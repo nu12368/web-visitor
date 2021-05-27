@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link href="./tt.css" rel="stylesheet">
+</head>
+
+<script>
+    console.log($('#chatmessages'))
+    // $("html, body").animate({"scrollTop": 2000});
+    var txt = $('#message2').val();
+
+    var htm = '<li id="' + txt + '" class="self"><div class="msg"><p>' + txt + '</p><time>7:45</time></div></li>';
+
+    $(".endDivChat").before(htm);
+
+    $("html, body").animate({
+        scrollTop: 2000
+    }, 600);
+</script>
+
+<body>
+    <div class="menu">
+        <div class="back">
+
+            <div class="name">test user</div>
+            <div class="last status">Offline</div>
+        </div>
+        <ul class="chat" id="messages">
+
+            <div class="endDivChat"></div>
+            <li class="other">
+
+                <div class="msg">
+                    <p>Hola!</p>
+                    <p>Te vienes a cenar al centro?
+                        <emoji class="pizza" />
+                    </p>
+                    <time>20:17</time>
+                </div>
+            </li>
+            <li class="self">
+
+                <div class="msg">
+                    <p>Puff...</p>
+                    <p>Aún estoy haciendo el contexto de Góngora...
+                        <emoji class="books" />
+                    </p>
+                    <p>Mejor otro día</p>
+                    <time>20:18</time>
+                </div>
+            </li>
+            <li class="self">
+
+                <div class="msg">
+                    <p>Puff...</p>
+                    <p>Aún estoy haciendo el contexto de Góngora...
+                        <emoji class="books" />
+                    </p>
+                    <p>Mejor otro día</p>
+                    <time>20:18</time>
+                </div>
+            </li>
+
+
+
+            <li class="other">
+
+                <div class="msg">
+                    <p>Hola!</p>
+                    <p>Te vienes a cenar al centro?
+                        <emoji class="pizza" />
+                    </p>
+                    <time>20:17</time>
+                </div>
+            </li>
+            <li class="self">
+
+                <div class="msg">
+                    <p>Puff...</p>
+                    <p>Aún estoy haciendo el contexto de Góngora...
+                        <emoji class="books" />
+                    </p>
+                    <p>Mejor otro día</p>
+                    <time>20:18</time>
+                </div>
+            </li>
+            <li class="other">
+
+                <div class="msg">
+                    <p>Hola!</p>
+                    <p>Te vienes a cenar al centro?
+                        <emoji class="pizza" />
+                    </p>
+                    <time>20:17</time>
+                </div>
+            </li>
+            <li class="self">
+
+                <div class="msg">
+                    <p>Puff...</p>
+                    <p>Aún estoy haciendo el contexto de Góngora...
+                        <emoji class="books" />
+                    </p>
+                    <p>Mejor otro día</p>
+                    <time>20:18</time>
+                </div>
+            </li>
+            <li class="other">
+
+                <div class="msg">
+                    <p>Hola!</p>
+                    <p>Te vienes a cenar al centro?
+                        <emoji class="pizza" />
+                    </p>
+                    <time>20:17</time>
+                </div>
+            </li>
+            <li class="self">
+
+                <div class="msg">
+                    <p>Puff...</p>
+                    <p>Aún estoy haciendo el contexto de Góngora...
+                        <emoji class="books" />
+                    </p>
+                    <p>Mejor otro día</p>
+                    <time>20:18</time>
+                </div>
+            </li>
+            <li class="other">
+
+                <div class="msg">
+                    <p>Hola!</p>
+                    <p>Te vienes a cenar al centro?
+                        <emoji class="pizza" />
+                    </p>
+                    <time>20:17</time>
+                </div>
+            </li>
+            <li class="self">
+
+                <div class="msg">
+                    <p>Puff...</p>
+                    <p>Aún estoy haciendo el contexto de Góngora...
+                        <emoji class="books" />
+                    </p>
+                    <p>Mejor otro día</p>
+                    <time>20:18</time>
+                </div>
+            </li>
+            <li class="self">
+
+                <div class="msg">
+                    <p>Puff...</p>
+                    <p>Aún estoy haciendo el contexto de Góngora...
+                        <emoji class="books" />
+                    </p>
+                    <p>Mejor otro día</p>
+                    <time>20:18</time>
+                </div>
+            </li>
+            <li class="self">
+
+                <div class="msg">
+                    <p>Puff...</p>
+                    <p>Aún estoy haciendo el contexto de Góngora...
+                        <emoji class="books" />
+                    </p>
+                    <p>Mejor otro día</p>
+                    <time>20:18</time>
+                </div>
+            </li>
+        </ul>
+
+
+
+        <div style="width:100%; height:44px; position:fixed; bottom:0; left:0;z-index:10;background:#fff;">
+
+
+            <input
+                style="padding-left:15px;border:none;height:44px;width:80%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;box-sizing: border-box;"
+                id="message2" type="text" placeholder="Type here!" />
+            <button
+                style="color:rgba(82,179,217,0.9);font-size:24px;text-align:center;line-height:44px;width:20%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;box-sizing: border-box;"
+                class="sendPm">
+                <div class="circle">
+                    <i class="zmdi zmdi-mail-send"></i> Send
+                </div>
+            </button>
+        </div>
+
+</body>
+
+</html>

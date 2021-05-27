@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>WAC</title>
+    <!-- Favicon-->
+    <link rel="icon" href="../../uploads/logo.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
+        type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="../../css/style.css" rel="stylesheet">
+
+
+   <!-- cookie -->
+   <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+   <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"></script>
+
+   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+   <!-- modal  -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+   <!-- Custom Css -->
+   <link href="../../css/style.css" rel="stylesheet">
+</head>
+
+<body class="login-page" style="background-color: white;">
+    <div class="login-box">
+        <div class="logo">
+            <a href="javascript:void(0);">&nbsp;</a>
+            <small>&nbsp;</small>
+        </div>
+        <div class="card">
+            <div class="body">
+                <form >
+                    <div class="msg">เข้าสู่ระบบ&nbsp;</div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">person</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="user_username" id="user_username" placeholder="ชื่อเข้าใช้งาน"
+                                required autofocus  value="">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">lock</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="password" class="form-control" name="user_password" id="user_password" value="" placeholder="รหัสผ่าน" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8 p-t-5">
+                            <p id="lbCheck" style="color: red;"></p>
+                        </div>
+                        <div class="col-xs-4">
+                            <button class="btn btn-block bg-pink waves-effect" id="myButton" onclick="postdataLogin()"
+                                type="button">เข้าสู่ระบบ</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        Cookies.remove('username');
+    </script>
+
+    <script>
+
+        $("#user_username").keyup(function (event) {
+            if (event.keyCode === 13) {
+                $("#myButton").click();
+            }
+        });
+        $("#user_password").keyup(function (event) {
+            if (event.keyCode === 13) {
+                $("#myButton").click();
+            }
+        });
+        $("#myButton").click(function () {
+
+            postdataLogin();
+        });
+
+
+        // LOGIN FORM: Validation function
+        function postdataLogin() {
+
+            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+
+                var urlipaddress = data.substring(1, data.length - 1);
+
+                //   alert(urlipaddress)
+                if (document.getElementById("user_username").value == '' || document.getElementById("user_password").value == '') {
+                    //var _password = document.getElementById("password").value;
+                    document.getElementById("user_username").style.borderColor = "red";
+                    document.getElementById("user_password").style.borderColor = "red";
+
+                  
+                } else {
+                    var _username = document.getElementById("user_username").value;
+                    var _password = document.getElementById("user_password").value;
+
+                    if (_username == 'wacadmin' && _password == 'wacpassword') {
+                     
+                        Cookies.set('username', 'wacsuperAdmin', { expires: 1 })
+                        location.href = "viewdashboard.html";
+                        return;
+                     // window.open('viewdashboard.html');
+                    }
+
+
+                    const dataUser = {
+                        username: _username,
+                        password: _password
+                    }
+                    const url = urlipaddress + 'loginAd';
+                    axios.post(url, dataUser
+                    ).then(function (response) {
+                        Cookies.set('username', response.data.message[0].name, { expires: 1 })
+                        location.href = "viewdashboard.html";
+
+                    }).catch(function (res) {
+                        const { response } = res
+
+                         $('#lbCheck').text('ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง !!')
+                        // .("Username and password invalid !");
+                    });
+                }
+
+            });
+        }
+
+    </script>
+
+
+
+
+    <!-- Jquery Core Js -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Select Plugin Js -->
+    <script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="../../plugins/node-waves/waves.js"></script>
+
+    <!-- Autosize Plugin Js -->
+    <script src="../../plugins/autosize/autosize.js"></script>
+
+    <!-- Moment Plugin Js -->
+    <script src="../../plugins/momentjs/moment.js"></script>
+
+    <!-- Bootstrap Material Datetime Picker Plugin Js -->
+    <script src="../../plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+    <!-- Bootstrap Datepicker Plugin Js -->
+    <script src="../../plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+    <!-- Custom Js -->
+    <script src="../../js/admin.js"></script>
+    <script src="../../js/pages/forms/basic-form-elements.js"></script>
+
+    <!-- Demo Js -->
+    <script src="../../js/demo.js"></script>
+</body>
+
+</html>

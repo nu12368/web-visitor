@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WAC</title>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+
+    <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- cookie -->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"></script>
+
+    <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
+
+
+
+<style>
+    .div {
+        border: 1px solid black;
+    }
+</style>
+
+<script>
+    // console.log(Cookies.get('wacadmin'))
+    // if (Cookies.get('wacadmin') == undefined) {
+    //     Cookies.remove('wacadmin');
+    //     location.href = "index.html";
+
+    // }
+
+
+    // ADMIN
+    function GENERATECLICKADMIN() {
+        $(document).ready(function () {
+            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                var urlipaddress = data.substring(1, data.length - 1);
+              //  console.log(urlipaddress)
+                axios.get(urlipaddress + 'genUser').then(function (response) {
+               //     console.log(response.data.message)
+                    document.getElementById("admin").value = response.data.message.username;
+
+                }).catch(function (res) {
+                    const { response } = res
+                 //   console.log(response.data.message)
+                });
+            });
+        });
+    }
+
+    // USER
+    function GENERATECLICKUSER() {
+        document.getElementById("save").innerText = "";
+        $(document).ready(function () {
+            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                var urlipaddress = data.substring(1, data.length - 1);
+              //  console.log(urlipaddress)
+                axios.get(urlipaddress + 'genUser').then(function (response) {
+              //      console.log(response.data.message)
+                    document.getElementById("user").value = response.data.message.username;
+
+                }).catch(function (res) {
+                    const { response } = res
+               //     console.log(response.data.message)
+                });
+            });
+        });
+    }
+</script>
+
+<body>
+
+    <form>
+        <!-- /// ADMIN -->
+        <div style="text-align: center;" class="container">
+            <div>
+                <h1>REGISTER ADMIN</h1>
+            </div>
+        </div>
+        <div class="div">
+            <div>&nbsp;</div>
+            <table align="center">
+                <tr>
+                    <td> USER :</td>
+                    <td> <input type="text" id="admin" name="admin"></td>
+                    <td></td>
+                    <td> <input type="button" value="GENERATE ADMIN ID" id="GENERATE" style="display: none;"
+                            onclick="GENERATECLICKADMIN()" name="GENERATE" style="cursor: pointer;"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>&nbsp;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>PASSWORD :</td>
+                    <td><input type="password" name="passadmin" id="passadmin" />
+                        <!-- <span class="showBtn">SHOW</span> -->
+                    </td>
+                    <td>&nbsp;</td>>
+
+                </tr>
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <div>&nbsp;</div>
+                        <p style="color: green;">ใช้อักขระ ที่มีทั้งตัวอักษร (A-Z,a-z) ตัวเลข (0-9) และสัญลักษณ์ผสมกัน
+                        </p>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="button" value="REGISTER ADMIN" id="REGISTER_ADMIN" onclick="regisadmin();"
+                            name="REGISTER_ADMIN" style="cursor: pointer;">
+                        <p id="p_admin" style="font-size: 18px;"></p>
+
+                        <script>
+                            function validateUsername() {
+                                // var reg = /^-?\d*\.?\d*$/;
+                                var regexNumber = /\d/; //ตรวจสอบว่าเป็นตัวเลข
+                                var regexLetter_A = /[a-z]/;  // ตรวจสอบว่า เป็นตัวอักษรภาษาอังกฤษ ทั้งพิมพ์ใหญ่และพิมพ์เล็ก
+                                var regexLetter_a = /[A-Z]/;
+                                var regExpStrong = /[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/;
+                                var checkpassadmin = document.getElementById('passadmin').value;
+                              //  console.log("en" + regexLetter_a.test(checkpassadmin));
+                             //   console.log("EN" + regexLetter_A.test(checkpassadmin));
+                             //   console.log("NUM" + regexNumber.test(checkpassadmin));
+                             //   console.log("Strong" + regExpStrong.test(checkpassadmin));
+
+                                // console.log("reg"+reg.test(checkpassadmin));
+                                // เงื่อนไข  ถ้าไม่ใช่ตัวอักษรภาษาอังกฤษ  หรือ  เป็นตัวอักษรภาษาไทย  ให้แสดงข้อความเตือน
+                                if (regexLetter_A.test(checkpassadmin) && (regexLetter_a.test(checkpassadmin)) && (regexNumber.test(checkpassadmin)) && (regExpStrong.test(checkpassadmin))) {
+                                    return true;
+                                } else {
+                                    document.getElementById("p_admin").innerText = "ใช้อักขระ [A-Z,a-z,0-9] และสัญลักษณ์ผสมกัน";
+                                    document.getElementById("p_admin").style.color = "red";
+                                    return false;
+                                }
+                            }
+
+
+                            function regisadmin() {
+                                var chk_pass = validateUsername();
+                                if (chk_pass == false) {
+                                    return;
+                                }
+
+                                document.getElementById("p_admin").innerText = "";
+                                if (document.getElementById("admin").value == "" || document.getElementById("passadmin").value == "") {
+                                    alert("กรุณา กดปุ่ม  GENERATE ADMIN ID และ ระบุ PASSWORD");
+                                    return;
+                                }
+                                $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                    var urlipaddress = data.substring(1, data.length - 1);
+                                //    console.log(urlipaddress)
+                                //    console.log('sfsfsdsdsds');
+
+                                    const dataUser = {
+                                        user: document.getElementById("admin").value,
+                                        password: document.getElementById("passadmin").value,
+                                        rule: 'admin'
+                                    }
+
+                                  //  console.log(dataUser);
+                                    axios.post(urlipaddress + 'regis', dataUser).then(function (response) {
+                                      //  console.log(response.data.message)
+                                        document.getElementById("p_admin").innerText = "บันทึกสำเร็จ";
+                                        document.getElementById("p_admin").style.color = "green";
+                                    }).catch(function (res) {
+                                        const { response } = res
+                                     //   console.log(response.data.message)
+                                        document.getElementById("p_admin").innerText = "บันทึกไม่สำเร็จ";
+                                        document.getElementById("p_admin").style.color = "red";
+                                    });
+                                });
+                            }
+                        </script>
+                    </td>
+                </tr>
+            </table>
+            <div>&nbsp;</div>
+        </div>
+
+
+
+        <!-- /// LOGIN -->
+        <div>&nbsp;</div>
+        <div style="text-align: center;">
+            <div>
+                <h1>REGISTER USER</h1>
+                <input type="button" value="LOGOUT" id="logout" onclick="LOG_OUT()" name="logout"
+                    style="cursor: pointer;">
+                <p style="color: red; font-size: 18px;">*** กรุณาออกจากระบบทุกครั้ง ***</p>
+                <p id="p_logout" style="color: green; font-size: 18px;"></p>
+            </div>
+            <script>
+                function LOG_OUT() {
+                    $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                        var urlipaddress = data.substring(1, data.length - 1);
+
+                        const databody = {
+                            refresh_token: document.getElementById("refreshtoken").value,//refreshtoken
+                        }
+
+                        axios.post(urlipaddress + 'logout', databody, {
+                            headers: {
+                                'Authorization': document.getElementById("accesstoken").value//refreshtoken
+                            }
+                        }).then(function (response) {
+
+                          //  console.log(response.data)
+
+                            if (response.data.message == "success") {
+                                document.getElementById("p_logout").innerText = "ออกจากระบบสำเร็จ";
+                                location.href = "index.html";
+                            } else {
+                                // alert("บันทึกข้อมูลไม่สำเร็จ");
+                            }
+
+                        }).catch(function (res) {
+                            const { response } = res
+                          //  console.log(response.data.message)
+                            if (response.data.message == "Unauthorized") {
+                                alert("คุณยังไม่ได้ login admin");
+                                location.href = "index.html";
+                            }
+                        });
+                    });
+                }
+            </script>
+
+
+
+            <div>&nbsp;</div>
+        </div>
+        <div class="div">
+            <div>&nbsp;</div>
+
+            <div>
+                <table align="center">
+                    <tr>
+                        <td> USER ID :</td>
+                        <td> <input type="text" id="login_user" name="login_user" value=""></td>
+                        <td></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>&nbsp;</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>PASSWORD :</td>
+                        <td><input type="password" name="login_pass" id="login_pass" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>&nbsp;</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="button" value="LOGIN" id="login" onclick="SUBMITLOGIN()" name="login"
+                                style="cursor: pointer;">
+                            <input type="hidden" id="objid">
+                            <input type="hidden" id="accesstoken">
+                            <input type="hidden" id="refreshtoken">
+                            <input type="hidden" id="userName">
+                        </td>
+
+                        <script>
+
+                            function SUBMITLOGIN() {
+
+                                if (document.getElementById("login_user").value == "" || document.getElementById("login_pass").value == "") {
+                                    alert("กรุณากรอก USER ID และ PASSWORD");
+                                    return;
+                                }
+                                $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                    var urlipaddress = data.substring(1, data.length - 1);
+                                    const dataUser = {
+                                        user: document.getElementById("login_user").value,
+                                        password: document.getElementById("login_pass").value,
+                                    }
+                                    axios.post(urlipaddress + 'login', dataUser).then(function (response) {
+                                        document.getElementById("tbl_1").style.display = "block";
+                                        var decodejwt = parseJwt(response.data.message.refresh_token);
+
+                                        document.getElementById("objid").value = decodejwt.userId;
+
+                                     //   console.log(data)
+                                     //   console.log("data")
+                                        axios.post(urlipaddress + 'token', data, {
+                                            headers: {
+                                                'Authorization': response.data.message.refresh_token
+                                            }
+                                        }).then(function (response) {
+
+                                            document.getElementById("accesstoken").value = response.data.message.access_token
+                                            document.getElementById("refreshtoken").value = response.data.message.refresh_token
+                                       //     console.log(response.data.message)
+
+                                            //////// GET USER
+                                            const dataUserID = {
+                                                userId: document.getElementById("objid").value
+                                            }
+                                            axios.post(urlipaddress + 'user', dataUserID, {
+                                                headers: {
+                                                    'Authorization': response.data.message.access_token
+                                                }
+                                            }).then(function (response) {
+                                                var cnt = response.data.message.data.length;
+                                                var n = 0;
+                                                var _arr = new Array();
+                                                for (i = 0; i < cnt; i++) {
+                                                    if (response.data.message.data[i].rule == "user") {
+                                                        _arr[n] = {
+                                                            _user: response.data.message.data[i].user
+                                                        }
+                                                        n = n + 1
+                                                    }
+
+                                                }
+                                              //  console.log(_arr)
+                                                $('#table1').DataTable({
+                                                    "lengthMenu": [[50, 100, 200, 300, 400, 500, 1000, 1500, 2000, -1], [50, 100, 200, 300, 400, 500, 1000, 1500, 2000, "All"]],
+                                                    "pageLength": 50,
+                                                    'data': _arr,
+                                                    "responsive": true,
+                                                    "autoWidth": false,
+                                                    "order": [],
+                                                    "paging": false,
+                                                    "ordering": false,
+                                                    "searching": false,
+                                                    "info": false,
+                                                    columns: [
+                                                        { data: "_user" },
+                                                        {
+                                                            data: null,
+                                                            className: "center",
+                                                            defaultContent: '<i href="" class="editor fa fa-search" style="font-size:16px;color:blue; cursor: pointer;">แก้ไข </i>/ <i href="" class="remove fa fa-minus-circle" style="font-size:14px;color:red; cursor: pointer;">ลบ</i>'
+                                                        }
+                                                    ]
+                                                });
+
+                                                $(document).ready(function () {
+                                                    $('#table1').on('click', 'i.editor', function (e) {
+                                                        e.preventDefault();
+                                                        var table = $('#table1').DataTable();
+                                                        var _ro = table.row($(this).parents('tr'));
+                                                        var data = _ro.data();
+
+                                                        if (data == undefined) {
+                                                            data = table.row(this).data();
+                                                        }
+
+                                                        $("#myModaledit").modal();
+
+                                                        document.getElementById("user_edit").value = data._user;
+                                                        document.getElementById("passuser_old").value = "";
+                                                        document.getElementById("passuser_new").value = "";
+                                                        document.getElementById("update").innerText = "";
+
+                                                    });
+
+
+                                                    var data;
+                                                    $('#table1').on('click', 'i.remove', function (e) {
+                                                        e.preventDefault();
+                                                        var table = $('#table1').DataTable();
+                                                        var _ro = table.row($(this).parents('tr'));
+                                                        data = _ro.data();
+
+                                                        if (data == undefined) {
+                                                            data = table.row(this).data();
+                                                        }
+
+                                                        $("#myModaldelete").modal();
+                                                        document.getElementById("c_delete").style.display = "block";
+                                                        document.getElementById("completed").style.display = "none";
+                                                        document.getElementById("user_edit").value = data._user;
+                                                        document.getElementById("passuser_old").value = "";
+                                                        document.getElementById("passuser_new").value = "";
+                                                        document.getElementById("update").innerText = "";
+                                                        $("#lbl_completed").text('คุณต้องการจะลบข้อมูล ใช่หรือไม่');
+
+                                                    });
+
+                                                    $('#deleteUser').on('click', function (e) {
+                                                      //  console.log('adadasda' + decodejwt.userId)
+
+                                                        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                                            var urlipaddress = data.substring(1, data.length - 1);
+                                                            const dataUser = {
+                                                                userId: decodejwt.userId,
+                                                                userName: document.getElementById("user_edit").value
+                                                            }
+                                                     //       console.log(document.getElementById("refreshtoken").value)
+                                                     //       console.log(document.getElementById("accesstoken").value)
+                                                     //       console.log(dataUser)
+
+                                                            axios({
+                                                                url: urlipaddress + 'delPass',
+                                                                method: 'delete',
+                                                                data: {
+                                                                    userId: decodejwt.userId,
+                                                                    userName: document.getElementById("user_edit").value
+                                                                },
+                                                                headers: { 'Authorization': document.getElementById("accesstoken").value }
+                                                            }).then(function (response) {
+                                                             //   console.log(response.data)
+                                                                if (response.data.message == "delete completed") {
+                                                                    document.getElementById("c_delete").style.display = "none";
+                                                                    document.getElementById("completed").style.display = "block";
+                                                                    $("#lbl_completed").text('ลบข้อมูลสำเร็จ');
+                                                                }
+
+
+                                                                //////// GET USER
+                                                                const dataUserID = {
+                                                                    userId: document.getElementById("objid").value
+                                                                }
+                                                                axios.post(urlipaddress + 'user', dataUserID, {
+                                                                    headers: {
+                                                                        'Authorization': document.getElementById("accesstoken").value
+                                                                    }
+                                                                }).then(function (response) {
+                                                            //        console.log('2')
+                                                            //       console.log(response)
+                                                                    var cnt = response.data.message.data.length;
+                                                                    var n = 0;
+                                                                    var _arr = new Array();
+                                                                    for (i = 0; i < cnt; i++) {
+                                                                        if (response.data.message.data[i].rule == "user") {
+                                                                            _arr[n] = {
+                                                                                _user: response.data.message.data[i].user
+                                                                            }
+                                                                            n = n + 1
+                                                                        }
+                                                                    }
+                                                                //    console.log(_arr)
+                                                                    $('#table1').DataTable().destroy();
+                                                                    $('#table1').DataTable({
+                                                                        "lengthMenu": [[50, 100, 200, 300, 400, 500, 1000, 1500, 2000, -1], [50, 100, 200, 300, 400, 500, 1000, 1500, 2000, "All"]],
+                                                                        "pageLength": 50,
+                                                                        'data': _arr,
+                                                                        "responsive": true,
+                                                                        "autoWidth": false,
+                                                                        "order": [],
+                                                                        "paging": false,
+                                                                        "ordering": false,
+                                                                        "searching": false,
+                                                                        "info": false,
+                                                                        columns: [
+                                                                            { data: "_user" },
+                                                                            {
+                                                                                data: null,
+                                                                                className: "center",
+                                                                                defaultContent: '<i href="" class="editor fa fa-search" style="font-size:16px;color:blue; cursor: pointer;">แก้ไข </i>/ <i href="" class="remove fa fa-minus-circle" style="font-size:14px;color:red; cursor: pointer;">ลบ</i>'
+                                                                            }
+                                                                        ]
+                                                                    });
+
+                                                                    $(document).ready(function () {
+                                                                        $('#table1').on('click', 'i.editor', function (e) {
+                                                                            e.preventDefault();
+                                                                            var table = $('#table1').DataTable();
+                                                                            var _ro = table.row($(this).parents('tr'));
+                                                                            var data = _ro.data();
+
+                                                                            if (data == undefined) {
+                                                                                data = table.row(this).data();
+                                                                            }
+
+                                                                            $("#myModaledit").modal();
+
+                                                                            document.getElementById("user_edit").value = data._user;
+                                                                            document.getElementById("passuser_old").value = "";
+                                                                            document.getElementById("passuser_new").value = "";
+                                                                            document.getElementById("update").innerText = "";
+
+                                                                        });
+
+
+                                                                        var data;
+                                                                        $('#table1').on('click', 'i.remove', function (e) {
+                                                                            e.preventDefault();
+                                                                            var table = $('#table1').DataTable();
+                                                                            var _ro = table.row($(this).parents('tr'));
+                                                                            data = _ro.data();
+
+                                                                            if (data == undefined) {
+                                                                                data = table.row(this).data();
+                                                                            }
+
+                                                                            $("#myModaldelete").modal();
+                                                                            document.getElementById("user_edit").value = data._user;
+                                                                            document.getElementById("passuser_old").value = "";
+                                                                            document.getElementById("passuser_new").value = "";
+                                                                            document.getElementById("update").innerText = "";
+                                                                            $("#lbl_completed").text('คุณต้องการจะลบข้อมูล ใช่หรือไม่');
+
+                                                                        });
+
+                                                                        $('#deleteUser').on('click', function (e) {
+                                                                       //     console.log('adadasda' + decodejwt.userId)
+
+                                                                            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                                                                var urlipaddress = data.substring(1, data.length - 1);
+                                                                                const dataUser = {
+                                                                                    userId: decodejwt.userId,
+                                                                                    userName: document.getElementById("user_edit").value
+                                                                                }
+                                                                        //        console.log(document.getElementById("refreshtoken").value)
+                                                                         //       console.log(document.getElementById("accesstoken").value)
+                                                                        //        console.log(dataUser)
+
+                                                                                axios({
+                                                                                    url: urlipaddress + 'delPass',
+                                                                                    method: 'delete',
+                                                                                    data: {
+                                                                                        userId: decodejwt.userId,
+                                                                                        userName: document.getElementById("user_edit").value
+                                                                                    },
+                                                                                    headers: { 'Authorization': document.getElementById("accesstoken").value }
+                                                                                }).then(function (response) {
+                                                                              //      console.log(response.data)
+                                                                                    if (response.data.message == "delete completed") {
+                                                                                        document.getElementById("c_delete").style.display = "none";
+                                                                                        document.getElementById("completed").style.display = "block";
+                                                                                        $("#lbl_completed").text('ลบข้อมูลสำเร็จ');
+
+
+                                                                                    }
+
+                                                                                }).catch(function (res) {
+                                                                                    const { response } = res
+                                                                               //     console.log(response.data.message)
+                                                                                });
+                                                                            });
+                                                                        });
+                                                                    });
+
+                                                                }).catch(function (res) {
+                                                                    const { response } = res
+                                                                 //   console.log(response.data.message)
+                                                                });
+
+                                                            }).catch(function (res) {
+                                                                const { response } = res
+                                                              //  console.log(response.data.message)
+                                                            });
+                                                        });
+                                                    });
+                                                });
+
+
+
+                                            }).catch(function (res) {
+                                                const { response } = res
+                                              //  console.log(response.data.message)
+                                            });
+
+
+                                        }).catch(function (res) {
+                                            const { response } = res
+                                         //   console.log(response.data.message)
+                                        });
+                                    }).catch(function (res) {
+                                        const { response } = res
+                                    //    console.log(response.data.message)
+                                    });
+                                });
+                            }
+
+                            function parseJwt(token) {
+                                var base64Url = token.split('.')[1];
+                                var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                                var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+                                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                                }).join(''));
+                                return JSON.parse(jsonPayload);
+                            };
+                        </script>
+                    </tr>
+                </table>
+            </div>
+
+
+            <div>&nbsp;</div>
+
+
+            <!-- /// USER -->
+
+            <div>&nbsp;</div>
+            <div id="tbl_1" style="display: none;">
+                <div style="text-align: center;">
+                    <div>
+                        <h1>ADD USER</h1>
+                    </div>
+                </div>
+                <table align="center">
+                    <tr>
+                        <td> USER :</td>
+                        <td> <input type="text" id="user" name="user"></td>
+                        <td></td>
+                        <td> <input type="button" value="GENERATE USER ID" id="GENERATE_USER" style="display: none;"
+                                onclick="GENERATECLICKUSER()" name="GENERATE_USER" style="cursor: pointer;"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>&nbsp;</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>PASSWORD :</td>
+                        <td><input type="password" name="passuser" id="passuser" /></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div>&nbsp;</div>
+                            <p style="color: green;">ใช้อักขระ ที่มีทั้งตัวอักษร (A-Z,a-z) ตัวเลข (0-9) และสัญลักษณ์ผสมกัน
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="button" value="REGISTER USER" id="REGISTER_USER" onclick="ADDACCOUNT()"
+                                name="REGISTER_USER" style="cursor: pointer;">
+                            <p id="save" style="color: green; font-size: 18px;"></p>
+                        </td>
+
+                        <script>
+
+
+                            function validateUsernameUSER() {
+                                // var reg = /^-?\d*\.?\d*$/;
+                                var regexNumber = /\d/; //ตรวจสอบว่าเป็นตัวเลข
+                                var regexLetter_A = /[a-z]/;  // ตรวจสอบว่า เป็นตัวอักษรภาษาอังกฤษ ทั้งพิมพ์ใหญ่และพิมพ์เล็ก
+                                var regexLetter_a = /[A-Z]/;
+                                var regExpStrong = /[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/;
+                                var checkpassadmin = document.getElementById('passuser').value;
+                             //   console.log("en" + regexLetter_a.test(checkpassadmin));
+                             //   console.log("EN" + regexLetter_A.test(checkpassadmin));
+                             //   console.log("NUM" + regexNumber.test(checkpassadmin));
+                             //   console.log("Strong" + regExpStrong.test(checkpassadmin));
+
+                                // console.log("reg"+reg.test(checkpassadmin));
+                                // เงื่อนไข  ถ้าไม่ใช่ตัวอักษรภาษาอังกฤษ  หรือ  เป็นตัวอักษรภาษาไทย  ให้แสดงข้อความเตือน
+                                if (regexLetter_A.test(checkpassadmin) && (regexLetter_a.test(checkpassadmin)) && (regexNumber.test(checkpassadmin)) && (regExpStrong.test(checkpassadmin))) {
+                                    return true;
+                                } else {
+                                    document.getElementById("save").innerText = "ใช้อักขระ [A-Z,a-z,0-9] และสัญลักษณ์ผสมกัน";
+                                    document.getElementById("save").style.color = "red";
+                                    return false;
+                                }
+                            }
+
+
+                            function ADDACCOUNT() {
+
+                                var chk_pass = validateUsernameUSER();
+                                if (chk_pass == false) {
+                                    return;
+                                }
+
+                                if (document.getElementById("user").value == "" || document.getElementById("passuser").value == "") {
+                                    alert("กรุณา กดปุ่ม  GENERATE USER ID และ ระบุ PASSWORD");
+                                    return;
+                                }
+                                $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                    var urlipaddress = data.substring(1, data.length - 1);
+                                    // console.log(document.getElementById("accesstoken").value)
+
+                                    const dataUser = {
+                                        userId: document.getElementById("objid").value,
+                                        user: document.getElementById("user").value,
+                                        password: document.getElementById("passuser").value,
+                                        rule: 'user'
+                                    }
+
+                                    axios.put(urlipaddress + 'addAccount', dataUser, {
+                                        headers: {
+                                            'Authorization': document.getElementById("accesstoken").value
+                                        }
+                                    }).then(function (response) {
+                                    //    console.log('1')
+                                        document.getElementById("tbl_1").style.display = "block";
+                                    //    console.log(response.data)
+
+                                        if (response.data.message == "This user has already been used.") {
+                                            alert("มีข้อมูลในระบบแล้ว");
+                                        } else {
+                                            document.getElementById("save").innerText = "บันทึกสำเร็จ";
+                                            document.getElementById("save").style.color = "green";
+                                        }
+
+
+
+
+
+
+                                        //////// GET USER
+                                        const dataUserID = {
+                                            userId: document.getElementById("objid").value
+                                        }
+                                        axios.post(urlipaddress + 'user', dataUserID, {
+                                            headers: {
+                                                'Authorization': document.getElementById("accesstoken").value
+                                            }
+                                        }).then(function (response) {
+                                         //   console.log('2')
+                                        //    console.log(response)
+                                            var cnt = response.data.message.data.length;
+                                            var n = 0;
+                                            var _arr = new Array();
+                                            for (i = 0; i < cnt; i++) {
+                                                if (response.data.message.data[i].rule == "user") {
+                                                    _arr[n] = {
+                                                        _user: response.data.message.data[i].user
+                                                    }
+                                                    n = n + 1
+                                                }
+                                            }
+                                        //    console.log(_arr)
+                                            $('#table1').DataTable().destroy();
+                                            $('#table1').DataTable({
+                                                "lengthMenu": [[50, 100, 200, 300, 400, 500, 1000, 1500, 2000, -1], [50, 100, 200, 300, 400, 500, 1000, 1500, 2000, "All"]],
+                                                "pageLength": 50,
+                                                'data': _arr,
+                                                "responsive": true,
+                                                "autoWidth": false,
+                                                "order": [],
+                                                "paging": false,
+                                                "ordering": false,
+                                                "searching": false,
+                                                "info": false,
+                                                columns: [
+                                                    { data: "_user" },
+                                                    {
+                                                        data: null,
+                                                        className: "center",
+                                                        defaultContent: '<i href="" class="editor fa fa-search" style="font-size:16px;color:blue; cursor: pointer;">แก้ไข </i>/ <i href="" class="remove fa fa-minus-circle" style="font-size:14px;color:red; cursor: pointer;">ลบ</i>'
+                                                    }
+                                                ]
+                                            });
+
+                                            $(document).ready(function () {
+                                                $('#table1').on('click', 'i.editor', function (e) {
+                                                    e.preventDefault();
+                                                    var table = $('#table1').DataTable();
+                                                    var _ro = table.row($(this).parents('tr'));
+                                                    var data = _ro.data();
+
+                                                    if (data == undefined) {
+                                                        data = table.row(this).data();
+                                                    }
+
+                                                    $("#myModaledit").modal();
+
+                                                    document.getElementById("user_edit").value = data._user;
+                                                    document.getElementById("passuser_old").value = "";
+                                                    document.getElementById("passuser_new").value = "";
+                                                    document.getElementById("update").innerText = "";
+
+                                                });
+
+
+                                                var data;
+                                                $('#table1').on('click', 'i.remove', function (e) {
+                                                    e.preventDefault();
+                                                    var table = $('#table1').DataTable();
+                                                    var _ro = table.row($(this).parents('tr'));
+                                                    data = _ro.data();
+
+                                                    if (data == undefined) {
+                                                        data = table.row(this).data();
+                                                    }
+
+                                                    $("#myModaldelete").modal();
+                                                    document.getElementById("user_edit").value = data._user;
+                                                    document.getElementById("passuser_old").value = "";
+                                                    document.getElementById("passuser_new").value = "";
+                                                    document.getElementById("update").innerText = "";
+                                                    $("#lbl_completed").text('คุณต้องการจะลบข้อมูล ใช่หรือไม่');
+
+                                                });
+
+                                                $('#deleteUser').on('click', function (e) {
+                                               //     console.log('adadasda' + decodejwt.userId)
+
+                                                    $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                                        var urlipaddress = data.substring(1, data.length - 1);
+                                                        const dataUser = {
+                                                            userId: decodejwt.userId,
+                                                            userName: document.getElementById("user_edit").value
+                                                        }
+                                                 //       console.log(document.getElementById("refreshtoken").value)
+                                                 //       console.log(document.getElementById("accesstoken").value)
+                                                  //      console.log(dataUser)
+
+                                                        axios({
+                                                            url: urlipaddress + 'delPass',
+                                                            method: 'delete',
+                                                            data: {
+                                                                userId: decodejwt.userId,
+                                                                userName: document.getElementById("user_edit").value
+                                                            },
+                                                            headers: { 'Authorization': document.getElementById("accesstoken").value }
+                                                        }).then(function (response) {
+                                                       //     console.log(response.data)
+                                                            if (response.data.message == "delete completed") {
+                                                                document.getElementById("c_delete").style.display = "none";
+                                                                document.getElementById("completed").style.display = "block";
+                                                                $("#lbl_completed").text('ลบข้อมูลสำเร็จ');
+                                                            }
+
+                                                        }).catch(function (res) {
+                                                            const { response } = res
+                                                        //    console.log(response.data.message)
+                                                        });
+                                                    });
+                                                });
+                                            });
+                                        }).catch(function (res) {
+                                            const { response } = res
+                                          //  console.log(response.data.message)
+                                        });
+                                    }).catch(function (res) {
+                                        const { response } = res
+                                     //   console.log(response.data.message)
+                                        if (response.data.message == "update fail.") {
+                                            alert("บันทึกข้อมูลไม่สำเร็จ");
+                                        }
+                                    });
+                                });
+                            }
+                        </script>
+                    </tr>
+                </table>
+
+                <table align="center" style="text-align:center; width: 800px; height: 200px;" id="table1" border="1px">
+                    <thead>
+                        <tr style="text-align:center;">
+                            <th style="text-align:center; font-size: 18px;">USER ID</th>
+                            <th style="text-align:center; font-size: 18px;">แก้ไข/ลบ</th>
+                        </tr>
+                    </thead>
+                </table>
+
+                <!-- // แก้ไข PASSWORD -->
+                <div class="container">
+                    <div class="modal fade" id="myModaledit" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 id="title_dalete_official" class="modal-title">เปลี่ยน PASSWORD</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <table>
+                                            <tr>
+                                                <td> USER :</td>
+                                                <td> <input type="text" id="user_edit" name="user_edit"></td>
+                                                <td></td>
+                                                <td> </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>&nbsp;</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>PASSWORD :</td>
+                                                <td><input type="password" name="passuser_old" id="passuser_old" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>&nbsp;</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>NEWPASSWORD :</td>
+                                                <td><input type="password" name="passuser_new" id="passuser_new" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div>&nbsp;</div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <input type="button" value="UPDATE PASSWORD" id="UPDATE"
+                                                        onclick="UPDATE_PASSWORD()" name="UPDATE"
+                                                        style="cursor: pointer;">
+                                                    <p id="update" style="color: green; font-size: 18px;"></p>
+                                                </td>
+
+                                                <script>
+                                                    function UPDATE_PASSWORD() {
+                                                        if (document.getElementById("user_edit").value == "" || document.getElementById("passuser_old").value == "" || document.getElementById("passuser_new").value == "") {
+                                                            alert("กรุณา ระบุ ข้อมูลให้ครบ !!!");
+                                                            return;
+                                                        }
+                                                        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                                            var urlipaddress = data.substring(1, data.length - 1);
+                                                            const dataUser = {
+                                                                user: document.getElementById("user_edit").value,
+                                                                password: document.getElementById("passuser_old").value,
+                                                                newPassword: document.getElementById("passuser_new").value,
+                                                            }
+
+                                                            axios.post(urlipaddress + 'changePass', dataUser, {
+                                                                headers: {
+                                                                    'Authorization': document.getElementById("accesstoken").value
+                                                                }
+                                                            }).then(function (response) {
+                                                            //    console.log(response.data)
+                                                                if (response.data.message == "Complete Registration") {
+                                                                    document.getElementById("update").innerText = "อัพเดทสำเร็จ";
+                                                                }
+
+                                                            }).catch(function (res) {
+                                                                const { response } = res
+                                                          //      console.log(response.data.message)
+                                                                if (response.data.message == "update fail.") {
+                                                                    alert("บันทึกข้อมูลไม่สำเร็จ");
+                                                                    document.getElementById("update").innerText = "";
+                                                                    document.getElementById("update").style.color = "red";
+                                                                }
+                                                                if (response.data.message == "Wrong user or password") {
+                                                                    document.getElementById("update").innerText = "รหัสผ่านเดิม ไม่ถูกต้อง !!!";
+                                                                    document.getElementById("update").style.color = "red";
+                                                                }
+
+                                                            });
+                                                        });
+                                                    }
+                                                </script>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+
+                <!-- /// ลบ -->
+                <div class="container">
+                    <div class="modal fade" id="myModaldelete" role="dialog">
+                        <div class="modal-dialog" style="width: 300px; height: 200px;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 id="title" class="modal-title">ลบข้อมูล</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-20">
+                                                <i class="fa fa-exclamation-triangle" id="c_delete"
+                                                    style="font-size:48px;color:red"></i>
+                                                <i class="fa fa-check-circle" id="completed"
+                                                    style="font-size:48px;color:green; display: none;"></i>
+                                            </div>
+
+                                            <div>
+                                                <label id="lbl_completed" for="fname"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <!-- <input type="button" value="ตกลง" id="deleteUser"
+                                    onclick="Click_DELETE()" name="deleteUser"
+                                    style="cursor: pointer;"> -->
+                                    <input type="button" value="ตกลง" id="deleteUser" class="primary btn btn-default" />
+
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div>&nbsp;</div>
+        </div>
+    </form>
+
+
+</body>
+
+</html>

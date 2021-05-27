@@ -1,0 +1,152 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+
+
+
+<!-- Favicon-->
+<link rel="icon" href="../../uploads/logo.ico" type="image/x-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
+    type="text/css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+<!-- Bootstrap Core Css -->
+<link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+<!-- Waves Effect Css -->
+<link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+
+<!-- Animation Css -->
+<link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
+
+<!-- JQuery DataTable Css -->
+<link href="../../plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+
+<link href="../../plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+
+<!-- Bootstrap Material Datetime Picker Css -->
+<link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
+    rel="stylesheet" />
+<link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+
+<!-- Custom Css -->
+<link href="../../css/style.css" rel="stylesheet">
+
+<!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+<link href="../../css/themes/all-themes.css" rel="stylesheet" />
+
+<!-- Bootstrap Material Datetime Picker Css -->
+<link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
+    rel="stylesheet" />
+
+<!-- Bootstrap DatePicker Css -->
+<link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+<link href="../../plugins/light-gallery/css/lightgallery.css" rel="stylesheet">
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/datatables.min.js"></script> -->
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"></script>
+
+
+<script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
+
+<!-- modal  -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../../plugins2/responsive.bootstrap4.min.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="../../plugins/light-gallery/css/lightgallery.css" rel="stylesheet">
+
+
+
+
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+
+<link href="../../plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+
+
+</head>
+
+<script>
+      $(document).ready(function () {
+      $('select').selectize({
+          sortField: 'text'
+      });
+  });
+</script>
+<body>
+  <select id="select-state" placeholder="Pick a state...">
+    <option value="">Select a state...</option>
+    <option value="AL">Alabama</option>
+    <option value="AK">Alaska</option>
+    <option value="AZ">Arizona</option>
+    <option value="AR">Arkansas</option>
+    <option value="CA">California</option>
+    <option value="CO">Colorado</option>
+    <option value="CT">Connecticut</option>
+    <option value="DE">Delaware</option>
+    <option value="DC">District of Columbia</option>
+    <option value="FL">Florida</option>
+    <option value="GA">Georgia</option>
+    <option value="HI">Hawaii</option>
+    <option value="ID">Idaho</option>
+    <option value="IL">Illinois</option>
+    <option value="IN">Indiana</option>
+  </select>
+
+   <!-- Jquery Core Js -->
+   <!-- <script src="../../plugins/jquery/jquery.min.js"></script> -->
+
+   <!-- Bootstrap Core Js -->
+   <!-- <script src="../../plugins/bootstrap/js/bootstrap.js"></script> -->
+
+   <!-- Select Plugin Js -->
+   <!-- <script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script> -->
+
+   <!-- Slimscroll Plugin Js -->
+   <script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+   <!-- Waves Effect Plugin Js -->
+   <script src="../../plugins/node-waves/waves.js"></script>
+
+   <!-- Autosize Plugin Js -->
+   <script src="../../plugins/autosize/autosize.js"></script>
+
+   <!-- Moment Plugin Js -->
+   <script src="../../plugins/momentjs/moment.js"></script>
+
+   <!-- Bootstrap Material Datetime Picker Plugin Js -->
+   <script src="../../plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+   <!-- Bootstrap Datepicker Plugin Js -->
+   <script src="../../plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+   <!-- Custom Js -->
+   <script src="../../js/admin.js"></script>
+   <script src="../../js/pages/forms/basic-form-elements.js"></script>
+
+
+   <script src="../../plugins/sweetalert/sweetalert.min.js"></script>
+   <script src="../../js/pages/ui/dialogs.js"></script>
+
+   <!-- Demo Js -->
+   <script src="../../js/demo.js"></script>
+</body>
+</html>

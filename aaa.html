@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>WAC</title>
+    <!-- Favicon-->
+    <link rel="icon" href="../../uploads/logo.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
+        type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- JQuery DataTable Css -->
+    <link href="../../plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+
+    <link href="../../plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
+        rel="stylesheet" />
+    <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+
+
+    <!-- Custom Css -->
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="../../css/themes/all-themes.css" rel="stylesheet" />
+
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
+        rel="stylesheet" />
+
+    <!-- Bootstrap DatePicker Css -->
+    <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+    <link href="../../plugins/light-gallery/css/lightgallery.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"></script>
+
+
+
+
+    <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
+
+    <!-- modal  -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../plugins2/responsive.bootstrap4.min.css">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="../../plugins/light-gallery/css/lightgallery.css" rel="stylesheet">
+    <script src="./visitordashboard.js"></script>
+    <!--     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> -->
+
+    <script src="./pageTable.js"></script>
+    <script src="./checkCost.js"></script>
+    <link href="./css-collor.css" rel="stylesheet">
+</head>
+
+<!-- <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+   <script src="http://code.highcharts.com/highcharts.js"></script> 
+   <script src="http://code.highcharts.com/modules/data.js"></script>   -->
+
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<script src="./checkCookies.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- <script>
+    $(document).ready(function () {
+        var _activeMode = Cookies.get('activeMode');
+        if (_activeMode == 'คิดเงิน') {
+            $("#lll").addClass("intro");
+            $("#ll").addClass("intro");
+        }
+    });
+</script> -->
+
+<!-- <script>
+    if (Cookies.get('datatoken') == undefined) {
+       Cookies.remove('datatoken');
+       location.href = "index.html";
+   }
+</script> -->
+<style>
+    .intro {
+        display: block !important;
+    }
+    .intronone {
+        display: none !important;
+    }
+</style>
+
+
+<body class="theme-red">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <div class="search-icon">
+            <i class="material-icons">search</i>
+        </div>
+        <input type="text" placeholder="START TYPING...">
+        <div class="close-search">
+            <i class="material-icons">close</i>
+        </div>
+    </div>
+    <!-- #END# Search Bar -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+
+                <a class="navbar-brand" id="logoname" href="../../menu.html">MENU</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Call Search -->
+
+                    <li><a onclick="logout()" style="cursor: pointer;" class="js-search"
+                            data-close="true">[ออกจากระบบ]</a></li>
+                    <script>
+                        function logout() {
+                            location.href = "index.html";
+                            Cookies.remove('username');
+                        }
+                    </script>
+                    <!-- #END# Call Search -->
+                    <!-- Notifications -->
+                    <li class="dropdown">
+
+                        <ul class="dropdown-menu">
+                            <li class="header">NOTIFICATIONS</li>
+                            <li class="body">
+                                <ul class="menu">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-light-green">
+                                                <i class="material-icons">person_add</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>12 new members joined</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 14 mins ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-cyan">
+                                                <i class="material-icons">add_shopping_cart</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>4 sales made</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 22 mins ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-red">
+                                                <i class="material-icons">delete_forever</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>Nancy Doe</b> deleted account</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 3 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-orange">
+                                                <i class="material-icons">mode_edit</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>Nancy</b> changed name</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 2 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-blue-grey">
+                                                <i class="material-icons">comment</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>John</b> commented your post</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 4 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-light-green">
+                                                <i class="material-icons">cached</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>John</b> updated status</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 3 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-purple">
+                                                <i class="material-icons">settings</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>Settings updated</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> Yesterday
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="javascript:void(0);">View All Notifications</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Notifications -->
+                    <!-- Tasks -->
+                    <li class="dropdown">
+
+                        <ul class="dropdown-menu">
+                            <li class="header">TASKS</li>
+                            <li class="body">
+                                <ul class="menu tasks">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Footer display issue
+                                                <small>32%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85"
+                                                    aria-valuemin="0" aria-valuemax="100" style="width: 32%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Make new buttons
+                                                <small>45%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85"
+                                                    aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Create new dashboard
+                                                <small>54%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85"
+                                                    aria-valuemin="0" aria-valuemax="100" style="width: 54%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Solve transition issue
+                                                <small>65%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-orange" role="progressbar"
+                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
+                                                    style="width: 65%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Answer GitHub questions
+                                                <small>92%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-purple" role="progressbar"
+                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
+                                                    style="width: 92%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="javascript:void(0);">View All Tasks</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Tasks -->
+                    <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i
+                                class="material-icons">more_vert</i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+
+
+
+    <!-- Left Sidebar -->
+
+
+    <aside id="leftsidebar" class="sidebar" style="text-align: center;">
+        <!-- User Info -->
+        <div class="user-info" style="text-align:center;">
+            <div class="image">
+
+                <a class="navbar-brand" id="logoname" href="../../visitordashboard.html">VISITOR</a>
+
+            </div>
+         
+                    <div><br></div>
+                    <div class="info-container">
+                        <div class="name" data-toggle="dropdown" id="userlogin" aria-haspopup="true" aria-expanded="false"></div>
+                    </div>
+        </div>
+        <div class="menu">
+            <ul class="list" id="nav">
+                <li id="l01" class="active">
+                    <a href="visitordashboard.html">
+                        <i class="material-icons">home</i>
+                        <span>แดชบอร์ด VISITOR</span>
+                    </a>
+                </li>
+                <li id="l02">
+                    <a href="visitorreport.html">
+                        <i class="material-icons">description</i>
+                        <span>รายงานการเข้าออก</span>
+                    </a>
+                </li>
+                <li id="ll" style="display: none;">
+                    <a href="visitorreportcost.html">
+                        <i class="material-icons">attach_money</i>
+                        <span>รายงานการคิดเงิน</span>
+                    </a>
+                </li>
+                <!-- <li >
+                    <a href="memberlist.html">
+                        <i class="material-icons">account_circle</i>
+                        <span>รายชื่อผู้ลงทะเบียน</span>
+                    </a>
+                </li> -->
+                <li id="l03">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">settings</i>
+                        <span>ตั้งค่า</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li id="l1" style="display: none;">
+                            <a href="visitorSetting.html">
+                                <span>ประเภท Visitor</span>
+                            </a>
+                        </li>
+                        <li id="l2" style="display: none;">
+                            <a href="visitorlicensePlate.html">
+                                <span>ทะเบียนรถ</span>
+                            </a>
+                        </li>
+                        <li id="l3" style="display: none;">
+                            <a href="visitPlace.html">
+                                <span>สถานที่ติดต่อ</span>
+                            </a>
+                        </li>
+                        <li id="l4" style="display: none;">
+                            <a href="contactTopic.html">
+                                <span>ติดต่อเรื่อง</span>
+                            </a>
+                        </li>
+                        <li id="l5" style="display: none;">
+                            <a href="visitFrom.html">
+                                <span>บริษัท</span>
+                            </a>
+                        </li>
+                        <li id="l6" style="display: none;">
+                            <a href="department.html">
+                                <span>แผนกที่ติดต่อ</span>
+                            </a>
+                        </li>
+                        <li id="l7" style="display: none;">
+                            <a href="visiperson.html">
+                                <span>ผู้รับการติดต่อ</span>
+                            </a>
+                        </li>
+                        <li id="l8" style="display: none;">
+                            <a href="vehicleType.html">
+                                <span>ชนิดรถ</span>
+                            </a>
+                        </li>
+                        <li id="l9" style="display: none;">
+                            <a href="visitorregisteruser.html">
+                                <span>เพิ่มผู้ใช้งาน</span>
+                            </a>
+                        </li>
+                        <li id="lll" style="display: none;">
+                            <a href="visitorcost.html">
+                                <span>คิดเงิน</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="deleteLog.html">
+                                <span>ลบข้อมูล</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li id="l04">
+                    <a href="visitorblack_white_list.html">
+                        <i class="material-icons">settings</i>
+                        <span>BlackList/WhiteList</span>
+                    </a>
+                </li>
+                <!-- <li >
+                    <a href="registermember.html">
+                        <i class="material-icons">group_add</i>
+                        <span>เพิ่มผู้ใช้งาน</span>
+                    </a>
+                </li> -->
+                <li id="l10" style="display: none;">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">event</i>
+                        <span>นัดหมาย/ประวัติการเข้าพบ</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="appointment.html">
+                                <span>นัดหมาย</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="reportappointment.html">
+                                <span>ประวัติการเข้าพบ</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- #Menu -->
+        <!-- Footer -->
+
+        <!-- #Footer -->
+    </aside>
+    <!-- #END# Left Sidebar -->
+    <!-- Right Sidebar -->
+    <aside id="rightsidebar" class="right-sidebar">
+        <ul class="nav nav-tabs tab-nav-right" role="tablist">
+            <li role="presentation" class="active"><a href="#skins" data-toggle="tab">SKINS</a></li>
+            <!-- <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li> -->
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active in active" id="skins">
+                <ul class="demo-choose-skin">
+                    <li data-theme="red" class="active">
+                        <div class="red"></div>
+                        <span>Red</span>
+                    </li>
+                    <li data-theme="pink">
+                        <div class="pink"></div>
+                        <span>Pink</span>
+                    </li>
+                    <li data-theme="purple">
+                        <div class="purple"></div>
+                        <span>Purple</span>
+                    </li>
+                    <li data-theme="deep-purple">
+                        <div class="deep-purple"></div>
+                        <span>Deep Purple</span>
+                    </li>
+                    <li data-theme="indigo">
+                        <div class="indigo"></div>
+                        <span>Indigo</span>
+                    </li>
+                    <li data-theme="blue">
+                        <div class="blue"></div>
+                        <span>Blue</span>
+                    </li>
+                    <li data-theme="light-blue">
+                        <div class="light-blue"></div>
+                        <span>Light Blue</span>
+                    </li>
+                    <li data-theme="cyan">
+                        <div class="cyan"></div>
+                        <span>Cyan</span>
+                    </li>
+                    <li data-theme="teal">
+                        <div class="teal"></div>
+                        <span>Teal</span>
+                    </li>
+                    <li data-theme="green">
+                        <div class="green"></div>
+                        <span>Green</span>
+                    </li>
+                    <li data-theme="light-green">
+                        <div class="light-green"></div>
+                        <span>Light Green</span>
+                    </li>
+                    <li data-theme="lime">
+                        <div class="lime"></div>
+                        <span>Lime</span>
+                    </li>
+                    <li data-theme="yellow">
+                        <div class="yellow"></div>
+                        <span>Yellow</span>
+                    </li>
+                    <li data-theme="amber">
+                        <div class="amber"></div>
+                        <span>Amber</span>
+                    </li>
+                    <li data-theme="orange">
+                        <div class="orange"></div>
+                        <span>Orange</span>
+                    </li>
+                    <li data-theme="deep-orange">
+                        <div class="deep-orange"></div>
+                        <span>Deep Orange</span>
+                    </li>
+                    <li data-theme="brown">
+                        <div class="brown"></div>
+                        <span>Brown</span>
+                    </li>
+                    <li data-theme="grey">
+                        <div class="grey"></div>
+                        <span>Grey</span>
+                    </li>
+                    <li data-theme="blue-grey">
+                        <div class="blue-grey"></div>
+                        <span>Blue Grey</span>
+                    </li>
+                    <li data-theme="black">
+                        <div class="black"></div>
+                        <span>Black</span>
+                    </li>
+                </ul>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="settings">
+                <div class="demo-settings">
+                    <p>GENERAL SETTINGS</p>
+                    <ul class="setting-list">
+                        <li>
+                            <span>Report Panel Usage</span>
+                            <div class="switch">
+                                <label><input type="checkbox" checked><span class="lever"></span></label>
+                            </div>
+                        </li>
+                        <li>
+                            <span>Email Redirect</span>
+                            <div class="switch">
+                                <label><input type="checkbox"><span class="lever"></span></label>
+                            </div>
+                        </li>
+                    </ul>
+                    <p>SYSTEM SETTINGS</p>
+                    <ul class="setting-list">
+                        <li>
+                            <span>Notifications</span>
+                            <div class="switch">
+                                <label><input type="checkbox" checked><span class="lever"></span></label>
+                            </div>
+                        </li>
+                        <li>
+                            <span>Auto Updates</span>
+                            <div class="switch">
+                                <label><input type="checkbox" checked><span class="lever"></span></label>
+                            </div>
+                        </li>
+                    </ul>
+                    <p>ACCOUNT SETTINGS</p>
+                    <ul class="setting-list">
+                        <li>
+                            <span>Offline</span>
+                            <div class="switch">
+                                <label><input type="checkbox"><span class="lever"></span></label>
+                            </div>
+                        </li>
+                        <li>
+                            <span>Location Permission</span>
+                            <div class="switch">
+                                <label><input type="checkbox" checked><span class="lever"></span></label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- #END# Right Sidebar -->
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>
+                </h2>
+            </div>
+            <!-- Basic Validation -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row clearfix">
+                        <!-- <script>
+                            function visitorreport() {
+                                location.href = 'visitorreport.html';
+                            }
+                        </script>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box bg-pink hover-expand-effect" style="cursor:pointer;"
+                                onclick="visitorreport()">
+                                <div class="icon">
+                                    <a href="visitorreport.html"><i class="material-icons">group</i></a>
+                                </div>
+                                <div class="content">
+                                    <div style="font-size: 16px;" class="text"></a>การเข้า-ออก</div>
+                                    <div class="number count-to" data-from="0" data-to="125" data-speed="15"
+                                        id="div_visitorreport" name="div_visitorreport" data-fresh-interval="20"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script>
+                            function allInvoice() {
+                                // location.href = 'allInvoice.html';
+                            }
+                        </script>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box bg-cyan hover-expand-effect" style="cursor:pointer;"
+                                onclick="allInvoice()">
+                                <div class="icon">
+                                    <a href="allInvoice.html"><i class="material-icons">art_track</i></a>
+                                </div>
+                                <div class="content">
+                                    <div style="font-size: 16px;;" class="text">รายงานเข้า</div>
+                                    <div class="number count-to" data-from="0" data-to="257" data-speed="1000"
+                                        id="div_visitorreportin" name="div_visitorreportin" data-fresh-interval="20">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script>
+                            function allpayment() {
+                                // location.href = 'allpayment.html';
+                            }
+                        </script>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box bg-light-green hover-expand-effect" style="cursor:pointer;"
+                                onclick="allpayment()">
+                                <div class="icon">
+                                    <a href="allpayment.html"><i class="material-icons">playlist_add_check</i></a>
+                                </div>
+                                <div class="content">
+                                    <div style="font-size: 16px;;" class="text">รายงานออก</div>
+                                    <div class="number count-to" data-from="0" data-to="243" data-speed="1000"
+                                        id="div_visitorreportout" name="div_visitorreportout" data-fresh-interval="20">
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-12">
+                            <div class="card">
+                                <div class="header header-new"">
+                                    <h2>
+                                        <font style="color: white;">การเข้า-ออก
+                                        </font>
+                                    </h2>
+                                </div>
+                                <div class="body">
+                                    <div class="table-responsive">
+                                        <table
+                                            class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display"
+                                            id="tablevisitor">
+                                            <thead>
+                                                <tr>
+                                                    <th>ประเภท</th>
+                                                    <th>เข้า</th>
+                                                    <th>ออก</th>
+                                                    <th>คงเหลือ</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tfoot>
+                                                <tr>
+                                                    <th style="text-align:right">รวม</th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>กราฟการเข้า-ออก</h2>
+                                    <!-- <ul class="header-dropdown m-r--5">
+                                        <li class="dropdown">
+                                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                <i class="material-icons">more_vert</i>
+                                            </a>
+                                            <ul class="dropdown-menu pull-right">
+                                                <li><a href="javascript:void(0);">Action</a></li>
+                                                <li><a href="javascript:void(0);">Another action</a></li>
+                                                <li><a href="javascript:void(0);">Something else here</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul> -->
+                                </div>
+                                <div class="body">
+                                    <canvas id="bar_chartnew" class="graph"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>กราฟเข้า</h2>
+                                </div>
+                                <div class="body">
+                                    <canvas id="pie_chart" height="150"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>กราฟออก</h2>
+                                </div>
+                                <div class="body">
+                                    <canvas id="pie_chartout" height="150"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>กราฟคงเหลือ</h2>
+                                </div>
+                                <div class="body">
+                                    <canvas id="pie_chartbalance" height="150"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- <div class="row clearfix">
+
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-12">
+                                <div class="card">
+                                    <div class="header">
+                                        <h2>กราฟแสดงการเข้าออก</h2>
+                                    </div>
+                                    <div class="body">
+
+                                        <div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">ชื่อเดิม</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="name_department" name="name_department" class="form-control">
+                    <input type="hidden" id="id_de" name="id_de">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="SavedepartmentName()">บันทึก</button>
+
+                    <script>
+                        function SavedepartmentName() {
+                            var val = document.getElementById("name_department").value;
+                            var _id = document.getElementById("id_de").value;
+                            //     console.log(_id)
+                            $.getScript("api_name_logo.js", function (data, textStatus, jqxhr) {
+                                var namecategory = data.substring(1, data.length - 1);
+                                $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                    var urlipaddressport = data.substring(1, data.length - 1).split(':');
+                                    $(document).ready(function () {
+                                        $.post(namecategory,
+                                            {
+                                                adddata: '',
+                                                selectdata: '',
+                                                id: _id,
+                                                updatenamedata: val,
+                                                updatelogostr: '',
+                                                port: urlipaddressport[1].replace('//', '').replace('/', ''),
+                                            },
+                                            function (data) {
+                                                var jsondata = data;
+
+                                                //console.log(jsondata)
+                                                location.href = 'viewdashboard.html';
+                                            })
+                                            .fail(function (xhr, status, error) {
+                                            });
+                                    });
+                                });
+                            });
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="exampleModalCenterImage" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">รูปภาพ</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img id="_logo" width="100" height="100" /><br>
+                    <input type="file" name="fileimage" type="file" accept=".png" id="fileimage"><br>
+                    <input type="hidden" id="id_de" name="id_de">
+                    <input type="hidden" id="base64str">
+
+                    <script>
+                        $('document').ready(function () {
+                            $("#fileimage").change(function () {
+                                if (this.files && this.files[0]) {
+                                    var reader = new FileReader();
+                                    var file_data = $('#fileimage').prop('files')[0];
+                                    if (file_data.size > 156752) {
+                                        alert('ไฟล์ภาพใหญ่เกิน !!');
+                                        return;
+                                    }
+                                    reader.onload = function (e) {
+
+                                        $('#_logo').attr('src', e.target.result);
+                                        document.getElementById("base64str").value = e.target.result;
+
+                                    }
+                                    reader.readAsDataURL(this.files[0]);
+                                }
+                            });
+                        });
+                    </script>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="SavedepartmentLOGO()">บันทึก</button>
+
+                    <script>
+                        function SavedepartmentLOGO() {
+                            var val = document.getElementById("name_department").value;
+                            var _id = document.getElementById("id_de").value;
+                            $.getScript("api_name_logo.js", function (data, textStatus, jqxhr) {
+                                var namecategory = data.substring(1, data.length - 1);
+                                var req = document.getElementById("base64str").value;
+                                $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                    var urlipaddressport = data.substring(1, data.length - 1).split(':');
+                                    $(document).ready(function () {
+                                        $.post(namecategory,
+                                            {
+                                                adddata: '',
+                                                selectdata: '',
+                                                id: _id,
+                                                updatenamedata: '',
+                                                updatelogostr: req,
+                                                port: urlipaddressport[1].replace('//', '').replace('/', ''),
+                                            },
+                                            function (data) {
+                                                var jsondata = data;
+                                                location.href = 'viewdashboard.html';
+                                            })
+                                            .fail(function (xhr, status, error) {
+                                            });
+                                    });
+                                });
+                            });
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="plugins/bootstrap/js/bootstrap.js"></script>
+
+
+
+    <!-- Jquery Core Js -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Select Plugin Js -->
+    <script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="../../plugins/node-waves/waves.js"></script>
+
+    <!-- Autosize Plugin Js -->
+    <script src="../../plugins/autosize/autosize.js"></script>
+
+    <!-- Moment Plugin Js -->
+    <script src="../../plugins/momentjs/moment.js"></script>
+
+    <!-- Bootstrap Material Datetime Picker Plugin Js -->
+    <script src="../../plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+    <!-- Bootstrap Datepicker Plugin Js -->
+    <script src="../../plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+    <!-- Custom Js -->
+    <script src="../../js/admin.js"></script>
+    <script src="../../js/pages/forms/basic-form-elements.js"></script>
+
+    <!-- Demo Js -->
+    <script src="../../js/demo.js"></script>
+
+
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="../../plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="../../plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+
+    <script src="../../plugins/chartjs/Chart.bundle.js"></script>
+
+    <!-- <script src="../../js/admin.js"></script> -->
+
+    <script>
+        function myFunction() {
+            document.getElementById("formElem").reset();
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            var ti = today.toLocaleTimeString('en-US', {
+                hour12: false,
+                hour: "numeric",
+                minute: "numeric"
+            });
+
+            today = dd + '/' + mm + '/' + yyyy + ' ' + ti;
+
+            $(document).ready(function () {
+                $("#datetimenotice").val(today);
+            });
+        }
+    </script>
+
+
+</body>
+
+</html>

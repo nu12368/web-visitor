@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>WAC</title>
+    <!-- Favicon-->
+    <link rel="icon" href="../../uploads/logo.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
+        type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- JQuery DataTable Css -->
+    <link href="../../plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+
+    <link href="../../plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
+        rel="stylesheet" />
+    <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+
+
+    <!-- Custom Css -->
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="../../css/themes/all-themes.css" rel="stylesheet" />
+
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
+        rel="stylesheet" />
+
+    <!-- Bootstrap DatePicker Css -->
+    <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+    <link href="../../plugins/light-gallery/css/lightgallery.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"></script>
+
+
+
+
+    <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
+
+    <!-- modal  -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../plugins2/responsive.bootstrap4.min.css">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="../../plugins/light-gallery/css/lightgallery.css" rel="stylesheet">
+    <script src="./visitordashboard.js"></script>
+    <!--     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> -->
+
+    <script src="./pageTable.js"></script>
+    <script src="./checkCost.js"></script>
+    <link href="./css-collor.css" rel="stylesheet">
+</head>
+
+<!-- <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+   <script src="http://code.highcharts.com/highcharts.js"></script> 
+   <script src="http://code.highcharts.com/modules/data.js"></script>   -->
+
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+
+<script src="./checkCookies.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="./logout.js"></script>
+
+</head>
+<style>
+    .intro {
+        display: block !important;
+    }
+    .intronone {
+        display: none !important;
+    }
+</style>
+
+<style>
+    tr.group,
+    tr.group:hover {
+        /* background-color: rgb(235, 233, 233) !important; */
+        background-color: #fde4e4 !important;
+        color: blue;
+    }
+</style>
+<script>
+    if (Cookies.get('username') == undefined) {
+        Cookies.remove('username');
+      //  location.href = "index.html";
+    }
+    var co = Cookies.get('username');
+    $(document).ready(function () {
+        $("#usernamelogin").text('ชื่อผู้ใช้งาน : ' + co);
+    });
+</script>
+
+
+<body class="theme-red">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <div class="search-icon">
+            <i class="material-icons">search</i>
+        </div>
+        <input type="text" placeholder="START TYPING...">
+        <div class="close-search">
+            <i class="material-icons">close</i>
+        </div>
+    </div>
+    <!-- #END# Search Bar -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" id="logoname" href="viewdashboard.html"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a id='logout' style="cursor: pointer;"
+                        data-close="true">[ออกจากระบบ]</a></li>
+                    <!-- Call Search -->
+                    <!-- <li><a href="javascript:void(0);" class="js-search" data-close="true"><i
+                                class="material-icons">search</i></a></li> -->
+                    <!-- #END# Call Search -->
+                    <!-- Notifications -->
+                    <li class="dropdown">
+                        <!-- <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <i class="material-icons">notifications</i>
+                            <span class="label-count">7</span>
+                        </a> -->
+                        <ul class="dropdown-menu">
+                            <li class="header">NOTIFICATIONS</li>
+                            <li class="body">
+                                <ul class="menu">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-light-green">
+                                                <i class="material-icons">person_add</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>12 new members joined</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 14 mins ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-cyan">
+                                                <i class="material-icons">add_shopping_cart</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>4 sales made</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 22 mins ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-red">
+                                                <i class="material-icons">delete_forever</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>Nancy Doe</b> deleted account</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 3 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-orange">
+                                                <i class="material-icons">mode_edit</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>Nancy</b> changed name</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 2 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-blue-grey">
+                                                <i class="material-icons">comment</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>John</b> commented your post</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 4 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-light-green">
+                                                <i class="material-icons">cached</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>John</b> updated status</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 3 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-purple">
+                                                <i class="material-icons">settings</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>Settings updated</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> Yesterday
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="javascript:void(0);">View All Notifications</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Notifications -->
+                    <!-- Tasks -->
+                    <li class="dropdown">
+                        <!-- <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <i class="material-icons">flag</i>
+                            <span class="label-count"></span>
+                        </a> -->
+                        <ul class="dropdown-menu">
+                            <li class="header">TASKS</li>
+                            <li class="body">
+                                <ul class="menu tasks">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Footer display issue
+                                                <small>32%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85"
+                                                    aria-valuemin="0" aria-valuemax="100" style="width: 32%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Make new buttons
+                                                <small>45%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85"
+                                                    aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Create new dashboard
+                                                <small>54%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85"
+                                                    aria-valuemin="0" aria-valuemax="100" style="width: 54%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Solve transition issue
+                                                <small>65%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-orange" role="progressbar"
+                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
+                                                    style="width: 65%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Answer GitHub questions
+                                                <small>92%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-purple" role="progressbar"
+                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
+                                                    style="width: 92%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="javascript:void(0);">View All Tasks</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Tasks -->
+                    <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i
+                                class="material-icons">more_vert</i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+
+            <div class="user-info" style="text-align:center;">
+                <div class="image" style="display: none;">
+                    <img id="LOGOVIEW" name="LOGOVIEW" width="100" height="100" alt="User" />
+                    <p id="usernamelogin" style="color:white;"></p>
+                </div>
+                <div><br></div>
+                <div><br></div>
+                <div style="color: white;">
+                    <div class="name" data-toggle="dropdown" id="userlogin"  aria-haspopup="true" aria-expanded="false"></div>
+                </div>
+            </div>
+            <div class="menu">
+                <ul class="list" id="nav">
+                    <li id="l01" >
+                        <a href="visitordashboard.html">
+                            <i class="material-icons">home</i>
+                            <span>แดชบอร์ด VISITOR</span>
+                        </a>
+                    </li>
+                    <li id="l02">
+                        <a href="visitorreport.html">
+                            <i class="material-icons">description</i>
+                            <span>รายงานการเข้าออก</span>
+                        </a>
+                    </li>
+                    <li id="ll" style="display: none;">
+                        <a href="visitorreportcost.html">
+                            <i class="material-icons">attach_money</i>
+                            <span>รายงานการคิดเงิน</span>
+                        </a>
+                    </li>
+                    <!-- <li class="active">
+                        <a href="memberlist.html">
+                            <i class="material-icons">account_circle</i>
+                            <span>รายชื่อผู้ลงทะเบียน</span>
+                        </a>
+                    </li> -->
+                    <li id="l03">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">settings</i>
+                            <span>ตั้งค่า</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li id="l1" style="display: none;">
+                                <a href="visitorSetting.html">
+                                    <span>ประเภท Visitor</span>
+                                </a>
+                            </li>
+                            <li id="l2" style="display: none;">
+                                <a href="visitorlicensePlate.html">
+                                    <span>ทะเบียนรถ</span>
+                                </a>
+                            </li>
+                            <li id="l3" style="display: none;">
+                                <a href="visitPlace.html">
+                                    <span>สถานที่ติดต่อ</span>
+                                </a>
+                            </li>
+                            <li id="l4" style="display: none;">
+                                <a href="contactTopic.html">
+                                    <span>ติดต่อเรื่อง</span>
+                                </a>
+                            </li>
+                            <li id="l5" style="display: none;">
+                                <a href="visitFrom.html">
+                                    <span>บริษัท</span>
+                                </a>
+                            </li>
+                            <li id="l6" style="display: none;">
+                                <a href="department.html">
+                                    <span>แผนกที่ติดต่อ</span>
+                                </a>
+                            </li>
+                            <li id="l7" style="display: none;">
+                                <a href="visiperson.html">
+                                    <span>ผู้รับการติดต่อ</span>
+                                </a>
+                            </li>
+                            <li id="l8" style="display: none;">
+                                <a href="vehicleType.html">
+                                    <span>ชนิดรถ</span>
+                                </a>
+                            </li>
+                            <li id="l9" style="display: none;">
+                                <a href="visitorregisteruser.html">
+                                    <span>เพิ่มผู้ใช้งาน</span>
+                                </a>
+                            </li>
+                            <li id="lll" style="display: none;">
+                                <a href="visitorcost.html">
+                                    <span>คิดเงิน</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="deleteLog.html">
+                                    <span>ลบข้อมูล</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="l04">
+                        <a href="visitorblack_white_list.html">
+                            <i class="material-icons">settings</i>
+                            <span>BlackList/WhiteList</span>
+                        </a>
+                    </li>
+                    <!-- <li >
+                        <a href="registermember.html">
+                            <i class="material-icons">group_add</i>
+                            <span>เพิ่มผู้ใช้งาน</span>
+                        </a>
+                    </li> -->
+                    <li id="l10" style="display: none;">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">event</i>
+                            <span>นัดหมาย/ประวัติการเข้าพบ</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="appointment.html">
+                                    <span>นัดหมาย</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="reportappointment.html">
+                                    <span>ประวัติการเข้าพบ</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- #Menu -->
+            <!-- Footer -->
+
+            <!-- #Footer -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+        <!-- Right Sidebar -->
+        <aside id="rightsidebar" class="right-sidebar">
+            <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                <li role="presentation" class="active"><a href="#skins" data-toggle="tab">SKINS</a></li>
+                <!-- <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li> -->
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active in active" id="skins">
+                    <ul class="demo-choose-skin">
+                        <li data-theme="red" class="active">
+                            <div class="red"></div>
+                            <span>Red</span>
+                        </li>
+                        <li data-theme="pink">
+                            <div class="pink"></div>
+                            <span>Pink</span>
+                        </li>
+                        <li data-theme="purple">
+                            <div class="purple"></div>
+                            <span>Purple</span>
+                        </li>
+                        <li data-theme="deep-purple">
+                            <div class="deep-purple"></div>
+                            <span>Deep Purple</span>
+                        </li>
+                        <li data-theme="indigo">
+                            <div class="indigo"></div>
+                            <span>Indigo</span>
+                        </li>
+                        <li data-theme="blue">
+                            <div class="blue"></div>
+                            <span>Blue</span>
+                        </li>
+                        <li data-theme="light-blue">
+                            <div class="light-blue"></div>
+                            <span>Light Blue</span>
+                        </li>
+                        <li data-theme="cyan">
+                            <div class="cyan"></div>
+                            <span>Cyan</span>
+                        </li>
+                        <li data-theme="teal">
+                            <div class="teal"></div>
+                            <span>Teal</span>
+                        </li>
+                        <li data-theme="green">
+                            <div class="green"></div>
+                            <span>Green</span>
+                        </li>
+                        <li data-theme="light-green">
+                            <div class="light-green"></div>
+                            <span>Light Green</span>
+                        </li>
+                        <li data-theme="lime">
+                            <div class="lime"></div>
+                            <span>Lime</span>
+                        </li>
+                        <li data-theme="yellow">
+                            <div class="yellow"></div>
+                            <span>Yellow</span>
+                        </li>
+                        <li data-theme="amber">
+                            <div class="amber"></div>
+                            <span>Amber</span>
+                        </li>
+                        <li data-theme="orange">
+                            <div class="orange"></div>
+                            <span>Orange</span>
+                        </li>
+                        <li data-theme="deep-orange">
+                            <div class="deep-orange"></div>
+                            <span>Deep Orange</span>
+                        </li>
+                        <li data-theme="brown">
+                            <div class="brown"></div>
+                            <span>Brown</span>
+                        </li>
+                        <li data-theme="grey">
+                            <div class="grey"></div>
+                            <span>Grey</span>
+                        </li>
+                        <li data-theme="blue-grey">
+                            <div class="blue-grey"></div>
+                            <span>Blue Grey</span>
+                        </li>
+                        <li data-theme="black">
+                            <div class="black"></div>
+                            <span>Black</span>
+                        </li>
+                    </ul>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="settings">
+                    <div class="demo-settings">
+                        <p>GENERAL SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Report Panel Usage</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Email Redirect</span>
+                                <div class="switch">
+                                    <label><input type="checkbox"><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                        <p>SYSTEM SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Notifications</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Auto Updates</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                        <p>ACCOUNT SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Offline</span>
+                                <div class="switch">
+                                    <label><input type="checkbox"><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Location Permission</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <!-- #END# Right Sidebar -->
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>
+
+                    <!-- <small>Taken from <a href="https://datatables.net/" target="_blank">datatables.net</a></small> -->
+                </h2>
+            </div>
+            <!-- Basic Examples -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header header-new"">
+                            <!-- <div class=""> -->
+                            <!-- // <div class=" "> -->
+                            <h2>
+                                <font style="color: white;">รายชื่อผู้ลงทะเบียน</font>
+                            </h2>
+                            <!-- </div> -->
+                            <!-- </div> -->
+                            <!-- <a href="" style="color: blue; font-size: 18px;" data-toggle="modal" data-target="#myModal">
+                                +เพิ่มประกาศ
+                            </a> -->
+                        </div>
+                        <div class="body">
+                            <form id="formElem">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs tab-nav-right" role="tablist">
+
+                                    <li role="presentation" class="active"><a href="#user" data-toggle="tab"
+                                            style="font-size: 18px;">รายชื่อผู้ลงทะเบียน</a></li>
+                                    <li role="presentation"><a href="#admin" data-toggle="tab"
+                                            style="font-size: 18px;">รายชื่อเจ้าหน้าที่</a></li>
+                                    <!-- <li role="presentation"><a href="#messages" data-toggle="tab">MESSAGES</a></li>
+                                    <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li> -->
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane fade in active" id="user">
+                                        <div class="body">
+                                            <div class="table-responsive">
+                                                <table
+                                                    class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display"
+                                                    id="table1">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="text-align: center; font-size: 18px; ">บ้านเลขที่
+                                                            </th>
+                                                            <th style="text-align: center; font-size: 18px;">เลขมิเตอร์
+                                                            </th>
+                                                            <th style="text-align: center; font-size: 18px;">เลขมาตร
+                                                            </th>
+                                                            <th style="text-align: center; font-size: 18px;">
+                                                                ชื่อ-นามสกุล</th>
+                                                            <th style="text-align: center; font-size: 18px;">เบอร์โทร
+                                                            </th>
+                                                            <th style="text-align: center; font-size: 18px;">
+                                                                ประเภทสิ่งปลูกสร้าง
+                                                            </th>
+                                                            <th style="text-align: center; font-size: 18px;">
+                                                                วันที่ลงทะเบียน
+                                                            </th>
+                                                            <th style="text-align: center; font-size: 18px; ">status
+                                                            </th>
+                                                            <th style="text-align: center; font-size: 18px;">แก้ไข/ลบ
+                                                            </th>
+                                                            
+                                                            <th style="text-align: center; font-size: 18px; ">_id
+                                                            </th>
+                                                            <th style="text-align: center; font-size: 18px; ">_id2
+                                                            </th>
+                                                            
+                                                        </tr>
+                                                    </thead>
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div role="tabpanel" class="tab-pane fade" id="admin">
+
+                                        <div class="body">
+                                            <div class="table-responsive">
+                                                <table
+                                                    class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display"
+                                                    id="table_admin">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="text-align: center; font-size: 18px; ">
+                                                                ชื่อผู้ใช้งาน
+                                                            </th>
+                                                            <th style="text-align: center; font-size: 18px;">
+                                                                ชื่อ-นามสกุล
+                                                            </th>
+                                                            <th style="text-align: center; font-size: 18px;">email
+                                                            </th>
+                                                            <th style="text-align: center; font-size: 18px;">เบอร์โทร
+                                                            </th>
+                                                            <th style="text-align: center; font-size: 18px;">
+                                                                วันที่ลงทะเบียน
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                            </form>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 id=title class="modal-title"></h4>
+
+                            </div>
+                            <div class="modal-body">
+                                <div class="row clearfix">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="card">
+                                            <div class="body">
+                                                <form id="formElem">
+
+                                                    <div id="move" style="display: none;">
+                                                        <div class="form-group form-float">
+                                                            <h5>ที่อยู่เดิม</h5>
+                                                            <div class="form-line">
+                                                                <textarea class="form-control" id="old_address" 
+                                                                    name="old_address" style="height: 200px; color: blue;" rows="3"
+                                                                    required></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group form-float">
+                                                            <div class="form-line">
+                                                                <select class="form-control show-tick" name="c_address"
+                                                                    id="c_address" style="font-size: 20;" onchange="c_checkaddress()">
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <script>
+                                                            function c_checkaddress() {
+                                                                $.getScript("ip.js", function (data, textStatus, jqxhr) {
+
+                                                                    var urlipaddress = data.substring(1, data.length - 1);
+                                                                    var _address = document.getElementById("c_address").value;
+                                                                    const address = {
+                                                                        address: _address
+                                                                    }
+
+                                                                    const url = urlipaddress + 'FindDataMeterForUser/';
+                                                                    axios.post(url, address
+                                                                        ).then(function (response) {
+                                                                           
+                                                                            document.getElementById("postaddress").value = response.data.message[0].home.data.address;
+                                                                            document.getElementById("postbuildingtype").value = response.data.message[0].home.data.buildingType;
+                                                                            document.getElementById("postmeter").value = response.data.message[0].home.data.meterId;
+                                                                            document.getElementById("meterValues").value = response.data.message[0].home.data.meterVal;
+
+
+                                                                            document.getElementById("latitude").value = response.data.message[0].home.data.gps.latitude;
+                                                                            document.getElementById("longitude").value = response.data.message[0].home.data.gps.longitude;
+                                                                          
+                                                                        }).catch(function (res) {
+                                                                            const { response } = res
+                                                                          
+                                                                        });
+                                                                });
+                                                            }
+                                                        </script>
+                                                    </div>
+
+                                                    <div class="form-group form-float">
+                                                      
+                                                        <div class="form-line">
+                                                          
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group form-float">
+                                                        <h4>เลขที่บ้าน</h4>
+                                                        <div class="form-line">
+                                                            <input type="text" class="form-control" name="postaddress"
+                                                                id="postaddress" value="" required autocomplete=off
+                                                                autocomplete=off />
+
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group form-float">
+                                                        <h4>คำนำหน้า</h4>
+                                                        <div class="form-line">
+                                                            <select name="posttitle" id="posttitle" class="form-control"
+                                                                style="height: 45px;">
+                                                                <option value="">- คำนำหน้า -</option>
+                                                                <option value="นาย">นาย</option>
+                                                                <option value="นาง">นาง</option>
+                                                                <option value="นางสาว">นางสาว</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <h4>ชื่อ</h4>
+                                                    <div class="form-group form-float">
+                                                        <input type="text" name="postname" id="postname" value=""
+                                                            class="form-control" required placeholder="ชื่อ" />
+
+                                                    </div>
+                                                    <h4>นามสกุล</h4>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input type="text" name="postlastName" id="postlastName"
+                                                                class="form-control" required value=""
+                                                                placeholder="นามสกุล" />
+                                                        </div>
+                                                    </div>
+                                                    <h4>เบอร์โทร</h4>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input type="text" name="posttel" id="posttel" value=""
+                                                                class="form-control" maxlength="10" required
+                                                                placeholder="เบอร์โทร" />
+                                                        </div>
+                                                    </div>
+
+                                                    <h4>ประเภทสิ่งปลูกสร้าง</h4>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <select name="postbuildingtype" id="postbuildingtype"
+                                                                class="form-control" style="height: 45px;">
+                                                                <option value="">- ประเภทสิ่งปลูกสร้าง -</option>
+                                                                <option value="บ้านเดี่ยว">บ้านเดี่ยว</option>
+                                                                <option value="บ้านแถว">บ้านแถว</option>
+                                                                <option value="ห้องแถว">ห้องแถว</option>
+                                                                <option value="ตึกแถว">ตึกแถว</option>
+                                                                <option value="โรงเรือนอื่นๆ">โรงเรือนอื่นๆ</option>
+                                                                <option value="สถานศึกษา">สถานศึกษา</option>
+                                                                <option value="สถานีบริการน้ำมันเชื้อเพลิง">
+                                                                    สถานีบริการน้ำมันเชื้อเพลิง</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <h4>เลขประจำตัวมิเตอร์</h4>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input type="text" name="postmeter" id="postmeter" value=""
+                                                                class="form-control" required
+                                                                placeholder="เลขประจำตัวมิเตอร์" />
+                                                        </div>
+                                                    </div>
+                                                    <h4>เลขมาตร</h4>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input type="text" name="meterValues" id="meterValues"
+                                                                class="form-control" value="" required
+                                                                placeholder="เลขมาตร" />
+                                                        </div>
+                                                    </div>
+                                                    <h4>latitude</h4>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input type="text" name="latitude" id="latitude" value=""
+                                                                class="form-control" required placeholder="latitude" />
+                                                        </div>
+                                                    </div>
+                                                    <h4>longitude</h4>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input type="text" name="longitude" id="longitude" value=""
+                                                                class="form-control" required placeholder="longitude" />
+                                                        </div>
+                                                    </div>
+                                                    <h4>กำหนดสิทธิ์</h4>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <select name="status" id="status" style="height: 45px; "
+                                                                class="form-control">
+                                                                <option value="">- กำหนดสิทธิ์ -</option>
+                                                                <option value="user">user</option>
+                                                                <option value="staff">staff</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <a id="resetpassworduser" style="cursor: pointer;">[ รีเซ็ตรหัสผ่าน ]</a>
+                                                    <h4 id="h_pass"></h4>
+                                                    <div class="form-group" id="oldpassword">
+                                                        <div class="form-line">
+                                                            <input type="password" name="password" id="password"
+                                                                class="form-control" maxlength="6" value="" required
+                                                                placeholder="รหัสผ่าน ใช้อักขระ 6 ตัว" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group form-float" id="newpassword" style="display: none;">
+                                                        <h4>รหัสผ่านใหม่</h4>
+                                                        <div class="form-line">
+                                                            <input type="password" name="new_pass_user"  maxlength="6" id="new_pass_user" value=""
+                                                            class="form-control" required placeholder="รหัสผ่าน ใช้อักขระ 6 ตัว" />
+                                                           
+                                                        </div>
+                                                    </div>
+                                                  
+                                                    <input type="button" value="อัพเดท"
+                                                        id="editpost" class="btn btn-primary waves-effect" />
+
+                                                    <input type="button" onclick="postdata()" value="บันทึก"
+                                                        id="submitpost" class="btn btn-primary waves-effect" />
+
+
+                                                        <!-- <input type="button" value="เปลี่ยนรหัสผ่าน"
+                                                        id="submitpostpassword" class="btn btn-primary waves-effect" /> -->
+
+                                                    <p id="p_update" style="font-size: 18px;"></p>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">ปิด</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <script>
+                        function postdata() {
+                            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+
+                                var urlipaddress = data.substring(1, data.length - 1);
+
+
+                                if (document.getElementById("postaddress").value == '' || document.getElementById("posttitle").value == '' || document.getElementById("posttel").value == '' || document.getElementById("postname").value == '' || document.getElementById("postlastName").value == '' || document.getElementById("status").value == '' || document.getElementById("password").value == '') {
+
+                                    document.getElementById("p_update").innerText = "กรุณากรอกข้อมูลให้ครบ !!!";
+                                    document.getElementById("p_update").style.color = "red";
+
+                                    return;
+                                } else {
+
+                                    document.getElementById("p_update").innerText = "";
+
+                                    var _address = document.getElementById("postaddress").value;
+                                    var _name = document.getElementById("posttitle").value + " " +
+                                        document.getElementById("postname").value + " " +
+                                        document.getElementById("postlastName").value;
+                                    var _tel = document.getElementById("posttel").value;
+                                    var _buildingType = document.getElementById("postbuildingtype").value;
+                                    var _meterId = document.getElementById("postmeter").value;
+                                    var _latitude = document.getElementById("latitude").value;
+                                    var _longitude = document.getElementById("longitude").value;
+                                    var _meterValues = document.getElementById("meterValues").value;
+                                    var _status = document.getElementById("status").value;
+                                    var _password = document.getElementById("password").value;
+                                    const dataUser = {
+                                        address: _address,
+                                        buildingType: _buildingType,
+                                        "gps": {
+                                            latitude: _latitude,
+                                            longitude: _longitude
+                                        },
+                                        meterId: _meterId,
+                                        name: _name,
+                                        tel: _tel,
+                                        meterVal: _meterValues,
+                                        status: _status,
+                                        password: _password
+                                    }
+                                    const url = urlipaddress + 'regisMember';
+
+                                    axios.post(url, dataUser
+                                    ).then(function (response) {
+                                        if (response.data.message.data == "Registration completed") {
+
+                                            //alert("ลงทะเบียนสำเร็จ");
+                                            location.href = "registerlist.html";
+                                        }
+                                    }).catch(function (res) {
+                                        const { response } = res
+
+                                        document.getElementById("p_update").innerText = "บันทึกข้อมูลไม่สำเร็จ !!!";
+                                        document.getElementById("p_update").style.color = "red";
+
+                                    });
+                                }
+                            });
+                        }
+                    </script>
+
+                </div>
+            </div>
+
+
+
+
+            <div class="container">
+                <div class="modal fade" id="myModaldelete" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 id="title" class="modal-title">ลบข้อมูล</h4>
+
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-20">
+                                            <i class="material-icons" id="c_delete"
+                                                style="font-size:58px;color:red">delete</i>
+                                            <i class="material-icons" id="completed"
+                                                style="font-size:58px;color:green; display: none;">check_circle</i>
+
+                                        </div>
+                                        <div>
+                                            <label id="lbl_completed" for="fname"> </label>
+                                            <input type="hidden" id="_id_deletedata">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="button" value="ลบ" id="deleteUser"
+                                    class="primary btn btn-default" />
+
+                                <button type="button" class="btn btn-default" 
+                                    data-dismiss="modal">ปิด</button>
+                            </div>
+                        </div>
+
+                    </div>
+                   
+                </div>
+            </div>
+
+
+<!-- //////////admin -->
+            <div class="container">
+                <div class="modal fade" id="myModaladmin" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 id=title class="modal-title"></h4>
+
+                            </div>
+                            <div class="modal-body">
+                                <div class="row clearfix">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="card">
+                                            <div class="body">
+                                                <form id="formElem">
+
+                                                    <div>
+                                                        <div class="form-group form-float">
+                                                            <h4>ชื่อผู้ใช้งาน</h4>
+                                                            <div class="form-line">
+                                                                <input type="text" name="username_ad" id="username_ad" value=""
+                                                                class="form-control" required placeholder="ชื่อผู้ใช้งาน" />
+                                                               
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group form-float">
+                                                            <a id="resetpasswordad" style="cursor: pointer;">[ รีเซ็ตรหัสผ่าน ]</a>
+                                                            <h4>รหัสผ่านเดิม</h4>
+                                                            <div class="form-line">
+                                                                <input type="password" name="pass_ad" id="pass_ad" value=""
+                                                                class="form-control" required placeholder="รหัสผ่าน" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group form-float">
+                                                            <h4>รหัสผ่านใหม่</h4>
+                                                            <div class="form-line">
+                                                                <input type="password" name="new_pass_ad" id="new_pass_ad" value=""
+                                                                class="form-control" required placeholder="รหัสผ่าน" />
+                                                               
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group form-float">
+                                                        <h4>คำนำหน้า</h4>
+                                                        <div class="form-line">
+                                                            <select name="posttitle_ad" id="posttitle_ad" class="form-control"
+                                                                style="height: 45px;">
+                                                                <option value="">- คำนำหน้า -</option>
+                                                                <option value="นาย">นาย</option>
+                                                                <option value="นาง">นาง</option>
+                                                                <option value="นางสาว">นางสาว</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <h4>ชื่อ</h4>
+                                                    <div class="form-group form-float">
+                                                        <input type="text" name="postname_ad" id="postname_ad" value=""
+                                                            class="form-control" required placeholder="ชื่อ" />
+
+                                                    </div>
+                                                    <h4>นามสกุล</h4>
+                                                    <div class="form-group">
+                                                        <div class="form-line">
+                                                            <input type="text" name="postlastName_ad" id="postlastName_ad"
+                                                                class="form-control" required value=""
+                                                                placeholder="นามสกุล" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group form-float">
+                                                        <h4>อีเมล์</h4>
+                                                        <div class="form-line">
+                                                            <input type="text" class="form-control" name="email_ad"
+                                                                id="email_ad" value="" required autocomplete=off
+                                                                autocomplete=off />
+                                                        </div>
+                                                    </div>
+                                                    <h4>เบอร์โทร</h4>
+                                                    <div class="form-group form-float">
+                                                        <input type="text" name="tel_ad" id="tel_ad" value=""
+                                                            class="form-control" required placeholder="เบอร์โทร" />
+                                                    </div>
+                                                   
+                                                    <input type="button" value="อัพเดท"
+                                                        id="editpostadmin" class="btn btn-primary waves-effect" />
+                                                        <p id="p_updateadmin" style="font-size: 18px;"></p>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">ปิด</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                   
+
+                </div>
+            </div>
+
+
+
+
+
+<!-- ////////////////////// reset Password -->
+            <div class="modal fade" id="myModalconfirm" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="title_reset"></h5>
+                    
+                </div>
+            
+                <div class="modal-body">
+                    <i class="fa fa-check-circle" id="reset_ok" style="font-size:100px;color:green; display: none;"></i>
+                    <i class="fa fa-plus-circle" id="reset_error"  style="font-size:100px;color:red; display: none;"></i>
+                    <i class="fa fa-power-off" id="reset_power" style="font-size:100px;color:blue; display: block;"></i>
+                </div>
+                <div class="modal-footer">
+                 
+                    <input type="button" value="ยืนยัน" id="btn_resetpassword"
+                    class="primary btn btn-default" />
+                    <input type="button" value="ยืนยัน" id="btn_resetpasswordadmin"
+                    class="primary btn btn-default" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+            <!-- #END# Basic Examples -->
+            <!-- Exportable Table -->
+
+            <!-- #END# Exportable Table -->
+        </div>
+    </section>
+    <!-- Jquery Core Js -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Select Plugin Js -->
+    <!-- <script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script> -->
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="../../plugins/node-waves/waves.js"></script>
+
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="../../plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="../../plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+
+    <!-- Custom Js -->
+    <script src="../../js/admin.js"></script>
+    <script src="../../js/pages/tables/jquery-datatable.js"></script>
+
+    <!-- Demo Js -->
+    <script src="../../js/demo.js"></script>
+
+    <script src="../../plugins2/dataTables.responsive.min.js"></script>
+
+</body>
+
+</html>

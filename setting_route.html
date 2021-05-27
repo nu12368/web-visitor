@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>WAC</title>
+    <!-- Favicon-->
+    <link rel="icon" href="../../uploads/logo.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
+        type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- JQuery DataTable Css -->
+    <link href="../../plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+
+    <link href="../../plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="../../css/themes/all-themes.css" rel="stylesheet" />
+
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
+        rel="stylesheet" />
+
+    <!-- Bootstrap DatePicker Css -->
+    <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+    <link href="../../plugins/light-gallery/css/lightgallery.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"></script>
+
+
+    <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
+
+    <!-- modal  -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../plugins2/responsive.bootstrap4.min.css">
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js"></script>
+
+
+    <link href="./css-collor.css" rel="stylesheet">
+
+    <script src=" https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src=https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js></script>
+    <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+
+
+
+</head>
+<style>
+    .div {
+        border: 1px solid black;
+    }
+</style>
+
+
+<script>
+    var obj = JSON.parse(Cookies.get('datatoken'));
+    var userId = Cookies.get('datauserId');
+    var marker = [];
+    let markers = [];
+    var table;
+    async function _point(point) {
+        const result = await acctoken();
+        const chkpoint = await getpoint(result);
+        $('#table1').DataTable().destroy();
+        table = $('#table1').DataTable({
+            "lengthChange": false,
+            "ordering": false,
+            "info": false,
+            "paging": false,
+            "responsive": true,
+            "autoWidth": false,
+            "searching": false,
+            'data': [...chkpoint],
+            columns: [
+                { data: "checkPointName" },
+                {
+                    data: null,
+                    targets: 0,
+                    className: "center",
+                    'render': function (data, type, full, meta) {
+                      //  console.log(full)
+                        return '<input type="checkbox"  id="' + full.checkPointId + '" name="' + full.checkPointName + '" class="filled-in" /><label for="' + full.checkPointId + '"></label>'
+                    }
+                }
+
+            ]
+        });
+
+
+        var routes = await getroute(result);
+        _route(routes);
+    }
+
+    function _route(point) {
+        var _data;
+        var c_n = 0;
+        var $select = $('#route');
+        $select.find('option').remove();
+        $select.append('<option value=' + 0 + '>' + '-- เลือกเส้นทาง --' + '</option>');
+        $.each(point, function (key, value) {
+            var dataroute = {
+                pointName: value.pointName.replace(" ", ";"),
+                routeId: value.routeId.replace(" ", ";"),
+                routeName: value.routeName.replace(" ", ";"),
+            }
+            _data = JSON.stringify(dataroute)
+            $select.append('<option value=' + _data + '>' + value.routeName.replace(";", " ") + '</option>');
+            c_n = c_n + 1;
+        });
+
+    }
+
+    function getroute(refresh_token) {
+        var data;
+      //  console.log(refresh_token)
+        return new Promise(resolve => {
+            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                var urlipaddress = data.substring(1, data.length - 1);
+                const dataUserID = {
+                    userId: userId
+                }
+               // console.log(dataUserID)
+                axios.post(urlipaddress + 'routes', dataUserID, {
+                    headers: {
+                        'Authorization': refresh_token
+                    }
+                }).then(function (response) {
+                  //  console.log(response.data.message.data)
+                    resolve(response.data.message.data);
+                }).catch(function (res) {
+                    const { response } = res
+                 //   console.log(response.data)
+                });
+            });
+        });
+    }
+
+
+    function c_check() {
+        document.getElementById("btn_add").style.display = "block";
+        document.getElementById("submit_update").style.display = "block";
+        document.getElementById("submit_save").style.display = "none";
+        document.getElementById("submit_delete").style.display = "block";
+        var _data = document.getElementById("route").value;
+        const obj = JSON.parse(_data)
+        var sp = obj.pointName.split(",")
+        document.getElementById("checkrouteId").value = obj.routeId;
+        $('#table1 :checkbox').each(function () {
+            document.getElementById("name_route").value = obj.routeName.replace(";", " ");
+            this.checked = false;
+            for (i = 0; i < sp.length; i++) {
+                if (sp[i] == this.name) {
+                    this.checked = true;
+                }
+            }
+        });
+    }
+
+    async function DELETE_ROUTE() {
+        $("#myModaldelete").modal();
+        document.getElementById("c_delete").style.display = "block";
+        document.getElementById("completed").style.display = "none";
+        $("#lbl_completed").text('คุณต้องการจะลบข้อมูล ใช่หรือไม่');
+    }
+
+
+    async function UPDATE_ROUTE() {
+        const result = await acctoken();
+        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+           // console.log("wwwww")
+            var urlipaddress = data.substring(1, data.length - 1);
+            var form = this;
+            var name_point;
+            table.$('input[type="checkbox"]').each(function () {
+                if (this.checked == true) {
+                    name_point += this.name + ",";
+                }
+            });
+            if (name_point != undefined) {
+                name_point = name_point.replace(undefined, "");
+            }
+            const datagps = {
+                userId: userId,
+                routeId: document.getElementById("checkrouteId").value,
+                routeName: document.getElementById("name_route").value,
+                pointName: name_point,
+
+            }
+            axios.post(urlipaddress + 'updateRoute', datagps, {
+                headers: {
+                    'Authorization': result
+                }
+            }).then(async function (response) {
+              //  console.log(response.data)
+                if (response.data.message == "update completed") {
+                    document.getElementById("update").innerText = "อัพเดทสำเร็จ";
+                    document.getElementById("update").style.color = "green";
+                }
+
+            }).catch(function (res) {
+                const { response } = res
+             //   console.log(response.data.message)
+
+                document.getElementById("update").innerText = "อัพเดทไม่สำเร็จ !!!";
+                document.getElementById("update").style.color = "red";
+
+            });
+        });
+
+    }
+
+
+
+    async function SUBMITDELETE() {
+        const result = await acctoken();
+        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+            var urlipaddress = data.substring(1, data.length - 1);
+            axios({
+                url: urlipaddress + 'delRoute',
+                method: 'delete',
+                data: {
+                    userId: userId,
+                    routeId: document.getElementById("checkrouteId").value
+                },
+                headers: { 'Authorization': result }
+            }).then(async function (response) {
+             //   console.log(response.data)
+                if (response.data.message == "delete completed") {
+                    location.href = "setting_route.html";
+                }
+                // 
+            }).catch(function (res) {
+                const { response } = res
+            //    console.log(response.data.message)
+            });
+
+        });
+    }
+
+
+    async function SUBMIT_ROUTE() {
+
+        if (document.getElementById("name_route").value == "") {
+            document.getElementById("update").style.color = "red";
+            document.getElementById("update").innerText = "กรุณา ระบุ ชื่อเส้นทาง !!!";
+            return;
+        }
+        var form = this;
+        var name_point;
+        const result = await acctoken();
+        table.$('input[type="checkbox"]').each(function () {
+            if (this.checked == true) {
+                name_point += this.name + ",";
+            }
+        });
+        if (name_point != undefined) {
+            name_point = name_point.replace(undefined, "");
+          //  console.log(name_point.substring(0, name_point.length - 1))
+
+
+            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                var urlipaddress = data.substring(1, data.length - 1);
+                const datapoint = {
+                    userId: userId,
+                    routeName: document.getElementById("name_route").value,
+                    pointName: name_point
+
+                }
+              //  console.log(datapoint)
+                axios.post(urlipaddress + 'route', datapoint, {
+                    headers: {
+                        'Authorization': result
+                    }
+                }).then(async function (response) {
+               //     console.log(response.data)
+                    if (response.data.message == "success") {
+                        document.getElementById("update").innerText = "บันทึกสำเร็จ";
+                        document.getElementById("update").style.color = "green";
+                    }
+
+                }).catch(function (res) {
+                    const { response } = res
+              //      console.log(response.data.message)
+                    document.getElementById("update").innerText = "บันทึกไม่สำเร็จ !!!";
+                    document.getElementById("update").style.color = "red";
+
+                });
+            });
+
+        } else {
+            document.getElementById("update").style.color = "red";
+            document.getElementById("update").innerText = "กรุณาเลือกตำแหน่ง !!!";
+            return;
+        }
+
+    }
+
+
+    function acctoken() {
+        var data;
+     //   console.log(obj.refresh_token)
+        return new Promise(resolve => {
+            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                var urlipaddress = data.substring(1, data.length - 1);
+                axios.post(urlipaddress + 'token', data, {
+                    headers: {
+                        'Authorization': obj.refresh_token
+                    }
+                }).then(function (response) {
+                    resolve(response.data.message.access_token);
+
+                }).catch(function (res) {
+                    const { response } = res
+          //          console.log(response.data.message)
+                    if (response.data.message == "Unauthorized") {
+                        location.href = "index.html";
+                    }
+
+                });
+            });
+        });
+    }
+
+    function getpoint(refresh_token) {
+        var data;
+     //   console.log(refresh_token)
+        return new Promise(resolve => {
+            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                var urlipaddress = data.substring(1, data.length - 1);
+                const dataUserID = {
+                    userId: userId
+                }
+                axios.post(urlipaddress + 'checkPoints', dataUserID, {
+                    headers: {
+                        'Authorization': refresh_token
+                    }
+                }).then(function (response) {
+                    resolve(response.data.message.data);
+
+                }).catch(function (res) {
+                    const { response } = res
+         //           console.log(response.data)
+                });
+            });
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+<body class="theme-red" onload="_point()">
+
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <div class="search-icon">
+            <i class="material-icons">search</i>
+        </div>
+        <input type="text" placeholder="START TYPING...">
+        <div class="close-search">
+            <i class="material-icons">close</i>
+        </div>
+    </div>
+    <!-- #END# Search Bar -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" id="logoname" href="report.html">Guard Tour</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a onclick="logout()" style="cursor: pointer;" class="js-search"
+                            data-close="true">[ออกจากระบบ]</a></li>
+                    <script>
+                        function logout() {
+                            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                var urlipaddress = data.substring(1, data.length - 1);
+
+                                const databody = {
+                                    refresh_token: document.getElementById("refreshtoken").value,//refreshtoken
+                                }
+
+                                axios.post(urlipaddress + 'logout', databody, {
+                                    headers: {
+                                        'Authorization': document.getElementById("accesstoken").value//refreshtoken
+                                    }
+                                }).then(function (response) {
+
+                                  //  console.log(response.data)
+
+                                    if (response.data.message == "success") {
+                                        document.getElementById("p_logout").innerText = "ออกจากระบบสำเร็จ";
+
+                                    } else {
+                                        // alert("บันทึกข้อมูลไม่สำเร็จ");
+                                    }
+
+                                }).catch(function (res) {
+                                    const { response } = res
+                                //    console.log(response.data.message)
+                                    if (response.data.message == "Unauthorized") {
+                                        alert("คุณยังไม่ได้ login admin");
+                                    }
+                                });
+                            });
+                            location.href = "index.html";
+                        }
+                    </script>
+                    <!-- Call Search -->
+                    <!-- <li><a href="javascript:void(0);" class="js-search" data-close="true"><i
+                                class="material-icons">search</i></a></li> -->
+                    <!-- #END# Call Search -->
+                    <!-- Notifications -->
+                    <li class="dropdown">
+                        <!-- <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <i class="material-icons">notifications</i>
+                            <span class="label-count">7</span>
+                        </a> -->
+                        <ul class="dropdown-menu">
+                            <li class="header">NOTIFICATIONS</li>
+                            <li class="body">
+                                <ul class="menu">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-light-green">
+                                                <i class="material-icons">person_add</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>12 new members joined</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 14 mins ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-cyan">
+                                                <i class="material-icons">add_shopping_cart</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>4 sales made</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 22 mins ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-red">
+                                                <i class="material-icons">delete_forever</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>Nancy Doe</b> deleted account</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 3 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-orange">
+                                                <i class="material-icons">mode_edit</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>Nancy</b> changed name</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 2 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-blue-grey">
+                                                <i class="material-icons">comment</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>John</b> commented your post</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 4 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-light-green">
+                                                <i class="material-icons">cached</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>John</b> updated status</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 3 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-purple">
+                                                <i class="material-icons">settings</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>Settings updated</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> Yesterday
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="javascript:void(0);">View All Notifications</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Notifications -->
+                    <!-- Tasks -->
+                    <li class="dropdown">
+                        <!-- <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <i class="material-icons">flag</i>
+                            <span class="label-count"></span>
+                        </a> -->
+                        <ul class="dropdown-menu">
+                            <li class="header">TASKS</li>
+                            <li class="body">
+                                <ul class="menu tasks">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Footer display issue
+                                                <small>32%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85"
+                                                    aria-valuemin="0" aria-valuemax="100" style="width: 32%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Make new buttons
+                                                <small>45%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85"
+                                                    aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Create new dashboard
+                                                <small>54%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85"
+                                                    aria-valuemin="0" aria-valuemax="100" style="width: 54%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Solve transition issue
+                                                <small>65%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-orange" role="progressbar"
+                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
+                                                    style="width: 65%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Answer GitHub questions
+                                                <small>92%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-purple" role="progressbar"
+                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
+                                                    style="width: 92%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="javascript:void(0);">View All Tasks</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Tasks -->
+                    <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i
+                                class="material-icons">more_vert</i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar" style="text-align: center;">
+            <!-- User Info -->
+            <div class="user-info" style="text-align:center;">
+                <div class="image">
+
+                    <!-- <img id="LOGOVIEW" name="LOGOVIEW" width="100" height="100" alt="User" />
+                    <p id="usernamelogin" style="color:white;"></p> -->
+                </div>
+                <div><br></div>
+                <div><br></div>
+                <div style="color: white;">
+                    <div class="name" data-toggle="dropdown" id="userlogin"  aria-haspopup="true" aria-expanded="false"></div>
+                </div>
+            </div>
+            <div class="menu">
+                <ul class="list">
+                    <li>
+                        <a href="report.html">
+                            <i class="material-icons">description</i>
+                            <span>รายงาน</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="userlist.html">
+                            <i class="material-icons">people</i>
+                            <span>USER ID ผู้ใช้งาน</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="updategps.html">
+                            <i class="material-icons">gps_fixed</i>
+                            <span>ตำแหน่ง</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="setting_route.html">
+                            <i class="material-icons">transfer_within_a_station</i>
+                            <span>กำหนดเส้นทาง</span>
+                        </a>
+                    </li>
+                    <li >
+                        <a href="shifttime.html">
+                            <i class="material-icons">av_timer</i>
+                            <span>กำหนดรอบตรวจ</span>
+                        </a>
+                    </li>
+                    <!-- <li>
+                        <a href="setting_point.html">
+                            <i class="material-icons">add_location</i>
+                            <span>กำหนดจุดตรวจ</span>
+                        </a>
+                    </li> -->
+
+                    <!-- <li style="text-align: left;" class="header"></li>
+                    <li>
+                        <a href="setting_road.html">
+                            <i class="material-icons">transfer_within_a_station</i>
+                            <span>กำหนดเส้นทาง</span>
+                        </a>
+                    </li>
+
+                    <li style="text-align: left;" class="header"></li>
+                    <li>
+                        <a href="setting_around.html">
+                            <i class="material-icons">history</i>
+                            <span>กำหนดรอบที่ตรวจ</span>
+                        </a>
+                    </li>
+                    <li style="text-align: left;" class="header"></li>
+                    <li>
+                        <a href="location.html">
+                            <i class="material-icons">map</i>
+                            <span>กำหนดรอบที่ตรวจ</span>
+                        </a>
+                    </li> -->
+                </ul>
+            </div>
+            <!-- #Menu -->
+            <!-- Footer -->
+
+            <!-- #Footer -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+        <!-- Right Sidebar -->
+        <aside id="rightsidebar" class="right-sidebar">
+            <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                <li role="presentation" class="active"><a href="#skins" data-toggle="tab">SKINS</a></li>
+                <!-- <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li> -->
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active in active" id="skins">
+                    <ul class="demo-choose-skin">
+                        <li data-theme="red" class="active">
+                            <div class="red"></div>
+                            <span>Red</span>
+                        </li>
+                        <li data-theme="pink">
+                            <div class="pink"></div>
+                            <span>Pink</span>
+                        </li>
+                        <li data-theme="purple">
+                            <div class="purple"></div>
+                            <span>Purple</span>
+                        </li>
+                        <li data-theme="deep-purple">
+                            <div class="deep-purple"></div>
+                            <span>Deep Purple</span>
+                        </li>
+                        <li data-theme="indigo">
+                            <div class="indigo"></div>
+                            <span>Indigo</span>
+                        </li>
+                        <li data-theme="blue">
+                            <div class="blue"></div>
+                            <span>Blue</span>
+                        </li>
+                        <li data-theme="light-blue">
+                            <div class="light-blue"></div>
+                            <span>Light Blue</span>
+                        </li>
+                        <li data-theme="cyan">
+                            <div class="cyan"></div>
+                            <span>Cyan</span>
+                        </li>
+                        <li data-theme="teal">
+                            <div class="teal"></div>
+                            <span>Teal</span>
+                        </li>
+                        <li data-theme="green">
+                            <div class="green"></div>
+                            <span>Green</span>
+                        </li>
+                        <li data-theme="light-green">
+                            <div class="light-green"></div>
+                            <span>Light Green</span>
+                        </li>
+                        <li data-theme="lime">
+                            <div class="lime"></div>
+                            <span>Lime</span>
+                        </li>
+                        <li data-theme="yellow">
+                            <div class="yellow"></div>
+                            <span>Yellow</span>
+                        </li>
+                        <li data-theme="amber">
+                            <div class="amber"></div>
+                            <span>Amber</span>
+                        </li>
+                        <li data-theme="orange">
+                            <div class="orange"></div>
+                            <span>Orange</span>
+                        </li>
+                        <li data-theme="deep-orange">
+                            <div class="deep-orange"></div>
+                            <span>Deep Orange</span>
+                        </li>
+                        <li data-theme="brown">
+                            <div class="brown"></div>
+                            <span>Brown</span>
+                        </li>
+                        <li data-theme="grey">
+                            <div class="grey"></div>
+                            <span>Grey</span>
+                        </li>
+                        <li data-theme="blue-grey">
+                            <div class="blue-grey"></div>
+                            <span>Blue Grey</span>
+                        </li>
+                        <li data-theme="black">
+                            <div class="black"></div>
+                            <span>Black</span>
+                        </li>
+                    </ul>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="settings">
+                    <div class="demo-settings">
+                        <p>GENERAL SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Report Panel Usage</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Email Redirect</span>
+                                <div class="switch">
+                                    <label><input type="checkbox"><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                        <p>SYSTEM SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Notifications</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Auto Updates</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                        <p>ACCOUNT SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Offline</span>
+                                <div class="switch">
+                                    <label><input type="checkbox"><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Location Permission</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <!-- #END# Right Sidebar -->
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>
+                </h2>
+            </div>
+            <!-- Basic Examples -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+
+                        <div class="header header-new"">
+                            <h2>
+                                <font style="color: white;">เพิ่ม / แก้ไข / ลบ
+                                </font>
+                            </h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="" onclick="ref()" style="color: white; font-size: 18px;"
+                                        data-toggle="modal" data-target="#add"> <i class="material-icons"
+                                            style="color: white;">refresh</i>
+
+                                    </a>
+                                    <script>
+                                        function ref() {
+                                            location.href = "setting_route.html";
+                                        }
+                                    </script>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body">
+
+                            <form id="formElem">
+
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select class="form-control show-tick" name="route" id="route"
+                                            style="cursor: pointer;" onchange="c_check()">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="name_route" id="name_route"
+                                            value="" required autocomplete="off" placeholder="ชื่อเส้นทาง" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <input type="button" class="btn btn-primary waves-effect" value="บันทึก"
+                                        id="submit_save" name="submit_save" onclick="SUBMIT_ROUTE()"
+                                        style="cursor: pointer;">
+                                    &nbsp;&nbsp;
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <input type="button" class="btn btn-primary waves-effect"
+                                                        style="display: none;" value="อัพเดท" id="submit_update"
+                                                        onclick="UPDATE_ROUTE()" name="submit_update"
+                                                        style="cursor: pointer;">
+                                                </td>
+                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>
+                                                    <input type="button" class="btn btn-primary waves-effect"
+                                                        style="display: none;" value="ลบ" id="submit_delete"
+                                                        onclick="DELETE_ROUTE()" name="submit_delete"
+                                                        style="cursor: pointer;">
+                                                </td>
+                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>
+                                                    <input type="button" class="btn btn-primary waves-effect"
+                                                    style="display: none;" value="เพิ่ม" id="btn_add"
+                                                    onclick="ref()" name="btn_add"
+                                                    style="cursor: pointer;">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <p id="update" style="color: green; font-size: 18px;"></p>
+                                    <input type="hidden" id="checkrouteId">
+                                </div>
+                                <div>&nbsp;</div>
+                                <div style="text-align: right;">
+                                    <input type="checkbox" id="select_all1"></input> <label
+                                        for="select_all1">เลือกทั้งหมด</label>
+                                </div>
+                                <script>
+                                    $('#select_all1').bind('click', function () {
+                                        var checkedState = this.checked;
+
+                                        $('#table1 :checkbox').each(function () {
+                                            this.checked = checkedState;
+                                        });
+                                    });
+                                </script>
+                                <table
+                                    class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display"
+                                    id="table1">
+                                    <thead>
+                                        <tr>
+                                            <th>ชื่อตำแหน่ง</th>
+                                            <th>เลือก
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="container">
+                <div class="modal fade" id="myModaledit" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 id="title_dalete_official" class="modal-title">เปลี่ยน PASSWORD</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <table>
+                                        <tr>
+                                            <td> USER :</td>
+                                            <td> <input type="text" id="user_edit" name="user_edit"></td>
+                                            <td></td>
+                                            <td> </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div>&nbsp;</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>PASSWORD :</td>
+                                            <td><input type="password" name="passuser_old" id="passuser_old" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div>&nbsp;</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>NEWPASSWORD :</td>
+                                            <td><input type="password" name="passuser_new" id="passuser_new" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div>&nbsp;</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <input type="button" value="UPDATE PASSWORD" id="UPDATE"
+                                                    onclick="UPDATE_PASSWORD()" name="UPDATE" style="cursor: pointer;">
+                                                <p id="update" style="color: green; font-size: 18px;"></p>
+                                            </td>
+
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- /// ลบ -->
+            <div class="container">
+                <div class="modal fade" id="myModaldelete" role="dialog">
+                    <div class="modal-dialog" style="width: 300px; height: 200px;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 id="title" class="modal-title">ลบข้อมูล</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-20">
+                                            <i class="fa fa-exclamation-triangle" id="c_delete"
+                                                style="font-size:48px;color:red"></i>
+                                            <i class="fa fa-check-circle" id="completed"
+                                                style="font-size:48px;color:green; display: none;"></i>
+                                        </div>
+
+                                        <div>
+                                            <label id="lbl_completed" for="fname"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <!-- <input type="button" value="ตกลง" id="deleteUser"
+                                onclick="Click_DELETE()" name="deleteUser"
+                                style="cursor: pointer;"> -->
+                                <input type="button" value="ตกลง" id="deleteUser" onclick="SUBMITDELETE()"
+                                    class="primary btn btn-default" />
+
+                                <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- Jquery Core Js -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Select Plugin Js -->
+    <!-- <script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script> -->
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="../../plugins/node-waves/waves.js"></script>
+
+    <script src="../../plugins/light-gallery/js/lightgallery-all.js"></script>
+    <script src="../../js/pages/medias/image-gallery.js"></script>
+
+    <script src="../../plugins/autosize/autosize.js"></script>
+
+    <script src="../../plugins/momentjs/moment.js"></script>
+
+
+    <script src="../../plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+    <!-- Bootstrap Datepicker Plugin Js -->
+    <script src="../../plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <!-- Bootstrap Material Datetime Picker Plugin Js -->
+
+
+
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="../../plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="../../plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+
+
+
+
+    <script src="../../js/pages/forms/basic-form-elements.js"></script>
+    <!-- Custom Js -->
+    <script src="../../js/admin.js"></script>
+    <script src="../../js/demo.js"></script>
+    <script src="../../plugins2/dataTables.responsive.min.js"></script>
+</body>
+
+</html>

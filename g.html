@@ -1,0 +1,103 @@
+
+ <!DOCTYPE html>
+ <html>
+ 
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="initial-scale=1.0">
+     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+ <script type="text/javascript"
+ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJ6SnvPM-O0dyoUChDYJxv34TXDX2cpEw&libraries=drawing,places"
+ async defer></script>
+
+</head>
+<style>
+    #map {
+        height: 100%;
+    }
+
+    html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    #map {
+        height: 600px;
+        width: 100%;
+    }
+
+</style>
+<script>
+     function initMap() {
+    // console.log("fsdfsd")
+        var map ;
+var markers = [];
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(async function (position) {
+                var myLatlng = { lat: position.coords.latitude, lng: position.coords.longitude };
+                 map = new google.maps.Map(
+                    document.getElementById('map'), {
+                    zoom: 18, center: myLatlng,
+                    gestureHandling: 'greedy'
+                });
+
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(myLatlng.lat, myLatlng.lng),
+                    map: map,
+                });
+                markers.push(marker);
+              //  search(map);
+                map.addListener('click', function (mapsMouseEvent) {
+                //    console.log(markers.length)
+                    if (markers.length > 0) {
+                        markers.pop().setMap(null);
+                    }
+                    // Create a new InfoWindow.
+                    infoWindow = new google.maps.InfoWindow({
+                        position: mapsMouseEvent.latLng
+
+                    });
+                    infoWindow.setContent(mapsMouseEvent.latLng.toString());
+
+                    var checkmarker = infoWindow.content.split(",")
+                    // console.log(checkmarker)
+                  //  console.log(checkmarker[0].substring(1, checkmarker[0].length))
+                  //  console.log(checkmarker[1].replace(" ", "").substring(0, checkmarker[0].length - 1))
+                    var lat = checkmarker[0].substring(1, checkmarker[0].length);
+                    var lng = checkmarker[1].replace(" ", "").substring(0, checkmarker[0].length - 1);
+                    var marker;
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(lat, lng),
+                        map: map
+                    });
+                  //  console.log(infoWindow)
+                    markers.push(marker);
+                    //  infoWindow.open(map);
+                
+                    //  infoWindow.open(map);
+                });
+
+            }, function () {
+               handleLocationError(true, infoWindow, map.getCenter());
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, infoWindow, map.getCenter());
+        }
+    }
+</script>
+
+
+
+
+<body onload="initMap()">
+    <div>&nbsp;</div>
+    <div id="map">
+    </div>
+    <div id="right-panel">
+        <p>Total Distance: <span id="total"></span></p>
+    </div>
+</body>
+</html>

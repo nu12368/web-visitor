@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>WAC</title>
+    <!-- Favicon-->
+    <link rel="icon" href="../../uploads/logo.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
+        type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- JQuery DataTable Css -->
+    <link href="../../plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+
+    <link href="../../plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
+        rel="stylesheet" />
+    <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+
+
+    <!-- Custom Css -->
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="../../css/themes/all-themes.css" rel="stylesheet" />
+
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
+        rel="stylesheet" />
+
+    <!-- Bootstrap DatePicker Css -->
+    <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+    <link href="../../plugins/light-gallery/css/lightgallery.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"></script>
+
+
+
+
+    <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
+
+    <!-- modal  -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../plugins2/responsive.bootstrap4.min.css">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="../../plugins/light-gallery/css/lightgallery.css" rel="stylesheet">
+    <script src="./pageTable.js"></script>
+    <script src="./checkCost.js"></script>
+    <link href="./css-collor.css" rel="stylesheet">
+    <script src="./Profile.js"></script>
+    <script src="./addimage.js"></script>
+    <script src="./user.js"></script>
+    <script src="./editimage.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+    <script src="./checkCookies.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./service.js"></script>
+
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css"
+        rel="stylesheet">
+    <link href="./chat.css" rel="stylesheet">
+    <link href="./c_popup.css" rel="stylesheet">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
+
+</head>
+<script>
+    Cookies.remove('appeal');
+    Cookies.remove('inform');
+    Cookies.remove('maintenance');
+    Cookies.set('appeal', 'appeal', { expires: 1 })
+
+    $(document).ready(function () {
+        $('#action_menu_btn').click(function () {
+            $('.action_menu').toggle();
+        });
+    });
+</script>
+
+<body>
+
+    <div class="container">
+        <div class="container-fluid">
+            <h3 class=" text-center">Messaging</h3>
+            <div class="messaging ">
+                <div class="inbox_msg ">
+                    <div class="inbox_people ">
+                        <div class="headind_srch ">
+                            <div class="recent_heading">
+                                <h4>ร้องเรียน</h4>
+                            </div>
+                        </div>
+                        <div class="inbox_chat ">
+                            <div class="chat_list">
+                                <div class="chat_people" id="chat_people">
+                                    <div class="chat_img" id="EditaddImage">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mesgs">
+                        <div class="msg_history">
+                            <div class="incoming_msg">
+                                <div class="received_msg">
+                                    <div class="received_withd_msg">
+                                        <p>member</p>
+                                        <span class="time_date"> 11:01 AM | June 9</span>
+                                    </div>
+                                </div>
+                            </div>
+                       
+                            <div class="outgoing_msg">
+                                <div class="sent_msg">
+                                    <p>admin</p>
+                                    <span class="time_date"> 11:01 AM | June 9</span>
+                                </div>
+                            </div>
+                         
+                         
+
+                            <div class="incoming_msg">
+                                <div class="incoming_msg_img"> <img
+                                        src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                <div class="received_msg">
+                                    <div class="received_withd_msg">
+                                        <p>Test, which is a new approach to have</p>
+                                        <span class="time_date"> 11:01 AM | Yesterday</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="outgoing_msg">
+                                <div class="sent_msg">
+                                    <p>Apollo University, Delhi, India Test</p>
+                                    <span class="time_date"> 11:01 AM | Today</span>
+                                </div>
+                            </div>
+                            <div class="incoming_msg">
+                                <div class="incoming_msg_img"> <img
+                                        src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                <div class="received_msg">
+                                    <div class="received_withd_msg">
+                                        <p>We work directly with our designers and suppliers,
+                                            and sell direct to you, which means quality, exclusive
+                                            products, at a price anyone can afford.</p>
+                                        <span class="time_date"> 11:01 AM | Today</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="incoming_msg">
+                                <div class="incoming_msg_img"> <img
+                                        src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                <div class="received_msg">
+                                    <div class="received_withd_msg">
+                                        <p>We work directly with our designers and suppliers,
+                                            and sell direct to you, which means quality, exclusive
+                                            products, at a price anyone can afford.</p>
+                                        <span class="time_date"> 11:01 AM | Today</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="type_msg">
+                            <div class="input_msg_write">
+                                <input type="text" class="write_msg" placeholder="Type a message" />
+                                <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o"
+                                        aria-hidden="true">ส่ง</i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- <p class="text-center top_spac"> Design by <a target="_blank"
+                    href="https://www.linkedin.com/in/sunil-rajput-nattho-singh/">Sunil Rajput</a></p> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="round hollow text-center">
+                <a href="#" id="addClass"><span class="glyphicon glyphicon-comment"></span> Open in chat </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $("#addClass").click(function () {
+                $('#qnimate').addClass('popup-box-on');
+            });
+            $("#removeClass").click(function () {
+                $('#qnimate').removeClass('popup-box-on');
+            });
+        })
+    </script>
+    <div class="popup-box chat-popup" id="qnimate">
+        <div class="popup-head">
+            <div class="popup-head-left pull-left"><img
+                    src="http://bootsnipp.com/img/avatars/bcf1c0d13e5500875fdd5a7e8ad9752ee16e7462.jpg"
+                    alt="iamgurdeeposahan"> Gurdeep Osahan</div>
+            <div class="popup-head-right pull-right">
+                <div class="btn-group">
+                    <button class="chat-header-button" data-toggle="dropdown" type="button" aria-expanded="false">
+                        <i class="glyphicon glyphicon-cog"></i> </button>
+                    <ul role="menu" class="dropdown-menu pull-right">
+                        <li><a href="#">Media</a></li>
+                        <li><a href="#">Block</a></li>
+                        <li><a href="#">Clear Chat</a></li>
+                        <li><a href="#">Email Chat</a></li>
+                    </ul>
+                </div>
+
+                <button data-widget="remove" id="removeClass" class="chat-header-button pull-right" type="button"><i
+                        class="glyphicon glyphicon-off"></i></button>
+            </div>
+        </div>
+        <div class="popup-messages">
+            <div class="direct-chat-messages">
+                <div class="chat-box-single-line">
+                    <abbr class="timestamp">October 8th, 2015</abbr>
+                </div>
+
+                <!-- Message. Default to the left -->
+                <div class="direct-chat-msg doted-border">
+                    <div class="direct-chat-info clearfix">
+                        <span class="direct-chat-name pull-left">Osahan</span>
+                    </div>
+                    <!-- /.direct-chat-info -->
+                    <img alt="message user image"
+                        src="http://bootsnipp.com/img/avatars/bcf1c0d13e5500875fdd5a7e8ad9752ee16e7462.jpg"
+                        class="direct-chat-img"><!-- /.direct-chat-img -->
+                    <div class="direct-chat-text">
+                        Hey bro, how’s everything going ?
+                    </div>
+                    <div class="direct-chat-info clearfix">
+                        <span class="direct-chat-timestamp pull-right">3.36 PM</span>
+                    </div>
+                    <div class="direct-chat-info clearfix">
+                        <span class="direct-chat-img-reply-small pull-left">
+
+                        </span>
+                        <span class="direct-chat-reply-name">Singh</span>
+                    </div>
+                    <!-- /.direct-chat-text -->
+                </div>
+                <!-- /.direct-chat-msg -->
+
+
+                <div class="chat-box-single-line">
+                    <abbr class="timestamp">October 9th, 2015</abbr>
+                </div>
+
+
+
+                <!-- Message. Default to the left -->
+                <div class="direct-chat-msg doted-border">
+                    <div class="direct-chat-info clearfix">
+                        <span class="direct-chat-name pull-left">Osahan</span>
+                    </div>
+                    <!-- /.direct-chat-info -->
+                    <img alt="iamgurdeeposahan"
+                        src="http://bootsnipp.com/img/avatars/bcf1c0d13e5500875fdd5a7e8ad9752ee16e7462.jpg"
+                        class="direct-chat-img"><!-- /.direct-chat-img -->
+                    <div class="direct-chat-text">
+                        Hey bro, how’s everything going ?
+                    </div>
+                    <div class="direct-chat-info clearfix">
+                        <span class="direct-chat-timestamp pull-right">3.36 PM</span>
+                    </div>
+                    <div class="direct-chat-info clearfix">
+                        <img alt="iamgurdeeposahan"
+                            src="http://bootsnipp.com/img/avatars/bcf1c0d13e5500875fdd5a7e8ad9752ee16e7462.jpg"
+                            class="direct-chat-img big-round">
+                        <span class="direct-chat-reply-name">Singh</span>
+                    </div>
+                    <!-- /.direct-chat-text -->
+                </div>
+                <!-- /.direct-chat-msg -->
+
+            </div>
+        </div>
+        <div class="popup-messages-footer">
+            <textarea id="status_message" placeholder="Type a message..." rows="10" cols="40" name="message"></textarea>
+            <div class="btn-footer">
+                <button class="bg_none"><i class="glyphicon glyphicon-film"></i> </button>
+                <button class="bg_none"><i class="glyphicon glyphicon-camera"></i> </button>
+                <button class="bg_none"><i class="glyphicon glyphicon-paperclip"></i> </button>
+                <button class="bg_none pull-right"><i class="glyphicon glyphicon-thumbs-up"></i> </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery Core Js -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Select Plugin Js -->
+    <!-- <script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script> -->
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="../../plugins/node-waves/waves.js"></script>
+
+    <script src="../../plugins/light-gallery/js/lightgallery-all.js"></script>
+    <script src="../../js/pages/medias/image-gallery.js"></script>
+
+    <script src="../../plugins/autosize/autosize.js"></script>
+
+    <script src="../../plugins/momentjs/moment.js"></script>
+
+
+    <script src="../../plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+    <!-- Bootstrap Datepicker Plugin Js -->
+    <script src="../../plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <!-- Bootstrap Material Datetime Picker Plugin Js -->
+
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="../../plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="../../plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+
+
+
+
+    <script src="../../js/pages/forms/basic-form-elements.js"></script>
+    <!-- Custom Js -->
+    <script src="../../js/admin.js"></script>
+    <script src="../../js/demo.js"></script>
+    <script src="../../plugins2/dataTables.responsive.min.js"></script>
+</body>
+
+</html>

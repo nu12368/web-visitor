@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="icon" href="../../uploads/logo.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
+        type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
+        rel="stylesheet" />
+
+    <!-- Bootstrap DatePicker Css -->
+    <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+    <!-- Wait Me Css -->
+    <link href="../../plugins/waitme/waitMe.css" rel="stylesheet" />
+
+    <!-- Bootstrap Select Css -->
+    <link href="../../plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="../../css/themes/all-themes.css" rel="stylesheet" />
+
+    <!-- cookie -->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- modal  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AAIzaSyCvSTrk8bqBoWYTWSmO9zi7b-ZtbyG-sq0&callback=initMap" async defer></script> -->
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?googleapikey=AIzaSyDoVbDCp51h9MtFIEMJ90-3ljAbdwyJpCk&callback=initMap" async defer></script> -->
+
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJ6SnvPM-O0dyoUChDYJxv34TXDX2cpEw"></script>
+
+
+    <!-- 
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
+        type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css"> -->
+
+
+    <!-- Custom Css -->
+    <link href="../../css/style.css" rel="stylesheet">
+
+</head>
+
+<style>
+    #map {
+        height: 100%;
+    }
+
+    html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    #map {
+        height: 900px;
+        width: 100%;
+    }
+</style>
+
+<script>
+
+    // var getUrlParameter = function getUrlParameter(sParam) {
+    //     var sPageURL = window.location.search.substring(1),
+    //         sURLVariables = sPageURL.split('&'),
+    //         sParameterName,
+    //         i;
+
+    //     for (i = 0; i < sURLVariables.length; i++) {
+    //         sParameterName = sURLVariables[i].split('=');
+
+    //         if (sParameterName[0] === sParam) {
+    //             return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+    //         }
+    //     }
+    // };
+    // var jsonObj = JSON.parse(getUrlParameter('map'));
+    // console.log(jsonObj)
+
+
+    var geocoder;
+    var map;
+    var _latitude;
+    var _longitude;
+    var Rm = 3961; // mean radius of the earth (miles) at 39 degrees from the equator
+    var Rk = 6373; // mean radius of the earth (km) at 39 degrees from the equator
+   // var Rk = 6371000;
+    var jsonObj = [{ "topic": "wac", "description": "โดยมุ่งเน้นพัฒนาโซลูชั่น", "latitude": "13.8069549", "longitude": "100.5899356", "timestamp": "31/07/2563 15:01" },
+    { "topic": "หมู่บ้านอารียา", "description": "ทาวน์โฮม 2 ชั้น สไตล์โมเดิร์น", "latitude": "13.847766", "longitude": "100.605768", "timestamp": "31/07/2563 12:01" },
+    { "topic": "สปีดเวย์", "description": "สปีดเวย์ 3 กรุ๊ปแอนด์เซอร์วิส ", "latitude": "13.845235", "longitude": "100.602711", "timestamp": "31/07/2563 09:01" },
+    { "topic": "สเต็ก ลุงหนวด", "description": "“สเต็กลุงหนวด” ก็คงเป็นบรรยากาศชิวๆ", "latitude": "13.862970", "longitude": "100.613834", "timestamp": "31/07/2563 07:01" }]
+
+   // console.log(jsonObj)
+
+    function onloadlocation() {
+        findDistance();
+
+        var mapOptions = {
+            center: { lat: Number(jsonObj[0].latitude), lng: Number(jsonObj[0].longitude) },
+            zoom: 15,
+            gestureHandling: 'greedy'
+        }
+        var maps = new google.maps.Map(document.getElementById("map"), mapOptions);
+        var marker, info, poly;
+
+        $.each(jsonObj, function (i, item) {
+            // alert(item.latitude);
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(item.latitude, item.longitude),
+                map: maps,
+                title: item._point,
+
+            });
+
+            var html = "<b>" + item._point + "</b> <br/>" + "เวลา " + "</b>" + item._datetime + "<br/>" + "user " + "</b>" + item._user;
+            // Create a renderer for directions and bind it to the map.
+
+            info = new google.maps.InfoWindow();
+            info.setContent(html);
+
+            info.open(maps, marker);
+
+            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                return function () {
+                    info.setContent(html);
+                    info.open(maps, marker);
+                }
+            })(marker, i));
+
+            var directionsService = new google.maps.DirectionsService;
+            var directionsDisplay = new google.maps.DirectionsRenderer({
+                suppressPolylines: true,
+                info: info
+            });
+
+            directionsDisplay.setMap(maps);
+            var triangleCoords = [
+                { lat: 13.8069549, lng: 100.5899356 },
+                { lat: 13.847766, lng: 100.605768 },
+                { lat: 13.845235, lng: 100.602711 }
+            ];
+        //    console.log(triangleCoords)
+            var _arr = new Array();
+            var n = 0;
+            var sp;
+            for (i = 0; i < jsonObj.length; i++) {
+                _arr[n] = {
+                    lat: parseFloat(jsonObj[i].latitude),
+                    lng: parseFloat(jsonObj[i].longitude)
+                }
+                n = n + 1
+            }
+
+          //  console.log(_arr)
+         //   console.log(mapOptions.center)
+            poly = new google.maps.Polyline({
+                path: _arr,
+                strokeColor: '#FF0000',
+                strokeOpacity: 1.0,
+                strokeWeight: 3
+            });
+            poly.setMap(maps);
+
+
+
+        });
+
+    }
+
+    var polylineOptions = {
+        strokeColor: '#C83939',
+        strokeOpacity: 1,
+        strokeWeight: 4
+    };
+
+
+
+    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+
+        directionsService.route({
+            origin: {
+                lat: 41.063328,
+                lng: 28.901215
+            },
+            destination: {
+                lat: 41.060756,
+                lng: 28.900046
+            },
+            // waypoints: waypts,
+            optimizeWaypoints: true,
+            travelMode: google.maps.TravelMode.DRIVING
+        }, function (response, status) {
+            if (status === google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setOptions({
+                    directions: response,
+                })
+                var route = response.routes[0];
+                renderDirectionsPolylines(response, map);
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
+        });
+
+    }
+
+
+
+    /* main function */
+    function findDistance() {
+        var t1, n1, t2, n2, lat1, lon1, lat2, lon2, dlat, dlon, a, c, dm, dk, mi, km;
+
+        // get values for lat1, lon1, lat2, and lon2
+        t1 = Number(jsonObj[0].latitude);
+        n1 = Number(jsonObj[0].longitude);
+        //console.log(jsonObj.length)
+        if (jsonObj.length > 1) {
+            t2 = Number(jsonObj[1].latitude);
+            n2 = Number(jsonObj[1].longitude);
+        }
+        // convert coordinates to radians
+        lat1 = deg2rad(t1);
+        lon1 = deg2rad(n1);
+        lat2 = deg2rad(t2);
+        lon2 = deg2rad(n2);
+
+        // find the differences between the coordinates
+        dlat = lat2 - lat1;
+        dlon = lon2 - lon1;
+
+        // here's the heavy lifting
+        a = Math.pow(Math.sin(dlat / 2), 2) + Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(dlon / 2), 2);
+        c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)); // great circle distance in radians
+        dm = c * Rm; // great circle distance in miles
+        dk = c * Rk; // great circle distance in km
+
+        // round the results down to the nearest 1/1000
+        mi = round(dm);
+        km = round(dk);
+
+    }
+
+
+    // convert degrees to radians
+    function deg2rad(deg) {
+        rad = deg * Math.PI / 180; // radians = degrees * pi/180
+        return rad;
+    }
+
+    // round to the nearest 1/1000
+    function round(x) {
+        return Math.round(x * 1000) / 1000;
+    }
+
+</script>
+
+
+
+<body class="theme-red" onload="onloadlocation()">
+
+
+    <!-- #END# Search Bar -->
+    <!-- Top Bar -->
+    <div id="map"></div>
+    <div id="right-panel">
+        <p>Total Distance: <span id="total"></span></p>
+    </div>
+    <!-- #Top Bar -->
+
+
+
+
+
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Select Plugin Js -->
+    <script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="../../plugins/node-waves/waves.js"></script>
+
+    <!-- Custom Js -->
+    <script src="../../js/admin.js"></script>
+
+    <!-- Demo Js -->
+    <script src="../../js/demo.js"></script>
+
+
+
+
+
+</body>
+
+</html>

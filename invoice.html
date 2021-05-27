@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>WAC</title>
+    <!-- Favicon-->
+    <link rel="icon" href="../../uploads/logo.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
+        type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- JQuery DataTable Css -->
+    <link href="../../plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+
+    <link href="../../plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
+        rel="stylesheet" />
+    <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+
+    <!-- Custom Css -->
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="../../css/themes/all-themes.css" rel="stylesheet" />
+
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
+        rel="stylesheet" />
+
+    <!-- Bootstrap DatePicker Css -->
+    <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+    <link href="../../plugins/light-gallery/css/lightgallery.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"></script>
+
+
+    <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
+
+    <!-- modal  -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../plugins2/responsive.bootstrap4.min.css">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="../../plugins/light-gallery/css/lightgallery.css" rel="stylesheet">
+
+
+    <script src="./pageTable.js"></script>
+    <script src="./checkCost.js"></script>
+    <link href="./css-collor.css" rel="stylesheet">
+    <script src="./addimage.js"></script>
+    <script src="./user.js"></script>
+    <script src="./category.js"></script>
+
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+    <script src="./checkCookies.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link href="../../plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+
+    <script src="./invoice.js"></script>
+    <script src="./logout.js"></script>
+    <script src="./Profile.js"></script>
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+    
+     -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+
+    
+</head>
+<link href='https://fonts.googleapis.com/css?family=Kanit:400,300&subset=thai,latin' rel='stylesheet' type='text/css'>
+<style>
+    body h1 h2 h3 h4 h5 h6 ul li a p {
+      font-family: 'Kanit', sans-serif;
+    }
+    div{
+        font-family: 'Kanit', sans-serif;
+    }
+</style>
+<style>
+    .intro {
+        display: block !important;
+    }
+
+    .intronone {
+        display: none !important;
+    }
+</style>
+
+
+<!-- <script>
+    $(document).ready(function () {
+    $('#ref2').selectize({
+        sortField: 'text'
+    });
+});
+</script> -->
+
+<script>
+    if (Cookies.get('username') == undefined) {
+        Cookies.remove('username');
+        // location.href = "index.html";
+    }
+    var co = Cookies.get('username');
+
+
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var ti = today.toLocaleTimeString('en-US', {
+        hour12: false,
+        hour: "numeric",
+        minute: "numeric"
+    });
+
+    // today = dd + '/' + mm + '/' + yyyy + ' ' + ti;
+    today = dd + '/' + mm + '/' + yyyy;
+    $(document).ready(function () {
+        $("#usernamelogin").text('ชื่อผู้ใช้งาน : ' + co);
+        $("#startDate").val(today);
+        //$("#duedate").val(today);
+
+    });
+
+</script>
+
+<body class="theme-red">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <div class="search-icon">
+            <i class="material-icons">search</i>
+        </div>
+        <input type="text" placeholder="START TYPING...">
+        <div class="close-search">
+            <i class="material-icons">close</i>
+        </div>
+    </div>
+    <!-- #END# Search Bar -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#navbar-collapse" aria-expanded="false"></a>
+                    <a href="javascript:void(0);" class="bars"></a>
+                    <a class="navbar-brand" style="display: none;" id="logoname" href="javascript:void(0);"></a>
+                    <a class="navbar-brand" id="namecompyny" href="../../menu.html" style="color: white;" href="#"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Call Search -->
+
+                    <li><a id='logout' style="cursor: pointer;"
+                        data-close="true">[ออกจากระบบ]</a></li>
+                    <!-- #END# Call Search -->
+                    <!-- Notifications -->
+                    <li class="dropdown">
+
+                        <ul class="dropdown-menu">
+                            <li class="header">NOTIFICATIONS</li>
+                            <li class="body">
+                                <ul class="menu">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-light-green">
+                                                <i class="material-icons">person_add</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>12 new members joined</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 14 mins ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-cyan">
+                                                <i class="material-icons">add_shopping_cart</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>4 sales made</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 22 mins ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-red">
+                                                <i class="material-icons">delete_forever</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>Nancy Doe</b> deleted account</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 3 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-orange">
+                                                <i class="material-icons">mode_edit</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>Nancy</b> changed name</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 2 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-blue-grey">
+                                                <i class="material-icons">comment</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>John</b> commented your post</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 4 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-light-green">
+                                                <i class="material-icons">cached</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>John</b> updated status</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 3 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-purple">
+                                                <i class="material-icons">settings</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>Settings updated</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> Yesterday
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="javascript:void(0);">View All Notifications</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Notifications -->
+                    <!-- Tasks -->
+                    <li class="dropdown">
+
+                        <ul class="dropdown-menu">
+                            <li class="header">TASKS</li>
+                            <li class="body">
+                                <ul class="menu tasks">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Footer display issue
+                                                <small>32%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85"
+                                                    aria-valuemin="0" aria-valuemax="100" style="width: 32%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Make new buttons
+                                                <small>45%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85"
+                                                    aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Create new dashboard
+                                                <small>54%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85"
+                                                    aria-valuemin="0" aria-valuemax="100" style="width: 54%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Solve transition issue
+                                                <small>65%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-orange" role="progressbar"
+                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
+                                                    style="width: 65%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Answer GitHub questions
+                                                <small>92%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-purple" role="progressbar"
+                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
+                                                    style="width: 92%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="javascript:void(0);">View All Tasks</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Tasks -->
+                    <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i
+                                class="material-icons">more_vert</i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar" style="text-align: center;">
+            <!-- User Info -->
+            <div class="user-info" style="text-align:center;">
+                <div class="image">
+                    <!-- <a class="navbar-brand" id="logoname" href="../../paymentdashboard.html">PAYMENT</a> -->
+                    <a class="navbar-brand" id="logoname" href="../../servicedashboard.html">
+                        <img id="imageProfile" src="/images/Profile.png" width="80" height="80" alt="User" />
+                    </a>
+                </div>
+                <div><br></div>
+                <div><br></div>
+                <div style="color: white;">
+                    <div class="name" data-toggle="dropdown" id="userlogin"  aria-haspopup="true" aria-expanded="false"></div>
+                </div>
+            </div>
+            <div class="menu">
+                <ul class="list">
+                    <li id="paymentdashboard" style="display: none;">
+                        <a href="paymentdashboard.html">
+                            <i class="material-icons">home</i>
+                            <span>แดชบอร์ด PAYMENT</span>
+                        </a>
+                    </li>
+
+
+                    <li class="active" id="invoice" style="display: none;">
+                        <a href="invoice.html">
+                            <i class="material-icons">local_atm</i>
+                            <span>ทำรายการชำระเงิน</span>
+                        </a>
+                    </li>
+                    <li  id="allInvoice" style="display: none;">
+                        <a href="allInvoice.html">
+                            <i class="material-icons">art_track</i>
+                            <span>รายการแจ้งหนี้</span>
+                        </a>
+                    </li>
+                    <li id="allpayment" style="display: none;">
+                        <a href="allpayment.html">
+                            <i class="material-icons">beenhere</i>
+                            <span>รายการชำระเงิน</span>
+                        </a>
+                    </li>
+
+
+                    <li  id="payment" style="display: none;">
+                        <a href="payment.html">
+                            <i class="material-icons">attach_money</i>
+                            <span>ชำระเงิน</span>
+                        </a>
+                    </li>
+                    <li  id="licategory" style="display: none;">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">settings</i>
+                            <span>ตั้งค่า</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="category.html">
+                                    <span>ประเภทค่าใช้จ่าย</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- #Menu -->
+            <!-- Footer -->
+
+            <!-- #Footer -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+        <!-- Right Sidebar -->
+        <aside id="rightsidebar" class="right-sidebar">
+            <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                <li role="presentation" class="active"><a href="#skins" data-toggle="tab">SKINS</a></li>
+                <!-- <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li> -->
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active in active" id="skins">
+                    <ul class="demo-choose-skin">
+                        <li data-theme="red" class="active">
+                            <div class="red"></div>
+                            <span>Red</span>
+                        </li>
+                        <li data-theme="pink">
+                            <div class="pink"></div>
+                            <span>Pink</span>
+                        </li>
+                        <li data-theme="purple">
+                            <div class="purple"></div>
+                            <span>Purple</span>
+                        </li>
+                        <li data-theme="deep-purple">
+                            <div class="deep-purple"></div>
+                            <span>Deep Purple</span>
+                        </li>
+                        <li data-theme="indigo">
+                            <div class="indigo"></div>
+                            <span>Indigo</span>
+                        </li>
+                        <li data-theme="blue">
+                            <div class="blue"></div>
+                            <span>Blue</span>
+                        </li>
+                        <li data-theme="light-blue">
+                            <div class="light-blue"></div>
+                            <span>Light Blue</span>
+                        </li>
+                        <li data-theme="cyan">
+                            <div class="cyan"></div>
+                            <span>Cyan</span>
+                        </li>
+                        <li data-theme="teal">
+                            <div class="teal"></div>
+                            <span>Teal</span>
+                        </li>
+                        <li data-theme="green">
+                            <div class="green"></div>
+                            <span>Green</span>
+                        </li>
+                        <li data-theme="light-green">
+                            <div class="light-green"></div>
+                            <span>Light Green</span>
+                        </li>
+                        <li data-theme="lime">
+                            <div class="lime"></div>
+                            <span>Lime</span>
+                        </li>
+                        <li data-theme="yellow">
+                            <div class="yellow"></div>
+                            <span>Yellow</span>
+                        </li>
+                        <li data-theme="amber">
+                            <div class="amber"></div>
+                            <span>Amber</span>
+                        </li>
+                        <li data-theme="orange">
+                            <div class="orange"></div>
+                            <span>Orange</span>
+                        </li>
+                        <li data-theme="deep-orange">
+                            <div class="deep-orange"></div>
+                            <span>Deep Orange</span>
+                        </li>
+                        <li data-theme="brown">
+                            <div class="brown"></div>
+                            <span>Brown</span>
+                        </li>
+                        <li data-theme="grey">
+                            <div class="grey"></div>
+                            <span>Grey</span>
+                        </li>
+                        <li data-theme="blue-grey">
+                            <div class="blue-grey"></div>
+                            <span>Blue Grey</span>
+                        </li>
+                        <li data-theme="black">
+                            <div class="black"></div>
+                            <span>Black</span>
+                        </li>
+                    </ul>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="settings">
+                    <div class="demo-settings">
+                        <p>GENERAL SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Report Panel Usage</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Email Redirect</span>
+                                <div class="switch">
+                                    <label><input type="checkbox"><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                        <p>SYSTEM SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Notifications</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Auto Updates</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                        <p>ACCOUNT SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Offline</span>
+                                <div class="switch">
+                                    <label><input type="checkbox"><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Location Permission</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <!-- #END# Right Sidebar -->
+    </section>
+
+
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Input -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card">
+                                <div class="header header-new"">
+                                    <h2>
+                                        <font style=" color: white;">รายการที่ต้องชำระ
+                                    </font>
+                                    </h2>
+                                </div>
+                                <div class="body">
+                                    <form id="formElem">
+                                        <!-- Nav tabs -->
+                                        <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                                            <li role="presentation" class="active"><a href="#home"
+                                                    style="font-size: 18px;" data-toggle="tab">รายการที่ต้องชำระ </a>
+                                            </li>
+                                            <li role="presentation"><a href="#profile"  data-toggle="tab"
+                                                    style="font-size: 18px; display: none;">รายการที่ต้องชำระ (.csv) ไฟล์</a></li>
+                                            <!-- <li role="presentation"><a href="#messages" data-toggle="tab">MESSAGES</a></li>
+                                            <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li> -->
+                                        </ul>
+
+                                        <!-- Tab panes -->
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                                <div class="body">
+                                                    <div class="row clearfix">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group form-float">
+                                                                <input type="file" name="fileimage" type="file" multiple
+                                                                    accept=".png, .jpg, .jpeg" id="fileimage">
+                                                                <label class="form-label">เลือกรูปภาพอัพโหลด</label>
+                                                                <p id="lbl_add" style="font-size: 16px; color: red;">
+                                                                </p>
+                                                            </div>
+                                                            <div class="form-group form-float">
+                                                                <div class="form-line">
+                                                                    <div class="list-unstyled row clearfix">
+                                                                        <p id="imgsixe"
+                                                                            style="font-size: 16px; color: red;">
+                                                                        </p>
+                                                                        <h4>รูปภาพ</h4>
+                                                                        <div id="addImagenew"
+                                                                            class="img-responsive thumbnail">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group" >
+                                                                <div class="form-line">
+                                                                    <select class="form-control show-tick" placeholder="ค้นหาบ้านเลขที่" name="ref2" id="ref2" >
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- <div class="form-group">
+                                                                <div class="form-line">
+                                                                    <input type="text" class="form-control" name="ref2"
+                                                                        id="ref2" value="" required autocomplete="off"
+                                                                        placeholder="เลขที่บ้าน" />
+                                                                    <p id="p_address" style="font-size: 18px;"></p>
+                                                                </div>
+                                                            </div> -->
+
+
+
+                                                            <div class="form-group">
+                                                                <div class="form-line">
+                                                                    <select  class="form-control show-tick" 
+                                                                        name="category" id="category"
+                                                                        style="cursor: pointer;">
+                                                                        <!-- <option value="0">-- เลือกประเภทค่าใช้จ่าย --</option>
+                                                                        <option value="ค่าน้ำประปา">ค่าน้ำประปา</option>
+                                                                        <option value="ค่าขยะ">ค่าขยะ</option>
+                                                                        <option value="ค่าส่วนกลาง">ค่าส่วนกลาง</option>
+                                                                        <option value="ค่าภาษีโรงเรือน">ค่าภาษีโรงเรือน</option>
+                                                                        <option value="ค่าภาษีป้าย">ค่าภาษีป้าย</option>
+                                                                        <option value="ค่าภาษีที่ดิน">ค่าภาษีที่ดิน</option>
+                                                                        <option value="ค่าภาษีธุรกิจเฉพาะ">ค่าภาษีธุรกิจเฉพาะ</option> -->
+                                                                    </select >
+                                                                    <p id="p_address" style="font-size: 18px;"></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="form-line">
+                                                                    <input type="text" class="form-control"
+                                                                        name="amount" id="amount" value="" required
+                                                                        autocomplete="off" placeholder="จำนวนเงิน" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="input-group date"
+                                                                    id="bs_datepicker_range_container">
+                                                                    <div class="form-line">
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="วันที่แจ้ง" id="startDate"
+                                                                            required autocomplete="off">
+                                                                    </div>
+                                                                    <span class="input-group-addon">
+                                                                        <i class="material-icons"
+                                                                            style="cursor: pointer;">date_range</i>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="form-group">
+                                                                <div class="input-group date"
+                                                                    id="bs_datepicker_component_container">
+                                                                    <div class="form-line">
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="วันครบชำระ" id="dueDate"
+                                                                            required autocomplete="off">
+                                                                    </div>
+                                                                    <span class="input-group-addon">
+                                                                        <i class="material-icons"
+                                                                            style="cursor: pointer;">date_range</i>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="form-group">
+                                                                <div class="form-line">
+                                                                    <textarea class="form-control" id="description"
+                                                                        name="description" rows="3"
+                                                                        placeholder="รายละเอียด"></textarea>
+
+                                                                </div>
+                                                            </div>
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <button class="btn btn-primary waves-effect" name="submitpostinvoice"
+                                                    id="submitpostinvoice" class="primary" type="button">บันทึก</button>
+                                                <p id="p_saveinvoice" style="font-size: 18px;"></p>
+
+                                                <!-- <input type="button" value="บันทึก" class="btn btn-primary waves-effect"
+                                            onclick="postdata()" id="submitpostinvoice" class="primary" /> -->
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane fade" id="profile">
+
+                                                <div class="body">
+                                                    <div class="row clearfix">
+                                                        <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                                <div class="form-group form-float">
+                                                                    <input type="file" name="fileToUpload" type="file"
+                                                                        accept=".csv"
+                                                                        placeholder="เลือกไฟล์อัพโหลด (.csv)" required
+                                                                        style="cursor: pointer;" id="fileToUpload">
+                                                                    <label class="form-label">เลือกไฟล์อัพโหลด
+                                                                        (.csv)</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button class="btn btn-primary waves-effect"
+                                                    onclick="postdatainvoieccsv()" id="submitpostinvoicecsv"
+                                                    class="primary" type="button">บันทึก</button>
+                                                <p id="p_saveinvoicecsv" style="font-size: 18px;"></p>
+                                                <!-- <input type="button" value="บันทึก" class="btn btn-primary waves-effect"
+                                            onclick="postdatainvoieccsv()" id="submitpostinvoicecsv" class="primary" /> -->
+                                            </div>
+                                            <script>
+                                                function postdatainvoieccsv() {
+                                                    $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                                        var urlipaddress = data.substring(1, data.length - 1);
+                                                        var file_data = $('#fileToUpload').prop('files')[0];
+                                                        var form_data = new FormData();
+
+                                                        if (file_data == undefined) {
+                                                            //   alert('dsds')
+                                                            document.getElementById("p_saveinvoicecsv").innerText = "กรุณาเลือกไฟล์ CSV !!!";
+                                                            document.getElementById("p_saveinvoicecsv").style.color = "red";
+                                                            return;
+                                                        }
+
+
+                                                        form_data.append('csv', file_data);
+                                                        axios.post(urlipaddress + 'addInvoiceCsv', form_data, {
+                                                            headers: {
+                                                                'Content-Type': 'multipart/form-data'
+                                                            }
+                                                        }).then(function (response) {
+                                                            ///    console.log("บันทึกข้อมูลสำเร็จ")
+                                                            document.getElementById("p_saveinvoicecsv").innerText = 'บันทึกข้อมูลสำเร็จ';
+                                                            document.getElementById("p_saveinvoicecsv").style.color = 'green';
+
+                                                            // $("#myModaldont").modal();
+                                                            // document.getElementById("lbl_completed").innerText = 'บันทึกข้อมูลสำเร็จ';
+                                                            // document.getElementById("c_delete").style.display = 'none';
+                                                            // document.getElementById("completed").style.display = 'block';
+                                                            // document.getElementById("btn_print").style.display = 'none';
+                                                        }).catch(function (res) {
+                                                            const { response } = res
+
+                                                            document.getElementById("p_saveinvoicecsv").innerText = 'บันทึกข้อมูลไม่สำเร็จ ';
+                                                            document.getElementById("p_saveinvoicecsv").style.color = 'red';
+
+                                                            // console.log("บันทึกข้อมูลไม่สำเร็จ")
+                                                            // document.getElementById("title").innerText = 'บันทึกข้อมูลไม่สำเร็จ';
+                                                            // $("#myModaldont").modal();
+                                                            // document.getElementById("completed").style.display = 'none';
+                                                            // document.getElementById("lbl_completed").innerText = 'บันทึกข้อมูลไม่สำเร็จ !!!';
+                                                            // document.getElementById("btn_print").style.display = 'none';
+                                                        });
+
+                                                    });
+                                                }
+                                            </script>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <script>
+                function postdata() {
+                    $.getScript("ip.js", function (data, textStatus, jqxhr) {
+
+                        var urlipaddress = data.substring(1, data.length - 1);
+
+                        var c_startdate = document.getElementById("startdate").value;
+                        var c_duedate = document.getElementById("duedate").value;
+                        var c_ref1 = document.getElementById("postref1").value;
+                        var c_meterid = document.getElementById("postmeterid").value;
+                        var c_meterVal = document.getElementById("meterVal").value;
+                        var c_category = document.getElementById("postcategory").value;
+                        var c_amount = document.getElementById("amount").value;
+                        var c_latitude = document.getElementById("latitude").value;
+                        var c_longitude = document.getElementById("longitude").value;
+
+
+
+
+                        //console.log(c_category)
+
+                        if (c_startdate == '' || c_duedate == '' || c_ref1 == '' || c_category == '' || c_amount == '' || c_latitude == '' || c_longitude == '') {
+                            //	alert('กรุณาใส่เลขที่บ้าน !!!');
+
+                            document.getElementById("p_saveinvoice").innerText = 'กรอกข้อมูลให้ครบ !!!';
+                            document.getElementById("p_saveinvoice").style.color = 'red';
+
+                            if (c_startdate == '') { document.getElementById("startdate").style.borderColor = "red"; }
+                            if (c_duedate == '') { document.getElementById("duedate").style.borderColor = "red"; }
+                            if (c_ref1 == '') { document.getElementById("postref1").style.borderColor = "red"; }
+                            //	if (c_meterid == '') { document.getElementById("postmeterid").style.borderColor = "red"; }
+                            //	if (c_meterVal == '') { document.getElementById("meterVal").style.borderColor = "red"; }
+                            if (c_category == '') { document.getElementById("postcategory").style.borderColor = "red"; }
+                            if (c_amount == '') { document.getElementById("amount").style.borderColor = "red"; }
+                            if (c_latitude == '') { document.getElementById("latitude").style.borderColor = "red"; }
+                            if (c_longitude == '') { document.getElementById("longitude").style.borderColor = "red"; }
+                            // $("#myModaldont").modal();
+                            // document.getElementById("p_saveinvoice").innerText = 'กรุณาเลือกช่องทางการชำระเงิน';
+                            // document.getElementById("p_saveinvoice").style.color = 'red';
+
+                            return;
+
+                        } else {
+
+
+
+                            document.getElementById("startdate").style.borderColor = "none";
+                            document.getElementById("duedate").style.borderColor = "none";
+                            document.getElementById("postref1").style.borderColor = "none";
+                            document.getElementById("postmeterid").style.borderColor = "none";
+                            document.getElementById("meterVal").style.borderColor = "none";
+                            document.getElementById("postcategory").style.borderColor = "none";
+                            document.getElementById("amount").style.borderColor = "none";
+                            document.getElementById("latitude").style.borderColor = "none";
+                            document.getElementById("longitude").style.borderColor = "none";
+
+
+                            var _startdate = document.getElementById("startdate").value;
+
+                            var today = new Date();
+                            var ti = today.toLocaleTimeString('en-US', {
+                                hour12: false,
+                                hour: "numeric",
+                                minute: "numeric"
+                            }).padStart(2, '0');
+                            var sp_date = _startdate.split("/");
+                            var startdatenew = sp_date[1] + '/' + sp_date[0] + '/' + sp_date[2] + ", " + ti;
+
+
+
+                            var _duedate = document.getElementById("duedate").value;
+                            var sp_date = _duedate.split("/");
+                            var duedatenew = sp_date[1] + '/' + sp_date[0] + '/' + sp_date[2] + ", " + ti;
+
+                            // console.log(startdatenew)
+                            // console.log(duedatenew)
+
+                            var _ref1 = document.getElementById("postref1").value;
+                            var _meterid = document.getElementById("postmeterid").value;
+                            var _meterVal = document.getElementById("meterVal").value;
+                            var _category = document.getElementById("postcategory").value;
+                            var _amount = document.getElementById("amount").value;
+                            var _latitude = document.getElementById("latitude").value;
+                            var _longitude = document.getElementById("longitude").value;
+
+                            const datainvoice = {
+                                ref1: _ref1,
+                                ref2: '',
+                                category: _category,
+                                startDate: startdatenew,
+                                dueDate: duedatenew,
+                                meterVal: _meterVal,
+                                meterId: _meterid,
+                                "gps": {
+                                    latitude: _latitude,
+                                    longitude: _longitude
+                                },
+                                "payment": {
+                                    status: 'ค้างชำระ',
+                                    amount: _amount,
+                                    credit: "0",
+                                    via: "",
+                                    creditDate: "",
+                                    receiveName: "",
+                                    remain: "0"
+                                }
+                            }
+                            //  console.log(datainvoice)
+                            var file_data = $('#fileimage').prop('files')[0];
+
+                            const url = urlipaddress + 'addInvoice';
+                            let formData = new FormData();
+                            if (file_data == undefined) {
+                                formData.append('dataFinance', JSON.stringify(datainvoice));
+                                formData.append('imageFinance', '');
+                            } else {
+                                formData.append('dataFinance', JSON.stringify(datainvoice));
+                                formData.append('imageFinance', file_data);
+                                // console.log('imageFinance')
+
+                                var typefile = $('#fileimage').val().split('.');
+                                if (typefile[1] != 'PNG' && typefile[1] != 'JPG' && typefile[1] != 'jpg' && typefile[1] != 'jpeg' && typefile[1] != 'png') {
+                                    // $("#myModaldont").modal();
+                                    // document.getElementById("completed").style.display = 'none';
+                                    // document.getElementById("c_delete").style.display = 'block';
+                                    // document.getElementById("lbl_completed").innerText = 'เลือกรูปภาพใหม่ เป็นไฟล์ JPEG, JPG, PNG !!!';
+                                    document.getElementById("p_saveinvoice").innerText = 'เลือกรูปภาพใหม่ เป็นไฟล์ JPEG, JPG, PNG !!!';
+                                    document.getElementById("p_saveinvoice").style.color = 'red';
+                                    return;
+                                }
+                            }
+                            axios.post(url, formData
+                            ).then(function (response) {
+                                document.getElementById("p_saveinvoice").innerText = 'บันทึกข้อมูลสำเร็จ';
+                                document.getElementById("p_saveinvoice").style.color = 'green';
+                                document.getElementById("fileimage").value = null;
+
+                                // console.log("บันทึกข้อมูลสำเร็จ")
+                                // document.getElementById("title").innerText = 'บันทึกข้อมูลสำเร็จ';
+                                // $("#myModaldont").modal();
+                                // document.getElementById("lbl_completed").innerText = 'บันทึกข้อมูลสำเร็จ';
+                                // document.getElementById("c_delete").style.display = 'none';
+                                // document.getElementById("completed").style.display = 'block';
+                                // document.getElementById("btn_print").style.display = 'none';
+                            }).catch(function (res) {
+                                const { response } = res
+
+                                document.getElementById("p_saveinvoice").innerText = 'บันทึกข้อมูลไม่สำเร็จ !!!';
+                                document.getElementById("p_saveinvoice").style.color = 'red';
+
+
+                            });
+                        }
+
+                    });
+                }
+            </script>
+
+            <div class="container">
+                <div class="modal fade" id="myModaldont" role="dialog">
+                    <div class="modal-dialog" style="width: 400px; height: 200px;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 id="title" class="modal-title"></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-20">
+                                            <i class="fa fa-exclamation-triangle" id="c_delete"
+                                                style="font-size:48px;color:red"></i>
+                                            <i class="fa fa-check-circle" id="completed"
+                                                style="font-size:48px;color:green; display: none;"></i>
+                                        </div>
+                                        <div>
+                                            <label id="lbl_completed" for="fname"> </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer" style="text-align: right;">
+
+                                <div class="row">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div>
+                                        <button type="button" class="btn btn-default" id="btn_print">
+                                            <p><a target="_blank" href="print.html" id="print">
+                                                    พิมพ์ใบเสร็จ</a></p>
+                                        </button>
+                                    </div>
+                                    <div>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button type="button"
+                                            class="btn btn-default" data-dismiss="modal">ปิด
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- Jquery Core Js -->
+    <!-- <script src="../../plugins/jquery/jquery.min.js"></script> -->
+
+    <!-- Bootstrap Core Js -->
+    <!-- <script src="../../plugins/bootstrap/js/bootstrap.js"></script> -->
+
+    <!-- Select Plugin Js -->
+    <!-- <script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script> -->
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="../../plugins/node-waves/waves.js"></script>
+
+    <!-- Autosize Plugin Js -->
+    <script src="../../plugins/autosize/autosize.js"></script>
+
+    <!-- Moment Plugin Js -->
+    <script src="../../plugins/momentjs/moment.js"></script>
+
+    <!-- Bootstrap Material Datetime Picker Plugin Js -->
+    <script src="../../plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+    <!-- Bootstrap Datepicker Plugin Js -->
+    <script src="../../plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+    <!-- Custom Js -->
+    <script src="../../js/admin.js"></script>
+    <script src="../../js/pages/forms/basic-form-elements.js"></script>
+
+
+    <script src="../../plugins/sweetalert/sweetalert.min.js"></script>
+    <script src="../../js/pages/ui/dialogs.js"></script>
+
+    <!-- Demo Js -->
+    <script src="../../js/demo.js"></script>
+</body>
+
+</html>

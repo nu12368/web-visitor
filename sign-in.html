@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>WAC</title>
+    <!-- Favicon-->
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
+        type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="../../css/style.css" rel="stylesheet">
+    <!-- cookie -->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"></script>
+
+
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+
+    <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+    <script>
+        Cookies.remove('wacadmin');
+        Cookies.remove('datatoken');
+        Cookies.remove('datauserId');
+        Cookies.remove('datajwt');
+        Cookies.remove('userappontment');
+        Cookies.remove('allnotice');
+        Cookies.remove('service');
+        Cookies.remove('visitor');
+        Cookies.remove('datamember');
+    </script>
+
+
+
+
+
+    <!-- <script src="./login.js"></script> -->
+
+
+    <!-- Google Fonts -->
+
+
+
+
+
+</head>
+<link href='https://fonts.googleapis.com/css?family=Kanit:400,300&subset=thai,latin' rel='stylesheet' type='text/css'>
+<style>
+    body h1 h2 h3 h4 h5 h6 ul li a p {
+      font-family: 'Kanit', sans-serif;
+    }
+    div{
+        font-family: 'Kanit', sans-serif;
+    }
+</style>
+<body class="signup-page">
+    <div>&nbsp;</div>
+    <div>&nbsp;</div>
+    <div>&nbsp;</div>
+    <div>&nbsp;</div>
+    <div class="signup-box">
+        <div class="logo">
+            <!-- <a href="javascript:void(0);">เข้าสู่ระบบนัดหมาย</b></a> -->
+            <small></small>
+        </div>
+
+        <div class="card">
+            <div class="body">
+                <form id="sign_up">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">home</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="home" placeholder="เลขที่บ้าน" value="" autofocus
+                                required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">person</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="login_user" id="login_user"
+                                placeholder="ชื่อผู้ใช้งาน" value="" required >
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">lock</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="password" class="form-control" id="login_pass" name="password"
+                                placeholder="รหัสผ่าน" value="" required>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-block btn-lg bg-pink waves-effect" onclick="SUBMITLOGIN()"
+                        type="button">ล็อกอินลูกบ้าน</button>
+                    <div>
+                        <p id="lbCheck" style="color: red; font-size: 16px;"></p>
+                    </div>
+                    <input type="hidden" id="objid">
+                    <input type="hidden" id="accesstoken">
+                    <input type="hidden" id="refreshtoken">
+                    <input type="hidden" id="userName">
+                    <script>
+                        //  function userlogin(){
+                        //     Cookies.set('userappontment', 'userappontment', { expires: 1 })
+                        //       location.href = "servicedashboard.html";
+                        //  }
+
+                        function SUBMITLOGIN() {
+                            document.getElementById("lbCheck").innerText = ""
+                            if (document.getElementById("login_user").value == "" || document.getElementById("login_pass").value == "") {
+                                document.getElementById("lbCheck").innerText = "กรุณากรอก USER ID และ PASSWORD";
+
+                                return;
+                            }
+
+                            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                var urlipaddress = data.substring(1, data.length - 1);
+                             
+
+                                const dataUser = {
+                                    username: document.getElementById("login_user").value,
+                                    password: document.getElementById("login_pass").value,
+                                }
+
+                                axios.post(urlipaddress + 'login', dataUser).then(function (response) {
+
+                                    var decodejwt = parseJwt(response.data.message.refresh_token);
+                                 
+                                    document.getElementById("objid").value = decodejwt.userId;
+                                    axios.post(urlipaddress + 'token', data, {
+                                        headers: {
+                                            'Authorization': response.data.message.refresh_token
+                                        }
+                                    }).then(function (tokenresponse) {
+                                        getuser(tokenresponse, urlipaddress, decodejwt);
+                                        var str = JSON.stringify(response.data.message);
+                                        Cookies.set('datatoken', str, { expires: 1 })
+                                        Cookies.set('datauserId', document.getElementById("objid").value, { expires: 1 })
+                                        var strdecodejwt = JSON.stringify(decodejwt);
+                                        Cookies.set('datajwt', strdecodejwt, { expires: 1 })
+                                        var _rule = decodejwt.rule.toLowerCase()
+
+
+                                        axios.get(urlipaddress + 'activeList', {
+                                            headers: {
+                                                'Authorization': tokenresponse.data.message.access_token
+                                            }
+                                        }).then(function (response) {
+                                            //      console.log(response.data.message)
+                                            var cnt_device = response.data.message.length;
+                                            for (i = 0; i < cnt_device; i++) {
+                                                if (response.data.message[i].deviceId != undefined) {
+                                                    for (i2 = 0; i2 < response.data.message[i].deviceId.length; i2++) {
+                                                        if (decodejwt.userId == response.data.message[i]._id) {
+                                                            Cookies.set('activeMode', response.data.message[i].activeMode, { expires: 1 })
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            if (_rule == 'member') {
+                                                Cookies.set('userappontment', 'userappontment', { expires: 1 })
+                                               location.href = "servicedashboard.html";
+                                            }
+                                            return;
+
+                                        }).catch(function (res) {
+                                            const { response } = res
+                                            //  console.log(response.data)
+                                        });
+                                    }).catch(function (res) {
+                                        const { response } = res
+                                        //    console.log(res)
+                                    });
+                                }).catch(function (res) {
+                                    const { response } = res
+                                    if (response.data.message == "The username or password that you've entered doesn't match any account.") {
+                                        document.getElementById("lbCheck").innerText = "USER ID หรือ PASSWORD ไม่ถูกต้อง"
+                                        return;
+                                    }
+                                });
+                            });
+                        }
+
+
+                        function getuser(tokenresponse, urlipaddress, decodejwt) {
+
+                            const dataUserID = {
+                                userId: document.getElementById("objid").value
+                            }
+                            axios.post(urlipaddress + 'user', dataUserID, {
+                                headers: {
+                                    'Authorization': tokenresponse.data.message.access_token
+                                }
+                            }).then(function (response) {
+                                var cnt = response.data.message.data.length;
+                                var n = 0;
+                                var _arr = new Array();
+                                for (i = 0; i < cnt; i++) {
+                                    //   
+                                    if (response.data.message.data[i].username == document.getElementById("login_user").value) {
+
+                                        if (response.data.message.data[i].rule == "member") {
+                                            Cookies.set('datamember', JSON.stringify(response.data.message.data[i]), { expires: 1 })
+                                            console.log(response.data.message.data[i])
+                                            document.getElementById("lbCheck").innerText = "";
+                                            var str = JSON.stringify(tokenresponse.data.message);
+                                            Cookies.set('datatoken', str, { expires: 1 })
+                                            Cookies.set('datauserId', document.getElementById("objid").value, { expires: 1 })
+                                            Cookies.set('datajwt', JSON.stringify(decodejwt), { expires: 1 })
+
+                                            console.log('ggggggggg')
+                                            return;
+                                        } else {
+
+                                            document.getElementById("lbCheck").innerText = "ไม่มีสิทธฺ์เข้าระบบ"
+                                        }
+                                        break;
+                                    }
+                                }
+                            });
+                        }
+                        function parseJwt(token) {
+                            var base64Url = token.split('.')[1];
+                            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                            var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+                                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                            }).join(''));
+                            return JSON.parse(jsonPayload);
+                        };
+                    </script>
+                    <div class="row m-t-15 m-b--20">
+                        <div class="col-xs-6">
+                            <a style="text-align: right;" href="index.html">ย้อนกลับ</a>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery Core Js -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="../../plugins/node-waves/waves.js"></script>
+
+    <!-- Validation Plugin Js -->
+    <script src="../../plugins/jquery-validation/jquery.validate.js"></script>
+
+    <!-- Custom Js -->
+    <script src="../../js/admin.js"></script>
+    <script src="../../js/pages/examples/sign-up.js"></script>
+</body>
+
+</html>
