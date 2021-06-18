@@ -1110,7 +1110,7 @@ $(function () {
 		const reversed = arr.reverse()
 
 
-		$("#div_Notice").text(arr.length + " รายการ");
+		// $("#div_Notice").text(arr.length + " รายการ");
 		$('#table_id8').DataTable({
 			"order": [],
 			"lengthMenu": [[50, 100, 200, 300, 400, 500, 1000, 1500, 2000, -1], [50, 100, 200, 300, 400, 500, 1000, 1500, 2000, "All"]],

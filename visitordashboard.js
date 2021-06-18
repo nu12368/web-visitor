@@ -411,8 +411,6 @@ $(async function () {
                 $('#total').text('£' + Number(pageTotal).toFixed(i));
             }
         }
-
-
     });
 
 

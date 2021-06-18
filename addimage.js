@@ -458,10 +458,7 @@ $(async function () {
                             formData.append('imageLogo', arr[0]);
                         } else {
                             formData.append('imageLogo', '');
-
-                            
                         }
-            
                         axios.post(url, formData, {
                             headers: {
                                 'Authorization': result,
@@ -555,8 +552,6 @@ $(async function () {
 
     //////////////// Chat
     function PostChat() {
-
-
         if (document.getElementById("txt_msg").value == '' && arr.length == 0) {
             return;
         }
@@ -572,7 +567,6 @@ $(async function () {
             var urlipaddress = data.substring(1, data.length - 1);
             const url = urlipaddress + 'chat';
             let formData = new FormData();
-
             if (arr.length == 0) {
                 formData.append('userId', userId);
                 formData.append('uId', datamember.userId);
@@ -580,13 +574,10 @@ $(async function () {
                 formData.append('chatImage', '');
                 formData.append('description', document.getElementById("txt_msg").value);
                 formData.append('sender', datamember.username);
-
             } else {
-
                 if (document.getElementById("txt_msg").value == '') {
                     document.getElementById("txt_msg").value = 'txt_msg_description'
                 }
-
                 formData.append('userId', userId);
                 formData.append('uId', datamember.userId);
                 formData.append('ticketId', document.getElementById("ticketId").value);
@@ -597,7 +588,6 @@ $(async function () {
                 }
                 formData.append('description', document.getElementById("txt_msg").value);
                 formData.append('sender', datamember.username);
-
             }
             axios.post(url, formData,
                 {
@@ -612,6 +602,8 @@ $(async function () {
 
                 $("#addImagenew").empty();
                 $("#id_incoming_msg").empty();
+
+                ///// ส่ง chat
                 const socket = io(urlipaddress);
                 socket.emit('sentMessage', document.getElementById("ticketId").value);
 

@@ -38,7 +38,7 @@ function acctoken() {
 }
 
 const getnotice = async (refresh_token, page, category) => {
-console.log(refresh_token)
+    console.log(refresh_token)
     var _arr = new Array();
     var n = 0;
     $.getScript("ip.js", function (data, textStatus, jqxhr) {
@@ -51,7 +51,7 @@ console.log(refresh_token)
             }
         }).then(function (response) {
 
-console.log(response.data.message.result)
+            console.log(response.data.message.result)
 
             var numberdashboard = 0
             if (response.data.message.result.length != 0) {
@@ -71,7 +71,7 @@ console.log(response.data.message.result)
                             }
                         }
                     }
-                    $("#div_notice").text(numberdashboard + " รายการ");
+                     $("#div_notice").text(numberdashboard + " รายการ");
                 }
 
 
@@ -117,6 +117,7 @@ console.log(response.data.message.result)
 
                 //////////////// member 
                 if (datamember.rule == 'member') {
+                    console.log('ffffffffffffff')
                     var today = new Date();
                     var n_date = today.toISOString();
                     let date = new Date(n_date);
@@ -125,7 +126,7 @@ console.log(response.data.message.result)
                     var chk_date = sp[0].padStart(2, '0') + "/" + sp[1].padStart(2, '0') + "/" + sp[2]
                     chk_date = chk_date.split(' ')
 
-                     console.log(chk_date)
+                    console.log(chk_date)
                     const thisTime = dayjs(chk_date, "DD-MM-YYYY HH:mm")
                     // console.log(thisTime)
                     var _arr = new Array();
@@ -170,9 +171,10 @@ console.log(response.data.message.result)
                     const compareByDate = (x, y) => toDate(y.showDate) - toDate(x.showDate);
                     _arr.sort(compareByDate);
                     const reversed = _arr.reverse()
-                    console.log(reversed)
+                   console.log(reversed)
 
-                    $("#div_Notice").text(reversed.length + " รายการ");
+                   // $("#div_notice").text(reversed.length + " รายการ");
+                  $('#table_id8').DataTable().destroy()
                     $('#table_id8').DataTable({
                         "lengthMenu": [[25, 50, 100], [25, 50, 100]],
                         "pageLength": 25,

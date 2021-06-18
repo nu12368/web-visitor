@@ -72,9 +72,10 @@
 <link href='https://fonts.googleapis.com/css?family=Kanit:400,300&subset=thai,latin' rel='stylesheet' type='text/css'>
 <style>
     body h1 h2 h3 h4 h5 h6 ul li a p {
-      font-family: 'Kanit', sans-serif;
+        font-family: 'Kanit', sans-serif;
     }
-    div{
+
+    div {
         font-family: 'Kanit', sans-serif;
     }
 </style>
@@ -415,7 +416,8 @@
                 <div><br></div>
                 <div><br></div>
                 <div style="color: white;">
-                    <div class="name" data-toggle="dropdown" id="userlogin"  aria-haspopup="true" aria-expanded="false"></div>
+                    <div class="name" data-toggle="dropdown" id="userlogin" aria-haspopup="true" aria-expanded="false">
+                    </div>
                 </div>
             </div>
             <div class="menu">
@@ -750,6 +752,16 @@
                                                                 if (chk_pass == false) {
                                                                     return;
                                                                 }
+                                                                // console.log(document.getElementById("RULE").value)
+                                                                if (document.getElementById("RULE").value == "0") {
+                                                                    alert("กรุณา เลือกโหมด !!!! ");
+                                                                    return;
+                                                                }
+
+                                                                if (document.getElementById("CODE").value == "") {
+                                                                    alert("กรุณา ระบุ CODE !!!! ");
+                                                                    return;
+                                                                }
 
                                                                 document.getElementById("p_admin").innerText = "";
                                                                 if (document.getElementById("admin").value == "" || document.getElementById("passadmin").value == "") {
@@ -760,7 +772,7 @@
                                                                     var urlipaddress = data.substring(1, data.length - 1);
                                                                     var file_data = $('#fileimage').prop('files')[0];
                                                                     var formData = new FormData();
-//console.log(file_data)
+                                                                    //console.log(file_data)
                                                                     if (file_data != undefined) {
                                                                         formData.append('imageProfile', file_data);
                                                                     } else {
@@ -798,7 +810,7 @@
                                                                     });
 
 
-                                                                
+
                                                                 });
                                                             }
                                                         </script>

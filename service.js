@@ -45,7 +45,7 @@ const getserviecOpen = async (refresh_token, page, _type) => {
     $.getScript("ip.js", function (data, textStatus, jqxhr) {
         var urlipaddress = data.substring(1, data.length - 1);
         //http://10.0.0.205:4004/ticket/605aaff01e8e0873c0a5956c?uId=605ab0261e8e0873c0a59570&type=appeal&status=Open%20OR%20In%20Progress&_page=1&_limit=100&_sort=1
-      
+
         var param = userId + '?uId=' + datamember.userId + '&type=' + _type + '&status=Open%20OR%20In%20Progress&' + '_page=' + page + '&_limit=100&_sort=1'
         axios.get(urlipaddress + 'ticket/' + param, {
             headers: {
@@ -432,7 +432,7 @@ const getserviecResolved = async (refresh_token, page, _type) => {
 }
 
 const getserviecAll = async (refresh_token, page, _type) => {
-   
+
     var _arr = new Array();
     var n = 0;
     $.getScript("ip.js", function (data, textStatus, jqxhr) {
@@ -553,9 +553,9 @@ const getserviecappealcount = async (refresh_token, page, _type) => {
 
             if (response.data.message.result.length != 0) {
                 $("#div_appeal").text(response.data.message.result.length + " รายการ");
-               
-            }else{
-             //   $("#div_appeal").text('0' + " รายการ");
+
+            } else {
+                //   $("#div_appeal").text('0' + " รายการ");
             }
 
         }).catch(function (res) {
@@ -565,7 +565,7 @@ const getserviecappealcount = async (refresh_token, page, _type) => {
 
 }
 const getserviecinformcount = async (refresh_token, page, _type) => {
-   
+
     var _arr = new Array();
     var n = 0;
     $.getScript("ip.js", function (data, textStatus, jqxhr) {
@@ -581,9 +581,9 @@ const getserviecinformcount = async (refresh_token, page, _type) => {
             if (response.data.message.result.length != 0) {
 
                 $("#div_inform").text(response.data.message.result.length + " รายการ");
-                
-            }else{
-             //   $("#div_inform").text('0' + " รายการ");
+
+            } else {
+                //   $("#div_inform").text('0' + " รายการ");
             }
 
         }).catch(function (res) {
@@ -593,7 +593,7 @@ const getserviecinformcount = async (refresh_token, page, _type) => {
 
 }
 const getserviecmaintenancecount = async (refresh_token, page, _type) => {
-   
+
     var _arr = new Array();
     var n = 0;
     $.getScript("ip.js", function (data, textStatus, jqxhr) {
@@ -608,8 +608,8 @@ const getserviecmaintenancecount = async (refresh_token, page, _type) => {
 
             if (response.data.message.result.length != 0) {
                 $("#div_maintenance").text(response.data.message.result.length + " รายการ");
-            }else{
-               // $("#div_maintenance").text('0' + " รายการ");
+            } else {
+                // $("#div_maintenance").text('0' + " รายการ");
             }
 
         }).catch(function (res) {
@@ -628,21 +628,21 @@ $(async function () {
         _type = 'appeal'
         for (let i = 1; i < 10; i++) {
             responseappointment = await getserviecappealcount(result, i, _type)
-    
+
         }
     }
     if (Cookies.get('inform') != undefined) {
         _type = 'inform'
         for (let i = 1; i < 10; i++) {
             responseappointment = await getserviecinformcount(result, i, _type)
-    
+
         }
     }
     if (Cookies.get('maintenance') != undefined) {
         _type = 'Maintenance'
-          for (let i = 1; i < 10; i++) {
+        for (let i = 1; i < 10; i++) {
             responseappointment = await getserviecmaintenancecount(result, i, _type)
-    
+
         }
     }
 
@@ -907,7 +907,7 @@ $(async function () {
                     console.log(document.getElementById("status_edit").value)
                 }
 
-                
+
                 const dataticket = {
                     userId: userId,
                     ticketId: data.ticketId,
@@ -1042,7 +1042,7 @@ const getchat = async (refresh_token, page, ticketId) => {
             }
         }).then(function (response) {
             if (response.data.message.result.length != 0) {
-
+                console.log(response.data.message.result)
                 for (i = 0; i < response.data.message.result.length; i++) {
                     let date = new Date(response.data.message.result[i].registerDate);
                     let options = { hour12: false };
@@ -1050,7 +1050,6 @@ const getchat = async (refresh_token, page, ticketId) => {
 
                     if (response.data.message.result[i].uId == datamember.userId) {
                         var msg_description = response.data.message.result[i];
-
                         if (response.data.message.result[i].chatImage.length != 0) {
                             for (img = 0; img < response.data.message.result[i].chatImage.length; img++) {
                                 axios.get(urlipaddress + "view/images/" + response.data.message.result[i].chatImage[img], {
@@ -1060,6 +1059,8 @@ const getchat = async (refresh_token, page, ticketId) => {
                                     }
                                 }).then(function (response) {
                                     var arrayBuffer = response.data; // Note: not oReq.responseText
+
+
                                     var u8 = new Uint8Array(arrayBuffer);
                                     var b64encoded = btoa(String.fromCharCode.apply(null, u8));
                                     var mimetype = "image/png"; // or whatever your image mime type is
@@ -1133,10 +1134,7 @@ const getchat = async (refresh_token, page, ticketId) => {
                         }
 
                     } else {
-
-
                         var msg_description = response.data.message.result[i];
-
                         if (response.data.message.result[i].chatImage.length != 0) {
                             for (img = 0; img < response.data.message.result[i].chatImage.length; img++) {
                                 axios.get(urlipaddress + "view/images/" + response.data.message.result[i].chatImage[img], {
@@ -1145,14 +1143,16 @@ const getchat = async (refresh_token, page, ticketId) => {
                                         'Authorization': refresh_token
                                     }
                                 }).then(function (response) {
+
+                                    // console.log(response.data)
                                     var arrayBuffer = response.data; // Note: not oReq.responseText
                                     var u8 = new Uint8Array(arrayBuffer);
+
                                     var b64encoded = btoa(String.fromCharCode.apply(null, u8));
                                     var mimetype = "image/png"; // or whatever your image mime type is
 
 
                                     if (msg_description.description == 'txt_msg_description') {
-
                                         $("#id_incoming_msg").append(`
                                     <div class="received_msg">
                                     <div class="received_withd_msg">
@@ -1181,8 +1181,6 @@ const getchat = async (refresh_token, page, ticketId) => {
                                         $("#id_incoming_msg").append(`
                                         <div class="received_msg">
                                         </div> `);
-
-
                                         $("#id_incoming_msg").append(`
                                         <div class="received_msg">
                                         <div class="received_withd_msg">
@@ -1191,7 +1189,6 @@ const getchat = async (refresh_token, page, ticketId) => {
                                         </div>
                                         </div>
                                         `);
-
                                         $("#id_incoming_msg").append(`
                                         <div class="received_msg">
                                         </div> `);
@@ -1199,7 +1196,6 @@ const getchat = async (refresh_token, page, ticketId) => {
                                         <div class="received_msg">
                                         </div> `);
                                     }
-
                                 });
                             }
                         } else {
