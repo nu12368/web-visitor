@@ -240,6 +240,11 @@ $(async function () {
     });
 
 
+    
+
+
+    
+
     ////////////////////  บันทึกประกาศ
     $('#submitnotice').on('click', function (e) {
 
@@ -429,93 +434,7 @@ $(async function () {
 
 
 
-    /////////////////////////////// LOGO
-    $('#updatelogo').on('click', async function (e) {
-        const result = await acctoken();
-        if (document.getElementById('logoId').value != '') {
-          
-                const datanew = {
-                    userId: userId,
-                    logoId: document.getElementById('logoId').value
-                }
-                console.log(datanew)
-                $.getScript("ip.js", function (data, textStatus, jqxhr) {
-                    var urlipaddress = data.substring(1, data.length - 1);
-                    axios({
-                        url: urlipaddress + 'logo',
-                        method: 'delete',
-                        data: datanew,
-                        headers: { 'Authorization': result }
-                    }).then(function (response) {
-                        var formData = new FormData();
     
-                        const url = urlipaddress + 'logo';
-                        formData.append('userId', userId);
-                        formData.append('name', document.getElementById('editnamecompany').value);
-                        formData.append('description', '');
-            
-                        if (arr.length != 0) {
-                            formData.append('imageLogo', arr[0]);
-                        } else {
-                            formData.append('imageLogo', '');
-                        }
-                        axios.post(url, formData, {
-                            headers: {
-                                'Authorization': result,
-                                'Content-Type': 'multipart/form-data'
-                            }
-                        }
-                        ).then(function (response) {
-                            console.log(response.data.message)
-                            // if (response.data.message = 'update completed') {
-                            location.href = "menu.html";
-                            // }
-                        }).catch(function (res) {
-                            const { response } = res
-                            console.log(response.data.message)
-                        });
-                    }).catch(function (res) {
-                        const { response } = res
-                    });
-                });
-            
-        }else{
-           
-            $.getScript("ip.js", function (data, textStatus, jqxhr) {
-                var urlipaddress = data.substring(1, data.length - 1);
-                var formData = new FormData();
-    
-                const url = urlipaddress + 'logo';
-                formData.append('userId', userId);
-                formData.append('name', document.getElementById('editnamecompany').value);
-                formData.append('description', '');
-    
-                if (arr.length != 0) {
-                    formData.append('imageLogo', arr[0]);
-                } else {
-                    formData.append('imageLogo', '');
-                }
-    
-                axios.post(url, formData, {
-                    headers: {
-                        'Authorization': result,
-                        'Content-Type': 'multipart/form-data'
-                    }
-                }
-                ).then(function (response) {
-                    console.log(response.data.message)
-                    // if (response.data.message = 'update completed') {
-                    location.href = "menu.html";
-                    // }
-                }).catch(function (res) {
-                    const { response } = res
-                    console.log(response.data.message)
-                });
-            });
-        }
-
-        
-    });
 
 
 

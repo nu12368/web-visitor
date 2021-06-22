@@ -134,12 +134,6 @@ $(async function () {
             }
         }
     }
-
-
-
-
-
-
     var namefile;
     var typename;
     $('#edit_fileimage').on('change', function () {
@@ -174,8 +168,6 @@ $(async function () {
 
         console.log(arr)
     }
-
-
 
     function dataURLtoFile(dataurl, filename) {
         var arr_1 = dataurl.split(','),
@@ -260,10 +252,6 @@ $(async function () {
         };
         reader.readAsArrayBuffer(file);
     }
-
-
-
-
 
     ///////// ลบรูปภาพ
     $('#EditaddImage').on('click', 'i.delete_cc', function (e) {
@@ -381,17 +369,12 @@ $(async function () {
             e.preventDefault();
             var _ro = table.row($(this).parents('tr'));
             data = _ro.data();
-
             if (data == undefined) {
                 data = table.row(this).data();
             }
-
             $("#Editnotice").modal();
-
             var nn = 0;
             for (let i in data.announceImage) {
-                console.log(data.announceImage[i])
-
                 axios.get(urlipad + "view/images/" + data.announceImage[i], {
                     responseType: 'arraybuffer',
                     headers: {
@@ -402,29 +385,22 @@ $(async function () {
                     var u8 = new Uint8Array(arrayBuffer);
                     var b64encoded = btoa(String.fromCharCode.apply(null, u8));
                     var mimetype = "image/png"; // or whatever your image mime type is
-
                     $("#EditaddImage").append(`<a id="close" style="font-size:18px;color:red; class="pull-right" href="#">
                     <i name="${n}" class="delete_cc  fa fa-times col-lg-3 col-md-4 col-sm-6 col-xs-12" ><img name="${n}" style="width: 600px;" src="${"data:" + mimetype + ";base64," + b64encoded}"class="view_img img-responsive thumbnail col-lg-3 col-md-4 col-sm-6 col-xs-12" >`);
-
                     arr[n] = dataURLtoFileEdit("data:" + mimetype + ";base64," + b64encoded, nn.toString() + '.jpg');
                     n = n + 1;
                 });
 
                 nn = nn + 1;
             }
-
             for (i = 0; i < data.tag.length; i++) {
                 $('#editinput-tags').tagsInput();
                 $('#editinput-tags').addTag(data.tag[i]);
             }
-
-
             let date = new Date(data.showDate);
             let options = { hour12: false };
             var sp = date.toLocaleString('en-US', options).replace(',', '').split('/')
-
             var _d = sp[1].padStart(2, '0') + "/" + sp[0].padStart(2, '0') + "/" + sp[2]
-
             $("#selectdeleteedit").val(data.isRemoved);
             $("#editshowDate").val(_d.substring(0, 10));
             $("#edittxttimenotice").val(_d.substring(10, _d.length));
@@ -434,6 +410,144 @@ $(async function () {
             $("#edit_weblink").val(data.weblink);
 
         });
+
+
+        $('#Edit_logo').on('click', async function (e) {
+            document.getElementById("profileEdit").value = 'profileEdit';
+            $("#exampleModalCenterImage").modal();
+            $("#EditaddImage").empty()
+            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                var urlipaddress = data.substring(1, data.length - 1);
+                var param = userId
+                axios.get(urlipaddress + 'logo/' + param, {
+                    headers: {
+                        'Authorization': result
+                    }
+                }).then(function (response) {
+                    console.log(response.data.message.data[0].imageLogo[0])
+                    document.getElementById('editnamecompany').value = response.data.message.data[0].name
+                    var nn = 0;
+                    axios.get(urlipad + "view/logo/" + response.data.message.data[0].imageLogo[0], {
+                        responseType: 'arraybuffer',
+                        headers: {
+                            'Authorization': result
+                        }
+                    }).then(function (response) {
+                        var arrayBuffer = response.data; // Note: not oReq.responseText
+                        var u8 = new Uint8Array(arrayBuffer);
+                        var b64encoded = btoa(String.fromCharCode.apply(null, u8));
+                        var mimetype = "image/png"; // or whatever your image mime type is
+
+                        $("#EditaddImage").append(`<a id="close" style="font-size:18px;color:red; class="pull-right" href="#">
+                    <i name="${n}" class="delete_cc  fa fa-times col-lg-3 col-md-4 col-sm-6 col-xs-12" ><img name="${n}" style="width: 600px;" src="${"data:" + mimetype + ";base64," + b64encoded}"class="view_img img-responsive thumbnail col-lg-3 col-md-4 col-sm-6 col-xs-12" >`);
+
+                        arr[n] = dataURLtoFileEdit("data:" + mimetype + ";base64," + b64encoded, nn.toString() + '.jpg');
+                        n = n + 1;
+                    });
+
+
+                }).catch(function (res) {
+                    const { response } = res
+                });
+            });
+        });
+        /////////////////////////////// LOGO
+        $('#updatelogo').on('click', async function (e) {
+            console.log('dddddddddddddddddddddddddddddd')
+            const result = await acctoken();
+            if (document.getElementById('logoId').value != '') {
+                const datanew = {
+                    userId: userId,
+                    logoId: document.getElementById('logoId').value
+                }
+                console.log(datanew)
+                $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                    var urlipaddress = data.substring(1, data.length - 1);
+                    axios({
+                        url: urlipaddress + 'logo',
+                        method: 'delete',
+                        data: datanew,
+                        headers: { 'Authorization': result }
+                    }).then(function (response) {
+                        var formData = new FormData();
+                        const url = urlipaddress + 'logo';
+                        formData.append('userId', userId);
+                        formData.append('name', document.getElementById('editnamecompany').value);
+                        formData.append('description', '');
+                        if (arr.length != 0) {
+                            if( arr[0] == ' '){
+                                formData.append('imageLogo', arr[1]);
+                            }else{
+                                formData.append('imageLogo', arr[0]);
+                            }
+                           // formData.append('imageLogo', arr[0]);
+                        } else {
+                            formData.append('imageLogo', '');
+                        }
+                        console.log(arr)
+                        axios.post(url, formData, {
+                            headers: {
+                                'Authorization': result,
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        }
+                        ).then(function (response) {
+                            console.log(response.data.message)
+                            // if (response.data.message = 'update completed') {
+                            location.href = "menu.html";
+                            // }
+                        }).catch(function (res) {
+                            const { response } = res
+                            console.log(response.data.message)
+                        });
+                    }).catch(function (res) {
+                        const { response } = res
+                    });
+                });
+
+            } else {
+                $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                    var urlipaddress = data.substring(1, data.length - 1);
+                    var formData = new FormData();
+
+                    const url = urlipaddress + 'logo';
+                    formData.append('userId', userId);
+                    formData.append('name', document.getElementById('editnamecompany').value);
+                    formData.append('description', '');
+
+                    if (arr.length != 0) {
+                        if( arr[0] == ' '){
+                            formData.append('imageLogo', arr[1]);
+                        }else{
+                            formData.append('imageLogo', arr[0]);
+                        }
+                       
+                    } else {
+                        formData.append('imageLogo', '');
+                    }
+
+                    axios.post(url, formData, {
+                        headers: {
+                            'Authorization': result,
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }
+                    ).then(function (response) {
+                        console.log(response.data.message)
+                        // if (response.data.message = 'update completed') {
+                        location.href = "menu.html";
+                        // }
+                    }).catch(function (res) {
+                        const { response } = res
+                        console.log(response.data.message)
+                    });
+                });
+            }
+
+
+        });
+
+
 
         /////////////////////////// อัพเดท ประกาศ
         $('#edit_submitpostinvoice').on('click', function (e) {

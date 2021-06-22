@@ -34,13 +34,13 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./checkCookies.js"></script>
     <script src="./logout.js"></script>
     <script src="./Profile.js"></script>
 
-<script src="./addimage.js"></script>
+<script src="./editimage.js"></script>
 
     
 </head>
@@ -86,12 +86,7 @@
 
 
 
-<script type="text/javascript">
-    function editlogo() {
-        document.getElementById("profileEdit").value = 'profileEdit';
-         $("#exampleModalCenterImage").modal();
-    }
-</script>
+
 
 
 
@@ -125,7 +120,7 @@
                    
                     <div class="header">
                         <div style="text-align: right;">
-                            <a onclick="editlogo()" style="cursor: pointer;"><i class="material-icons">settings_applications</i>แก้ไขบริษัท</a>
+                            <a id="Edit_logo" style="cursor: pointer;"><i class="material-icons">settings_applications</i>แก้ไขบริษัท</a>
                             <input type="hidden" id="profileEdit" name="profileEdit">
                         </div>
                         <br>
@@ -252,16 +247,34 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">รูปภาพ</h5>
+                    <h5 class="modal-title" id="exampleModalCenterTitle">เลือกโลโก้ใหม่</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <img id="_logo" width="100" height="100" /><br><br>
-                    <input type="file" name="fileimage" type="file"  id="fileimage">
-                    <!-- <p>ใช้ภาพ .png</p> -->
-                    <br>
+                    
+              
+                    <div class="form-group form-float">
+                        <input type="file" name="edit_fileimage" type="file" multiple
+                            style="display: block;" accept=".png, .jpg, .jpeg"
+                            id="edit_fileimage">
+                        <label class="form-label">เลือกโลโก้อัพโหลด</label>
+                    </div>
+
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <div class="list-unstyled row clearfix">
+                                <p id="imgsixe" style="font-size: 16px; color: red;">
+                                </p>
+                                <h4>โลโก้</h4>
+                                <div id="EditaddImage" class="img-responsive thumbnail">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
 
                     ชื่อบริษัท : <input type="text" id='editnamecompany' class="form-control">
                     <input type="hidden" id="id_de" name="id_de">
