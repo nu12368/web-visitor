@@ -103,13 +103,20 @@
     <script src="../../js/pages/ui/dialogs.js"></script>
 
     <script src="./logout.js"></script>
+
+
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJ6SnvPM-O0dyoUChDYJxv34TXDX2cpEw&libraries=drawing,places"
+        async defer></script>
+    <script src="./map.js"></script>
 </head>
 <link href='https://fonts.googleapis.com/css?family=Kanit:400,300&subset=thai,latin' rel='stylesheet' type='text/css'>
 <style>
     body h1 h2 h3 h4 h5 h6 ul li a p {
-      font-family: 'Kanit', sans-serif;
+        font-family: 'Kanit', sans-serif;
     }
-    div{
+
+    div {
         font-family: 'Kanit', sans-serif;
     }
 </style>
@@ -181,17 +188,17 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
                     data-target="#navbar-collapse" aria-expanded="false"></a>
-                    <a href="javascript:void(0);" class="bars"></a>
-                    <a class="navbar-brand" style="display: none;" id="logoname" href="javascript:void(0);"></a>
-                    <a class="navbar-brand" id="namecompyny" href="../../menu.html" style="color: white;" href="#"></a>
-                    <a class="navbar-brand" id="namecompynymember" href="../../servicedashboard.html" style="color: white;" href="#"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" style="display: none;" id="logoname" href="javascript:void(0);"></a>
+                <a class="navbar-brand" id="namecompyny" href="../../menu.html" style="color: white;" href="#"></a>
+                <a class="navbar-brand" id="namecompynymember" href="../../servicedashboard.html" style="color: white;"
+                    href="#"></a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Call Search -->
 
-                    <li><a id='logout' style="cursor: pointer;"
-                        data-close="true">[ออกจากระบบ]</a></li>
+                    <li><a id='logout' style="cursor: pointer;" data-close="true">[ออกจากระบบ]</a></li>
                     <!-- Call Search -->
                     <!-- <li><a href="javascript:void(0);" class="js-search" data-close="true"><i
                                 class="material-icons">search</i></a></li> -->
@@ -413,7 +420,8 @@
                 <div><br></div>
                 <div><br></div>
                 <div style="color: white;">
-                    <div class="name" data-toggle="dropdown" id="userlogin"  aria-haspopup="true" aria-expanded="false"></div>
+                    <div class="name" data-toggle="dropdown" id="userlogin" aria-haspopup="true" aria-expanded="false">
+                    </div>
                 </div>
             </div>
             <div class="menu">
@@ -460,27 +468,27 @@
                             </li>
                         </ul>
                     </li>
-                    <li >
+                    <li>
                         <a href="appeal.html">
                             <i class="material-icons">pan_tool</i>
                             <span>รายการร้องเรียน</span>
                         </a>
                     </li>
-                
+
                     <li>
                         <a href="maintenance.html">
                             <i class="material-icons">build</i>
                             <span>รายการแจ้งซ่อมบำรุง</span>
                         </a>
                     </li>
-                    <li >
+                    <li>
                         <a href="allservice.html">
                             <i class="material-icons">local_laundry_service</i>
                             <span>ข้อมูลบริการ</span>
                         </a>
                     </li>
 
-                    <li >
+                    <li>
                         <a href="allbusiness.html">
                             <i class="material-icons">business</i>
                             <span>ข้อมูลธุรกิจ</span>
@@ -498,21 +506,21 @@
                             <span>ข้อมูลทรัพย์สิน</span>
                         </a>
                     </li>
-                   
+
                     <li id="allpayment" style="display: none;">
                         <a href="allpayment.html">
                             <i class="material-icons">beenhere</i>
                             <span>รายการชำระเงิน</span>
                         </a>
                     </li>
-                    <li id="allmarket" >
+                    <li id="allmarket">
                         <a href="#">
                             <i class="material-icons">shopping_cart</i>
                             <span>ตลาดนัด</span>
                         </a>
                     </li>
-                 
-                   
+
+
                 </ul>
             </div>
             <!-- #Menu -->
@@ -816,8 +824,7 @@
                                                             id="bs_datepicker_component_container">
                                                             <div class="">
                                                                 <input type="text" class="form-control"
-                                                                    placeholder="วันที่" autocomplete=off
-                                                                    id="showDate">
+                                                                    placeholder="วันที่" autocomplete=off id="showDate">
                                                             </div>
                                                             <span class="input-group-addon">
                                                                 <i class="material-icons"
@@ -869,6 +876,45 @@
                                                             placeholder="เว็บลิงค์"></textarea>
                                                     </div>
                                                 </div>
+                                                <a onclick="onclick_map()" style="cursor: pointer;" target="_blank">
+                                                    <span>คลิกเลือกตำแหน่ง</span>
+                                                    <i class="material-icons">map</i>
+                                                </a>
+                                                <script>
+                                                    function onclick_map() {
+                                                        setInterval(function () {
+                                                            if (Cookies.get('latitude') != undefined) {
+                                                                document.getElementById("latitude").value = Cookies.get('latitude');
+                                                                document.getElementById("longitude").value =  Cookies.get('longitude');
+                                                            }
+                                                        }, 1000);
+                                                        window.open('map.html', '_blank');
+                                                    }
+                                                </script>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <input type="text" class="form-control" name="latitude"
+                                                            id="latitude" value="" required autocomplete="off" readonly
+                                                            placeholder="latitude" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <input type="text" class="form-control" name="longitude"
+                                                            id="longitude" value="" required autocomplete="off" readonly
+                                                            placeholder="longitude" />
+                                                    </div>
+                                                    <div style="display: none;">
+                                                        <input id="pac-input" class="controls" type="text"
+                                                            placeholder="ค้นหาใน Google Maps" />
+    
+                                                        <div id="map"></div>
+                                                    </div>
+                                                </div>
+
+                                              
+
+
                                                 <div class="form-group form-float">
                                                     <p>TAG</p>
                                                     <select name="selecttag" class="form-control" onchange="c()"
@@ -1061,8 +1107,8 @@
                                                     </select>
                                                     <br />
                                                     <br />
-                                                    <input name="edittags" id="editinput-tags" data_role="tagsInput"
-                                                        class="form-control" />
+                                                    <input name="edittags" id="editinput-tags" readonly
+                                                        data_role="tagsInput" class="form-control" />
                                                 </div>
                                                 <script>
                                                     $('#editinput-tags').tagsInput();

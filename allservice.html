@@ -102,6 +102,11 @@
     <script src="../../js/pages/ui/dialogs.js"></script>
 
     <script src="./logout.js"></script>
+
+    <script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJ6SnvPM-O0dyoUChDYJxv34TXDX2cpEw&libraries=drawing,places"
+    async defer></script>
+<script src="./map.js"></script>
 </head>
 <link href='https://fonts.googleapis.com/css?family=Kanit:400,300&subset=thai,latin' rel='stylesheet' type='text/css'>
 <style>
@@ -867,6 +872,41 @@
                                                         <textarea class="form-control" id="postweblink"
                                                             name="postweblink" rows="3"
                                                             placeholder="เว็บลิงค์"></textarea>
+                                                    </div>
+                                                </div>
+                                                <a onclick="onclick_map()" style="cursor: pointer;" target="_blank">
+                                                    <span>คลิกเลือกตำแหน่ง</span>
+                                                    <i class="material-icons">map</i>
+                                                </a>
+                                                <script>
+                                                    function onclick_map() {
+                                                        setInterval(function () {
+                                                            if (Cookies.get('latitude') != undefined) {
+                                                                document.getElementById("latitude").value = Cookies.get('latitude');
+                                                                document.getElementById("longitude").value = Cookies.get('longitude');
+                                                            }
+                                                        }, 1000);
+                                                        window.open('map.html', '_blank');
+                                                    }
+                                                </script>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <input type="text" class="form-control" name="latitude"
+                                                            id="latitude" value="" required autocomplete="off" readonly
+                                                            placeholder="latitude" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <input type="text" class="form-control" name="longitude"
+                                                            id="longitude" value="" required autocomplete="off" readonly
+                                                            placeholder="longitude" />
+                                                    </div>
+                                                    <div style="display: none;">
+                                                        <input id="pac-input" class="controls" type="text"
+                                                            placeholder="ค้นหาใน Google Maps" />
+    
+                                                        <div id="map"></div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group form-float">

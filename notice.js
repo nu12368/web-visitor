@@ -9,6 +9,11 @@ if (datamember != undefined) {
     datamember = JSON.parse(datamember)
 }
 
+
+
+
+
+
 function acctoken() {
     return new Promise(resolve => {
         $.getScript("ip.js", function (data, textStatus, jqxhr) {
@@ -71,7 +76,7 @@ const getnotice = async (refresh_token, page, category) => {
                             }
                         }
                     }
-                     $("#div_notice").text(numberdashboard + " รายการ");
+                    $("#div_notice").text(numberdashboard + " รายการ");
                 }
 
 
@@ -171,10 +176,10 @@ const getnotice = async (refresh_token, page, category) => {
                     const compareByDate = (x, y) => toDate(y.showDate) - toDate(x.showDate);
                     _arr.sort(compareByDate);
                     const reversed = _arr.reverse()
-                   console.log(reversed)
+                    console.log(reversed)
 
-                   // $("#div_notice").text(reversed.length + " รายการ");
-                  $('#table_id8').DataTable().destroy()
+                    // $("#div_notice").text(reversed.length + " รายการ");
+                    $('#table_id8').DataTable().destroy()
                     $('#table_id8').DataTable({
                         "lengthMenu": [[25, 50, 100], [25, 50, 100]],
                         "pageLength": 25,
@@ -334,6 +339,7 @@ const getnotice = async (refresh_token, page, category) => {
 }
 
 $(async function () {
+ 
     var data
     const result = await acctoken();
     var Strcategory;

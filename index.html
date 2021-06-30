@@ -234,7 +234,6 @@
                                             console.log(urlipaddress + 'login', dataUser)
                                         
                                             axios.post(urlipaddress + 'login', dataUser).then(function (response) {
-
                                                 var decodejwt = parseJwt(response.data.message.refresh_token);
                                                 console.log(decodejwt)
                                                 //     console.log(response.data.message.refresh_token)
