@@ -95,7 +95,7 @@ function getvisitorReportLog(refresh_token) {
 
 
                         }
-                        console.log(_arr)
+                     //   console.log(_arr)
                         await viewCost(refresh_token, _arr)
 
                         resolve(_arr);
@@ -360,7 +360,7 @@ async function viewCost(result, datalog) {
 
 async function viewdata_table(datacost) {
 
-    console.log(datacost)
+  //  console.log(datacost)
     var pre_data;
     $('#table1').DataTable().destroy();
     var table = $('#table1').DataTable({
@@ -404,7 +404,7 @@ async function viewdata_table(datacost) {
             { data: "contactPlace" },
             {
                 data: "visitorNumber",
-                render: async function (data) {
+                render:  function (data) {
                  //   await div_preloader()
                    
                     return data
@@ -417,7 +417,7 @@ async function viewdata_table(datacost) {
             { data: "totalExpenses" },
             { data: "paymentStatus" },
         ],
-        "footerCallback": async function (row, data, start, end, display) {
+        "footerCallback":  function (row, data, start, end, display) {
             var api = this.api(),
                 data;
             //console.log(api)
@@ -435,7 +435,7 @@ async function viewdata_table(datacost) {
             total = api
                 .column(8)
                 .data()
-                .reduce(async function (a, b) {
+                .reduce( function (a, b) {
                     //     console.log(intVal(a) + intVal(b))
                     return intVal(a) + intVal(b);
                 }, 0);
@@ -446,7 +446,7 @@ async function viewdata_table(datacost) {
                     page: 'current'
                 })
                 .data()
-                .reduce(async function (a, b) {
+                .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0);
 
@@ -472,7 +472,7 @@ async function viewdata_table(datacost) {
                 footer: true
             }
         ],
-        "createdRow": async function (row, data, dataIndex) {
+        "createdRow":  function (row, data, dataIndex) {
             // console.log(data.paymentStatus)
             if (data.paymentStatus == "จ่าย") {
                 $(row).addClass('green');

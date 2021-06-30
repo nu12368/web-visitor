@@ -311,7 +311,7 @@ $(async function () {
 
 async function view_datatable() {
     $('#table1').DataTable().destroy();
-    console.log(_arrSearch)
+   // console.log(_arrSearch)
     var header = [];
     header.push("เลข visitor");
     header.push("ประเภท");
