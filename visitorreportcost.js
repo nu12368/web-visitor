@@ -215,7 +215,7 @@ async function SearchLog(refresh_token, d) {
                         }
                     } else {
                     }
-                    await div_preloader()
+                  //  await div_preloader()
                     await viewCost(_arrSearch)
                     n = 0;
                     _arrSearch = new Array()
