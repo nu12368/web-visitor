@@ -122,7 +122,7 @@ const getvisitorReportLogSearch = async (refresh_token, d) => {
                         }
                     } else {
                     }
-                    await view_datatable()
+                    await view_datatable('div_preloader')
                 }).catch(function (res) {
                     const { response } = res
                 });
@@ -233,7 +233,6 @@ const getvisitorReportInfoSearch = async (refresh_token, d) => {
                             }
                         }
                     }
-                    // await view_datatable(_arrSearch)
                     // console.log(_arrSearch)
                     //resolve(_arrSearch)
                 }).catch(function (res) {
@@ -277,7 +276,7 @@ $(async function () {
         location.href = "visitorreport.html";
     });
     $('#Searchdate').on('click', async function (e) {
-        //document.getElementById("div_preloader").style.display = 'block'
+        document.getElementById("div_preloader").style.display = 'block'
         $('#table1').DataTable().destroy();
         n = 0;
         c_search = 'search'
@@ -305,13 +304,33 @@ $(async function () {
             var responseLog = await getvisitorReportLogSearch(result, s_date);
             cc = cc + 1;
         }
-        await view_datatable();
+        await view_datatable('div_preloader');
     });
 });
 
-async function view_datatable() {
+async function myFunction(id) {
+    var mytime = setInterval(function () {
+        if (id != '') {
+            div_preloader()
+            id = ''
+        } else {
+            clearInterval(mytime)
+            div_preloaderStop()
+        }
+    }, 1000);
+    id = ''
+}
+
+async function div_preloader() {
+    document.getElementById('div_preloader').style.display = 'block'
+}
+async function div_preloaderStop() {
+    document.getElementById('div_preloader').style.display = 'none'
+}
+
+async function view_datatable(load) {
     $('#table1').DataTable().destroy();
-   // console.log(_arrSearch)
+    // console.log(_arrSearch)
     var header = [];
     header.push("เลข visitor");
     header.push("ประเภท");
@@ -338,7 +357,13 @@ async function view_datatable() {
             fixedHeader: true,
             "order": [],
             columns: [
-                { data: "visitorNumber" },
+                {
+                    data: "visitorNumber",
+                    render: function (data) {
+                        myFunction(data)
+                        return data
+                    }
+                },
                 { data: "visitorType" },
                 {
                     data: "recordTimeIn",
@@ -377,8 +402,6 @@ async function view_datatable() {
                     className: "center",
                     defaultContent: '<i href="" class="view_img" style="font-size:16px;color:blue; cursor: pointer;">รูปภาพ </i>'
                 },
-
-
             ],
             dom: 'lBfrtip',
             buttons: [
@@ -396,7 +419,6 @@ async function view_datatable() {
                         columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
                     }
                 }
-
             ],
             initComplete: function () {
                 this.api().columns(0).every(function () {
@@ -466,8 +488,6 @@ async function view_datatable() {
                             .draw();
                     });
                 });
-
-
                 this.api().columns(5).every(function () {
                     var that = this;
                     $('select', this.header()).on('change', function () {
@@ -483,9 +503,6 @@ async function view_datatable() {
                             .draw();
                     });
                 });
-
-
-
                 this.api().columns(6).every(function () {
                     var that = this;
                     $('input', this.header()).on('keyup change', function () {
@@ -500,10 +517,9 @@ async function view_datatable() {
                 });
             },
 
+            
         });
-     //   document.getElementById("div_preloader").style.display = 'none'
         table.buttons().container().appendTo($('#test'));
-
         $('#table1').on('click', 'tbody td i.view_img', function (e) {
             var table = $('#table1').DataTable();
             e.preventDefault();
@@ -535,10 +551,8 @@ async function view_datatable() {
                         var mimetype = "image/png"; // or whatever your image mime type is
                         $("#viewImage").append(`<img name="${b64encoded}" src="${"data:" + mimetype + ";base64," + b64encoded}"class="view_img img-responsive thumbnail col-lg-3 col-md-4 col-sm-6 col-xs-12">`);
                     });
-
                 }
             }
-
         });
     });
 

@@ -37,8 +37,6 @@ const gettag = async (refresh_token) => {
             }
         }).then(function (response) {
             console.log(response.data.message.result)
-
-    
             var $select = $('#selecttag');
             $select.find('option').remove();
             $select.append('<option value=' + ' ' + '>' + '-- เลือก TAG --' + '</option>');

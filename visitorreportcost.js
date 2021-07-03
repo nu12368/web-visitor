@@ -95,8 +95,9 @@ function getvisitorReportLog(refresh_token) {
 
 
                         }
-                     //   console.log(_arr)
+                        //   document.getElementById("div_preloader").style.display = 'block'
                         await viewCost(refresh_token, _arr)
+
 
                         resolve(_arr);
                     } else {
@@ -215,8 +216,10 @@ async function SearchLog(refresh_token, d) {
                         }
                     } else {
                     }
-                  //  await div_preloader()
+                    //  await div_preloader()
+                    //    document.getElementById("div_preloader").style.display = 'block'
                     await viewCost(_arrSearch)
+
                     n = 0;
                     _arrSearch = new Array()
                 }).catch(function (res) {
@@ -244,8 +247,13 @@ $(async function () {
     if (_sSearch != 'Search') {
         var responseLog = await getvisitorReportLog(result);
     }
-
     $('#SearchdateReportCost').on('click', async function (e) {
+        document.getElementById("div_preloader").style.display = 'block'
+        $('#table1').DataTable().destroy();
+        //document.getElementById('table2').style.display = 'block'
+        var _t = $('#table1').DataTable()
+        _t.clear();
+        _t.draw();
         n = 0;
         _sSearch = 'Search';
         _arrSearch = new Array()
@@ -266,8 +274,20 @@ $(async function () {
         }
         //await div_preloaderStop()
     });
-
 });
+
+async function myFunction(id) {
+    var mytime = setInterval(function () {
+        if (id != '') {
+            div_preloader()
+            id = ''
+        } else {
+            clearInterval(mytime)
+            div_preloaderStop()
+        }
+    }, 1000);
+    id = ''
+}
 
 async function div_preloader() {
     document.getElementById('div_preloader').style.display = 'block'
@@ -324,7 +344,6 @@ async function viewCost(result, datalog) {
         }).then(async function (responsecost) {
             var cnt_cost = responsecost.data.message.result;
             for (i = 0; i < datalog.length; i++) {
-
                 var Timein = datalog[i].recordTimeIn.split('-')
                 var today = new Date();
                 var date = today.getFullYear().toString();
@@ -347,10 +366,9 @@ async function viewCost(result, datalog) {
                 }
             }
             $('#table1').DataTable().destroy();
-            await viewdata_table(_arrnewcost)
+            // document.getElementById("div_preloader").style.display = 'block'
 
-            // clearInterval(myVar);
-            //console.log(_arrnewcost)
+            await viewdata_table(_arrnewcost)
 
         });
     });
@@ -359,20 +377,19 @@ async function viewCost(result, datalog) {
 }
 
 async function viewdata_table(datacost) {
-
-  //  console.log(datacost)
     var pre_data;
     $('#table1').DataTable().destroy();
     var table = $('#table1').DataTable({
         "lengthMenu": [[25, 50, 100], [25, 50, 100]],
         "pageLength": 25,
         'data': datacost,
+        "processing": true,
         "ordering": false,
         "bAutoWidth": false,
         "responsive": true,
         "autoWidth": false,
-        orderCellsTop: true,
-        fixedHeader: true,
+        'orderCellsTop': true,
+        'fixedHeader': true,
         "order": [],
         columns: [
             {
@@ -384,14 +401,12 @@ async function viewdata_table(datacost) {
                     if (date.toLocaleString('en-US', options).replace(',', '') == 'Invalid Date') {
                         return '-';
                     }
-
                     return sp[1].padStart(2, '0') + "/" + sp[0].padStart(2, '0') + "/" + sp[2];
                 }
             },
             {
                 data: "recordTimeOut",
                 render: function (data) {
-
                     let date = new Date(data);
                     let options = { hour12: false };
                     var sp = date.toLocaleString('en-US', options).replace(',', '').split('/')
@@ -404,9 +419,8 @@ async function viewdata_table(datacost) {
             { data: "contactPlace" },
             {
                 data: "visitorNumber",
-                render:  function (data) {
-                 //   await div_preloader()
-                   
+                render: function (data) {
+                    myFunction(data)
                     return data
                 }
             },
@@ -417,7 +431,7 @@ async function viewdata_table(datacost) {
             { data: "totalExpenses" },
             { data: "paymentStatus" },
         ],
-        "footerCallback":  function (row, data, start, end, display) {
+        "footerCallback": function (row, data, start, end, display) {
             var api = this.api(),
                 data;
             //console.log(api)
@@ -428,14 +442,137 @@ async function viewdata_table(datacost) {
                     typeof i === 'number' ?
                         i : 0;
             };
-
             // Total over all pages
             //for (i = 1; i < 4; i++) {
-
             total = api
                 .column(8)
                 .data()
-                .reduce( function (a, b) {
+                .reduce(function (a, b) {
+                    //     console.log(intVal(a) + intVal(b))
+                    return intVal(a) + intVal(b);
+                }, 0);
+            // Total over this page
+            pageTotal = api
+                .column(8, {
+                    page: 'current'
+                })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+            // Update footer
+            $(api.column(8).footer()).html(
+                total
+            );
+            $(api.column(8).footer()).html(
+                total + ' บาท'
+                //pageTotal + ' (' + ' ทั้งหมด ' + total + ')'
+            );
+            console.log(pageTotal)
+
+            console.log(total)
+            //  $('#total').text('Number(total).toFixed(8)');
+            // $('#total').text('£' + Number(total).toFixed(8));
+            // }
+        },
+        dom: 'lBfrtip',
+        buttons: [
+            {
+                title: 'export',
+                text: 'Export <i class="fa fa-file-excel-o" style="font-size:30px"></i>',
+                extend: 'excel',
+                //  footer: false,
+                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                footer: true
+            }
+        ],
+        "createdRow": function (row, data, dataIndex) {
+            // console.log(data.paymentStatus)
+            if (data.paymentStatus == "จ่าย") {
+                $(row).addClass('green');
+            } else if (data.paymentStatus == "ไม่จ่าย") {
+                $(row).addClass('red');
+            }
+            else {
+                $(row).addClass('yellow');
+            }
+        }
+    });
+    table.buttons().container().appendTo($('#test'));
+}
+
+async function viewdata_table2(datacost) {
+    var pre_data;
+    $('#table2').DataTable().destroy();
+    var table = $('#table2').DataTable({
+        "lengthMenu": [[25, 50, 100], [25, 50, 100]],
+        "pageLength": 25,
+        'data': datacost,
+        "processing": true,
+        "ordering": false,
+        "bAutoWidth": false,
+        "responsive": true,
+        "autoWidth": false,
+        'orderCellsTop': true,
+        'fixedHeader': true,
+        "order": [],
+        columns: [
+            {
+                data: "recordTimeIn",
+                render: function (data) {
+                    let date = new Date(data);
+                    let options = { hour12: false };
+                    var sp = date.toLocaleString('en-US', options).replace(',', '').split('/')
+                    if (date.toLocaleString('en-US', options).replace(',', '') == 'Invalid Date') {
+                        return '-';
+                    }
+                    return sp[1].padStart(2, '0') + "/" + sp[0].padStart(2, '0') + "/" + sp[2];
+                }
+            },
+            {
+                data: "recordTimeOut",
+                render: function (data) {
+                    let date = new Date(data);
+                    let options = { hour12: false };
+                    var sp = date.toLocaleString('en-US', options).replace(',', '').split('/')
+                    if (date.toLocaleString('en-US', options).replace(',', '') == 'Invalid Date') {
+                        return '-';
+                    }
+                    return sp[1].padStart(2, '0') + "/" + sp[0].padStart(2, '0') + "/" + sp[2];
+                }
+            },
+            { data: "contactPlace" },
+            {
+                data: "visitorNumber",
+                render: function (data) {
+                    myFunction(data)
+                    return data
+                }
+            },
+            { data: "visitorType" },
+            { data: "costType" },
+            { data: "totalMinute" },
+            { data: "totalMinute2" },
+            { data: "totalExpenses" },
+            { data: "paymentStatus" },
+        ],
+        "footerCallback": function (row, data, start, end, display) {
+            var api = this.api(),
+                data;
+            //console.log(api)
+            // Remove the formatting to get integer data for summation
+            var intVal = function (i) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '') * 1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+            // Total over all pages
+            //for (i = 1; i < 4; i++) {
+            total = api
+                .column(8)
+                .data()
+                .reduce(function (a, b) {
                     //     console.log(intVal(a) + intVal(b))
                     return intVal(a) + intVal(b);
                 }, 0);
@@ -446,7 +583,7 @@ async function viewdata_table(datacost) {
                     page: 'current'
                 })
                 .data()
-                .reduce( function (a, b) {
+                .reduce(function (a, b) {
                     return intVal(a) + intVal(b);
                 }, 0);
 
@@ -457,8 +594,8 @@ async function viewdata_table(datacost) {
             $(api.column(8).footer()).html(
                 pageTotal
             );
-        
-            $('#total').text('£' + Number(pageTotal).toFixed(8));
+            // $('#total').text('£' + Number(total).toFixed(8) + '(' + +')');
+            $('#total').text('£' + Number(pageTotal).toFixed(8) + '(' + total + ')');
             // }
         },
         dom: 'lBfrtip',
@@ -472,7 +609,9 @@ async function viewdata_table(datacost) {
                 footer: true
             }
         ],
-        "createdRow":  function (row, data, dataIndex) {
+
+        "createdRow": function (row, data, dataIndex) {
+
             // console.log(data.paymentStatus)
             if (data.paymentStatus == "จ่าย") {
                 $(row).addClass('green');
@@ -482,12 +621,9 @@ async function viewdata_table(datacost) {
             else {
                 $(row).addClass('yellow');
             }
-
-           
         }
 
     });
 
     table.buttons().container().appendTo($('#test'));
-  
 }
