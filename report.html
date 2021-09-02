@@ -9,8 +9,7 @@
     <link rel="icon" href="../../uploads/logo.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
-        type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Core Css -->
@@ -34,8 +33,7 @@
     <link href="../../css/themes/all-themes.css" rel="stylesheet" />
 
     <!-- Bootstrap Material Datetime Picker Css -->
-    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
-        rel="stylesheet" />
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
 
     <!-- Bootstrap DatePicker Css -->
     <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
@@ -46,9 +44,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/datatables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
 
     <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
 
@@ -74,30 +70,32 @@
 
 
 <script>
-
     var obj = JSON.parse(Cookies.get('datatoken'));
     var userId = Cookies.get('datauserId');
     var datafilterlog;
+
     function acctoken() {
         var data;
-     //   console.log(obj.refresh_token)
+        //   console.log(obj.refresh_token)
         return new Promise(resolve => {
-            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+            $.getScript("ip.js", function(data, textStatus, jqxhr) {
                 var urlipaddress = data.substring(1, data.length - 1);
                 axios.post(urlipaddress + 'token', data, {
                     headers: {
                         'Authorization': obj.refresh_token
                     }
-                }).then(function (response) {
+                }).then(function(response) {
                     resolve(response.data.message.access_token);
 
-                }).catch(function (res) {
-                    const { response } = res
-            //        console.log(response.data.message)
+                }).catch(function(res) {
+                    const {
+                        response
+                    } = res
+                    //        console.log(response.data.message)
 
                     if (response.data.message == "Unauthorized") {
-                       
-                       location.href = "index.html";
+
+                        location.href = "index.html";
                     }
 
                 });
@@ -107,9 +105,9 @@
 
     function getlog(refresh_token) {
         var data;
-     //   console.log(refresh_token)
+        //   console.log(refresh_token)
         return new Promise(resolve => {
-            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+            $.getScript("ip.js", function(data, textStatus, jqxhr) {
                 var urlipaddress = data.substring(1, data.length - 1);
                 const dataUserID = {
                     userId: userId
@@ -118,14 +116,16 @@
                     headers: {
                         'Authorization': refresh_token
                     }
-                }).then(function (response) {
+                }).then(function(response) {
                     resolve(response.data.message.data);
 
                     // console.log(response.data.message.data)
 
-                }).catch(function (res) {
-                    const { response } = res
-               //     console.log(response.data)
+                }).catch(function(res) {
+                    const {
+                        response
+                    } = res
+                    //     console.log(response.data)
                 });
             });
         });
@@ -133,9 +133,9 @@
 
     function getuser(refresh_token) {
         var data;
-     //   console.log(refresh_token)
+        //   console.log(refresh_token)
         return new Promise(resolve => {
-            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+            $.getScript("ip.js", function(data, textStatus, jqxhr) {
                 var urlipaddress = data.substring(1, data.length - 1);
                 const dataUserID = {
                     userId: userId
@@ -144,13 +144,15 @@
                     headers: {
                         'Authorization': refresh_token
                     }
-                }).then(function (response) {
+                }).then(function(response) {
                     resolve(response.data.message.data);
 
                     //  console.log(response.data.message.data)
 
-                }).catch(function (res) {
-                    const { response } = res
+                }).catch(function(res) {
+                    const {
+                        response
+                    } = res
                     // console.log(response.data)
                 });
             });
@@ -173,7 +175,7 @@
         var $select = $('#user');
         $select.find('option').remove();
         $select.append('<option value=' + 0 + '>' + '-- เลือก USER ID --' + '</option>');
-        $.each(_arr, function (key, value) {
+        $.each(_arr, function(key, value) {
             $select.append('<option value=' + value._user + '>' + value._user + '</option>');
 
         });
@@ -204,7 +206,7 @@
 
         ////// USER
         if (datauser != '0') {
-            for (var i = 0; i < chklog.length; i++) {   ////// USER
+            for (var i = 0; i < chklog.length; i++) { ////// USER
                 if (chklog[i].userName == datauser) {
                     _arr[num] = chklog[i]
                     num = num + 1;
@@ -217,14 +219,14 @@
             if (_arr.length > 0) {
                 num = 0;
                 checkdata = "checkdata"
-                for (var i = 0; i < _arr.length; i++) {   ////// USER AND ROUTE
+                for (var i = 0; i < _arr.length; i++) { ////// USER AND ROUTE
                     if (_arr[i].routeName == dataroute) {
                         _arrview[num] = _arr[i]
                         num = num + 1;
                     }
                 }
             } else {
-                for (var i = 0; i < chklog.length; i++) {  ////// ROUTE
+                for (var i = 0; i < chklog.length; i++) { ////// ROUTE
                     if (chklog[i].routeName == dataroute) {
                         _arr[num] = chklog[i]
                         num = num + 1;
@@ -236,10 +238,10 @@
         ////// shifttime
         if (datashifttime != '0') {
             if (_arrview.length > 0) {
-              //  console.log('1 ----->  USER AND ROUTE AND shifttime')
+                //  console.log('1 ----->  USER AND ROUTE AND shifttime')
                 num = 0;
                 checkdata = "checkdataall"
-                for (var i = 0; i < _arrview.length; i++) {   ////// USER AND ROUTE AND shifttime
+                for (var i = 0; i < _arrview.length; i++) { ////// USER AND ROUTE AND shifttime
                     if (_arrview[i].shiftName == datashifttime) {
                         _arrviewall[num] = _arrview[i]
                         num = num + 1;
@@ -248,12 +250,12 @@
 
                 // console.log(_arrviewall)
             } else {
-           //     console.log('00000 ------> USER AND shifttime')
+                //     console.log('00000 ------> USER AND shifttime')
                 if (_arr.length > 0) {
-                //    console.log('2 ----> USER AND shifttime')
+                    //    console.log('2 ----> USER AND shifttime')
                     num = 0;
                     checkdata = "checkdata"
-                    for (var i = 0; i < _arr.length; i++) {   ////// USER AND shifttime
+                    for (var i = 0; i < _arr.length; i++) { ////// USER AND shifttime
                         if (_arr[i].shiftName == datashifttime) {
                             _arrviewall[num] = _arr[i]
                             num = num + 1;
@@ -262,8 +264,8 @@
                     }
                     //console.log(_arrviewall)
                 } else {
-                //    console.log('shifttime -------> 3')
-                    for (var i = 0; i < chklog.length; i++) {  ////// shifttime
+                    //    console.log('shifttime -------> 3')
+                    for (var i = 0; i < chklog.length; i++) { ////// shifttime
                         if (chklog[i].shiftName == datashifttime) {
                             _arr[num] = chklog[i]
                             num = num + 1;
@@ -273,21 +275,21 @@
             }
         }
 
-     //   console.log(_arr)
-      //  console.log(_arrview)
-      //  console.log(_arrviewall)
+        //   console.log(_arr)
+        //  console.log(_arrview)
+        //  console.log(_arrviewall)
 
         if (checkdata != undefined) {
             if (checkdata == "checkdata") {
                 view_log(_arrview)
-             //   console.log('1')
+                    //   console.log('1')
             } else {
                 view_log(_arrviewall)
-            //    console.log('2')
+                    //    console.log('2')
             }
         } else {
             view_log(_arr)
-         //   console.log('3')
+                //   console.log('3')
         }
 
 
@@ -299,7 +301,7 @@
         //  console.log(json)
         $("#viewImage").empty();
         const result = await acctoken();
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var data;
             var _iddaleteinform;
             var urlipaddress = data.substring(1, data.length - 1);
@@ -326,28 +328,38 @@
 
 
             const reversed = [...json].reverse()
-            //   console.log([...reversed])
+                //   console.log([...reversed])
 
             $('#table1').DataTable().destroy();
             $('#table1').DataTable({
-                "lengthMenu": [[20, 50, 100, 150, 200, 250, 300, 350, 400, -1], [20, 50, 100, 150, 200, 250, 300, 350, 400, "All"]],
+                "lengthMenu": [
+                    [20, 50, 100, 150, 200, 250, 300, 350, 400, -1],
+                    [20, 50, 100, 150, 200, 250, 300, 350, 400, "All"]
+                ],
                 "pageLength": 20,
                 'data': [...reversed],
                 'order': [],
                 "responsive": true,
                 "autoWidth": false,
                 "searching": true,
-                columns: [
-                    { data: "userName" },
-                    { data: "checkPoint" },
-                    { data: "status" },
-                    { data: "description" },
-                    { data: "gps", "visible": false },
-                    {
+                columns: [{
+                        data: "userName"
+                    }, {
+                        data: "checkPoint"
+                    }, {
+                        data: "status"
+                    }, {
+                        data: "description"
+                    }, {
+                        data: "gps",
+                        "visible": false
+                    }, {
                         data: "lastUpdate",
-                        render: function (data) {
+                        render: function(data) {
                             let date = new Date(data);
-                            let options = { hour12: false };
+                            let options = {
+                                hour12: false
+                            };
                             return date.toLocaleString('en-US', options).replace(',', '');
                         }
                     },
@@ -357,8 +369,7 @@
                         className: "center",
                         defaultContent: '<i href="" class="view_img" style="font-size:16px;color:blue; cursor: pointer;">ดูรูปภาพ</i>'
 
-                    },
-                    {
+                    }, {
                         data: null,
                         className: "center",
                         defaultContent: '<i href="" class="view_audio" style="font-size:16px;color:blue; cursor: pointer;">เสียง</i>'
@@ -367,33 +378,29 @@
 
                 ],
                 dom: 'lBfrtip',
-                buttons: [
-                    {
-                        title: 'report',
-                        extend: 'csv',
-                        footer: false,
-                        exportOptions: {
-                            columns: [0, 1, 2, 3, 5]
-                        }
-
-                    },
-                    {
-                        title: 'report',
-                        extend: 'excel',
-                        footer: false,
-                        exportOptions: {
-                            columns: [0, 1, 2, 3, 5]
-                        }
-                    },
-                    {
-                        title: 'report',
-                        extend: 'print',
-                        footer: false,
-                        exportOptions: {
-                            columns: [0, 1, 2, 3, 5]
-                        }
+                buttons: [{
+                    title: 'report',
+                    extend: 'csv',
+                    footer: false,
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 5]
                     }
-                ]
+
+                }, {
+                    title: 'report',
+                    extend: 'excel',
+                    footer: false,
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 5]
+                    }
+                }, {
+                    title: 'report',
+                    extend: 'print',
+                    footer: false,
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 5]
+                    }
+                }]
 
             });
 
@@ -406,32 +413,35 @@
         var $select = $('#route');
         $select.find('option').remove();
         $select.append('<option value=' + 0 + '>' + '-- เลือกเส้นทาง --' + '</option>');
-        $.each(point, function (key, value) {
+        $.each(point, function(key, value) {
             $select.append('<option value=' + value.routeName.replace(";", " ") + '>' + value.routeName.replace(";", " ") + '</option>');
             c_n = c_n + 1;
         });
 
     }
+
     function getroute(refresh_token) {
         var data;
-      //  console.log(refresh_token)
+        //  console.log(refresh_token)
         return new Promise(resolve => {
-            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+            $.getScript("ip.js", function(data, textStatus, jqxhr) {
                 var urlipaddress = data.substring(1, data.length - 1);
                 const dataUserID = {
-                    userId: userId
-                }
-                // console.log(dataUserID)
+                        userId: userId
+                    }
+                    // console.log(dataUserID)
                 axios.post(urlipaddress + 'routes', dataUserID, {
                     headers: {
                         'Authorization': refresh_token
                     }
-                }).then(function (response) {
+                }).then(function(response) {
                     //  console.log(response.data.message.data)
                     resolve(response.data.message.data);
-                }).catch(function (res) {
-                    const { response } = res
-                //    console.log(response.data)
+                }).catch(function(res) {
+                    const {
+                        response
+                    } = res
+                    //    console.log(response.data)
                 });
             });
         });
@@ -439,24 +449,26 @@
 
     function getshifttime(refresh_token) {
         var data;
-     //   console.log(refresh_token)
+        //   console.log(refresh_token)
         return new Promise(resolve => {
-            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+            $.getScript("ip.js", function(data, textStatus, jqxhr) {
                 var urlipaddress = data.substring(1, data.length - 1);
                 const dataUserID = {
-                    userId: userId
-                }
-                // console.log(dataUserID)
+                        userId: userId
+                    }
+                    // console.log(dataUserID)
                 axios.post(urlipaddress + 'shifttimes', dataUserID, {
                     headers: {
                         'Authorization': refresh_token
                     }
-                }).then(function (response) {
+                }).then(function(response) {
                     //  console.log(response.data.message.data)
                     resolve(response.data.message.data);
-                }).catch(function (res) {
-                    const { response } = res
-            //        console.log(response.data)
+                }).catch(function(res) {
+                    const {
+                        response
+                    } = res
+                    //        console.log(response.data)
                 });
             });
         });
@@ -470,7 +482,7 @@
         $select.find('option').remove();
         $select.append('<option value=' + 0 + '>' + '-- เลือกรอบตรวจ --' + '</option>');
         $select.append('<option value=' + 'นอกรอบ' + '>' + 'นอกรอบ' + '</option>');
-        $.each(point, function (key, value) {
+        $.each(point, function(key, value) {
             $select.append('<option value=' + value.shiftName.replace(";", " ") + '>' + value.shiftName.replace(";", " ") + '</option>');
             c_n = c_n + 1;
         });
@@ -492,7 +504,7 @@
         //console.log(chkshifttime)
         shifttime(chkshifttime)
 
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var data;
             var json;
             var _iddaleteinform;
@@ -509,7 +521,7 @@
 
 
             /////// ดูรูปภาพ
-            $('#table1').on('click', 'tbody td i.view_img', function (e) {
+            $('#table1').on('click', 'tbody td i.view_img', function(e) {
                 var table = $('#table1').DataTable();
                 e.preventDefault();
                 var _ro = table.row($(this).parents('tr'));
@@ -519,18 +531,18 @@
                     data = table.row(this).data();
                 }
                 $("#viewImage").empty();
-            //    console.log(data.imagesLink)
+                //    console.log(data.imagesLink)
                 $("#myModalview").modal();
                 var nn = 0;
                 for (let i in data.imagesLink) {
-             //       console.log(data.imagesLink[i])
+                    //       console.log(data.imagesLink[i])
                     axios.get(urlipaddress + "view/images/" + data.imagesLink[i], {
                         responseType: 'arraybuffer',
                         headers: {
                             'Authorization': result
                         }
 
-                    }).then(function (response) {
+                    }).then(function(response) {
                         var arrayBuffer = response.data; // Note: not oReq.responseText
                         var u8 = new Uint8Array(arrayBuffer);
                         var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -544,9 +556,9 @@
 
             });
             var mysrc;
-            $('#viewImage').on('click', 'img.view_img', async function (e) {
+            $('#viewImage').on('click', 'img.view_img', async function(e) {
 
-            //    console.log($(this).attr("name"));
+                //    console.log($(this).attr("name"));
                 mysrc = $(this).attr("name");
             });
 
@@ -555,7 +567,7 @@
             // });
 
             /////// เสียง
-            $('#table1').on('click', 'tbody td i.view_audio', function (e) {
+            $('#table1').on('click', 'tbody td i.view_audio', function(e) {
                 var table = $('#table1').DataTable();
                 e.preventDefault();
                 var _ro = table.row($(this).parents('tr'));
@@ -565,14 +577,14 @@
                     data = table.row(this).data();
                 }
                 $("#myModalviewaudio").modal();
-         //       console.log(data.mediaLink[0])
+                //       console.log(data.mediaLink[0])
                 axios.get(urlipaddress + "audio/" + data.mediaLink[0], {
                     responseType: 'arraybuffer',
                     headers: {
                         'Authorization': result
                     }
 
-                }).then(function (response) {
+                }).then(function(response) {
                     var arrayBuffer = response.data; // Note: not oReq.responseText
 
                     var u8 = new Uint8Array(arrayBuffer);
@@ -582,27 +594,31 @@
                     // console.log("data:" + mimetype + ";base64," + b64encoded)
                     // var sss = "data:" + mimetype + ";base64," + b64encoded;
                     //console.log(sss)
-                }).catch(function (res) {
-                    const { response } = res
-                 //   console.log(response.data.message)
+                }).catch(function(res) {
+                    const {
+                        response
+                    } = res
+                    //   console.log(response.data.message)
                 });
             });
 
 
             ////////ดู map
-            $('#map').on('click', function (e) {
+            $('#map').on('click', function(e) {
                 var table = $('#table1').DataTable();
                 var data = table
                     .rows()
                     .data();
-            //    console.log(data.length)
-            //    console.log(data)
+                //    console.log(data.length)
+                //    console.log(data)
                 var _arr = new Array();
                 var n = 0;
                 var sp;
                 for (i = 0; i < data.length; i++) {
                     let date = new Date(data[i].lastUpdate);
-                    let options = { hour12: false };
+                    let options = {
+                        hour12: false
+                    };
                     _arr[n] = {
                         latitude: data[i].gps.latitude,
                         longitude: data[i].gps.longitude,
@@ -613,7 +629,7 @@
                     n = n + 1
                 }
                 var myJSON = JSON.stringify(_arr);
-               // console.log(myJSON);
+                // console.log(myJSON);
                 $("#map").attr("href", `map.html?map= ${myJSON}`);
             });
 
@@ -670,10 +686,6 @@
         // });
 
     }
-
-
-
-
 </script>
 
 <body class="theme-red" onload="newonload()">
@@ -713,31 +725,29 @@
     <nav class="navbar">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
                 <a class="navbar-brand" id="logoname" href="report.html">Guard Tour</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a onclick="logout()" style="cursor: pointer;" class="js-search"
-                            data-close="true">[ออกจากระบบ]</a></li>
+                    <li><a onclick="logout()" style="cursor: pointer;" class="js-search" data-close="true">[ออกจากระบบ]</a></li>
                     <script>
                         function logout() {
-                            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                            $.getScript("ip.js", function(data, textStatus, jqxhr) {
                                 var urlipaddress = data.substring(1, data.length - 1);
 
                                 const databody = {
-                                    refresh_token: document.getElementById("refreshtoken").value,//refreshtoken
+                                    refresh_token: document.getElementById("refreshtoken").value, //refreshtoken
                                 }
 
                                 axios.post(urlipaddress + 'logout', databody, {
                                     headers: {
-                                        'Authorization': document.getElementById("accesstoken").value//refreshtoken
+                                        'Authorization': document.getElementById("accesstoken").value //refreshtoken
                                     }
-                                }).then(function (response) {
+                                }).then(function(response) {
 
-                                //    console.log(response.data)
+                                    //    console.log(response.data)
 
                                     if (response.data.message == "success") {
                                         document.getElementById("p_logout").innerText = "ออกจากระบบสำเร็จ";
@@ -746,9 +756,11 @@
                                         // alert("บันทึกข้อมูลไม่สำเร็จ");
                                     }
 
-                                }).catch(function (res) {
-                                    const { response } = res
-                                //    console.log(response.data.message)
+                                }).catch(function(res) {
+                                    const {
+                                        response
+                                    } = res
+                                    //    console.log(response.data.message)
                                     if (response.data.message == "Unauthorized") {
                                         alert("คุณยังไม่ได้ login admin");
                                     }
@@ -887,8 +899,7 @@
                                                 <small>32%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 32%">
+                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 32%">
                                                 </div>
                                             </div>
                                         </a>
@@ -900,8 +911,7 @@
                                                 <small>45%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
                                                 </div>
                                             </div>
                                         </a>
@@ -913,8 +923,7 @@
                                                 <small>54%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 54%">
+                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 54%">
                                                 </div>
                                             </div>
                                         </a>
@@ -926,9 +935,7 @@
                                                 <small>65%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-orange" role="progressbar"
-                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
-                                                    style="width: 65%">
+                                                <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 65%">
                                                 </div>
                                             </div>
                                         </a>
@@ -940,9 +947,7 @@
                                                 <small>92%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-purple" role="progressbar"
-                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
-                                                    style="width: 92%">
+                                                <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 92%">
                                                 </div>
                                             </div>
                                         </a>
@@ -974,7 +979,7 @@
                 <div><br></div>
                 <div><br></div>
                 <div style="color: white;">
-                    <div class="name" data-toggle="dropdown" id="userlogin"  aria-haspopup="true" aria-expanded="false"></div>
+                    <div class="name" data-toggle="dropdown" id="userlogin" aria-haspopup="true" aria-expanded="false"></div>
                 </div>
             </div>
             <div class="menu">
@@ -1203,16 +1208,14 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
 
-                        <div class="header header-new"">
+                        <div class="header header-new">
                             <h2>
                                 <font style="color: white;">รายงาน
                                 </font>
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
-                                    <a href="" onclick="ref()" style="color: white; font-size: 18px;"
-                                        data-toggle="modal" data-target="#add"> <i class="material-icons"
-                                            style="color: white;">refresh</i>
+                                    <a href="" onclick="ref()" style="color: white; font-size: 18px;" data-toggle="modal" data-target="#add"> <i class="material-icons" style="color: white;">refresh</i>
 
                                     </a>
                                     <script>
@@ -1228,8 +1231,7 @@
                             <div class="">
                                 <div class="form-line">
                                     <div class="">
-                                        <select class="form-control show-tick" name="user" id="user"
-                                            style="cursor: pointer;">
+                                        <select class="form-control show-tick" name="user" id="user" style="cursor: pointer;">
                                         </select>
                                         <p id="p_address" style="font-size: 18px;"></p>
                                     </div>
@@ -1252,8 +1254,7 @@
                                 <div class="col-xs-3">
                                     <div class="input-daterange input-group" id="timestart">
                                         <div class="form-line">
-                                            <input type="text" class="timepicker form-control"
-                                                placeholder="เวลาเริ่มต้น">
+                                            <input type="text" class="timepicker form-control" placeholder="เวลาเริ่มต้น">
                                         </div>
                                         <span class="input-group-addon">
                                             <i class="material-icons" style="cursor: pointer;">access_time</i>
@@ -1276,8 +1277,7 @@
                                 <div class="col-xs-3">
                                     <div class="input-daterange input-group" id="timerange">
                                         <div class="form-line">
-                                            <input type="text" class="timepicker form-control"
-                                                placeholder="เวลาสิ้นสุด">
+                                            <input type="text" class="timepicker form-control" placeholder="เวลาสิ้นสุด">
                                         </div>
                                         <span class="input-group-addon">
                                             <i class="material-icons" style="cursor: pointer;">access_time</i>
@@ -1291,8 +1291,7 @@
                             <div class="">
                                 <div class="form-line">
                                     <div class="">
-                                        <select class="form-control show-tick" name="route" id="route"
-                                            style="cursor: pointer;">
+                                        <select class="form-control show-tick" name="route" id="route" style="cursor: pointer;">
                                         </select>
                                         <p id="p_address" style="font-size: 18px;"></p>
                                     </div>
@@ -1303,8 +1302,7 @@
                             <div class="">
                                 <div class="form-line">
                                     <div class="">
-                                        <select class="form-control show-tick" name="shifttime" id="shifttime"
-                                            style="cursor: pointer;">
+                                        <select class="form-control show-tick" name="shifttime" id="shifttime" style="cursor: pointer;">
                                         </select>
                                         <p id="p_address" style="font-size: 18px;"></p>
                                     </div>
@@ -1319,17 +1317,13 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                <input type="button" class="btn btn-primary waves-effect" value="ค้นหา"
-                                                    id="submit_save" name="submit_save" onclick="c_user()"
-                                                    style="cursor: pointer;">
+                                                <input type="button" class="btn btn-primary waves-effect" value="ค้นหา" id="submit_save" name="submit_save" onclick="c_user()" style="cursor: pointer;">
 
                                             </td>
                                             <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                             <td>&nbsp;</td>
                                             <td>
-                                                <input type="button" class="btn btn-primary waves-effect"
-                                                    style="display: none;" value="แสดงทั้งหมด" id="btn_ref"
-                                                    name="btn_ref" onclick="ref()" style="cursor: pointer;">
+                                                <input type="button" class="btn btn-primary waves-effect" style="display: none;" value="แสดงทั้งหมด" id="btn_ref" name="btn_ref" onclick="ref()" style="cursor: pointer;">
                                             </td>
                                             <script>
                                                 function ref() {
@@ -1362,9 +1356,7 @@
                                 </a>
                             </div>
                             <div class="table-responsive">
-                                <table
-                                    class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display"
-                                    id="table1">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display" id="table1">
                                     <thead>
                                         <tr>
                                             <th>user</th>
@@ -1456,8 +1448,7 @@
                                                 <div id="aniimated-thumbnials">
                                                     <a id="a_imageview" class="lightgallery">
 
-                                                        <div id="viewImage" style="cursor: pointer;"
-                                                            class="img-responsive thumbnail lightgallery">
+                                                        <div id="viewImage" style="cursor: pointer;" class="img-responsive thumbnail lightgallery">
                                                         </div>
                                                     </a>
                                                     <!-- <div id="aniimated-thumbnials" class="list-unstyled row clearfix">

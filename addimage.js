@@ -1,4 +1,3 @@
-
 var length_img;
 var userId = Cookies.get('datauserId');
 var obj = JSON.parse(Cookies.get('datatoken'));
@@ -7,26 +6,33 @@ var arr = new Array();
 var img_id = $(this).children("img").attr("id");
 var num_index = 0;
 var _f_name;
-var datamember;
 
-console.log(userId)
+var datamember;
+datamember = Cookies.get('datamember');
+if (datamember != undefined) {
+    datamember = JSON.parse(datamember)
+} else {
+    datamember = Cookies.get('datamemberID');
+    datamember = JSON.parse(datamember)
+}
+
 
 
 function acctoken() {
     return new Promise(resolve => {
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             // console.log('aaaaaaaaaaaaaa')
             axios.post(urlipaddress + 'token', data, {
                 headers: {
                     'Authorization': obj.refresh_token
                 }
-            }).then(function (response) {
+            }).then(function(response) {
                 //   console.log('bbb')
                 // console.log(response.data.message.access_token)
                 resolve(response.data.message.access_token);
 
-            }).catch(function (res) {
+            }).catch(function(res) {
                 const { response } = res
                 //   console.log(response.data.message)
 
@@ -40,10 +46,10 @@ function acctoken() {
     });
 }
 
-$(async function () {
+$(async function() {
     const result = await acctoken();
     /////////////////แสดงรูปภาพ
-    var imagesPreview = function (input) {
+    var imagesPreview = function(input) {
         if (input.files) {
             var filesAmount = input.files.length;
             document.getElementById("lbl_add").innerText = '';
@@ -58,14 +64,14 @@ $(async function () {
                     return;
                 }
                 console.log(input.files[i])
-                // ResizeImage(input.files[i])
+                    // ResizeImage(input.files[i])
                 if (input.files[i].size > 2192282) {
                     // document.getElementById("lbl_add").innerText = "ขนาดภาพใหญ่เกินไป !!" + '\n' + input.files[i].name;
                     //  document.getElementById("lbl_add").style.color = "red";
                     // return;
                 }
 
-                reader.onload = function (event) {
+                reader.onload = function(event) {
                     length_img = $("#addImagenew img");
                     if (length_img.length > 4) {
                         document.getElementById("lbl_add").innerText = "อัพไฟล์รูปได้ไม่เกิน 5 รูป !!!";
@@ -86,28 +92,21 @@ $(async function () {
 
     function resize(item) {
         //define the width to resize e.g 600px
-        var resize_width = 600;//without px
+        var resize_width = 600; //without px
         //    console.log(item.files)
-
         for (i = 0; i < item.files.length; i++) {
-            //get the image selected
-            // var item = document.querySelector('#uploader').files[0];
-
-            //create a FileReader
             var reader = new FileReader();
-
             //image turned to base64-encoded Data URI.
             reader.readAsDataURL(item.files[i]);
-            reader.name = item.files[i].name;//get the image's name
+            reader.name = item.files[i].name; //get the image's name
             reader.size = item.files[i].size; //get the image's size
-            reader.onload = function (event) {
-                var img = new Image();//create a image
-                img.src = event.target.result;//result is base64-encoded Data URI
-                img.name = event.target.name;//set name (optional)
-                img.size = event.target.size;//set size (optional)
-                img.onload = function (el) {
-                    var elem = document.createElement('canvas');//create a canvas
-
+            reader.onload = function(event) {
+                var img = new Image(); //create a image
+                img.src = event.target.result; //result is base64-encoded Data URI
+                img.name = event.target.name; //set name (optional)
+                img.size = event.target.size; //set size (optional)
+                img.onload = function(el) {
+                    var elem = document.createElement('canvas'); //create a canvas
                     //scale the image to 600 (width) and keep aspect ratio
                     var scaleFactor = resize_width / el.target.width;
                     elem.width = resize_width;
@@ -120,16 +119,14 @@ $(async function () {
                     //get the base64-encoded Data URI from the resize image
                     var srcEncoded = ctx.canvas.toDataURL(el.target, 'image/jpeg', 0);
 
-                    //assign it to thumb src
-                    //    document.querySelector('#image').src = srcEncoded;
-
-                    /*Now you can send "srcEncoded" to the server and
-                    convert it to a png o jpg. Also can send
-                    "el.target.name" that is the file's name.*/
-
                     //  console.log(event.target.name)
                     var _file = dataURLtoFile(srcEncoded, event.target.name)
-                    //  console.log(_file)
+                    console.log(_file)
+
+
+
+
+
 
                     if ($("#profileEdit").val() != undefined) {
                         ////// แก้ไข โปรไฟล์
@@ -153,12 +150,23 @@ $(async function () {
                     }
 
 
-                    /////// เพิ่ม รูปภาพ ทั่วไป 
-                    $("#addImagenew").append(`<a id="close"  style="font-size:18px;color:red; class="pull-right" href="#">
-                <i name="${n}" class="delete_cc fa fa-times fa fa-times col-lg-3 col-md-4 col-sm-6 col-xs-12" ><img name="${n}" src="${srcEncoded} "class="cc img-responsive thumbnail"></i></a>`);
+                    if (title_appeal == 'imagetitle') { /////////////////// สร้าง ร้องเรียน แจ้งเหตุ ซ่อมบำรุง
+                        $("#viewImage_title").append(`<a id="close"  style="font-size:18px;color:red; class="pull-right" href="#">
+                        <i name="${n}" class="delete_cc fa fa-times fa fa-times col-lg-3 col-md-4 col-sm-6 col-xs-12" ><img name="${n}" src="${srcEncoded} "class="cc img-responsive thumbnail"></i></a>`);
 
-                    arr[n] = dataURLtoFile(srcEncoded, event.target.name);
-                    n = n + 1;
+                        arr[n] = dataURLtoFile(srcEncoded, event.target.name);
+                        n = n + 1;
+
+                    } else {
+                        /////// เพิ่ม รูปภาพ ทั่วไป 
+                        $("#addImagenew").append(`<a id="close"  style="font-size:18px;color:red; class="pull-right" href="#">
+                    <i name="${n}" class="delete_cc fa fa-times fa fa-times col-lg-3 col-md-4 col-sm-6 col-xs-12" ><img name="${n}" src="${srcEncoded} "class="cc img-responsive thumbnail"></i></a>`);
+
+                        arr[n] = dataURLtoFile(srcEncoded, event.target.name);
+                        n = n + 1;
+                    }
+
+
 
                 }
             }
@@ -168,7 +176,7 @@ $(async function () {
     var typename;
 
     ///////////////// เลือกไฟล์
-    $('#fileimage').on('change', function () {
+    $('#fileimage').on('change', function() {
         length_img = $("#addImagenew img");
         resize(this)
         return
@@ -187,7 +195,15 @@ $(async function () {
     }
 
     ///////// ลบรูปภาพ
-    $('#addImagenew').on('click', 'i.delete_cc', function (e) {
+    $('#addImagenew').on('click', 'i.delete_cc', function(e) {
+        var remove_index = $(this).attr("name");
+        console.log(remove_index)
+        arr[parseInt(remove_index)] = " ";
+        $(this).remove();
+
+    });
+    ///////// ลบรูปภาพ title
+    $('#viewImage_title').on('click', 'i.delete_cc', function(e) {
         var remove_index = $(this).attr("name");
         console.log(remove_index)
         arr[parseInt(remove_index)] = " ";
@@ -195,9 +211,18 @@ $(async function () {
 
     });
 
+    var title_appeal;
+    ////////////////เพิ่ม รายการ แจ้งเหตุ ร้องเรียน ซ่อมบำรุง
+    $('#add_appeal').on('click', function(e) {
+        $("#addappeal").modal();
+        Cookies.set('imagetitle', 'imagetitle', { expires: 1 })
+        title_appeal = 'imagetitle'
+    });
+
+
     ////////////////////  บันทึก พัสดุ
-    $('#submitsupplies').on('click', function (e) {
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+    $('#submitsupplies').on('click', function(e) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             const url = urlipaddress + 'deliver';
             let formData = new FormData();
@@ -221,17 +246,15 @@ $(async function () {
                 formData.append('description', document.getElementById("description").value);
                 formData.append('status', 'มา');
             }
-            axios.post(url, formData,
-                {
-                    headers: {
-                        'Authorization': result
-                    }
+            axios.post(url, formData, {
+                headers: {
+                    'Authorization': result
                 }
-            ).then(function (response) {
+            }).then(function(response) {
                 // console.log(response.data.message)
                 showSuccessMessage('supplies.html');
                 // location.href = "supplies.html";
-            }).catch(function (res) {
+            }).catch(function(res) {
                 const { response } = res
                 // console.log(response.data.message)
                 showCancelMessage(response.data.message, '')
@@ -240,14 +263,81 @@ $(async function () {
     });
 
 
-    
+    ////////////////////  บันทึกรายการ จอง
+    $('#submitlist').on('click', async function(e) {
+        const result = await acctoken();
+        var category = document.getElementById('postlist').value
+        var hr = document.getElementById('starthours').value
+        var mi = document.getElementById('startminutes').value
+        if (category == '') {
+            showCancelMessage('กรุณาระรายการจอง', '')
+            return
+        }
+        if (hr == '00' && mi == '00') {
+            showCancelMessage('กรุณาเลือกช่วงเวลา', '')
+            return
+        }
+        var t_hr = hr / 60
+        var t_mi = mi / 60
+        var hms;
+        if (t_hr == 0) {
+            hms = t_mi
+            hms = hms.toFixed(2)
+        } else {
+            console.log(t_mi)
+            if (t_mi == 0) { /////:00
+                hms = parseInt(hr)
+            } else {
+                hms = parseInt(hr) + t_mi
+                hms = hms.toFixed(2)
+            }
+        }
 
+        console.log(hms.toString())
 
-    
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
+            var urlipaddress = data.substring(1, data.length - 1);
+            const url = urlipaddress + 'setProp';
+            let formData = new FormData();
+            if (arr.length == 0) {
+                formData.append('userId', userId);
+                formData.append('category', category);
+                formData.append('intervalDifference', hms.toString());
+                formData.append('setFormat', '0');
+                formData.append('description', document.getElementById("categorydescription").value);
+            } else {
+                formData.append('userId', userId);
+                formData.append('category', category);
+                formData.append('intervalDifference', hms.toString());
+                formData.append('setFormat', '0');
+                formData.append('description', document.getElementById("categorydescription").value);
+                for (var i = 0; i < arr.length; i++) {
+                    if (arr[i] != " ") {
+                        formData.append('imageProp', arr[i]);
+                    }
+                }
+            }
+            axios.post(url, formData, {
+                headers: {
+                    'Authorization': result
+                }
+            }).then(function(response) {
+                console.log(response.data.message)
+                showSuccessMessage('agendar.html')
+
+            }).catch(function(res) {
+                const { response } = res
+                console.log(response.data.message)
+                if (response.data.message == 'category already exists.') {
+                    showCancelMessage('มีรายนี้อยู่ในระบบแล้ว', '')
+                }
+
+            });
+        });
+    });
 
     ////////////////////  บันทึกประกาศ
-    $('#submitnotice').on('click', function (e) {
-
+    $('#submitnotice').on('click', function(e) {
         var Strcategory;
         if (Cookies.get('announce') != undefined) {
             Strcategory = "announce"
@@ -266,16 +356,12 @@ $(async function () {
         }
 
 
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             const url = urlipaddress + 'announce';
             let formData = new FormData();
             var ddd = document.getElementById('showDate').value
             var s_time = document.getElementById('txttimenotice').value;
-
-            // console.log(new Date().toISOString())
-            // console.log(s_time)
-            // if(document.getElementById('showDate').value)
             document.getElementById("savelbl_notice").innerText = ''
             var timedaysshowDate;
             var strdaysshowDate;
@@ -283,123 +369,148 @@ $(async function () {
                 document.getElementById("savelbl_notice").innerText = 'กรุณาระบุวันที่'
                 document.getElementById("savelbl_notice").style.color = 'red'
                 return
-
             } else {
-                // alert('1else')
                 timedaysshowDate = document.getElementById('showDate').value.split('/');
-                // alert('2else')
                 var aaa = new Date(`${timedaysshowDate[2] + '-' + timedaysshowDate[1] + '-' + timedaysshowDate[0]}T${s_time}:00`).toISOString()
-                // console.log(aaa)
-                // strdaysshowDate = new Date(timedaysshowDate[2] + '-' + timedaysshowDate[1] + '-' + timedaysshowDate[0] + ' ' + s_time + ':' + '00').toISOString();
-                // console.log(strdaysshowDate)
-
-
-                // strdaysshowDate = timedaysshowDate[2] + '-' + timedaysshowDate[1] + '-' + timedaysshowDate[0] + ' ' + s_time + ':' + '00'.toISOString();
-
                 strdaysshowDate = aaa;
-
-                //strdaysshowDate = '2021-03-09T09:47:00.000Z'
-                // alert(strdaysshowDate)
-
             }
 
-            if (arr.length == 0) {
-                // alert('arr.length' + arr.length)
-                formData.append('userId', userId);
-                formData.append('announceImage', '');
-                formData.append('topic', document.getElementById("posttopic").value);
-                formData.append('detail', document.getElementById("postdetail").value);
-                formData.append('weblink', document.getElementById("postweblink").value);
-                var _sp = document.getElementById("input-tags").value.split(',')
-                for (i = 0; i < _sp.length; i++) {
-                    formData.append('tag[]', _sp[i]);
-                }
-                formData.append('category', Strcategory);
-                formData.append('showDate', strdaysshowDate);
-                var isRemoved = false;
-                if (document.getElementById("selectdelete").value == 'true') {
-                    isRemoved = true;
-                }
 
-                console.log(isRemoved)
-                formData.append('isRemoved', isRemoved);
 
-            } else {
-                //  alert('arr.length' + arr.length)
-                formData.append('userId', userId);
-                for (var i = 0; i < arr.length; i++) {
-                    if (arr[i] != " ") {
-                        formData.append('announceImage', arr[i]);
+            if (datamember.rule == 'member') { ///////////////  member
+                if (arr.length == 0) {
+                    console.log(datamember)
+                    formData.append('userId', userId);
+                    formData.append('uId', datamember.userId);
+                    formData.append('announceImage', '');
+                    formData.append('topic', document.getElementById("posttopic").value);
+                    formData.append('detail', document.getElementById("postdetail").value);
+                    formData.append('weblink', document.getElementById("postweblink").value);
+                    var _sp = document.getElementById("input-tags").value.split(',')
+                    for (i = 0; i < _sp.length; i++) {
+                        formData.append('tag[]', _sp[i]);
                     }
-                }
-                formData.append('topic', document.getElementById("posttopic").value);
-                formData.append('detail', document.getElementById("postdetail").value);
-                formData.append('weblink', document.getElementById("postweblink").value);
+                    formData.append('gps[latitude]', document.getElementById("latitude").value);
+                    formData.append('gps[longitude]', document.getElementById("longitude").value);
+                    formData.append('category', Strcategory);
+                    formData.append('showDate', strdaysshowDate);
+                    var isRemoved = false;
+                    if (document.getElementById("selectdelete").value == 'true') {
+                        isRemoved = true;
+                    }
+                    formData.append('isRemoved', isRemoved);
+                    formData.append('approve', 'รออนุมัติ');
+                } else {
 
-                var _sp = document.getElementById("input-tags").value.split(',')
-                for (i = 0; i < _sp.length; i++) {
-                    formData.append('tag[]', _sp[i]);
-                }
-                formData.append('category', Strcategory);
-                formData.append('showDate', strdaysshowDate);
-                var isRemoved = false;
-                if (document.getElementById("selectdelete").value == 'true') {
-                    isRemoved = true;
+                    console.log(datamember.userId)
+                    formData.append('userId', userId);
+                    formData.append('uId', datamember.userId);
+                    for (var i = 0; i < arr.length; i++) {
+                        if (arr[i] != " ") {
+                            formData.append('announceImage', arr[i]);
+                        }
+                    }
+                    formData.append('topic', document.getElementById("posttopic").value);
+                    formData.append('detail', document.getElementById("postdetail").value);
+                    formData.append('weblink', document.getElementById("postweblink").value);
+                    var _sp = document.getElementById("input-tags").value.split(',')
+                    for (i = 0; i < _sp.length; i++) {
+                        formData.append('tag[]', _sp[i]);
+                    }
+                    formData.append('gps[latitude]', document.getElementById("latitude").value);
+                    formData.append('gps[longitude]', document.getElementById("longitude").value);
+                    formData.append('category', Strcategory);
+                    formData.append('showDate', strdaysshowDate);
+                    var isRemoved = false;
+                    if (document.getElementById("selectdelete").value == 'true') {
+                        isRemoved = true;
+                    }
+                    formData.append('isRemoved', isRemoved);
+                    formData.append('approve', 'รออนุมัติ');
                 }
 
-                formData.append('isRemoved', isRemoved);
+            } else { /////////////////////////admin
 
+                if (arr.length == 0) {
+                    formData.append('userId', userId);
+                    formData.append('announceImage', '');
+                    formData.append('topic', document.getElementById("posttopic").value);
+                    formData.append('detail', document.getElementById("postdetail").value);
+                    formData.append('weblink', document.getElementById("postweblink").value);
+                    var _sp = document.getElementById("input-tags").value.split(',')
+                    for (i = 0; i < _sp.length; i++) {
+                        formData.append('tag[]', _sp[i]);
+                    }
+                    formData.append('gps[latitude]', document.getElementById("latitude").value);
+                    formData.append('gps[longitude]', document.getElementById("longitude").value);
+                    formData.append('category', Strcategory);
+                    formData.append('showDate', strdaysshowDate);
+                    var isRemoved = false;
+                    if (document.getElementById("selectdelete").value == 'true') {
+                        isRemoved = true;
+                    }
+                    formData.append('isRemoved', isRemoved);
+                } else {
+                    formData.append('userId', userId);
+                    for (var i = 0; i < arr.length; i++) {
+                        if (arr[i] != " ") {
+                            formData.append('announceImage', arr[i]);
+                        }
+                    }
+                    formData.append('topic', document.getElementById("posttopic").value);
+                    formData.append('detail', document.getElementById("postdetail").value);
+                    formData.append('weblink', document.getElementById("postweblink").value);
+                    var _sp = document.getElementById("input-tags").value.split(',')
+                    for (i = 0; i < _sp.length; i++) {
+                        formData.append('tag[]', _sp[i]);
+                    }
+                    formData.append('gps[latitude]', document.getElementById("latitude").value);
+                    formData.append('gps[longitude]', document.getElementById("longitude").value);
+                    formData.append('category', Strcategory);
+                    formData.append('showDate', strdaysshowDate);
+                    var isRemoved = false;
+                    if (document.getElementById("selectdelete").value == 'true') {
+                        isRemoved = true;
+                    }
+                    formData.append('isRemoved', isRemoved);
+                }
             }
-            // alert('2')
-            axios.post(url, formData,
-                {
-                    headers: {
-                        'Authorization': result
-                    }
+
+
+            axios.post(url, formData, {
+                headers: {
+                    'Authorization': result
                 }
-            ).then(function (response) {
-                // alert(response.data.message)
+            }).then(function(response) {
                 console.log(response.data.message)
-
                 if (Strcategory == 'announce') {
-                    //  location.href = "allnotice.html";
                     showSuccessMessageallnotice('allnotice.html');
                 }
                 if (Strcategory == 'service') {
-                    //  location.href = "allservice.html";
                     showSuccessMessageallnotice('allservice.html');
                 }
                 if (Strcategory == 'business') {
-                    //location.href = "allbusiness.html";
                     showSuccessMessageallnotice('allbusiness.html');
                 }
                 if (Strcategory == 'asset') {
-                    // location.href = "allasset.html";
                     showSuccessMessageallnotice('allasset.html');
                 }
                 if (Strcategory == 'travel') {
                     showSuccessMessageallnotice('alltravel.html');
-                    // location.href = "alltravel.html";
                 }
-            }).catch(function (res) {
+            }).catch(function(res) {
                 const { response } = res
-                //  alert(response.data.message)
                 showCancelMessageallnotice(response.data.message, '')
                 console.log(response.data.message)
-                // if (response.data.message == 'Please specify a announceImage.') {
-                //     document.getElementById("savelbl_notice").innerText = 'กรุณาระบุเลือกไฟล์รูปภาพ'
-                //     document.getElementById("savelbl_notice").style.color = 'red'
-                //     return
-                // }
             });
         });
     });
 
 
     ///////////////////////////////////// แก้ไขโปรไฟล์ member
-    $('#updateProfile').on('click', async function (e) {
+    $('#updateProfile').on('click', async function(e) {
         const result = await acctoken();
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             var formData = new FormData();
 
@@ -419,36 +530,29 @@ $(async function () {
                     'Authorization': result,
                     'Content-Type': 'multipart/form-data'
                 }
-            }
-            ).then(function (response) {
+            }).then(function(response) {
                 console.log(response.data.message)
                 if (response.data.message = 'update completed') {
                     location.href = "servicedashboard.html";
                 }
-            }).catch(function (res) {
+            }).catch(function(res) {
                 const { response } = res
                 console.log(response.data.message)
             });
         });
     });
 
-
-
-    
-
-
-
     ////////////////////  เพิ่มข้อมูลร้องเรียน
-    $('#submitappeal').on('click', function (e) {
+    $('#submitappeal').on('click', function(e) {
         Postdata('appeal')
     });
 
     /////// Chat
-    $('#btn_sendmsg').on('click', function (e) {
+    $('#btn_sendmsg').on('click', function(e) {
         PostChat()
     });
 
-    $("#txt_msg").keyup(function (event) {
+    $("#txt_msg").keyup(function(event) {
 
         if (event.keyCode === 13) {
             if (document.getElementById("txt_msg").value != '') {
@@ -460,29 +564,29 @@ $(async function () {
 
 
     ////////////////////  เพิ่มข้อมูลแจ้งเหตุ
-    $('#submitinform').on('click', function (e) {
+    $('#submitinform').on('click', function(e) {
         Postdata('inform')
     });
 
     ////////////////////  เพิ่มข้อมูลแจ้งซ้อมบำรุง
-    $('#submitmaintenance').on('click', function (e) {
+    $('#submitmaintenance').on('click', function(e) {
         Postdata('Maintenance')
     });
 
     //////////////// Chat
-    function PostChat() {
+    async function PostChat() {
         if (document.getElementById("txt_msg").value == '' && arr.length == 0) {
             return;
         }
 
-        var datamember = Cookies.get('datamember');////// ลูกบ้าน
+        var datamember = Cookies.get('datamember'); ////// ลูกบ้าน
         if (datamember != undefined) {
             datamember = JSON.parse(datamember)
         } else {
             datamember = Cookies.get('datamemberID');
             datamember = JSON.parse(datamember)
         }
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             const url = urlipaddress + 'chat';
             let formData = new FormData();
@@ -500,6 +604,7 @@ $(async function () {
                 formData.append('userId', userId);
                 formData.append('uId', datamember.userId);
                 formData.append('ticketId', document.getElementById("ticketId").value);
+
                 for (var i = 0; i < arr.length; i++) {
                     if (arr[i] != " ") {
                         formData.append('chatImage', arr[i]);
@@ -508,13 +613,11 @@ $(async function () {
                 formData.append('description', document.getElementById("txt_msg").value);
                 formData.append('sender', datamember.username);
             }
-            axios.post(url, formData,
-                {
-                    headers: {
-                        'Authorization': result
-                    }
+            axios.post(url, formData, {
+                headers: {
+                    'Authorization': result
                 }
-            ).then(function (response) {
+            }).then(function(response) {
                 console.log(response.data.message)
                 document.getElementById("txt_msg").value = ''
 
@@ -528,7 +631,7 @@ $(async function () {
 
 
 
-            }).catch(function (res) {
+            }).catch(function(res) {
                 const { response } = res
                 console.log(response.data.message)
 
@@ -536,16 +639,77 @@ $(async function () {
         });
     }
 
-    //////////////// POST
-    function Postdata(type) {
-        var datamember = Cookies.get('datamember');////// ลูกบ้าน
+
+    //////////////// ChatImageTiltle
+    async function PostChatImageTitle(fileimage) {
+        if (document.getElementById("txt_msg").value == '' && arr.length == 0) {
+            return;
+        }
+
+        var datamember = Cookies.get('datamember'); ////// ลูกบ้าน
         if (datamember != undefined) {
             datamember = JSON.parse(datamember)
         } else {
             datamember = Cookies.get('datamemberID');
             datamember = JSON.parse(datamember)
         }
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
+            var urlipaddress = data.substring(1, data.length - 1);
+            const url = urlipaddress + 'chat';
+            let formData = new FormData();
+            if (arr.length == 0) {
+                formData.append('userId', userId);
+                formData.append('uId', datamember.userId);
+                formData.append('ticketId', document.getElementById("ticketId").value);
+                formData.append('chatImage', '');
+                formData.append('description', document.getElementById("txt_msg").value);
+                formData.append('sender', datamember.username);
+            } else {
+                if (document.getElementById("txt_msg").value == '') {
+                    document.getElementById("txt_msg").value = 'txt_msg_description'
+                }
+                formData.append('userId', userId);
+                formData.append('uId', datamember.userId);
+                formData.append('ticketId', document.getElementById("ticketId").value);
+                formData.append('chatImage', fileimage);
+                formData.append('description', document.getElementById("txt_msg").value);
+                formData.append('sender', datamember.username);
+            }
+            axios.post(url, formData, {
+                headers: {
+                    'Authorization': result
+                }
+            }).then(function(response) {
+                console.log(response.data.message)
+                document.getElementById("txt_msg").value = ''
+
+
+                $("#addImagenew").empty();
+                $("#id_incoming_msg").empty();
+
+                ///// ส่ง chat
+                const socket = io(urlipaddress);
+                socket.emit('sentMessage', document.getElementById("ticketId").value);
+
+
+
+            }).catch(function(res) {
+                const { response } = res
+                console.log(response.data.message)
+
+            });
+        });
+    }
+    //////////////// POST
+    async function Postdata(type) {
+        var datamember = Cookies.get('datamember'); ////// ลูกบ้าน
+        if (datamember != undefined) {
+            datamember = JSON.parse(datamember)
+        } else {
+            datamember = Cookies.get('datamemberID');
+            datamember = JSON.parse(datamember)
+        }
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             const url = urlipaddress + 'ticket';
 
@@ -558,44 +722,87 @@ $(async function () {
                 status: 'Open',
                 type: type
             }
-            axios.post(urlipaddress + 'ticket', dataticket,
-                {
-                    headers: {
-                        'Authorization': result
-                    }
+            axios.post(urlipaddress + 'ticket', dataticket, {
+                headers: {
+                    'Authorization': result
                 }
-            ).then(function (response) {
+            }).then(async function(response) {
                 console.log(response.data.message)
                 if (response.data.message == 'add ticket completed') {
                     if (type == 'appeal') {
+                        var dataticket = await getserviecAll(type)
+                        document.getElementById("txt_msg").value = 'txt_msg_description'
+                        document.getElementById("ticketId").value = dataticket.ticketId
+                        console.log(arr)
+                        for (var i = 0; i < arr.length; i++) {
+                            if (arr[i] != " ") {
+                                await PostChatImageTitle(arr[i]);
+                            }
+                        }
                         showSuccessMessage('appeal.html');
-                        // location.href = "appeal.html";
                     }
                     if (type == 'inform') {
+                        var dataticket = await getserviecAll(type)
+                        document.getElementById("txt_msg").value = 'txt_msg_description'
+                        document.getElementById("ticketId").value = dataticket.ticketId
+                        console.log(arr)
+                        for (var i = 0; i < arr.length; i++) {
+                            if (arr[i] != " ") {
+                                await PostChatImageTitle(arr[i]);
+                            }
+                        }
                         showSuccessMessage('inform.html');
-                        //location.href = "inform.html";
                     }
                     if (type == 'Maintenance') {
+                        var dataticket = await getserviecAll(type)
+                        document.getElementById("txt_msg").value = 'txt_msg_description'
+                        document.getElementById("ticketId").value = dataticket.ticketId
+                        console.log(arr)
+                        for (var i = 0; i < arr.length; i++) {
+                            if (arr[i] != " ") {
+                                await PostChatImageTitle(arr[i]);
+                            }
+                        }
                         showSuccessMessage('maintenance.html');
-                        //  location.href = "maintenance.html";
                     }
 
                 }
 
-            }).catch(function (res) {
+            }).catch(function(res) {
                 const { response } = res
                 console.log(response.data.message)
             });
         });
     }
 
+    const getserviecAll = async(_type) => {
+        return new Promise(resolve => {
+            $.getScript("ip.js", function(data, textStatus, jqxhr) {
+                var urlipaddress = data.substring(1, data.length - 1);
+
+                var param = userId + '?uId=' + datamember.userId + '&type=' + _type + '&status=Open%20OR%20In%20Progress&' + '_page=1&_limit=100&_sort=1'
+                axios.get(urlipaddress + 'ticket/' + param, {
+                    headers: {
+                        'Authorization': result
+                    }
+                }).then(function(response) {
+                    resolve(response.data.message.result[response.data.message.result.length - 1])
+
+
+                }).catch(function(res) {
+                    const { response } = res
+                });
+            });
+        });
+    }
 
 
     ////////////////////  ทำรายการชำระเงิน
-    $('#submitpostinvoice').on('click', function (e) {
+    $('#submitpostinvoice').on('click', function(e) {
         var Strref2 = document.getElementById("ref2").value.split('@')
         console.log(Strref2[0])
-        console.log(Strref2[1])
+        console.log(Strref2)
+
 
         var datamember = Cookies.get('datamember');
         if (datamember != undefined) {
@@ -604,7 +811,7 @@ $(async function () {
             datamember = Cookies.get('datamemberID');
             datamember = JSON.parse(datamember)
         }
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             const url = urlipaddress + 'invoice';
             let formData = new FormData();
@@ -627,6 +834,7 @@ $(async function () {
                 str_duetdate = convertTZ(d_date[2] + '-' + d_date[1] + '-' + d_date[0], 'Asia/Bangkok').toISOString()
 
             }
+
             function convertTZ(date, tzString) {
                 return new Date((typeof date === "string" ? new Date(date) : date).toLocaleString("en-US", { timeZone: tzString }));
             }
@@ -683,13 +891,11 @@ $(async function () {
             }
 
 
-            axios.post(url, formData,
-                {
-                    headers: {
-                        'Authorization': result
-                    }
+            axios.post(url, formData, {
+                headers: {
+                    'Authorization': result
                 }
-            ).then(function (response) {
+            }).then(function(response) {
                 console.log(response.data.message)
                 if (response.data.message == 'add invoice completed') {
                     // document.getElementById("p_saveinvoice").innerText = 'บันทึกข้อมูลสำเร็จ'
@@ -698,38 +904,38 @@ $(async function () {
 
                     showSuccessMessage('invoice.html');
                 }
-            }).catch(function (res) {
+            }).catch(function(res) {
                 const { response } = res
                 console.log(response.data.message)
                 showCancelMessage(response.data.message, '')
-                // if (response.data.message == 'Please specify a announceImage.') {
-                //     document.getElementById("p_saveinvoice").innerText = 'กรุณาระบุเลือกไฟล์รูปภาพ'
-                //     document.getElementById("p_saveinvoice").style.color = 'red'
-                //     return
-                // }
+                    // if (response.data.message == 'Please specify a announceImage.') {
+                    //     document.getElementById("p_saveinvoice").innerText = 'กรุณาระบุเลือกไฟล์รูปภาพ'
+                    //     document.getElementById("p_saveinvoice").style.color = 'red'
+                    //     return
+                    // }
             });
         });
     });
 
 
-    
+
 
     async function showCancelMessageallnotice(title, text) {
         swal({
             title: title,
             text: text,
             type: "error",
-        }, function (isConfirm) {
+        }, function(isConfirm) {
             swal("Cancelled", "Your imaginary file is safe :)", "error");
         });
     }
 
-   async function showSuccessMessageallnotice(page) {
+    async function showSuccessMessageallnotice(page) {
         swal({
             title: "สำเร็จ",
             text: "บันทึกข้อมูลสำเร็จ",
             type: "success",
-        }, function (isConfirm) {
+        }, function(isConfirm) {
             if (isConfirm) {
                 location.href = page;
             }
@@ -737,22 +943,22 @@ $(async function () {
     }
 
 
-   async function showCancelMessage(title, text) {
+    async function showCancelMessage(title, text) {
         swal({
             title: title,
             text: text,
             type: "error",
-        }, function (isConfirm) {
+        }, function(isConfirm) {
             swal("Cancelled", "Your imaginary file is safe :)", "error");
         });
     }
 
-   async function showSuccessMessage(page) {
+    async function showSuccessMessage(page) {
         swal({
             title: "สำเร็จ",
             text: "บันทึกข้อมูลสำเร็จ",
             type: "success",
-        }, function (isConfirm) {
+        }, function(isConfirm) {
             if (isConfirm) {
                 location.href = page;
             }
@@ -760,12 +966,12 @@ $(async function () {
     }
 
     function getDataUrl(file, callback2) {
-        var callback = function (srcOrientation) {
+        var callback = function(srcOrientation) {
             var reader2 = new FileReader();
-            reader2.onload = function (e) {
+            reader2.onload = function(e) {
                 var srcBase64 = e.target.result;
                 var img = new Image();
-                img.onload = function () {
+                img.onload = function() {
                     var width = img.width,
                         height = img.height,
                         canvas = document.createElement('canvas'),
@@ -781,14 +987,29 @@ $(async function () {
                     }
                     // transform context before drawing image
                     switch (srcOrientation) {
-                        case 2: ctx.transform(-1, 0, 0, 1, width, 0); break;
-                        case 3: ctx.transform(-1, 0, 0, -1, width, height); break;
-                        case 4: ctx.transform(1, 0, 0, -1, 0, height); break;
-                        case 5: ctx.transform(0, 1, 1, 0, 0, 0); break;
-                        case 6: ctx.transform(0, 1, -1, 0, height, 0); break;
-                        case 7: ctx.transform(0, -1, -1, 0, height, width); break;
-                        case 8: ctx.transform(0, -1, 1, 0, 0, width); break;
-                        default: break;
+                        case 2:
+                            ctx.transform(-1, 0, 0, 1, width, 0);
+                            break;
+                        case 3:
+                            ctx.transform(-1, 0, 0, -1, width, height);
+                            break;
+                        case 4:
+                            ctx.transform(1, 0, 0, -1, 0, height);
+                            break;
+                        case 5:
+                            ctx.transform(0, 1, 1, 0, 0, 0);
+                            break;
+                        case 6:
+                            ctx.transform(0, 1, -1, 0, height, 0);
+                            break;
+                        case 7:
+                            ctx.transform(0, -1, -1, 0, height, width);
+                            break;
+                        case 8:
+                            ctx.transform(0, -1, 1, 0, 0, width);
+                            break;
+                        default:
+                            break;
                     }
                     // draw image
                     ctx.drawImage(img, 0, 0);
@@ -803,10 +1024,11 @@ $(async function () {
             reader2.readAsDataURL(file);
         }
         var reader = new FileReader();
-        reader.onload = function (e) {
+        reader.onload = function(e) {
             var view = new DataView(e.target.result);
             if (view.getUint16(0, false) != 0xFFD8) return callback(-2);
-            var length = view.byteLength, offset = 2;
+            var length = view.byteLength,
+                offset = 2;
             while (offset < length) {
                 var marker = view.getUint16(offset, false);
                 offset += 2;
@@ -819,8 +1041,7 @@ $(async function () {
                     for (var i = 0; i < tags; i++)
                         if (view.getUint16(offset + (i * 12), little) == 0x0112)
                             return callback(view.getUint16(offset + (i * 12) + 8, little));
-                }
-                else if ((marker & 0xFF00) != 0xFF00) break;
+                } else if ((marker & 0xFF00) != 0xFF00) break;
                 else offset += view.getUint16(offset, false);
             }
             return callback(-1);

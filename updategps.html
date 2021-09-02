@@ -8,8 +8,7 @@
     <link rel="icon" href="../../uploads/logo.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
-        type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Core Css -->
@@ -22,8 +21,7 @@
     <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
 
     <!-- Bootstrap Material Datetime Picker Css -->
-    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
-        rel="stylesheet" />
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
 
     <!-- Bootstrap DatePicker Css -->
     <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
@@ -43,9 +41,7 @@
     <link href="../../css/themes/all-themes.css" rel="stylesheet" />
 
     <!-- cookie -->
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -57,9 +53,7 @@
     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AAIzaSyCvSTrk8bqBoWYTWSmO9zi7b-ZtbyG-sq0&callback=initMap" async defer></script> -->
     <!-- <script src="https://maps.googleapis.com/maps/api/js?googleapikey=AIzaSyDoVbDCp51h9MtFIEMJ90-3ljAbdwyJpCk&callback=initMap" async defer></script> -->
 
-    <script type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJ6SnvPM-O0dyoUChDYJxv34TXDX2cpEw&libraries=drawing,places"
-        async defer></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJ6SnvPM-O0dyoUChDYJxv34TXDX2cpEw&libraries=drawing,places" async defer></script>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
@@ -70,8 +64,7 @@
     <link href="../../css/style.css" rel="stylesheet">
 
     <!-- Bootstrap Material Datetime Picker Css -->
-    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
-        rel="stylesheet" />
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
 
     <!-- Bootstrap DatePicker Css -->
     <link href="../../plugins/light-gallery/css/lightgallery.css" rel="stylesheet">
@@ -95,19 +88,19 @@
     #map {
         height: 100%;
     }
-
+    
     html {
         height: 100%;
         margin: 0;
         padding: 0;
         text-align: center;
     }
-
+    
     #map {
         height: 600px;
         width: 100%;
     }
-
+    
     #pac-input {
         background-color: #fff;
         font-family: Roboto;
@@ -117,9 +110,8 @@
         padding: 0 11px 0 13px;
         text-overflow: ellipsis;
         width: 300px;
-
     }
-
+    
     .controls {
         margin-top: 16px;
         border: 1px solid transparent;
@@ -141,27 +133,31 @@
     async function initMap() {
         const result = await acctoken();
         const chkpoint = await getpoint(result);
-     //   console.log(chkpoint)
+        //   console.log(chkpoint)
         _point(chkpoint);
-        var map ;
+        var map;
 
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(async function (position) {
-                var myLatlng = { lat: position.coords.latitude, lng: position.coords.longitude };
-            //    console.log(myLatlng)
-                 map = new google.maps.Map(
+            navigator.geolocation.getCurrentPosition(async function(position) {
+                var myLatlng = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                //    console.log(myLatlng)
+                map = new google.maps.Map(
                     document.getElementById('map'), {
-                    zoom: 18, center: myLatlng,
-                    gestureHandling: 'greedy'
-                });
+                        zoom: 18,
+                        center: myLatlng,
+                        gestureHandling: 'greedy'
+                    });
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(myLatlng.lat, myLatlng.lng),
                     map: map,
                 });
                 markers.push(marker);
                 search(map);
-                map.addListener('click', function (mapsMouseEvent) {
-                 //   console.log(markers.length)
+                map.addListener('click', function(mapsMouseEvent) {
+                    //   console.log(markers.length)
                     if (markers.length > 0) {
                         markers.pop().setMap(null);
                     }
@@ -172,9 +168,9 @@
                     });
                     infoWindow.setContent(mapsMouseEvent.latLng.toString());
                     var checkmarker = infoWindow.content.split(",")
-                    // console.log(checkmarker)
-               //     console.log(checkmarker[0].substring(1, checkmarker[0].length))
-               //     console.log(checkmarker[1].replace(" ", "").substring(0, checkmarker[0].length - 1))
+                        // console.log(checkmarker)
+                        //     console.log(checkmarker[0].substring(1, checkmarker[0].length))
+                        //     console.log(checkmarker[1].replace(" ", "").substring(0, checkmarker[0].length - 1))
                     var lat = checkmarker[0].substring(1, checkmarker[0].length);
                     var lng = checkmarker[1].replace(" ", "").substring(0, checkmarker[0].length - 1);
                     var marker;
@@ -182,31 +178,31 @@
                         position: new google.maps.LatLng(lat, lng),
                         map: map
                     });
-                //    console.log(infoWindow)
+                    //    console.log(infoWindow)
                     markers.push(marker);
                     document.getElementById("latitude").value = lat;
                     document.getElementById("longitude").value = lng.replace(")", "");
                 });
 
-            }, function () {
-               handleLocationError(true, infoWindow, map.getCenter());
+            }, function() {
+                handleLocationError(true, infoWindow, map.getCenter());
             });
         } else {
             // Browser doesn't support Geolocation
             handleLocationError(false, infoWindow, map.getCenter());
         }
     }
-   
+
     var checkmap_serarch;
 
     function search(map) {
-      //  console.log(document.getElementById('pac-input').ownerDocument.nodeType)
+        //  console.log(document.getElementById('pac-input').ownerDocument.nodeType)
         var searchBox = new google.maps.places.SearchBox(document.getElementById('pac-input'));
 
         //  map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('pac-input'));
 
         //   console.log(map)
-        google.maps.event.addListener(searchBox, 'places_changed', function () {
+        google.maps.event.addListener(searchBox, 'places_changed', function() {
             searchBox.set('map', null);
 
             var places = searchBox.getPlaces();
@@ -216,15 +212,15 @@
             var bounds = new google.maps.LatLngBounds();
             var i, place;
             for (i = 0; place = places[i]; i++) {
-                (function (place) {
+                (function(place) {
                     var marker = new google.maps.Marker({
                         position: place.geometry.location
                     });
 
-            //        console.log(document.getElementById('pac-input').value)
+                    //        console.log(document.getElementById('pac-input').value)
 
                     marker.bindTo('map', searchBox, 'map');
-                    google.maps.event.addListener(marker, 'map_changed', function () {
+                    google.maps.event.addListener(marker, 'map_changed', function() {
                         if (!this.getMap()) {
                             this.unbindAll();
                         }
@@ -233,8 +229,8 @@
                     var lat = marker.getPosition().lat();
                     var lng = marker.getPosition().lng();
 
-                 //   console.log(lat)
-                 //   console.log(lng)
+                    //   console.log(lat)
+                    //   console.log(lng)
 
                     markers.push(marker);
                     bounds.extend(place.geometry.location);
@@ -264,7 +260,7 @@
         $select.find('option').remove();
         $select.append('<option value=' + 0 + '>' + '-- เลือกตำแหน่ง --' + '</option>');
         //  console.log(_data)
-        $.each(point, function (key, value) {
+        $.each(point, function(key, value) {
             var datapoint = {
                 checkPointId: value.checkPointId,
                 checkPointName: value.checkPointName.replace(" ", ";"),
@@ -276,8 +272,8 @@
             }
 
             _data = JSON.stringify(datapoint)
-            //console.log(_data)
-            if (c_n == 0) {  ///////// จุด แรก มา mark center
+                //console.log(_data)
+            if (c_n == 0) { ///////// จุด แรก มา mark center
                 markerpoint(_data);
             }
             $select.append('<option value=' + _data.toString() + '>' + value.checkPointName.replace("", " ") + '</option>');
@@ -286,18 +282,25 @@
 
     }
 
-    function markerpoint(_data) {   ///////// จุด แรก มา mark
+    function markerpoint(_data) { ///////// จุด แรก มา mark
 
-      //  console.log(_data)
+        //  console.log(_data)
         //////// จุดแรกมา mark
         const obj = JSON.parse(_data)
-        //  console.log(obj)
+            //  console.log(obj)
         var marker;
         // console.log(obj.gps.latitude)
         // console.log(obj.gps.longitude)
-        var myLatlng = { lat: Number(obj.gps.latitude), lng: Number(obj.gps.longitude) };
+        var myLatlng = {
+            lat: Number(obj.gps.latitude),
+            lng: Number(obj.gps.longitude)
+        };
         var map = new google.maps.Map(
-            document.getElementById('map'), { zoom: 18, center: myLatlng, gestureHandling: 'greedy' });
+            document.getElementById('map'), {
+                zoom: 18,
+                center: myLatlng,
+                gestureHandling: 'greedy'
+            });
         marker = new google.maps.Marker({
             position: new google.maps.LatLng(obj.gps.latitude, obj.gps.longitude),
             map: map,
@@ -305,24 +308,26 @@
 
         markers.push(marker);
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
+            navigator.geolocation.getCurrentPosition(function(position) {
                 //    console.log(position)
                 var infoWindow = new google.maps.InfoWindow();
                 // // Configure the click listener.
-                map.addListener('click', function (mapsMouseEvent) {
+                map.addListener('click', function(mapsMouseEvent) {
                     document.getElementById("submit_update").style.display = "none";
                     // Close the current InfoWindow.
-               //     console.log(markers)
+                    //     console.log(markers)
                     markers.pop().setMap(null);
                     infoWindow.close();
                     // Create a new InfoWindow.
-                    infoWindow = new google.maps.InfoWindow({ position: mapsMouseEvent.latLng });
+                    infoWindow = new google.maps.InfoWindow({
+                        position: mapsMouseEvent.latLng
+                    });
                     infoWindow.setContent(mapsMouseEvent.latLng.toString());
 
                     var checkmarker = infoWindow.content.split(",")
-               //     console.log(checkmarker)
-               //     console.log(checkmarker[0].substring(1, checkmarker[0].length))
-               //     console.log(checkmarker[1].replace(" ", "").substring(0, checkmarker[0].length - 1))
+                        //     console.log(checkmarker)
+                        //     console.log(checkmarker[0].substring(1, checkmarker[0].length))
+                        //     console.log(checkmarker[1].replace(" ", "").substring(0, checkmarker[0].length - 1))
 
                     var lat = checkmarker[0].substring(1, checkmarker[0].length);
                     var lng = checkmarker[1].replace(" ", "").substring(0, checkmarker[0].length - 1);
@@ -344,21 +349,24 @@
     }
 
     function c_check() {
-   //     console.log(document.getElementById('pac-input').ownerDocument.nodeType)
+        //     console.log(document.getElementById('pac-input').ownerDocument.nodeType)
         document.getElementById("btn_add").style.display = "block";
         document.getElementById("point_name").disabled = true;
         document.getElementById("submit_update").style.display = "block";
         document.getElementById("submit_save").style.display = "none";
         document.getElementById("submit_delete").style.display = "block";
-   //     console.log(document.getElementById("point").value)
+        //     console.log(document.getElementById("point").value)
 
         var data = document.getElementById("point").value
 
         var obj = JSON.parse(data)
-     //   console.log(obj)
+            //   console.log(obj)
 
         var mapOptions = {
-            center: { lat: Number(obj.gps.latitude), lng: Number(obj.gps.longitude) },
+            center: {
+                lat: Number(obj.gps.latitude),
+                lng: Number(obj.gps.longitude)
+            },
             zoom: 18,
             gestureHandling: 'greedy'
 
@@ -381,26 +389,28 @@
         document.getElementById("description").value = obj.description.replace(";", " ");
         document.getElementById("latitude").value = obj.gps.latitude;
         document.getElementById("longitude").value = obj.gps.longitude;
-     //   console.log(obj.checkPointId)
+        //   console.log(obj.checkPointId)
 
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
+            navigator.geolocation.getCurrentPosition(function(position) {
                 //  console.log(position)
                 var infoWindow = new google.maps.InfoWindow();
                 search(maps)
-                maps.addListener('click', function (mapsMouseEvent) {
+                maps.addListener('click', function(mapsMouseEvent) {
                     // Close the current InfoWindow.
-                  //  console.log(markers)
+                    //  console.log(markers)
                     markers.pop().setMap(null);
                     infoWindow.close();
                     // Create a new InfoWindow.
-                    infoWindow = new google.maps.InfoWindow({ position: mapsMouseEvent.latLng });
+                    infoWindow = new google.maps.InfoWindow({
+                        position: mapsMouseEvent.latLng
+                    });
                     infoWindow.setContent(mapsMouseEvent.latLng.toString());
 
                     var checkmarker = infoWindow.content.split(",")
-                 //   console.log(checkmarker)
-                    // console.log(checkmarker[0].substring(1, checkmarker[0].length))
-                    //  console.log(checkmarker[1].replace(" ", "").substring(0, checkmarker[0].length - 1))
+                        //   console.log(checkmarker)
+                        // console.log(checkmarker[0].substring(1, checkmarker[0].length))
+                        //  console.log(checkmarker[1].replace(" ", "").substring(0, checkmarker[0].length - 1))
 
                     var lat = checkmarker[0].substring(1, checkmarker[0].length);
                     var lng = checkmarker[1].replace(" ", "").substring(0, checkmarker[0].length - 1);
@@ -432,20 +442,22 @@
 
     function acctoken() {
         var data;
-     //   console.log(obj.refresh_token)
+        //   console.log(obj.refresh_token)
         return new Promise(resolve => {
-            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+            $.getScript("ip.js", function(data, textStatus, jqxhr) {
                 var urlipaddress = data.substring(1, data.length - 1);
                 axios.post(urlipaddress + 'token', data, {
                     headers: {
                         'Authorization': obj.refresh_token
                     }
-                }).then(function (response) {
+                }).then(function(response) {
                     resolve(response.data.message.access_token);
 
-                }).catch(function (res) {
-                    const { response } = res
-             //       console.log(response.data.message)
+                }).catch(function(res) {
+                    const {
+                        response
+                    } = res
+                    //       console.log(response.data.message)
                     if (response.data.message == "Unauthorized") {
                         location.href = "index.html";
                     }
@@ -457,9 +469,9 @@
 
     function getpoint(refresh_token) {
         var data;
-     //   console.log(refresh_token)
+        //   console.log(refresh_token)
         return new Promise(resolve => {
-            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+            $.getScript("ip.js", function(data, textStatus, jqxhr) {
                 var urlipaddress = data.substring(1, data.length - 1);
                 const dataUserID = {
                     userId: userId
@@ -468,12 +480,14 @@
                     headers: {
                         'Authorization': refresh_token
                     }
-                }).then(function (response) {
+                }).then(function(response) {
                     resolve(response.data.message.data);
 
-                }).catch(function (res) {
-                    const { response } = res
-               //     console.log(response.data)
+                }).catch(function(res) {
+                    const {
+                        response
+                    } = res
+                    //     console.log(response.data)
                 });
             });
         });
@@ -486,34 +500,36 @@
             document.getElementById("update").innerText = "กรุณา ระบุ ข้อมูลให้ครบ !!!";
             return;
         }
-     //   console.log('vfdfeewrf')
+        //   console.log('vfdfeewrf')
 
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             const datapoint = {
-                userId: userId,
-                checkPointName: document.getElementById("point_name").value,
-                description: document.getElementById("description").value,
-                "gps": {
-                    latitude: document.getElementById("latitude").value,
-                    longitude: document.getElementById("longitude").value
+                    userId: userId,
+                    checkPointName: document.getElementById("point_name").value,
+                    description: document.getElementById("description").value,
+                    "gps": {
+                        latitude: document.getElementById("latitude").value,
+                        longitude: document.getElementById("longitude").value
+                    }
                 }
-            }
-       //     console.log(datapoint)
+                //     console.log(datapoint)
             axios.post(urlipaddress + 'checkPoint', datapoint, {
                 headers: {
                     'Authorization': result
                 }
-            }).then(async function (response) {
-          //      console.log(response.data)
+            }).then(async function(response) {
+                //      console.log(response.data)
                 if (response.data.message == "success") {
                     document.getElementById("update").innerText = "บันทึกสำเร็จ";
                     document.getElementById("update").style.color = "green";
                 }
 
-            }).catch(function (res) {
-                const { response } = res
-           //     console.log(response.data.message)
+            }).catch(function(res) {
+                const {
+                    response
+                } = res
+                //     console.log(response.data.message)
 
                 document.getElementById("update").innerText = "บันทึกไม่สำเร็จ !!!";
                 document.getElementById("update").style.color = "red";
@@ -536,7 +552,7 @@
 
     async function SUBMITDELETE() {
         const result = await acctoken();
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             axios({
                 url: urlipaddress + 'delCheckPoint',
@@ -545,23 +561,27 @@
                     userId: userId,
                     checkPointId: document.getElementById("checkPointId").value
                 },
-                headers: { 'Authorization': result }
-            }).then(async function (response) {
-            //    console.log(response.data)
+                headers: {
+                    'Authorization': result
+                }
+            }).then(async function(response) {
+                //    console.log(response.data)
                 if (response.data.message == "delete completed") {
                     location.href = "updategps.html";
                 }
                 // 
-            }).catch(function (res) {
-                const { response } = res
-            //    console.log(response.data.message)
+            }).catch(function(res) {
+                const {
+                    response
+                } = res
+                //    console.log(response.data.message)
             });
 
         });
     }
 
     async function UPDATE_LOCATION() {
-     //   console.log("dddddddddddddddd")
+        //   console.log("dddddddddddddddd")
         // latitude longitude
         if (document.getElementById("latitude").value == "" || document.getElementById("longitude").value == "") {
             document.getElementById("update").style.color = "red";
@@ -570,34 +590,36 @@
             return;
         }
         const result = await acctoken();
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
-        //    console.log("wwwww")
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
+            //    console.log("wwwww")
             var urlipaddress = data.substring(1, data.length - 1);
             const datagps = {
-                userId: userId,
-                checkPointName: document.getElementById("point_name").value,
-                description: document.getElementById("description").value.toString(),
-                checkPointId: document.getElementById("checkPointId").value,
-                "gps": {
-                    latitude: document.getElementById("latitude").value,
-                    longitude: document.getElementById("longitude").value
+                    userId: userId,
+                    checkPointName: document.getElementById("point_name").value,
+                    description: document.getElementById("description").value.toString(),
+                    checkPointId: document.getElementById("checkPointId").value,
+                    "gps": {
+                        latitude: document.getElementById("latitude").value,
+                        longitude: document.getElementById("longitude").value
+                    }
                 }
-            }
-          //  console.log(datagps)
+                //  console.log(datagps)
             axios.post(urlipaddress + 'updateCheckPoint', datagps, {
                 headers: {
                     'Authorization': result
                 }
-            }).then(async function (response) {
-           //     console.log(response.data)
+            }).then(async function(response) {
+                //     console.log(response.data)
                 if (response.data.message == "update completed") {
                     document.getElementById("update").innerText = "อัพเดทสำเร็จ";
                     document.getElementById("update").style.color = "green";
                 }
 
-            }).catch(function (res) {
-                const { response } = res
-            //    console.log(response.data.message)
+            }).catch(function(res) {
+                const {
+                    response
+                } = res
+                //    console.log(response.data.message)
 
                 document.getElementById("update").innerText = "อัพเดทไม่สำเร็จ !!!";
                 document.getElementById("update").style.color = "red";
@@ -606,7 +628,6 @@
         });
 
     }
-
 </script>
 
 <body class="theme-red" onload="initMap()">
@@ -646,31 +667,29 @@
     <nav class="navbar">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
                 <a class="navbar-brand" id="logoname" href="report.html">Guard Tour</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a onclick="logout()" style="cursor: pointer;" class="js-search"
-                            data-close="true">[ออกจากระบบ]</a></li>
+                    <li><a onclick="logout()" style="cursor: pointer;" class="js-search" data-close="true">[ออกจากระบบ]</a></li>
                     <script>
                         function logout() {
-                            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                            $.getScript("ip.js", function(data, textStatus, jqxhr) {
                                 var urlipaddress = data.substring(1, data.length - 1);
 
                                 const databody = {
-                                    refresh_token: document.getElementById("refreshtoken").value,//refreshtoken
+                                    refresh_token: document.getElementById("refreshtoken").value, //refreshtoken
                                 }
 
                                 axios.post(urlipaddress + 'logout', databody, {
                                     headers: {
-                                        'Authorization': document.getElementById("accesstoken").value//refreshtoken
+                                        'Authorization': document.getElementById("accesstoken").value //refreshtoken
                                     }
-                                }).then(function (response) {
+                                }).then(function(response) {
 
-                                //    console.log(response.data)
+                                    //    console.log(response.data)
 
                                     if (response.data.message == "success") {
                                         document.getElementById("p_logout").innerText = "ออกจากระบบสำเร็จ";
@@ -679,9 +698,11 @@
                                         // alert("บันทึกข้อมูลไม่สำเร็จ");
                                     }
 
-                                }).catch(function (res) {
-                                    const { response } = res
-                                //    console.log(response.data.message)
+                                }).catch(function(res) {
+                                    const {
+                                        response
+                                    } = res
+                                    //    console.log(response.data.message)
                                     if (response.data.message == "Unauthorized") {
                                         alert("คุณยังไม่ได้ login admin");
                                     }
@@ -820,8 +841,7 @@
                                                 <small>32%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 32%">
+                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 32%">
                                                 </div>
                                             </div>
                                         </a>
@@ -833,8 +853,7 @@
                                                 <small>45%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
                                                 </div>
                                             </div>
                                         </a>
@@ -846,8 +865,7 @@
                                                 <small>54%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 54%">
+                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 54%">
                                                 </div>
                                             </div>
                                         </a>
@@ -859,9 +877,7 @@
                                                 <small>65%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-orange" role="progressbar"
-                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
-                                                    style="width: 65%">
+                                                <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 65%">
                                                 </div>
                                             </div>
                                         </a>
@@ -873,9 +889,7 @@
                                                 <small>92%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-purple" role="progressbar"
-                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
-                                                    style="width: 92%">
+                                                <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 92%">
                                                 </div>
                                             </div>
                                         </a>
@@ -1099,16 +1113,14 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
                     <div class="card">
-                        <div class="header header-new"" style="text-align: left;">
+                        <div class="header header-new" style="text-align: left;">
                             <h2>
                                 <font style="color: white;">เพิ่ม / แก้ไข / ลบ
                                 </font>
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li class="dropdown">
-                                    <a href="" onclick="ref()" style="color: white; font-size: 18px;"
-                                        data-toggle="modal" data-target="#add"> <i class="material-icons"
-                                            style="color: white;">refresh</i>
+                                    <a href="" onclick="ref()" style="color: white; font-size: 18px;" data-toggle="modal" data-target="#add"> <i class="material-icons" style="color: white;">refresh</i>
 
                                     </a>
                                     <script>
@@ -1125,64 +1137,47 @@
 
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <select class="form-control show-tick" name="point" id="point"
-                                            style="cursor: pointer;" onchange="c_check()">
+                                        <select class="form-control show-tick" name="point" id="point" style="cursor: pointer;" onchange="c_check()">
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="latitude" id="latitude" value=""
-                                            required autocomplete="off" placeholder="latitude" />
+                                        <input type="text" class="form-control" name="latitude" id="latitude" value="" required autocomplete="off" placeholder="latitude" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="longitude" id="longitude" value=""
-                                            required autocomplete="off" placeholder="longitude" />
+                                        <input type="text" class="form-control" name="longitude" id="longitude" value="" required autocomplete="off" placeholder="longitude" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="point_name" id="point_name"
-                                            value="" required autocomplete="off" placeholder="ชื่อตำแหน่ง" />
+                                        <input type="text" class="form-control" name="point_name" id="point_name" value="" required autocomplete="off" placeholder="ชื่อตำแหน่ง" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <textarea class="form-control" id="description" name="description" rows="3"
-                                            placeholder="รายละเอียด"></textarea>
+                                        <textarea class="form-control" id="description" name="description" rows="3" placeholder="รายละเอียด"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group" style="text-align: left;">
-                                    <input type="button" class="btn btn-primary waves-effect" value="บันทึก"
-                                        id="submit_save" onclick="SUBMIT_LOCATION()" name="submit_save"
-                                        style="cursor: pointer;">
-                                    &nbsp;&nbsp;
+                                    <input type="button" class="btn btn-primary waves-effect" value="บันทึก" id="submit_save" onclick="SUBMIT_LOCATION()" name="submit_save" style="cursor: pointer;"> &nbsp;&nbsp;
                                     <div>
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <input type="button" class="btn btn-primary waves-effect"
-                                                        style="display: none;" value="อัพเดท" id="submit_update"
-                                                        onclick="UPDATE_LOCATION()" name="submit_update"
-                                                        style="cursor: pointer;">
+                                                    <input type="button" class="btn btn-primary waves-effect" style="display: none;" value="อัพเดท" id="submit_update" onclick="UPDATE_LOCATION()" name="submit_update" style="cursor: pointer;">
                                                 </td>
                                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                 <td>&nbsp;</td>
                                                 <td>
-                                                    <input type="button" class="btn btn-primary waves-effect"
-                                                        style="display: none;" value="ลบ" id="submit_delete"
-                                                        onclick="DELETE_LOCATION()" name="submit_delete"
-                                                        style="cursor: pointer;">
+                                                    <input type="button" class="btn btn-primary waves-effect" style="display: none;" value="ลบ" id="submit_delete" onclick="DELETE_LOCATION()" name="submit_delete" style="cursor: pointer;">
                                                 </td>
                                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                 <td>&nbsp;</td>
                                                 <td>
-                                                    <input type="button" class="btn btn-primary waves-effect"
-                                                    style="display: none;" value="เพิ่ม" id="btn_add"
-                                                    onclick="ref()" name="btn_add"
-                                                    style="cursor: pointer;">
+                                                    <input type="button" class="btn btn-primary waves-effect" style="display: none;" value="เพิ่ม" id="btn_add" onclick="ref()" name="btn_add" style="cursor: pointer;">
                                                 </td>
                                             </tr>
                                         </table>
@@ -1192,8 +1187,7 @@
                                 </div>
 
                                 <ul class="nav nav-tabs tab-nav-right" role="tablist">
-                                    <li role="presentation" class="active"><a href="#location" style="font-size: 18px;"
-                                            data-toggle="tab">แผนที่</a>
+                                    <li role="presentation" class="active"><a href="#location" style="font-size: 18px;" data-toggle="tab">แผนที่</a>
                                     </li>
 
                                 </ul>
@@ -1205,8 +1199,7 @@
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
                                                         <div class="form-group form-float">
-                                                            <input id="pac-input" class="controls" type="text"
-                                                                placeholder="Search Google Maps" />
+                                                            <input id="pac-input" class="controls" type="text" placeholder="Search Google Maps" />
                                                             <div>&nbsp;</div>
                                                             <div id="map">
                                                             </div>
@@ -1251,48 +1244,45 @@
 
 
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="container">
-                <div class="modal fade" id="myModaldelete" role="dialog">
-                    <div class="modal-dialog" style="width: 300px; height: 200px;">
-                        <div class="modal-content">
-                            <div class="modal-header" style="text-align: left;">
-                                <h4 id="title" class="modal-title">ลบข้อมูล</h4>
+                <div class="container">
+                    <div class="modal fade" id="myModaldelete" role="dialog">
+                        <div class="modal-dialog" style="width: 300px; height: 200px;">
+                            <div class="modal-content">
+                                <div class="modal-header" style="text-align: left;">
+                                    <h4 id="title" class="modal-title">ลบข้อมูล</h4>
 
-                            </div>
-                            <div class="modal-body">
-                                <div class="col-20">
-                                    <i class="fa fa-exclamation-triangle" id="c_delete"
-                                        style="font-size:48px;color:red"></i>
-                                    <i class="fa fa-check-circle" id="completed"
-                                        style="font-size:48px;color:green; display: none;"></i>
                                 </div>
+                                <div class="modal-body">
+                                    <div class="col-20">
+                                        <i class="fa fa-exclamation-triangle" id="c_delete" style="font-size:48px;color:red"></i>
+                                        <i class="fa fa-check-circle" id="completed" style="font-size:48px;color:green; display: none;"></i>
+                                    </div>
 
-                                <div>
-                                    <label id="lbl_completed" for="fname"></label>
+                                    <div>
+                                        <label id="lbl_completed" for="fname"></label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <!-- <input type="button" value="ตกลง" id="deleteUser"
+                                <div class="modal-footer">
+                                    <!-- <input type="button" value="ตกลง" id="deleteUser"
                                 onclick="Click_DELETE()" name="deleteUser"
                                 style="cursor: pointer;"> -->
-                                <input type="button" value="ตกลง" id="deleteUser" onclick="SUBMITDELETE()"
-                                    class="primary btn btn-default" />
+                                    <input type="button" value="ตกลง" id="deleteUser" onclick="SUBMITDELETE()" class="primary btn btn-default" />
 
-                                <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                                </div>
                             </div>
+
                         </div>
 
                     </div>
-
                 </div>
-            </div>
 
-        </div>
+            </div>
 
     </section>
 

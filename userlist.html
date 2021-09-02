@@ -9,8 +9,7 @@
     <link rel="icon" href="../../uploads/logo.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
-        type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Core Css -->
@@ -34,8 +33,7 @@
     <link href="../../css/themes/all-themes.css" rel="stylesheet" />
 
     <!-- Bootstrap Material Datetime Picker Css -->
-    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
-        rel="stylesheet" />
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
 
     <!-- Bootstrap DatePicker Css -->
     <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
@@ -46,9 +44,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/datatables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
 
     <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
 
@@ -75,26 +71,27 @@
 
 
 <script>
-
     var obj = JSON.parse(Cookies.get('datatoken'));
     var userId = Cookies.get('datauserId');
 
     function acctoken() {
         var data;
-    //    console.log(obj.refresh_token)
+        //    console.log(obj.refresh_token)
         return new Promise(resolve => {
-            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+            $.getScript("ip.js", function(data, textStatus, jqxhr) {
                 var urlipaddress = data.substring(1, data.length - 1);
                 axios.post(urlipaddress + 'token', data, {
                     headers: {
                         'Authorization': obj.refresh_token
                     }
-                }).then(function (response) {
+                }).then(function(response) {
                     resolve(response.data.message.access_token);
 
-                }).catch(function (res) {
-                    const { response } = res
-                 //   console.log(response.data.message)
+                }).catch(function(res) {
+                    const {
+                        response
+                    } = res
+                    //   console.log(response.data.message)
 
                     if (response.data.message == "Unauthorized") {
                         location.href = "index.html";
@@ -109,9 +106,9 @@
 
     function getuser(refresh_token) {
         var data;
-      //  console.log(refresh_token)
+        //  console.log(refresh_token)
         return new Promise(resolve => {
-            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+            $.getScript("ip.js", function(data, textStatus, jqxhr) {
                 var urlipaddress = data.substring(1, data.length - 1);
                 const dataUserID = {
                     userId: userId
@@ -120,14 +117,16 @@
                     headers: {
                         'Authorization': refresh_token
                     }
-                }).then(function (response) {
+                }).then(function(response) {
                     resolve(response.data.message.data);
 
-                //    console.log(response.data.message.data)
+                    //    console.log(response.data.message.data)
 
-                }).catch(function (res) {
-                    const { response } = res
-                  //  console.log(response.data)
+                }).catch(function(res) {
+                    const {
+                        response
+                    } = res
+                    //  console.log(response.data)
                 });
             });
         });
@@ -150,66 +149,65 @@
                 num = num + 1
             }
         }
-     //   console.log(_arr)
+        //   console.log(_arr)
 
         $('#table1').DataTable().destroy();
         $('#table1').DataTable({
-            "lengthMenu": [[20, 50, 100, 150, 200, 250, 300, 350, 400, -1], [20, 50, 100, 150, 200, 250, 300, 350, 400, "All"]],
+            "lengthMenu": [
+                [20, 50, 100, 150, 200, 250, 300, 350, 400, -1],
+                [20, 50, 100, 150, 200, 250, 300, 350, 400, "All"]
+            ],
             "pageLength": 20,
             'data': _arr,
             "responsive": true,
             "autoWidth": false,
             "searching": true,
-            columns: [
-                { data: "num" },
-                { data: "_user" },
-                {
-                    data: null,
-                    className: "center",
-                    defaultContent: '<i href="" class="editor" style="font-size:16px;color:blue; cursor: pointer;">แก้ไข </i>/ <i href="" class="remove" style="font-size:14px;color:red; cursor: pointer;">ลบ</i>'
-                }
-            ],
+            columns: [{
+                data: "num"
+            }, {
+                data: "_user"
+            }, {
+                data: null,
+                className: "center",
+                defaultContent: '<i href="" class="editor" style="font-size:16px;color:blue; cursor: pointer;">แก้ไข </i>/ <i href="" class="remove" style="font-size:14px;color:red; cursor: pointer;">ลบ</i>'
+            }],
             dom: 'lBfrtip',
-            buttons: [
-                {
-                    title: 'USER ID',
-                    extend: 'csv',
-                    footer: false,
-                    exportOptions: {
-                        columns: [1]
-                    }
-
-                },
-                {
-                    title: 'USER ID',
-                    extend: 'excel',
-                    footer: false,
-                    exportOptions: {
-                        columns: [1]
-                    }
-                },
-                {
-                    title: 'USER ID',
-                    extend: 'print',
-                    footer: false,
-                    exportOptions: {
-                        columns: [1]
-                    }
+            buttons: [{
+                title: 'USER ID',
+                extend: 'csv',
+                footer: false,
+                exportOptions: {
+                    columns: [1]
                 }
-            ]
+
+            }, {
+                title: 'USER ID',
+                extend: 'excel',
+                footer: false,
+                exportOptions: {
+                    columns: [1]
+                }
+            }, {
+                title: 'USER ID',
+                extend: 'print',
+                footer: false,
+                exportOptions: {
+                    columns: [1]
+                }
+            }]
         });
     }
 
     async function newonload() {
         const result = await acctoken();
         const chkuser = await getuser(result);
-     //   console.log(chkuser);
+        //   console.log(chkuser);
         viewuser(chkuser);
 
 
 
-        $(document).ready(function () {
-            $('#table1').on('click', 'i.editor', function (e) {
+        $(document).ready(function() {
+            $('#table1').on('click', 'i.editor', function(e) {
                 e.preventDefault();
                 var table = $('#table1').DataTable();
                 var _ro = table.row($(this).parents('tr'));
@@ -228,7 +226,7 @@
 
 
             var data;
-            $('#table1').on('click', 'i.remove', function (e) {
+            $('#table1').on('click', 'i.remove', function(e) {
                 e.preventDefault();
                 var table = $('#table1').DataTable();
                 var _ro = table.row($(this).parents('tr'));
@@ -239,7 +237,7 @@
                 }
 
                 $("#myModaldelete").modal();
-          //      console.log(data._user)
+                //      console.log(data._user)
                 document.getElementById("c_delete").style.display = "block";
                 document.getElementById("completed").style.display = "none";
                 document.getElementById("user_edit").value = data._user;
@@ -250,17 +248,17 @@
 
             });
 
-            $('#deleteUser').on('click', async function (e) {
+            $('#deleteUser').on('click', async function(e) {
                 var decodejwt = JSON.parse(Cookies.get('datajwt'));
-           //     console.log(decodejwt.userId)
-            //    console.log(document.getElementById("user_edit").value)
-                $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                //     console.log(decodejwt.userId)
+                //    console.log(document.getElementById("user_edit").value)
+                $.getScript("ip.js", function(data, textStatus, jqxhr) {
                     var urlipaddress = data.substring(1, data.length - 1);
                     const dataUser = {
-                        userId: decodejwt.userId,
-                        userName: document.getElementById("user_edit").value
-                    }
-                 //   console.log(dataUser)
+                            userId: decodejwt.userId,
+                            userName: document.getElementById("user_edit").value
+                        }
+                        //   console.log(dataUser)
                     axios({
                         url: urlipaddress + 'delPass',
                         method: 'delete',
@@ -268,9 +266,11 @@
                             userId: decodejwt.userId,
                             userName: document.getElementById("user_edit").value
                         },
-                        headers: { 'Authorization': result }
-                    }).then(async function (response) {
-                //        console.log(response.data)
+                        headers: {
+                            'Authorization': result
+                        }
+                    }).then(async function(response) {
+                        //        console.log(response.data)
                         if (response.data.message == "delete completed") {
                             document.getElementById("c_delete").style.display = "none";
                             document.getElementById("completed").style.display = "block";
@@ -281,9 +281,11 @@
                             location.href = "userlist.html";
                         }
 
-                    }).catch(function (res) {
-                        const { response } = res
-                //        console.log(response.data.message)
+                    }).catch(function(res) {
+                        const {
+                            response
+                        } = res
+                        //        console.log(response.data.message)
                     });
                 });
             });
@@ -294,14 +296,14 @@
     function validateUsername() {
         // var reg = /^-?\d*\.?\d*$/;
         var regexNumber = /\d/; //ตรวจสอบว่าเป็นตัวเลข
-        var regexLetter_A = /[a-z]/;  // ตรวจสอบว่า เป็นตัวอักษรภาษาอังกฤษ ทั้งพิมพ์ใหญ่และพิมพ์เล็ก
+        var regexLetter_A = /[a-z]/; // ตรวจสอบว่า เป็นตัวอักษรภาษาอังกฤษ ทั้งพิมพ์ใหญ่และพิมพ์เล็ก
         var regexLetter_a = /[A-Z]/;
         var regExpStrong = /[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/;
         var checkpassadmin = document.getElementById('passuser_new').value;
-      //  console.log("en" + regexLetter_a.test(checkpassadmin));
-     //   console.log("EN" + regexLetter_A.test(checkpassadmin));
-     //   console.log("NUM" + regexNumber.test(checkpassadmin));
-     //   console.log("Strong" + regExpStrong.test(checkpassadmin));
+        //  console.log("en" + regexLetter_a.test(checkpassadmin));
+        //   console.log("EN" + regexLetter_A.test(checkpassadmin));
+        //   console.log("NUM" + regexNumber.test(checkpassadmin));
+        //   console.log("Strong" + regExpStrong.test(checkpassadmin));
 
         // console.log("reg"+reg.test(checkpassadmin));
         // เงื่อนไข  ถ้าไม่ใช่ตัวอักษรภาษาอังกฤษ  หรือ  เป็นตัวอักษรภาษาไทย  ให้แสดงข้อความเตือน
@@ -321,14 +323,14 @@
             return;
         }
 
-    //    console.log("dfdffd")
+        //    console.log("dfdffd")
         if (document.getElementById("user_edit").value == "" || document.getElementById("passuser_old").value == "" || document.getElementById("passuser_new").value == "") {
             alert("กรุณา ระบุ ข้อมูลให้ครบ !!!");
             return;
         }
         const result = await acctoken();
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
-      //      console.log("wwwww")
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
+            //      console.log("wwwww")
             var urlipaddress = data.substring(1, data.length - 1);
             const dataUser = {
                 user: document.getElementById("user_edit").value,
@@ -337,21 +339,23 @@
             }
 
 
-         //   console.log("wwwww")
+            //   console.log("wwwww")
             axios.post(urlipaddress + 'changePass', dataUser, {
                 headers: {
                     'Authorization': result
                 }
-            }).then(async function (response) {
-         //       console.log(response.data)
+            }).then(async function(response) {
+                //       console.log(response.data)
                 if (response.data.message == "Change password is complete.") {
                     document.getElementById("update").innerText = "อัพเดทสำเร็จ";
                     document.getElementById("update").style.color = "green";
                 }
 
-            }).catch(function (res) {
-                const { response } = res
-             //   console.log(response.data.message)
+            }).catch(function(res) {
+                const {
+                    response
+                } = res
+                //   console.log(response.data.message)
                 if (response.data.message == "update fail.") {
                     alert("บันทึกข้อมูลไม่สำเร็จ");
                     document.getElementById("update").innerText = "";
@@ -407,31 +411,29 @@
     <nav class="navbar">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
                 <a class="navbar-brand" id="logoname" href="report.html">Guard Tour</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a onclick="logout()" style="cursor: pointer;" class="js-search"
-                            data-close="true">[ออกจากระบบ]</a></li>
+                    <li><a onclick="logout()" style="cursor: pointer;" class="js-search" data-close="true">[ออกจากระบบ]</a></li>
                     <script>
                         function logout() {
-                            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                            $.getScript("ip.js", function(data, textStatus, jqxhr) {
                                 var urlipaddress = data.substring(1, data.length - 1);
 
                                 const databody = {
-                                    refresh_token: document.getElementById("refreshtoken").value,//refreshtoken
+                                    refresh_token: document.getElementById("refreshtoken").value, //refreshtoken
                                 }
 
                                 axios.post(urlipaddress + 'logout', databody, {
                                     headers: {
-                                        'Authorization': document.getElementById("accesstoken").value//refreshtoken
+                                        'Authorization': document.getElementById("accesstoken").value //refreshtoken
                                     }
-                                }).then(function (response) {
+                                }).then(function(response) {
 
-                               //     console.log(response.data)
+                                    //     console.log(response.data)
 
                                     if (response.data.message == "success") {
                                         document.getElementById("p_logout").innerText = "ออกจากระบบสำเร็จ";
@@ -440,9 +442,11 @@
                                         // alert("บันทึกข้อมูลไม่สำเร็จ");
                                     }
 
-                                }).catch(function (res) {
-                                    const { response } = res
-                                //    console.log(response.data.message)
+                                }).catch(function(res) {
+                                    const {
+                                        response
+                                    } = res
+                                    //    console.log(response.data.message)
                                     if (response.data.message == "Unauthorized") {
                                         alert("คุณยังไม่ได้ login admin");
                                     }
@@ -581,8 +585,7 @@
                                                 <small>32%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 32%">
+                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 32%">
                                                 </div>
                                             </div>
                                         </a>
@@ -594,8 +597,7 @@
                                                 <small>45%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
                                                 </div>
                                             </div>
                                         </a>
@@ -607,8 +609,7 @@
                                                 <small>54%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 54%">
+                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 54%">
                                                 </div>
                                             </div>
                                         </a>
@@ -620,9 +621,7 @@
                                                 <small>65%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-orange" role="progressbar"
-                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
-                                                    style="width: 65%">
+                                                <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 65%">
                                                 </div>
                                             </div>
                                         </a>
@@ -634,9 +633,7 @@
                                                 <small>92%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-purple" role="progressbar"
-                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
-                                                    style="width: 92%">
+                                                <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 92%">
                                                 </div>
                                             </div>
                                         </a>
@@ -669,7 +666,7 @@
                 <div><br></div>
                 <div><br></div>
                 <div style="color: white;">
-                    <div class="name" data-toggle="dropdown" id="userlogin"  aria-haspopup="true" aria-expanded="false"></div>
+                    <div class="name" data-toggle="dropdown" id="userlogin" aria-haspopup="true" aria-expanded="false"></div>
                 </div>
             </div>
             <div class="menu">
@@ -897,7 +894,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
 
-                        <div class="header header-new"">
+                        <div class="header header-new">
                             <h2>
                                 <font style="color: white;">USER ID ผู้ใช้งาน
                                 </font>
@@ -907,9 +904,7 @@
 
                         <div class="body">
 
-                            <table
-                                class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display"
-                                id="table1">
+                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display" id="table1">
                                 <thead>
                                     <tr>
                                         <th>ลำดับที่</th>
@@ -964,28 +959,29 @@
                                         <tr>
                                             <td>NEWPASSWORD :</td>
                                             <td><input type="password" name="passuser_new" id="passuser_new" /></td>
-                                            <td> <p style="color: green;">ใช้อักขระ ที่มีทั้งตัวอักษร (A-Z,a-z) <br> ตัวเลข (0-9) และสัญลักษณ์ผสมกัน
-                                            </p></td>
+                                            <td>
+                                                <p style="color: green;">ใช้อักขระ ที่มีทั้งตัวอักษร (A-Z,a-z) <br> ตัวเลข (0-9) และสัญลักษณ์ผสมกัน
+                                                </p>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                               
+
                                                 <div>&nbsp;</div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td>
-                                                <input type="button" value="UPDATE PASSWORD" id="UPDATE"
-                                                    onclick="UPDATE_PASSWORD()" name="UPDATE" style="cursor: pointer;">
-                                              
+                                                <input type="button" value="UPDATE PASSWORD" id="UPDATE" onclick="UPDATE_PASSWORD()" name="UPDATE" style="cursor: pointer;">
+
                                             </td>
 
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td>
-                                              
+
                                             </td>
                                         </tr>
                                     </table>
@@ -1016,10 +1012,8 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-20">
-                                            <i class="fa fa-exclamation-triangle" id="c_delete"
-                                                style="font-size:48px;color:red"></i>
-                                            <i class="fa fa-check-circle" id="completed"
-                                                style="font-size:48px;color:green; display: none;"></i>
+                                            <i class="fa fa-exclamation-triangle" id="c_delete" style="font-size:48px;color:red"></i>
+                                            <i class="fa fa-check-circle" id="completed" style="font-size:48px;color:green; display: none;"></i>
                                         </div>
 
                                         <div>

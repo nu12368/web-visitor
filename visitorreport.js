@@ -9,21 +9,21 @@ function acctoken() {
     // console.log('acctoken')
     // console.log(obj.refresh_token)
     return new Promise(resolve => {
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             // console.log('aaaaaaaaaaaaaa')
             axios.post(urlipaddress + 'token', data, {
                 headers: {
                     'Authorization': obj.refresh_token
                 }
-            }).then(function (response) {
+            }).then(function(response) {
                 //   console.log('bbb')
                 // console.log(response.data.message.access_token)
                 resolve(response.data.message.access_token);
 
-            }).catch(function (res) {
+            }).catch(function(res) {
                 const { response } = res
-             //   console.log(response.data.message)
+                //   console.log(response.data.message)
 
                 if (response.data.message == "Unauthorized") {
 
@@ -38,19 +38,19 @@ function acctoken() {
 function getvisitorType(refresh_token) {
     //console.log(refresh_token)
     return new Promise(resolve => {
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             axios.get(urlipaddress + 'visitorType/' + userId, {
                 headers: {
                     'Authorization': refresh_token
                 }
-            }).then(function (response) {
+            }).then(function(response) {
                 //  console.log(response.data.message.visitorType)
                 resolve(response.data.message.visitorType);
 
-            }).catch(function (res) {
+            }).catch(function(res) {
                 const { response } = res
-               // console.log(response.data)
+                // console.log(response.data)
             });
         });
     });
@@ -206,18 +206,18 @@ function getvisitorReportLog(refresh_token) {
     var paramLog;
     //var _page =2;
     return new Promise(resolve => {
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             for (_page = 1; _page <= 10; _page++) {
                 // paramInfo = '_id=' + userId + '&_time=' + date + '&_before=true&_page=' + _page + '&_limit=10&_sort=-1&_type=all'
                 paramLog = '_id=' + userId + '&_time=' + date + '&_before=false&_page=' + _page + '&_limit=100&_sort=1&_type=all'
-                //  console.log(paramLog)
-                //  console.log(refresh_token)
+                console.log(paramLog)
+                    //  console.log(refresh_token)
                 axios.get(urlipaddress + 'visitorLog?' + paramLog, {
                     headers: {
                         'Authorization': refresh_token
                     }
-                }).then(function (responseLog) {
+                }).then(function(responseLog) {
                     var cnt_Log = responseLog.data.message.result.length;
                     //  console.log(cnt_Log)
                     //   console.log(responseLog.data.message.result)
@@ -237,8 +237,8 @@ function getvisitorReportLog(refresh_token) {
                                 const _m = (today.getMonth() + 1).toString().padStart(2, '0');
                                 const _d = (today.getDate()).toString().padStart(2, '0');
                                 var date = today.getFullYear().toString();
-                            //    console.log(Timein[0])
-                                if (Timein[0] == date) {   //////ปีปัจจุบัน
+                                //    console.log(Timein[0])
+                                if (Timein[0] == date) { //////ปีปัจจุบัน
                                     _arr[n] = {
                                         visitorNumber: responseLog.data.message.result[i].visitorNumber,
                                         visitorType: responseLog.data.message.result[i].visitorType,
@@ -271,9 +271,9 @@ function getvisitorReportLog(refresh_token) {
                         }
                     }
 
-                }).catch(function (res) {
+                }).catch(function(res) {
                     const { response } = res
-                  //  console.log(response.data)
+                    //  console.log(response.data)
                 });
             }
         });
@@ -282,7 +282,7 @@ function getvisitorReportLog(refresh_token) {
 
 }
 
-function getvisitorReportInfo(refresh_token) {  ////// เอา log มา add Array ต่อจาก Log
+function getvisitorReportInfo(refresh_token) { ////// เอา log มา add Array ต่อจาก Log
     // console.log('Info')
     var today = new Date();
     const _m = (today.getMonth() + 1).toString().padStart(2, '0');
@@ -290,17 +290,17 @@ function getvisitorReportInfo(refresh_token) {  ////// เอา log มา add 
     var date = today.getFullYear().toString() + _m + _d;
     var paramInfo;
     return new Promise(resolve => {
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             for (_page = 1; _page <= 10; _page++) {
                 paramInfo = '_id=' + userId + '&_time=' + date + '&_before=false&_page=' + _page + '&_limit=100&_sort=1&_type=all'
-                // paramLog = '_id=' + userId + '&_time=' + date + '&_before=false&_page=' + _page + '&_limit=10&_sort=-1&_type=all'
-                //console.log(paramLog)
+                    // paramLog = '_id=' + userId + '&_time=' + date + '&_before=false&_page=' + _page + '&_limit=10&_sort=-1&_type=all'
+                    //console.log(paramLog)
                 axios.get(urlipaddress + 'visitorInfo?' + paramInfo, {
                     headers: {
                         'Authorization': refresh_token
                     }
-                }).then(function (responseInfo) {
+                }).then(function(responseInfo) {
                     var cnt_Log = responseInfo.data.message.result.length;
                     if (cnt_Log != 0) {
                         // console.log('visitorInfo')
@@ -320,8 +320,8 @@ function getvisitorReportInfo(refresh_token) {  ////// เอา log มา add 
                                 const _m = (today.getMonth() + 1).toString().padStart(2, '0');
                                 const _d = (today.getDate()).toString().padStart(2, '0');
                                 var date = today.getFullYear().toString();
-                              //  console.log(Timein[0])
-                                if (Timein[0] == date) {   //////ปีปัจจุบัน
+                                //  console.log(Timein[0])
+                                if (Timein[0] == date) { //////ปีปัจจุบัน
                                     _arr[n] = {
                                         visitorNumber: responseInfo.data.message.result[i].visitorNumber,
                                         visitorType: responseInfo.data.message.result[i].visitorType,
@@ -351,7 +351,7 @@ function getvisitorReportInfo(refresh_token) {  ////// เอา log มา add 
                         resolve(_arr);
                     }
 
-                }).catch(function (res) {
+                }).catch(function(res) {
                     const { response } = res
                     //console.log(response.data)
                 });
@@ -365,18 +365,18 @@ function getvisitorReportInfo(refresh_token) {  ////// เอา log มา add 
 
 //////////////////////////////////////////////////////ชนิดรถ
 function getvehicleType(refresh_token) {
-  //  console.log(refresh_token)
+    //  console.log(refresh_token)
     return new Promise(resolve => {
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             axios.get(urlipaddress + 'vehicleType/' + userId, {
                 headers: {
                     'Authorization': refresh_token
                 }
-            }).then(function (response) {
+            }).then(function(response) {
                 resolve(response.data.message.vehicleType);
 
-            }).catch(function (res) {
+            }).catch(function(res) {
                 const { response } = res
                 //console.log(response.data)
             });
@@ -386,15 +386,15 @@ function getvehicleType(refresh_token) {
 
 
 
-$(async function () {
+$(async function() {
 
     const result = await acctoken();
     // console.log('result')
-   // console.log(result)
+    // console.log(result)
 
     const responsevisitorType = await getvisitorType(result);
 
-    const responsevehicleType = await getvehicleType(result);   ///////  ชนิดรถ
+    const responsevehicleType = await getvehicleType(result); ///////  ชนิดรถ
     //console.log(responsevehicleType)
 
 
@@ -405,8 +405,8 @@ $(async function () {
 
 
     const responseReport = await getvisitorReportInfo(result);
-   // console.log('responseReport')
-   // console.log(responseReport)
+    // console.log('responseReport')
+    // console.log(responseReport)
 
 
 
@@ -415,7 +415,7 @@ $(async function () {
 
 
 
-    $.getScript("ip.js", function (data, textStatus, jqxhr) {
+    $.getScript("ip.js", function(data, textStatus, jqxhr) {
         var urlipaddress = data.substring(1, data.length - 1);
         var _arrvisitorType = new Array();
         var cnt = responsevisitorType.length;
@@ -440,7 +440,7 @@ $(async function () {
 
         n = 0;
         _num = 1;
-        for (i = 0; i < cnt_vehicleType; i++) {  /////ชนิดรถ
+        for (i = 0; i < cnt_vehicleType; i++) { /////ชนิดรถ
             _arrvehicleType[n] = {
                 num: _num,
                 vehicleType: responsevehicleType[i],
@@ -469,7 +469,10 @@ $(async function () {
 
 
         var table = $('#table1').DataTable({
-            "lengthMenu": [[25, 50, 100], [25, 50, 100]],
+            "lengthMenu": [
+                [25, 50, 100],
+                [25, 50, 100]
+            ],
             "pageLength": 25,
             'data': [...responseReport],
             "ordering": false,
@@ -484,7 +487,7 @@ $(async function () {
                 { data: "visitorType" },
                 {
                     data: "recordTimeIn",
-                    render: function (data) {
+                    render: function(data) {
                         let date = new Date(data);
                         let options = { hour12: false };
                         var sp = date.toLocaleString('en-US', options).replace(',', '').split('/')
@@ -496,7 +499,7 @@ $(async function () {
                 },
                 {
                     data: "recordTimeOut",
-                    render: function (data) {
+                    render: function(data) {
 
                         let date = new Date(data);
                         let options = { hour12: false };
@@ -520,15 +523,14 @@ $(async function () {
                 },
             ],
             dom: 'lBfrtip',
-            buttons: [
-                {
+            buttons: [{
                     title: 'export',
                     text: 'Export <i class="fa fa-file-excel-o" style="font-size:30px"></i>',
                     extend: 'excel',
                     footer: false,
                     exportOptions: {
                         format: {
-                            header: function (data, column, row) {
+                            header: function(data, column, row) {
                                 return header[column]; //header is the array I used to store header texts
                             }
                         },
@@ -537,14 +539,14 @@ $(async function () {
                 }
 
             ],
-            initComplete: function () {
+            initComplete: function() {
                 ///////////////เลข visitor
-                this.api().columns(0).every(function () {
+                this.api().columns(0).every(function() {
                     var column = this;
                     $(column.header()).append("<br/><br/>")
                     $('<input type="text" class="form-control" style=" width: 80px ;" placeholder="ค้นหา" />')
                         .appendTo($(column.header()))
-                        .on('keyup change', function () {
+                        .on('keyup change', function() {
                             var val = $.fn.dataTable.util.escapeRegex(
                                 $(this).val()
                             );
@@ -557,12 +559,12 @@ $(async function () {
 
 
                 //////////////////// ประเภท Visitor  ไปเอามาจาก
-                this.api().columns(1).every(function () {
+                this.api().columns(1).every(function() {
                     var column = this;
                     $(column.header()).append("<br/><p></p>")
                     var select = $('<select style=" width: 80px ;"><option>ทั้งหมด</option></select>')
                         .appendTo($(column.header()))
-                        .on('change', function () {
+                        .on('change', function() {
                             var val = $.fn.dataTable.util.escapeRegex(
                                 $(this).val()
 
@@ -577,17 +579,17 @@ $(async function () {
                                 .draw();
                         });
 
-                    $.each(_arrvisitorType, function (key, value) {
+                    $.each(_arrvisitorType, function(key, value) {
                         select.append('<option value=' + value.visitorType + '>' + value.visitorType + '</option>');
                     });
                 });
                 ///////////////เวลาเข้า
-                this.api().columns(2).every(function () {
+                this.api().columns(2).every(function() {
                     var column = this;
                     $(column.header()).append("<br/><br/>")
                     var select = $('<input type="text" class="form-control" style=" width: 100px ;" placeholder="ค้นหา" />')
                         .appendTo($(column.header()))
-                        .on('keyup change', function () {
+                        .on('keyup change', function() {
                             var val = $.fn.dataTable.util.escapeRegex(
                                 $(this).val()
                             );
@@ -599,12 +601,12 @@ $(async function () {
                 });
 
                 ///////////////เวลาออก
-                this.api().columns(3).every(function () {
+                this.api().columns(3).every(function() {
                     var column = this;
                     $(column.header()).append("<br/><br/>")
                     var select = $('<input type="text" class="form-control" style=" width: 100px ;" placeholder="ค้นหา" />')
                         .appendTo($(column.header()))
-                        .on('keyup change', function () {
+                        .on('keyup change', function() {
                             var val = $.fn.dataTable.util.escapeRegex(
                                 $(this).val()
                             );
@@ -615,12 +617,12 @@ $(async function () {
                         });
                 });
                 ///////////////ค้นหาทะเบียนรถ
-                this.api().columns(4).every(function () {
+                this.api().columns(4).every(function() {
                     var column = this;
                     $(column.header()).append("<br/><br/>")
                     var select = $('<input type="text" class="form-control" style=" width: 100px ;" placeholder="ค้นหา" />')
                         .appendTo($(column.header()))
-                        .on('keyup change', function () {
+                        .on('keyup change', function() {
                             var val = $.fn.dataTable.util.escapeRegex(
                                 $(this).val()
                             );
@@ -632,12 +634,12 @@ $(async function () {
                 });
                 /////////////// ชนิดของรถ
 
-                this.api().columns(5).every(function () {
+                this.api().columns(5).every(function() {
                     var column = this;
                     $(column.header()).append("<br/><p></p>")
                     var select = $('<select style=" width: 100px ;"><option>ทั้งหมด</option></select>')
                         .appendTo($(column.header()))
-                        .on('change', function () {
+                        .on('change', function() {
                             var val = $.fn.dataTable.util.escapeRegex(
                                 $(this).val()
 
@@ -651,7 +653,7 @@ $(async function () {
                                 .draw();
                         });
 
-                    $.each(_arrvehicleType, function (key, value) {
+                    $.each(_arrvehicleType, function(key, value) {
                         select.append('<option value=' + value.vehicleType + '>' + value.vehicleType + '</option>');
                     });
                 });
@@ -660,12 +662,12 @@ $(async function () {
 
 
                 ///////////////สถานที่ติดต่อ
-                this.api().columns(6).every(function () {
+                this.api().columns(6).every(function() {
                     var column = this;
                     $(column.header()).append("<br/><br/>")
                     var select = $('<input type="text" class="form-control" style=" width: 100px ;" placeholder="ค้นหา" />')
                         .appendTo($(column.header()))
-                        .on('keyup change', function () {
+                        .on('keyup change', function() {
                             var val = $.fn.dataTable.util.escapeRegex(
                                 $(this).val()
                             );
@@ -690,7 +692,7 @@ $(async function () {
         //console.log(table.page.len(46).draw(false))
         //  table.page(50).draw(false);
 
-        $('#table1').on('click', 'tbody td i.view_img', function (e) {
+        $('#table1').on('click', 'tbody td i.view_img', function(e) {
             var table = $('#table1').DataTable();
             e.preventDefault();
             var _ro = table.row($(this).parents('tr'));
@@ -714,7 +716,7 @@ $(async function () {
                         headers: {
                             'Authorization': result
                         }
-                    }).then(function (response) {
+                    }).then(function(response) {
                         var arrayBuffer = response.data; // Note: not oReq.responseText
                         var u8 = new Uint8Array(arrayBuffer);
                         var b64encoded = btoa(String.fromCharCode.apply(null, u8));

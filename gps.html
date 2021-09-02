@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="x-ua-compatible" content="IE=edge">
+  <title>WAC</title>
+  <!-- Favicon-->
+  <link rel="icon" href="../../uploads/logo.ico" type="image/x-icon">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <link rel="icon" href="../../uploads/logo.ico" type="image/x-icon">
+  <meta charset="utf-8">
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJ6SnvPM-O0dyoUChDYJxv34TXDX2cpEw&callback=initMap"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBET5mHtuJQq6oi6v2BXdQVutZarExfGkA&callback=myMap"></script> -->
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBET5mHtuJQq6oi6v2BXdQVutZarExfGkA&callback=initMap"
+async defer></script> -->
+
+  <style>
+    /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+    #map {
+      height: 100%;
+    }
+    /* Optional: Makes the sample page fill the window. */
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<script>
+
+  function onloaddata() {
+   
+    var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
+var latitude = getUrlParameter('latitude');
+var longitude = getUrlParameter('longitude');
+    var jsonObj = [{ "location": "", "latitude": latitude, "longitude": longitude }]
+
+    var mapOptions = {
+      center: { lat: Number(jsonObj[0].latitude), lng: Number(jsonObj[0].longitude) },
+      zoom: 15,
+    }
+    var maps = new google.maps.Map(document.getElementById("map"), mapOptions);
+    var marker, info;
+    $.each(jsonObj, function (i, item) {
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(item.latitude, item.longitude),
+        map: maps,
+        title: item.location
+      });
+      info = new google.maps.InfoWindow();
+      google.maps.event.addListener(marker, 'click', (function (marker, i) {
+        return function () {
+          info.setContent(item.location);
+          info.open(maps, marker);
+        }
+      })(marker, i));
+    });
+
+  }
+
+</script>
+
+<body onload="onloaddata()">
+  <div id="map" style="width: 100%;"></div>
+</body>
+
+</html>

@@ -9,8 +9,7 @@
     <link rel="icon" href="../../uploads/logo.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
-        type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Core Css -->
@@ -29,8 +28,7 @@
 
 
     <!-- Bootstrap Material Datetime Picker Css -->
-    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
-        rel="stylesheet" />
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
     <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
 
 
@@ -42,8 +40,7 @@
     <link href="../../css/themes/all-themes.css" rel="stylesheet" />
 
     <!-- Bootstrap Material Datetime Picker Css -->
-    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
-        rel="stylesheet" />
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
 
     <!-- Bootstrap DatePicker Css -->
     <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
@@ -54,10 +51,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/datatables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"></script>
-
-
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
 
 
     <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
@@ -100,6 +94,7 @@
     .intro {
         display: block !important;
     }
+    
     .intronone {
         display: none !important;
     }
@@ -116,10 +111,10 @@
 <script>
     if (Cookies.get('username') == undefined) {
         Cookies.remove('username');
-      //  location.href = "index.html";
+        //  location.href = "index.html";
     }
     var co = Cookies.get('username');
-    $(document).ready(function () {
+    $(document).ready(function() {
         $("#usernamelogin").text('ชื่อผู้ใช้งาน : ' + co);
     });
 </script>
@@ -161,15 +156,13 @@
     <nav class="navbar">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
                 <a class="navbar-brand" id="logoname" href="viewdashboard.html"></a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a id='logout' style="cursor: pointer;"
-                        data-close="true">[ออกจากระบบ]</a></li>
+                    <li><a id='logout' style="cursor: pointer;" data-close="true">[ออกจากระบบ]</a></li>
                     <!-- Call Search -->
                     <!-- <li><a href="javascript:void(0);" class="js-search" data-close="true"><i
                                 class="material-icons">search</i></a></li> -->
@@ -300,8 +293,7 @@
                                                 <small>32%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 32%">
+                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 32%">
                                                 </div>
                                             </div>
                                         </a>
@@ -313,8 +305,7 @@
                                                 <small>45%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
                                                 </div>
                                             </div>
                                         </a>
@@ -326,8 +317,7 @@
                                                 <small>54%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 54%">
+                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 54%">
                                                 </div>
                                             </div>
                                         </a>
@@ -339,9 +329,7 @@
                                                 <small>65%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-orange" role="progressbar"
-                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
-                                                    style="width: 65%">
+                                                <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 65%">
                                                 </div>
                                             </div>
                                         </a>
@@ -353,9 +341,7 @@
                                                 <small>92%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-purple" role="progressbar"
-                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
-                                                    style="width: 92%">
+                                                <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 92%">
                                                 </div>
                                             </div>
                                         </a>
@@ -388,12 +374,12 @@
                 <div><br></div>
                 <div><br></div>
                 <div style="color: white;">
-                    <div class="name" data-toggle="dropdown" id="userlogin"  aria-haspopup="true" aria-expanded="false"></div>
+                    <div class="name" data-toggle="dropdown" id="userlogin" aria-haspopup="true" aria-expanded="false"></div>
                 </div>
             </div>
             <div class="menu">
                 <ul class="list" id="nav">
-                    <li id="l01" >
+                    <li id="l01">
                         <a href="visitordashboard.html">
                             <i class="material-icons">home</i>
                             <span>แดชบอร์ด VISITOR</span>
@@ -411,12 +397,12 @@
                             <span>รายงานการคิดเงิน</span>
                         </a>
                     </li>
-                    <!-- <li class="active">
-                        <a href="memberlist.html">
-                            <i class="material-icons">account_circle</i>
-                            <span>รายชื่อผู้ลงทะเบียน</span>
+                    <li>
+                        <a href="estamp_report.html">
+                            <i class="material-icons">description</i>
+                            <span>รายงาน E-Stamp</span>
                         </a>
-                    </li> -->
+                    </li>
                     <li id="l03">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">settings</i>
@@ -486,12 +472,7 @@
                             <span>BlackList/WhiteList</span>
                         </a>
                     </li>
-                    <!-- <li >
-                        <a href="registermember.html">
-                            <i class="material-icons">group_add</i>
-                            <span>เพิ่มผู้ใช้งาน</span>
-                        </a>
-                    </li> -->
+
                     <li id="l10" style="display: none;">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">event</i>
@@ -675,7 +656,7 @@
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
-                        <div class="header header-new"">
+                        <div class="header header-new">
                             <!-- <div class=""> -->
                             <!-- // <div class=" "> -->
                             <h2>
@@ -692,10 +673,8 @@
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs tab-nav-right" role="tablist">
 
-                                    <li role="presentation" class="active"><a href="#user" data-toggle="tab"
-                                            style="font-size: 18px;">รายชื่อผู้ลงทะเบียน</a></li>
-                                    <li role="presentation"><a href="#admin" data-toggle="tab"
-                                            style="font-size: 18px;">รายชื่อเจ้าหน้าที่</a></li>
+                                    <li role="presentation" class="active"><a href="#user" data-toggle="tab" style="font-size: 18px;">รายชื่อผู้ลงทะเบียน</a></li>
+                                    <li role="presentation"><a href="#admin" data-toggle="tab" style="font-size: 18px;">รายชื่อเจ้าหน้าที่</a></li>
                                     <!-- <li role="presentation"><a href="#messages" data-toggle="tab">MESSAGES</a></li>
                                     <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li> -->
                                 </ul>
@@ -705,9 +684,7 @@
                                     <div role="tabpanel" class="tab-pane fade in active" id="user">
                                         <div class="body">
                                             <div class="table-responsive">
-                                                <table
-                                                    class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display"
-                                                    id="table1">
+                                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display" id="table1">
                                                     <thead>
                                                         <tr>
                                                             <th style="text-align: center; font-size: 18px; ">บ้านเลขที่
@@ -730,12 +707,12 @@
                                                             </th>
                                                             <th style="text-align: center; font-size: 18px;">แก้ไข/ลบ
                                                             </th>
-                                                            
+
                                                             <th style="text-align: center; font-size: 18px; ">_id
                                                             </th>
                                                             <th style="text-align: center; font-size: 18px; ">_id2
                                                             </th>
-                                                            
+
                                                         </tr>
                                                     </thead>
 
@@ -749,9 +726,7 @@
 
                                         <div class="body">
                                             <div class="table-responsive">
-                                                <table
-                                                    class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display"
-                                                    id="table_admin">
+                                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display" id="table_admin">
                                                     <thead>
                                                         <tr>
                                                             <th style="text-align: center; font-size: 18px; ">
@@ -784,58 +759,54 @@
 
 
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="container">
-                <div class="modal fade" id="myModal" role="dialog">
-                    <div class="modal-dialog">
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 id=title class="modal-title"></h4>
+                <div class="container">
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 id=title class="modal-title"></h4>
 
-                            </div>
-                            <div class="modal-body">
-                                <div class="row clearfix">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <div class="card">
-                                            <div class="body">
-                                                <form id="formElem">
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row clearfix">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="card">
+                                                <div class="body">
+                                                    <form id="formElem">
 
-                                                    <div id="move" style="display: none;">
-                                                        <div class="form-group form-float">
-                                                            <h5>ที่อยู่เดิม</h5>
-                                                            <div class="form-line">
-                                                                <textarea class="form-control" id="old_address" 
-                                                                    name="old_address" style="height: 200px; color: blue;" rows="3"
-                                                                    required></textarea>
+                                                        <div id="move" style="display: none;">
+                                                            <div class="form-group form-float">
+                                                                <h5>ที่อยู่เดิม</h5>
+                                                                <div class="form-line">
+                                                                    <textarea class="form-control" id="old_address" name="old_address" style="height: 200px; color: blue;" rows="3" required></textarea>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group form-float">
-                                                            <div class="form-line">
-                                                                <select class="form-control show-tick" name="c_address"
-                                                                    id="c_address" style="font-size: 20;" onchange="c_checkaddress()">
+                                                            <div class="form-group form-float">
+                                                                <div class="form-line">
+                                                                    <select class="form-control show-tick" name="c_address" id="c_address" style="font-size: 20;" onchange="c_checkaddress()">
                                                                 </select>
+                                                                </div>
                                                             </div>
-                                                        </div>
 
-                                                        <script>
-                                                            function c_checkaddress() {
-                                                                $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                                            <script>
+                                                                function c_checkaddress() {
+                                                                    $.getScript("ip.js", function(data, textStatus, jqxhr) {
 
-                                                                    var urlipaddress = data.substring(1, data.length - 1);
-                                                                    var _address = document.getElementById("c_address").value;
-                                                                    const address = {
-                                                                        address: _address
-                                                                    }
+                                                                        var urlipaddress = data.substring(1, data.length - 1);
+                                                                        var _address = document.getElementById("c_address").value;
+                                                                        const address = {
+                                                                            address: _address
+                                                                        }
 
-                                                                    const url = urlipaddress + 'FindDataMeterForUser/';
-                                                                    axios.post(url, address
-                                                                        ).then(function (response) {
-                                                                           
+                                                                        const url = urlipaddress + 'FindDataMeterForUser/';
+                                                                        axios.post(url, address).then(function(response) {
+
                                                                             document.getElementById("postaddress").value = response.data.message[0].home.data.address;
                                                                             document.getElementById("postbuildingtype").value = response.data.message[0].home.data.buildingType;
                                                                             document.getElementById("postmeter").value = response.data.message[0].home.data.meterId;
@@ -844,73 +815,66 @@
 
                                                                             document.getElementById("latitude").value = response.data.message[0].home.data.gps.latitude;
                                                                             document.getElementById("longitude").value = response.data.message[0].home.data.gps.longitude;
-                                                                          
-                                                                        }).catch(function (res) {
-                                                                            const { response } = res
-                                                                          
+
+                                                                        }).catch(function(res) {
+                                                                            const {
+                                                                                response
+                                                                            } = res
+
                                                                         });
-                                                                });
-                                                            }
-                                                        </script>
-                                                    </div>
-
-                                                    <div class="form-group form-float">
-                                                      
-                                                        <div class="form-line">
-                                                          
+                                                                    });
+                                                                }
+                                                            </script>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group form-float">
-                                                        <h4>เลขที่บ้าน</h4>
-                                                        <div class="form-line">
-                                                            <input type="text" class="form-control" name="postaddress"
-                                                                id="postaddress" value="" required autocomplete=off
-                                                                autocomplete=off />
 
+                                                        <div class="form-group form-float">
+
+                                                            <div class="form-line">
+
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                        <div class="form-group form-float">
+                                                            <h4>เลขที่บ้าน</h4>
+                                                            <div class="form-line">
+                                                                <input type="text" class="form-control" name="postaddress" id="postaddress" value="" required autocomplete=off autocomplete=off />
+
+                                                            </div>
+                                                        </div>
 
 
-                                                    <div class="form-group form-float">
-                                                        <h4>คำนำหน้า</h4>
-                                                        <div class="form-line">
-                                                            <select name="posttitle" id="posttitle" class="form-control"
-                                                                style="height: 45px;">
+                                                        <div class="form-group form-float">
+                                                            <h4>คำนำหน้า</h4>
+                                                            <div class="form-line">
+                                                                <select name="posttitle" id="posttitle" class="form-control" style="height: 45px;">
                                                                 <option value="">- คำนำหน้า -</option>
                                                                 <option value="นาย">นาย</option>
                                                                 <option value="นาง">นาง</option>
                                                                 <option value="นางสาว">นางสาว</option>
                                                             </select>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <h4>ชื่อ</h4>
-                                                    <div class="form-group form-float">
-                                                        <input type="text" name="postname" id="postname" value=""
-                                                            class="form-control" required placeholder="ชื่อ" />
+                                                        <h4>ชื่อ</h4>
+                                                        <div class="form-group form-float">
+                                                            <input type="text" name="postname" id="postname" value="" class="form-control" required placeholder="ชื่อ" />
 
-                                                    </div>
-                                                    <h4>นามสกุล</h4>
-                                                    <div class="form-group">
-                                                        <div class="form-line">
-                                                            <input type="text" name="postlastName" id="postlastName"
-                                                                class="form-control" required value=""
-                                                                placeholder="นามสกุล" />
                                                         </div>
-                                                    </div>
-                                                    <h4>เบอร์โทร</h4>
-                                                    <div class="form-group">
-                                                        <div class="form-line">
-                                                            <input type="text" name="posttel" id="posttel" value=""
-                                                                class="form-control" maxlength="10" required
-                                                                placeholder="เบอร์โทร" />
+                                                        <h4>นามสกุล</h4>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" name="postlastName" id="postlastName" class="form-control" required value="" placeholder="นามสกุล" />
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                        <h4>เบอร์โทร</h4>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" name="posttel" id="posttel" value="" class="form-control" maxlength="10" required placeholder="เบอร์โทร" />
+                                                            </div>
+                                                        </div>
 
-                                                    <h4>ประเภทสิ่งปลูกสร้าง</h4>
-                                                    <div class="form-group">
-                                                        <div class="form-line">
-                                                            <select name="postbuildingtype" id="postbuildingtype"
-                                                                class="form-control" style="height: 45px;">
+                                                        <h4>ประเภทสิ่งปลูกสร้าง</h4>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <select name="postbuildingtype" id="postbuildingtype" class="form-control" style="height: 45px;">
                                                                 <option value="">- ประเภทสิ่งปลูกสร้าง -</option>
                                                                 <option value="บ้านเดี่ยว">บ้านเดี่ยว</option>
                                                                 <option value="บ้านแถว">บ้านแถว</option>
@@ -921,345 +885,314 @@
                                                                 <option value="สถานีบริการน้ำมันเชื้อเพลิง">
                                                                     สถานีบริการน้ำมันเชื้อเพลิง</option>
                                                             </select>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <h4>เลขประจำตัวมิเตอร์</h4>
-                                                    <div class="form-group">
-                                                        <div class="form-line">
-                                                            <input type="text" name="postmeter" id="postmeter" value=""
-                                                                class="form-control" required
-                                                                placeholder="เลขประจำตัวมิเตอร์" />
+                                                        <h4>เลขประจำตัวมิเตอร์</h4>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" name="postmeter" id="postmeter" value="" class="form-control" required placeholder="เลขประจำตัวมิเตอร์" />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <h4>เลขมาตร</h4>
-                                                    <div class="form-group">
-                                                        <div class="form-line">
-                                                            <input type="text" name="meterValues" id="meterValues"
-                                                                class="form-control" value="" required
-                                                                placeholder="เลขมาตร" />
+                                                        <h4>เลขมาตร</h4>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" name="meterValues" id="meterValues" class="form-control" value="" required placeholder="เลขมาตร" />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <h4>latitude</h4>
-                                                    <div class="form-group">
-                                                        <div class="form-line">
-                                                            <input type="text" name="latitude" id="latitude" value=""
-                                                                class="form-control" required placeholder="latitude" />
+                                                        <h4>latitude</h4>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" name="latitude" id="latitude" value="" class="form-control" required placeholder="latitude" />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <h4>longitude</h4>
-                                                    <div class="form-group">
-                                                        <div class="form-line">
-                                                            <input type="text" name="longitude" id="longitude" value=""
-                                                                class="form-control" required placeholder="longitude" />
+                                                        <h4>longitude</h4>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" name="longitude" id="longitude" value="" class="form-control" required placeholder="longitude" />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <h4>กำหนดสิทธิ์</h4>
-                                                    <div class="form-group">
-                                                        <div class="form-line">
-                                                            <select name="status" id="status" style="height: 45px; "
-                                                                class="form-control">
+                                                        <h4>กำหนดสิทธิ์</h4>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <select name="status" id="status" style="height: 45px; " class="form-control">
                                                                 <option value="">- กำหนดสิทธิ์ -</option>
                                                                 <option value="user">user</option>
                                                                 <option value="staff">staff</option>
                                                             </select>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <a id="resetpassworduser" style="cursor: pointer;">[ รีเซ็ตรหัสผ่าน ]</a>
-                                                    <h4 id="h_pass"></h4>
-                                                    <div class="form-group" id="oldpassword">
-                                                        <div class="form-line">
-                                                            <input type="password" name="password" id="password"
-                                                                class="form-control" maxlength="6" value="" required
-                                                                placeholder="รหัสผ่าน ใช้อักขระ 6 ตัว" />
+                                                        <a id="resetpassworduser" style="cursor: pointer;">[ รีเซ็ตรหัสผ่าน ]</a>
+                                                        <h4 id="h_pass"></h4>
+                                                        <div class="form-group" id="oldpassword">
+                                                            <div class="form-line">
+                                                                <input type="password" name="password" id="password" class="form-control" maxlength="6" value="" required placeholder="รหัสผ่าน ใช้อักขระ 6 ตัว" />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group form-float" id="newpassword" style="display: none;">
-                                                        <h4>รหัสผ่านใหม่</h4>
-                                                        <div class="form-line">
-                                                            <input type="password" name="new_pass_user"  maxlength="6" id="new_pass_user" value=""
-                                                            class="form-control" required placeholder="รหัสผ่าน ใช้อักขระ 6 ตัว" />
-                                                           
-                                                        </div>
-                                                    </div>
-                                                  
-                                                    <input type="button" value="อัพเดท"
-                                                        id="editpost" class="btn btn-primary waves-effect" />
+                                                        <div class="form-group form-float" id="newpassword" style="display: none;">
+                                                            <h4>รหัสผ่านใหม่</h4>
+                                                            <div class="form-line">
+                                                                <input type="password" name="new_pass_user" maxlength="6" id="new_pass_user" value="" class="form-control" required placeholder="รหัสผ่าน ใช้อักขระ 6 ตัว" />
 
-                                                    <input type="button" onclick="postdata()" value="บันทึก"
-                                                        id="submitpost" class="btn btn-primary waves-effect" />
+                                                            </div>
+                                                        </div>
+
+                                                        <input type="button" value="อัพเดท" id="editpost" class="btn btn-primary waves-effect" />
+
+                                                        <input type="button" onclick="postdata()" value="บันทึก" id="submitpost" class="btn btn-primary waves-effect" />
 
 
                                                         <!-- <input type="button" value="เปลี่ยนรหัสผ่าน"
                                                         id="submitpostpassword" class="btn btn-primary waves-effect" /> -->
 
-                                                    <p id="p_update" style="font-size: 18px;"></p>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default"
-                                                    data-dismiss="modal">ปิด</button>
+                                                        <p id="p_update" style="font-size: 18px;"></p>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+                        <script>
+                            function postdata() {
+                                $.getScript("ip.js", function(data, textStatus, jqxhr) {
 
-                    </div>
-                    <script>
-                        function postdata() {
-                            $.getScript("ip.js", function (data, textStatus, jqxhr) {
-
-                                var urlipaddress = data.substring(1, data.length - 1);
+                                    var urlipaddress = data.substring(1, data.length - 1);
 
 
-                                if (document.getElementById("postaddress").value == '' || document.getElementById("posttitle").value == '' || document.getElementById("posttel").value == '' || document.getElementById("postname").value == '' || document.getElementById("postlastName").value == '' || document.getElementById("status").value == '' || document.getElementById("password").value == '') {
+                                    if (document.getElementById("postaddress").value == '' || document.getElementById("posttitle").value == '' || document.getElementById("posttel").value == '' || document.getElementById("postname").value == '' || document.getElementById("postlastName").value == '' || document.getElementById("status").value == '' || document.getElementById("password").value == '') {
 
-                                    document.getElementById("p_update").innerText = "กรุณากรอกข้อมูลให้ครบ !!!";
-                                    document.getElementById("p_update").style.color = "red";
-
-                                    return;
-                                } else {
-
-                                    document.getElementById("p_update").innerText = "";
-
-                                    var _address = document.getElementById("postaddress").value;
-                                    var _name = document.getElementById("posttitle").value + " " +
-                                        document.getElementById("postname").value + " " +
-                                        document.getElementById("postlastName").value;
-                                    var _tel = document.getElementById("posttel").value;
-                                    var _buildingType = document.getElementById("postbuildingtype").value;
-                                    var _meterId = document.getElementById("postmeter").value;
-                                    var _latitude = document.getElementById("latitude").value;
-                                    var _longitude = document.getElementById("longitude").value;
-                                    var _meterValues = document.getElementById("meterValues").value;
-                                    var _status = document.getElementById("status").value;
-                                    var _password = document.getElementById("password").value;
-                                    const dataUser = {
-                                        address: _address,
-                                        buildingType: _buildingType,
-                                        "gps": {
-                                            latitude: _latitude,
-                                            longitude: _longitude
-                                        },
-                                        meterId: _meterId,
-                                        name: _name,
-                                        tel: _tel,
-                                        meterVal: _meterValues,
-                                        status: _status,
-                                        password: _password
-                                    }
-                                    const url = urlipaddress + 'regisMember';
-
-                                    axios.post(url, dataUser
-                                    ).then(function (response) {
-                                        if (response.data.message.data == "Registration completed") {
-
-                                            //alert("ลงทะเบียนสำเร็จ");
-                                            location.href = "registerlist.html";
-                                        }
-                                    }).catch(function (res) {
-                                        const { response } = res
-
-                                        document.getElementById("p_update").innerText = "บันทึกข้อมูลไม่สำเร็จ !!!";
+                                        document.getElementById("p_update").innerText = "กรุณากรอกข้อมูลให้ครบ !!!";
                                         document.getElementById("p_update").style.color = "red";
 
-                                    });
-                                }
-                            });
-                        }
-                    </script>
+                                        return;
+                                    } else {
 
+                                        document.getElementById("p_update").innerText = "";
+
+                                        var _address = document.getElementById("postaddress").value;
+                                        var _name = document.getElementById("posttitle").value + " " +
+                                            document.getElementById("postname").value + " " +
+                                            document.getElementById("postlastName").value;
+                                        var _tel = document.getElementById("posttel").value;
+                                        var _buildingType = document.getElementById("postbuildingtype").value;
+                                        var _meterId = document.getElementById("postmeter").value;
+                                        var _latitude = document.getElementById("latitude").value;
+                                        var _longitude = document.getElementById("longitude").value;
+                                        var _meterValues = document.getElementById("meterValues").value;
+                                        var _status = document.getElementById("status").value;
+                                        var _password = document.getElementById("password").value;
+                                        const dataUser = {
+                                            address: _address,
+                                            buildingType: _buildingType,
+                                            "gps": {
+                                                latitude: _latitude,
+                                                longitude: _longitude
+                                            },
+                                            meterId: _meterId,
+                                            name: _name,
+                                            tel: _tel,
+                                            meterVal: _meterValues,
+                                            status: _status,
+                                            password: _password
+                                        }
+                                        const url = urlipaddress + 'regisMember';
+
+                                        axios.post(url, dataUser).then(function(response) {
+                                            if (response.data.message.data == "Registration completed") {
+
+                                                //alert("ลงทะเบียนสำเร็จ");
+                                                location.href = "registerlist.html";
+                                            }
+                                        }).catch(function(res) {
+                                            const {
+                                                response
+                                            } = res
+
+                                            document.getElementById("p_update").innerText = "บันทึกข้อมูลไม่สำเร็จ !!!";
+                                            document.getElementById("p_update").style.color = "red";
+
+                                        });
+                                    }
+                                });
+                            }
+                        </script>
+
+                    </div>
                 </div>
-            </div>
 
 
 
 
-            <div class="container">
-                <div class="modal fade" id="myModaldelete" role="dialog">
-                    <div class="modal-dialog">
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 id="title" class="modal-title">ลบข้อมูล</h4>
+                <div class="container">
+                    <div class="modal fade" id="myModaldelete" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 id="title" class="modal-title">ลบข้อมูล</h4>
 
-                            </div>
-                            <div class="modal-body">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-20">
-                                            <i class="material-icons" id="c_delete"
-                                                style="font-size:58px;color:red">delete</i>
-                                            <i class="material-icons" id="completed"
-                                                style="font-size:58px;color:green; display: none;">check_circle</i>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-20">
+                                                <i class="material-icons" id="c_delete" style="font-size:58px;color:red">delete</i>
+                                                <i class="material-icons" id="completed" style="font-size:58px;color:green; display: none;">check_circle</i>
 
-                                        </div>
-                                        <div>
-                                            <label id="lbl_completed" for="fname"> </label>
-                                            <input type="hidden" id="_id_deletedata">
+                                            </div>
+                                            <div>
+                                                <label id="lbl_completed" for="fname"> </label>
+                                                <input type="hidden" id="_id_deletedata">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <input type="button" value="ลบ" id="deleteUser"
-                                    class="primary btn btn-default" />
+                                <div class="modal-footer">
+                                    <input type="button" value="ลบ" id="deleteUser" class="primary btn btn-default" />
 
-                                <button type="button" class="btn btn-default" 
-                                    data-dismiss="modal">ปิด</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                                </div>
                             </div>
+
                         </div>
 
                     </div>
-                   
                 </div>
-            </div>
 
 
-<!-- //////////admin -->
-            <div class="container">
-                <div class="modal fade" id="myModaladmin" role="dialog">
-                    <div class="modal-dialog">
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 id=title class="modal-title"></h4>
+                <!-- //////////admin -->
+                <div class="container">
+                    <div class="modal fade" id="myModaladmin" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 id=title class="modal-title"></h4>
 
-                            </div>
-                            <div class="modal-body">
-                                <div class="row clearfix">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <div class="card">
-                                            <div class="body">
-                                                <form id="formElem">
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row clearfix">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="card">
+                                                <div class="body">
+                                                    <form id="formElem">
 
-                                                    <div>
-                                                        <div class="form-group form-float">
-                                                            <h4>ชื่อผู้ใช้งาน</h4>
-                                                            <div class="form-line">
-                                                                <input type="text" name="username_ad" id="username_ad" value=""
-                                                                class="form-control" required placeholder="ชื่อผู้ใช้งาน" />
-                                                               
+                                                        <div>
+                                                            <div class="form-group form-float">
+                                                                <h4>ชื่อผู้ใช้งาน</h4>
+                                                                <div class="form-line">
+                                                                    <input type="text" name="username_ad" id="username_ad" value="" class="form-control" required placeholder="ชื่อผู้ใช้งาน" />
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group form-float">
+                                                                <a id="resetpasswordad" style="cursor: pointer;">[ รีเซ็ตรหัสผ่าน ]</a>
+                                                                <h4>รหัสผ่านเดิม</h4>
+                                                                <div class="form-line">
+                                                                    <input type="password" name="pass_ad" id="pass_ad" value="" class="form-control" required placeholder="รหัสผ่าน" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group form-float">
+                                                                <h4>รหัสผ่านใหม่</h4>
+                                                                <div class="form-line">
+                                                                    <input type="password" name="new_pass_ad" id="new_pass_ad" value="" class="form-control" required placeholder="รหัสผ่าน" />
+
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group form-float">
-                                                            <a id="resetpasswordad" style="cursor: pointer;">[ รีเซ็ตรหัสผ่าน ]</a>
-                                                            <h4>รหัสผ่านเดิม</h4>
-                                                            <div class="form-line">
-                                                                <input type="password" name="pass_ad" id="pass_ad" value=""
-                                                                class="form-control" required placeholder="รหัสผ่าน" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group form-float">
-                                                            <h4>รหัสผ่านใหม่</h4>
-                                                            <div class="form-line">
-                                                                <input type="password" name="new_pass_ad" id="new_pass_ad" value=""
-                                                                class="form-control" required placeholder="รหัสผ่าน" />
-                                                               
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
-                                                    <div class="form-group form-float">
-                                                        <h4>คำนำหน้า</h4>
-                                                        <div class="form-line">
-                                                            <select name="posttitle_ad" id="posttitle_ad" class="form-control"
-                                                                style="height: 45px;">
+                                                        <div class="form-group form-float">
+                                                            <h4>คำนำหน้า</h4>
+                                                            <div class="form-line">
+                                                                <select name="posttitle_ad" id="posttitle_ad" class="form-control" style="height: 45px;">
                                                                 <option value="">- คำนำหน้า -</option>
                                                                 <option value="นาย">นาย</option>
                                                                 <option value="นาง">นาง</option>
                                                                 <option value="นางสาว">นางสาว</option>
                                                             </select>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <h4>ชื่อ</h4>
-                                                    <div class="form-group form-float">
-                                                        <input type="text" name="postname_ad" id="postname_ad" value=""
-                                                            class="form-control" required placeholder="ชื่อ" />
+                                                        <h4>ชื่อ</h4>
+                                                        <div class="form-group form-float">
+                                                            <input type="text" name="postname_ad" id="postname_ad" value="" class="form-control" required placeholder="ชื่อ" />
 
-                                                    </div>
-                                                    <h4>นามสกุล</h4>
-                                                    <div class="form-group">
-                                                        <div class="form-line">
-                                                            <input type="text" name="postlastName_ad" id="postlastName_ad"
-                                                                class="form-control" required value=""
-                                                                placeholder="นามสกุล" />
                                                         </div>
-                                                    </div>
+                                                        <h4>นามสกุล</h4>
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input type="text" name="postlastName_ad" id="postlastName_ad" class="form-control" required value="" placeholder="นามสกุล" />
+                                                            </div>
+                                                        </div>
 
-                                                    <div class="form-group form-float">
-                                                        <h4>อีเมล์</h4>
-                                                        <div class="form-line">
-                                                            <input type="text" class="form-control" name="email_ad"
-                                                                id="email_ad" value="" required autocomplete=off
-                                                                autocomplete=off />
+                                                        <div class="form-group form-float">
+                                                            <h4>อีเมล์</h4>
+                                                            <div class="form-line">
+                                                                <input type="text" class="form-control" name="email_ad" id="email_ad" value="" required autocomplete=off autocomplete=off />
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <h4>เบอร์โทร</h4>
-                                                    <div class="form-group form-float">
-                                                        <input type="text" name="tel_ad" id="tel_ad" value=""
-                                                            class="form-control" required placeholder="เบอร์โทร" />
-                                                    </div>
-                                                   
-                                                    <input type="button" value="อัพเดท"
-                                                        id="editpostadmin" class="btn btn-primary waves-effect" />
+                                                        <h4>เบอร์โทร</h4>
+                                                        <div class="form-group form-float">
+                                                            <input type="text" name="tel_ad" id="tel_ad" value="" class="form-control" required placeholder="เบอร์โทร" />
+                                                        </div>
+
+                                                        <input type="button" value="อัพเดท" id="editpostadmin" class="btn btn-primary waves-effect" />
                                                         <p id="p_updateadmin" style="font-size: 18px;"></p>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default"
-                                                    data-dismiss="modal">ปิด</button>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
+
                     </div>
-                   
-
                 </div>
+
+
+
+
+
+                <!-- ////////////////////// reset Password -->
+                <div class="modal fade" id="myModalconfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="title_reset"></h5>
+
+                            </div>
+
+                            <div class="modal-body">
+                                <i class="fa fa-check-circle" id="reset_ok" style="font-size:100px;color:green; display: none;"></i>
+                                <i class="fa fa-plus-circle" id="reset_error" style="font-size:100px;color:red; display: none;"></i>
+                                <i class="fa fa-power-off" id="reset_power" style="font-size:100px;color:blue; display: block;"></i>
+                            </div>
+                            <div class="modal-footer">
+
+                                <input type="button" value="ยืนยัน" id="btn_resetpassword" class="primary btn btn-default" />
+                                <input type="button" value="ยืนยัน" id="btn_resetpasswordadmin" class="primary btn btn-default" />
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- #END# Basic Examples -->
+                <!-- Exportable Table -->
+
+                <!-- #END# Exportable Table -->
             </div>
-
-
-
-
-
-<!-- ////////////////////// reset Password -->
-            <div class="modal fade" id="myModalconfirm" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="title_reset"></h5>
-                    
-                </div>
-            
-                <div class="modal-body">
-                    <i class="fa fa-check-circle" id="reset_ok" style="font-size:100px;color:green; display: none;"></i>
-                    <i class="fa fa-plus-circle" id="reset_error"  style="font-size:100px;color:red; display: none;"></i>
-                    <i class="fa fa-power-off" id="reset_power" style="font-size:100px;color:blue; display: block;"></i>
-                </div>
-                <div class="modal-footer">
-                 
-                    <input type="button" value="ยืนยัน" id="btn_resetpassword"
-                    class="primary btn btn-default" />
-                    <input type="button" value="ยืนยัน" id="btn_resetpasswordadmin"
-                    class="primary btn btn-default" />
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-            <!-- #END# Basic Examples -->
-            <!-- Exportable Table -->
-
-            <!-- #END# Exportable Table -->
-        </div>
     </section>
     <!-- Jquery Core Js -->
     <script src="../../plugins/jquery/jquery.min.js"></script>

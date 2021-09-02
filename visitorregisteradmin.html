@@ -9,8 +9,7 @@
     <link rel="icon" href="../../uploads/logo.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
-        type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Core Css -->
@@ -34,8 +33,7 @@
     <link href="../../css/themes/all-themes.css" rel="stylesheet" />
 
     <!-- Bootstrap Material Datetime Picker Css -->
-    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
-        rel="stylesheet" />
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
 
     <!-- Bootstrap DatePicker Css -->
     <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
@@ -46,9 +44,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/datatables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
 
     <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
 
@@ -63,7 +59,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link href="../../plugins/light-gallery/css/lightgallery.css" rel="stylesheet">
-    <script src="./visitoractivate.js"></script>
+    <!-- <script src="./visitoractivate.js"></script> -->
 
     <script src="https://pagination.js.org/dist/2.1.5/pagination.min.js"></script>
     <script src="https://pagination.js.org/dist/2.1.5/pagination.js"></script>
@@ -74,7 +70,7 @@
     body h1 h2 h3 h4 h5 h6 ul li a p {
         font-family: 'Kanit', sans-serif;
     }
-
+    
     div {
         font-family: 'Kanit', sans-serif;
     }
@@ -90,16 +86,18 @@
 
     // ADMIN
     function GENERATECLICKADMIN() {
-        $(document).ready(function () {
-            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $(document).ready(function() {
+            $.getScript("ip.js", function(data, textStatus, jqxhr) {
                 var urlipaddress = data.substring(1, data.length - 1);
                 // console.log(urlipaddress)
-                axios.get(urlipaddress + 'genUser').then(function (response) {
+                axios.get(urlipaddress + 'genUser').then(function(response) {
                     //    console.log(response.data.message)
                     document.getElementById("admin").value = response.data.message.username;
 
-                }).catch(function (res) {
-                    const { response } = res
+                }).catch(function(res) {
+                    const {
+                        response
+                    } = res
                     //  console.log(response.data.message)
                 });
             });
@@ -109,16 +107,18 @@
     // USER
     function GENERATECLICKUSER() {
         document.getElementById("save").innerText = "";
-        $(document).ready(function () {
-            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $(document).ready(function() {
+            $.getScript("ip.js", function(data, textStatus, jqxhr) {
                 var urlipaddress = data.substring(1, data.length - 1);
                 // console.log(urlipaddress)
-                axios.get(urlipaddress + 'genUser').then(function (response) {
+                axios.get(urlipaddress + 'genUser').then(function(response) {
                     //  console.log(response.data.message)
                     document.getElementById("user").value = response.data.message.username;
 
-                }).catch(function (res) {
-                    const { response } = res
+                }).catch(function(res) {
+                    const {
+                        response
+                    } = res
                     // console.log(response.data.message)
                 });
             });
@@ -126,6 +126,55 @@
     }
 </script>
 
+
+<script>
+    $(document).ready(function() {
+        var a = getVc();
+        var b = getVcNumber();
+        console.log(a + '' + b)
+        document.getElementById('user_gen').value = a + '' + b
+
+        function getVc() {
+            // var str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+            var str = 'abcdefghijklmnopqrstuvwxyz'
+            var vc = '';
+            for (var i = 0; i <= 4; i++) {
+                var num = parseInt(Math.random() * str.length);
+                if (vc.indexOf(str[num]) === -1) {
+                    vc += str[num];
+                } else {
+                    i--;
+                }
+            }
+            return vc;
+        }
+
+        function getVcNumber() {
+            var str = '0123456789'
+            var vc = '';
+            for (var i = 0; i <= 2; i++) {
+                var num = parseInt(Math.random() * str.length);
+                if (vc.indexOf(str[num]) === -1) {
+                    vc += str[num];
+                } else {
+                    i--;
+                }
+            }
+            return vc;
+        }
+        $('#REGENERATE').on('click', function(e) {
+            var a = getVc();
+            var b = getVcNumber();
+            document.getElementById('user_gen').value = a + '' + b
+
+
+        });
+
+    });
+
+
+    // console.log(getVc());
+</script>
 
 <body class="theme-red">
     <!-- Page Loader -->
@@ -163,30 +212,28 @@
     <nav class="navbar">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
                 <a class="navbar-brand" id="logoname" href="">REGISTER</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Call Search -->
-                    <li><a onclick="logout()" style="cursor: pointer;" class="js-search"
-                            data-close="true">[ออกจากระบบ]</a></li>
+                    <li><a onclick="logout()" style="cursor: pointer;" class="js-search" data-close="true">[ออกจากระบบ]</a></li>
                     <script>
                         function logout() {
-                            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                            $.getScript("ip.js", function(data, textStatus, jqxhr) {
                                 var urlipaddress = data.substring(1, data.length - 1);
 
                                 const databody = {
-                                    refresh_token: document.getElementById("refreshtoken").value,//refreshtoken
+                                    refresh_token: document.getElementById("refreshtoken").value, //refreshtoken
                                 }
 
                                 axios.post(urlipaddress + 'logout', databody, {
                                     headers: {
-                                        'Authorization': document.getElementById("accesstoken").value//refreshtoken
+                                        'Authorization': document.getElementById("accesstoken").value //refreshtoken
                                     }
-                                }).then(function (response) {
+                                }).then(function(response) {
 
                                     // console.log(response.data)
 
@@ -197,8 +244,10 @@
                                         // alert("บันทึกข้อมูลไม่สำเร็จ");
                                     }
 
-                                }).catch(function (res) {
-                                    const { response } = res
+                                }).catch(function(res) {
+                                    const {
+                                        response
+                                    } = res
                                     //  console.log(response.data.message)
                                     if (response.data.message == "Unauthorized") {
                                         alert("คุณยังไม่ได้ login admin");
@@ -329,8 +378,7 @@
                                                 <small>32%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 32%">
+                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 32%">
                                                 </div>
                                             </div>
                                         </a>
@@ -342,8 +390,7 @@
                                                 <small>45%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
                                                 </div>
                                             </div>
                                         </a>
@@ -355,8 +402,7 @@
                                                 <small>54%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 54%">
+                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 54%">
                                                 </div>
                                             </div>
                                         </a>
@@ -368,9 +414,7 @@
                                                 <small>65%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-orange" role="progressbar"
-                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
-                                                    style="width: 65%">
+                                                <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 65%">
                                                 </div>
                                             </div>
                                         </a>
@@ -382,9 +426,7 @@
                                                 <small>92%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-purple" role="progressbar"
-                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
-                                                    style="width: 92%">
+                                                <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 92%">
                                                 </div>
                                             </div>
                                         </a>
@@ -589,10 +631,10 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="card">
-                                <div class="header header-new"">
+                                <div class="header header-new">
                                     <h2>
                                         <font style=" color: white;">ลงทะเบียน
-                                    </font>
+                                        </font>
                                     </h2>
                                 </div>
                                 <div class="body">
@@ -604,8 +646,7 @@
                                                 <tr>
                                                     <td> รูปโปรไฟล์ :</td>
                                                     <td>
-                                                        <input type="file" name="fileimage" type="file" multiple
-                                                            accept=".png, .jpg, .jpeg" id="fileimage">
+                                                        <input type="file" name="fileimage" type="file" multiple accept=".png, .jpg, .jpeg" id="fileimage">
                                                     </td>
                                                     <td></td>
                                                     <td></td>
@@ -617,12 +658,15 @@
                                                 </tr>
                                                 <tr>
                                                     <td> USER :</td>
-                                                    <td> <input type="text" id="admin" name="admin"></td>
-                                                    <td></td>
-                                                    <td> <input type="button" value="GENERATE ADMIN ID" id="GENERATE"
-                                                            autocomplete="off" style="display: none;"
-                                                            onclick="GENERATECLICKADMIN()" name="GENERATE"
-                                                            style="cursor: pointer;"></td>
+                                                    <td> <input type="text" id="admin" name="admin">
+                                                        <input type="text" style="width: 20px;" readonly id="user_add" value="@" name="user_add">
+                                                        <input type="text" style="width: 120px;" id="user_gen" name="user_gen">
+                                                        <input type="button" value="REGENERATE" id="REGENERATE" autocomplete="off" name="REGENERATE" style="cursor: pointer;">
+                                                    </td>
+                                                    <td>
+
+                                                    </td>
+                                                    <td> <input type="button" value="GENERATE ADMIN ID" id="GENERATE" autocomplete="off" style="display: none;" onclick="GENERATECLICKADMIN()" name="GENERATE" style="cursor: pointer;"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -631,12 +675,21 @@
                                                 </tr>
                                                 <tr>
                                                     <td>PASSWORD :</td>
-                                                    <td><input type="password" name="passadmin" autocomplete="off"
-                                                            id="passadmin" />
+                                                    <td><input type="password" name="passadmin" autocomplete="off" id="passadmin" />
                                                         <!-- <span class="showBtn">SHOW</span> -->
                                                     </td>
                                                     <td>&nbsp;</td>
 
+                                                </tr>
+                                                <tr>
+                                                    <td>
+
+                                                    </td>
+                                                    <td>
+                                                        <div>&nbsp;</div>
+                                                        <p style="color: green;">รหัสผ่าน ใช้อักขระ ที่มีทั้งตัวอักษร (A-Z,a-z) ตัวเลข (0-9) และสัญลักษณ์ผสมกัน
+                                                        </p>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -649,8 +702,7 @@
                                                         <!-- <input type="RULE" name="RULE"  autocomplete="off" value="Master Admin"  id="RULE" /> -->
                                                         <!-- <span class="showBtn">SHOW</span> -->
 
-                                                        <select class="show-tick" name="RULE" id="RULE"
-                                                            style="cursor: pointer;" onchange="">
+                                                        <select class="show-tick" name="RULE" id="RULE" style="cursor: pointer;" onchange="">
                                                             <option value="0">-- เลือกโหมด --
                                                             </option>
                                                             <option value="SALE">SALE</option>
@@ -668,8 +720,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>COMPANY :</td>
-                                                    <td><input type="text" name="COMPANY" autocomplete="off"
-                                                            id="COMPANY" />
+                                                    <td><input type="text" name="COMPANY" autocomplete="off" id="COMPANY" />
                                                         <!-- <span class="showBtn">SHOW</span> -->
                                                     </td>
                                                     <td>&nbsp;</td>
@@ -695,8 +746,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>CODE :</td>
-                                                    <td><input type="password" name="CODE" autocomplete="off"
-                                                            id="CODE" />
+                                                    <td><input type="password" name="CODE" autocomplete="off" id="CODE" />
                                                         <!-- <span class="showBtn">SHOW</span> -->
                                                     </td>
                                                     <td>&nbsp;</td>
@@ -704,29 +754,116 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-
+                                                        <div>&nbsp;</div>
                                                     </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>การใช้งาน :</td>
+                                                    <td>
+                                                        <select class="show-tick" name="useFrom" id="useFrom" style="cursor: pointer;" onchange="">
+                                                            <option value="0">-- เลือกการใช้งาน --
+                                                            </option>
+                                                            <option value="online" selected>online</option>
+                                                            <option value="offline">offline</option>
+
+                                                        </select>
+                                                    </td>
+                                                    <td>&nbsp;</td>
+
+                                                </tr>
+                                                <tr>
                                                     <td>
                                                         <div>&nbsp;</div>
-                                                        <p style="color: green;">ใช้อักขระ ที่มีทั้งตัวอักษร (A-Z,a-z)
-                                                            ตัวเลข (0-9) และสัญลักษณ์ผสมกัน
-                                                        </p>
-
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td></td>
                                                     <td>
-                                                        <input type="button" value="REGISTER ADMIN" id="REGISTER_ADMIN"
-                                                            onclick="regisadmin();" name="REGISTER_ADMIN"
-                                                            style="cursor: pointer;">
+                                                        <div class="table-responsive">
+                                                            <h4 style="color: blue;" id="h_type"> เมนูการใช้งาน </h4>
+                                                            <div class="table-responsive">
+                                                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display" id="table1">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>เลือก เปิด-ปิด ใช้งาน</th>
+                                                                            <th>รายการ</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td><input type="checkbox" checked id="check_notice" name="check_notice" value="ประกาศชุมชน"> <label for="check_notice">ค่าเริ่มต้น</label></td>
+                                                                            <td>ประกาศชุมชน</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><input type="checkbox" checked id="check_market" name="check_market" value="ตลาดนัด"> <label for="check_market">ค่าเริ่มต้น</label></td>
+                                                                            <td>ตลาดนัด</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><input type="checkbox" checked id="check_appointment" name="check_appointment" value="ผู้มาติดต่อ/นัดหมาย"> <label for="check_appointment">ค่าเริ่มต้น</label></td>
+                                                                            <td>ผู้มาติดต่อ/นัดหมาย</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><input type="checkbox" id="check_stamp" name="check_stamp" value="E-STAMP"> <label for="check_stamp"></label></td>
+                                                                            <td>E-STAMP</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><input type="checkbox" id="check_supplies" name="check_supplies" value="พัสดุ"> <label for="check_supplies"></label></td>
+                                                                            <td>พัสดุ</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><input type="checkbox" id="check_maintenance" name="check_maintenance" value="แจ้งซ่อมบำรุง"> <label for="check_maintenance"></label></td>
+                                                                            <td>แจ้งซ่อมบำรุง</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><input type="checkbox" id="check_appeal" name="check_appeal" value="ร้องเรียน"> <label for="check_appeal"></label></td>
+                                                                            <td>ร้องเรียน</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><input type="checkbox" id="check_business" name="check_business" value="ข้อมูลธุรกิจ"> <label for="check_business"></label></td>
+                                                                            <td>ข้อมูลธุรกิจ</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><input type="checkbox" id="check_service" name="check_service" value="ข้อมูลบริการ"> <label for="check_service"></label></td>
+                                                                            <td>ข้อมูลบริการ</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><input type="checkbox" id="check_travel" name="check_travel" value="ข้อมูลท่องเที่ยว"> <label for="check_travel"></label></td>
+                                                                            <td>ข้อมูลท่องเที่ยว</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><input type="checkbox" id="check_servicereservation" name="check_servicereservation" value="จองบริการ"> <label for="check_servicereservation"></label></td>
+                                                                            <td>จองบริการ</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><input type="checkbox" id="check_payment" name="check_payment" value="รายการชำระเงิน"> <label for="check_payment"></label></td>
+                                                                            <td>รายการชำระเงิน</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><input type="checkbox" id="check_sos" name="check_sos" value="ฉุกฉิน S.O.S"> <label for="check_sos"></label></td>
+                                                                            <td>ฉุกฉิน S.O.S</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div>&nbsp;</div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td></td>
+                                                    <td>
+                                                        <input type="button" value="REGISTER ADMIN" id="REGISTER_ADMIN" onclick="regisadmin();" name="REGISTER_ADMIN" style="cursor: pointer;">
                                                         <p id="p_admin" style="font-size: 18px;"></p>
 
                                                         <script>
                                                             function validateUsername() {
                                                                 // var reg = /^-?\d*\.?\d*$/;
                                                                 var regexNumber = /\d/; //ตรวจสอบว่าเป็นตัวเลข
-                                                                var regexLetter_A = /[a-z]/;  // ตรวจสอบว่า เป็นตัวอักษรภาษาอังกฤษ ทั้งพิมพ์ใหญ่และพิมพ์เล็ก
+                                                                var regexLetter_A = /[a-z]/; // ตรวจสอบว่า เป็นตัวอักษรภาษาอังกฤษ ทั้งพิมพ์ใหญ่และพิมพ์เล็ก
                                                                 var regexLetter_a = /[A-Z]/;
                                                                 var regExpStrong = /[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/;
                                                                 var checkpassadmin = document.getElementById('passadmin').value;
@@ -734,20 +871,22 @@
                                                                 //    console.log("EN" + regexLetter_A.test(checkpassadmin));
                                                                 //    console.log("NUM" + regexNumber.test(checkpassadmin));
                                                                 //    console.log("Strong" + regExpStrong.test(checkpassadmin));
-
                                                                 // console.log("reg"+reg.test(checkpassadmin));
                                                                 // เงื่อนไข  ถ้าไม่ใช่ตัวอักษรภาษาอังกฤษ  หรือ  เป็นตัวอักษรภาษาไทย  ให้แสดงข้อความเตือน
                                                                 if (regexLetter_A.test(checkpassadmin) && (regexLetter_a.test(checkpassadmin)) && (regexNumber.test(checkpassadmin)) && (regExpStrong.test(checkpassadmin))) {
                                                                     return true;
                                                                 } else {
-                                                                    document.getElementById("p_admin").innerText = "ใช้อักขระ [A-Z,a-z,0-9] และสัญลักษณ์ผสมกัน";
+                                                                    document.getElementById("p_admin").innerText = "รหัสผ่าน ใช้อักขระ [A-Z,a-z,0-9] และสัญลักษณ์ผสมกัน";
                                                                     document.getElementById("p_admin").style.color = "red";
                                                                     return false;
                                                                 }
                                                             }
 
-
                                                             function regisadmin() {
+                                                                if (document.getElementById("admin").value == "" || document.getElementById("passadmin").value == "" || document.getElementById("user_gen").value == "") {
+                                                                    alert("กรุณา ระบุ user และ ระบุ PASSWORD และ GEN ID");
+                                                                    return;
+                                                                }
                                                                 var chk_pass = validateUsername();
                                                                 if (chk_pass == false) {
                                                                     return;
@@ -757,18 +896,26 @@
                                                                     alert("กรุณา เลือกโหมด !!!! ");
                                                                     return;
                                                                 }
-
                                                                 if (document.getElementById("CODE").value == "") {
                                                                     alert("กรุณา ระบุ CODE !!!! ");
                                                                     return;
                                                                 }
 
-                                                                document.getElementById("p_admin").innerText = "";
-                                                                if (document.getElementById("admin").value == "" || document.getElementById("passadmin").value == "") {
-                                                                    alert("กรุณา กดปุ่ม  GENERATE ADMIN ID และ ระบุ PASSWORD");
-                                                                    return;
+                                                                var features = []
+                                                                var i = 0;
+                                                                $("#table1 input:checkbox:checked").map(function() {
+                                                                    console.log(this.value)
+                                                                    if (this.checked) {
+                                                                        chk = 'true'
+                                                                        features[i] = this.value
+                                                                        i = i + 1
+                                                                    }
+                                                                });
+                                                                if (features.length == 0) {
+                                                                    features[0] = ''
                                                                 }
-                                                                $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                                                document.getElementById("p_admin").innerText = "";
+                                                                $.getScript("ip.js", function(data, textStatus, jqxhr) {
                                                                     var urlipaddress = data.substring(1, data.length - 1);
                                                                     var file_data = $('#fileimage').prop('files')[0];
                                                                     var formData = new FormData();
@@ -778,41 +925,87 @@
                                                                     } else {
                                                                         formData.append('imageProfile', '');
                                                                     }
-
-                                                                    formData.append('username', document.getElementById("admin").value);
+                                                                    formData.append('username', document.getElementById("admin").value + document.getElementById("user_add").value + document.getElementById("user_gen").value);
                                                                     formData.append('password', document.getElementById("passadmin").value);
                                                                     formData.append('rule', document.getElementById("RULE").value);
                                                                     formData.append('company', document.getElementById("COMPANY").value);
                                                                     formData.append('phone', document.getElementById("PHONE").value);
                                                                     formData.append('serial', document.getElementById("CODE").value);
+                                                                    formData.append('useFrom', document.getElementById("useFrom").value);
+                                                                    for (const i in features) {
+                                                                        formData.append('features[]', features[i]);
+                                                                    }
 
+                                                                    formData.append('description', '');
                                                                     axios.post(urlipaddress + 'regis', formData, {
                                                                         headers: {
                                                                             'Content-Type': 'multipart/form-data'
                                                                         }
-                                                                    }).then(function (response) {
+                                                                    }).then(function(response) {
+                                                                        console.log(response.data.message)
+                                                                            // features(response.data.message.result.data[0].userId)
                                                                         document.getElementById("p_admin").innerText = "บันทึกสำเร็จ";
                                                                         document.getElementById("p_admin").style.color = "green";
-                                                                    }).catch(function (res) {
-                                                                        const { response } = res
+                                                                    }).catch(function(res) {
+                                                                        const {
+                                                                            response
+                                                                        } = res
+                                                                        console.log(response.data.message)
                                                                         if (response.data.message == 'You have no right') {
                                                                             document.getElementById("p_admin").innerText = "คุณไม่มีสิทธิ์ทำรายการนี้";
                                                                             document.getElementById("p_admin").style.color = "red";
                                                                         } else
-                                                                            if (response.data.message == 'This user has already been used.') {
-                                                                                document.getElementById("p_admin").innerText = "ชื่อผู้ใช้นี้ มีอยุ่ในระบบแล้ว";
-                                                                                document.getElementById("p_admin").style.color = "red";
-                                                                            }
-                                                                            else {
-                                                                                document.getElementById("p_admin").innerText = "บันทึกไม่สำเร็จ";
-                                                                                document.getElementById("p_admin").style.color = "red";
-                                                                            }
+                                                                        if (response.data.message == 'This user has already been used.') {
+                                                                            document.getElementById("p_admin").innerText = "ชื่อผู้ใช้นี้ มีอยุ่ในระบบแล้ว";
+                                                                            document.getElementById("p_admin").style.color = "red";
+                                                                        } else {
+                                                                            document.getElementById("p_admin").innerText = "บันทึกไม่สำเร็จ";
+                                                                            document.getElementById("p_admin").style.color = "red";
+                                                                        }
                                                                     });
 
 
 
                                                                 });
                                                             }
+
+
+                                                            // function features(userId, acc) {
+                                                            //     $.getScript("ip.js", function(data, textStatus, jqxhr) {
+                                                            //         var urlipaddress = data.substring(1, data.length - 1);
+                                                            //         var chk = '';
+                                                            //         var features = []
+                                                            //         var i = 0;
+                                                            //         var bookingId;
+                                                            //         $("#table1 input:checkbox:checked").map(function() {
+                                                            //             console.log(this.value)
+                                                            //             if (this.checked) {
+                                                            //                 chk = 'true'
+                                                            //                 features[i] = this.value
+                                                            //                 i = i + 1
+                                                            //             }
+                                                            //         });
+                                                            //         const datafeatures = {
+                                                            //             userId: userId,
+                                                            //             features: features,
+                                                            //             description: '',
+                                                            //         }
+                                                            //         console.log(datafeatures)
+                                                            //         axios.post(urlipaddress + 'features', datafeatures, {
+                                                            //             headers: {
+                                                            //                 'Authorization': 'Content-Type'
+                                                            //             }
+                                                            //         }).then(async function(response) {
+                                                            //             console.log(response.data.message)
+
+                                                            //         }).catch(function(res) {
+                                                            //             const {
+                                                            //                 response
+                                                            //             } = res
+                                                            //             console.log(response.data.message)
+                                                            //         });
+                                                            //     });
+                                                            // }
                                                         </script>
                                                     </td>
                                                 </tr>
@@ -828,26 +1021,25 @@
                                             <h1>REGISTER USER LOGIN ด้วย ADMIN เพื่อลงทะเบียน USER</h1>
                                             <div style="display: none;">
 
-                                                <input type="button" value="LOGOUT" id="logout" onclick="LOG_OUT()"
-                                                    name="logout" style="cursor: pointer;">
+                                                <input type="button" value="LOGOUT" id="logout" onclick="LOG_OUT()" name="logout" style="cursor: pointer;">
                                                 <p style="color: red; font-size: 18px;">*** กรุณาออกจากระบบทุกครั้ง ***
                                                 </p>
                                                 <p id="p_logout" style="color: green; font-size: 18px;"></p>
                                             </div>
                                             <script>
                                                 function LOG_OUT() {
-                                                    $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                                    $.getScript("ip.js", function(data, textStatus, jqxhr) {
                                                         var urlipaddress = data.substring(1, data.length - 1);
 
                                                         const databody = {
-                                                            refresh_token: document.getElementById("refreshtoken").value,//refreshtoken
+                                                            refresh_token: document.getElementById("refreshtoken").value, //refreshtoken
                                                         }
 
                                                         axios.post(urlipaddress + 'logout', databody, {
                                                             headers: {
-                                                                'Authorization': document.getElementById("accesstoken").value//refreshtoken
+                                                                'Authorization': document.getElementById("accesstoken").value //refreshtoken
                                                             }
-                                                        }).then(function (response) {
+                                                        }).then(function(response) {
 
                                                             // console.log(response.data)
 
@@ -858,8 +1050,10 @@
                                                                 // alert("บันทึกข้อมูลไม่สำเร็จ");
                                                             }
 
-                                                        }).catch(function (res) {
-                                                            const { response } = res
+                                                        }).catch(function(res) {
+                                                            const {
+                                                                response
+                                                            } = res
                                                             // console.log(response.data.message)
                                                             if (response.data.message == "Unauthorized") {
                                                                 // alert("คุณยังไม่ได้ login admin");
@@ -881,8 +1075,7 @@
                                                 <table align="center">
                                                     <tr>
                                                         <td> USER ID :</td>
-                                                        <td> <input type="text" id="login_user" name="login_user"
-                                                                value=""></td>
+                                                        <td> <input type="text" id="login_user" name="login_user" value=""></td>
                                                         <td></td>
                                                         <td>&nbsp;</td>
                                                     </tr>
@@ -893,8 +1086,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>PASSWORD :</td>
-                                                        <td><input type="password" name="login_pass" id="login_pass"
-                                                                value="" /></td>
+                                                        <td><input type="password" name="login_pass" id="login_pass" value="" /></td>
                                                     </tr>
                                                     <tr>
                                                         <td>
@@ -904,9 +1096,7 @@
                                                     <tr>
                                                         <td></td>
                                                         <td>
-                                                            <input type="button" value="LOGIN" id="login"
-                                                                onclick="SUBMITLOGIN()" name="login"
-                                                                style="cursor: pointer;">
+                                                            <input type="button" value="LOGIN" id="login" onclick="SUBMITLOGIN()" name="login" style="cursor: pointer;">
                                                             <input type="hidden" id="objid">
                                                             <input type="hidden" id="accesstoken">
                                                             <input type="hidden" id="refreshtoken">
@@ -914,20 +1104,19 @@
                                                         </td>
 
                                                         <script>
-
                                                             function SUBMITLOGIN() {
 
                                                                 if (document.getElementById("login_user").value == "" || document.getElementById("login_pass").value == "") {
                                                                     alert("กรุณากรอก USER ID และ PASSWORD");
                                                                     return;
                                                                 }
-                                                                $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                                                $.getScript("ip.js", function(data, textStatus, jqxhr) {
                                                                     var urlipaddress = data.substring(1, data.length - 1);
                                                                     const dataUser = {
                                                                         user: document.getElementById("login_user").value,
                                                                         password: document.getElementById("login_pass").value,
                                                                     }
-                                                                    axios.post(urlipaddress + 'login', dataUser).then(function (response) {
+                                                                    axios.post(urlipaddress + 'login', dataUser).then(function(response) {
                                                                         document.getElementById("tbl_1").style.display = "block";
                                                                         var decodejwt = parseJwt(response.data.message.refresh_token);
 
@@ -939,11 +1128,11 @@
                                                                             headers: {
                                                                                 'Authorization': response.data.message.refresh_token
                                                                             }
-                                                                        }).then(function (response) {
+                                                                        }).then(function(response) {
 
                                                                             document.getElementById("accesstoken").value = response.data.message.access_token
                                                                             document.getElementById("refreshtoken").value = response.data.message.refresh_token
-                                                                            //      console.log(response.data.message)
+                                                                                //      console.log(response.data.message)
 
                                                                             //////// GET USER
                                                                             const dataUserID = {
@@ -953,7 +1142,7 @@
                                                                                 headers: {
                                                                                     'Authorization': response.data.message.access_token
                                                                                 }
-                                                                            }).then(function (response) {
+                                                                            }).then(function(response) {
                                                                                 var cnt = response.data.message.data.length;
                                                                                 var n = 0;
                                                                                 var _arr = new Array();
@@ -968,7 +1157,10 @@
                                                                                 }
                                                                                 //      console.log(_arr)
                                                                                 $('#table1').DataTable({
-                                                                                    "lengthMenu": [[50, 100, 200, 300, 400, 500, 1000, 1500, 2000, -1], [50, 100, 200, 300, 400, 500, 1000, 1500, 2000, "All"]],
+                                                                                    "lengthMenu": [
+                                                                                        [50, 100, 200, 300, 400, 500, 1000, 1500, 2000, -1],
+                                                                                        [50, 100, 200, 300, 400, 500, 1000, 1500, 2000, "All"]
+                                                                                    ],
                                                                                     "pageLength": 50,
                                                                                     'data': _arr,
                                                                                     "responsive": true,
@@ -978,18 +1170,17 @@
                                                                                     "ordering": false,
                                                                                     "searching": false,
                                                                                     "info": false,
-                                                                                    columns: [
-                                                                                        { data: "_user" },
-                                                                                        {
-                                                                                            data: null,
-                                                                                            className: "center",
-                                                                                            defaultContent: '<i href="" class="editor fa fa-search" style="font-size:16px;color:blue; cursor: pointer;">แก้ไข </i>/ <i href="" class="remove fa fa-minus-circle" style="font-size:14px;color:red; cursor: pointer;">ลบ</i>'
-                                                                                        }
-                                                                                    ]
+                                                                                    columns: [{
+                                                                                        data: "_user"
+                                                                                    }, {
+                                                                                        data: null,
+                                                                                        className: "center",
+                                                                                        defaultContent: '<i href="" class="editor fa fa-search" style="font-size:16px;color:blue; cursor: pointer;">แก้ไข </i>/ <i href="" class="remove fa fa-minus-circle" style="font-size:14px;color:red; cursor: pointer;">ลบ</i>'
+                                                                                    }]
                                                                                 });
 
-                                                                                $(document).ready(function () {
-                                                                                    $('#table1').on('click', 'i.editor', function (e) {
+                                                                                $(document).ready(function() {
+                                                                                    $('#table1').on('click', 'i.editor', function(e) {
                                                                                         e.preventDefault();
                                                                                         var table = $('#table1').DataTable();
                                                                                         var _ro = table.row($(this).parents('tr'));
@@ -1010,7 +1201,7 @@
 
 
                                                                                     var data;
-                                                                                    $('#table1').on('click', 'i.remove', function (e) {
+                                                                                    $('#table1').on('click', 'i.remove', function(e) {
                                                                                         e.preventDefault();
                                                                                         var table = $('#table1').DataTable();
                                                                                         var _ro = table.row($(this).parents('tr'));
@@ -1031,18 +1222,18 @@
 
                                                                                     });
 
-                                                                                    $('#deleteUser').on('click', function (e) {
+                                                                                    $('#deleteUser').on('click', function(e) {
                                                                                         //     console.log('adadasda' + decodejwt.userId)
 
-                                                                                        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                                                                        $.getScript("ip.js", function(data, textStatus, jqxhr) {
                                                                                             var urlipaddress = data.substring(1, data.length - 1);
                                                                                             const dataUser = {
-                                                                                                userId: decodejwt.userId,
-                                                                                                userName: document.getElementById("user_edit").value
-                                                                                            }
-                                                                                            //      console.log(document.getElementById("refreshtoken").value)
-                                                                                            //    console.log(document.getElementById("accesstoken").value)
-                                                                                            //   console.log(dataUser)
+                                                                                                    userId: decodejwt.userId,
+                                                                                                    userName: document.getElementById("user_edit").value
+                                                                                                }
+                                                                                                //      console.log(document.getElementById("refreshtoken").value)
+                                                                                                //    console.log(document.getElementById("accesstoken").value)
+                                                                                                //   console.log(dataUser)
 
                                                                                             axios({
                                                                                                 url: urlipaddress + 'delPass',
@@ -1051,8 +1242,10 @@
                                                                                                     userId: decodejwt.userId,
                                                                                                     userName: document.getElementById("user_edit").value
                                                                                                 },
-                                                                                                headers: { 'Authorization': document.getElementById("accesstoken").value }
-                                                                                            }).then(function (response) {
+                                                                                                headers: {
+                                                                                                    'Authorization': document.getElementById("accesstoken").value
+                                                                                                }
+                                                                                            }).then(function(response) {
                                                                                                 //    console.log(response.data)
                                                                                                 if (response.data.message == "delete completed") {
                                                                                                     document.getElementById("c_delete").style.display = "none";
@@ -1069,7 +1262,7 @@
                                                                                                     headers: {
                                                                                                         'Authorization': document.getElementById("accesstoken").value
                                                                                                     }
-                                                                                                }).then(function (response) {
+                                                                                                }).then(function(response) {
                                                                                                     //       console.log('2')
                                                                                                     //       console.log(response)
                                                                                                     var cnt = response.data.message.data.length;
@@ -1086,7 +1279,10 @@
                                                                                                     //   console.log(_arr)
                                                                                                     $('#table1').DataTable().destroy();
                                                                                                     $('#table1').DataTable({
-                                                                                                        "lengthMenu": [[50, 100, 200, 300, 400, 500, 1000, 1500, 2000, -1], [50, 100, 200, 300, 400, 500, 1000, 1500, 2000, "All"]],
+                                                                                                        "lengthMenu": [
+                                                                                                            [50, 100, 200, 300, 400, 500, 1000, 1500, 2000, -1],
+                                                                                                            [50, 100, 200, 300, 400, 500, 1000, 1500, 2000, "All"]
+                                                                                                        ],
                                                                                                         "pageLength": 50,
                                                                                                         'data': _arr,
                                                                                                         "responsive": true,
@@ -1096,18 +1292,17 @@
                                                                                                         "ordering": false,
                                                                                                         "searching": false,
                                                                                                         "info": false,
-                                                                                                        columns: [
-                                                                                                            { data: "_user" },
-                                                                                                            {
-                                                                                                                data: null,
-                                                                                                                className: "center",
-                                                                                                                defaultContent: '<i href="" class="editor fa fa-search" style="font-size:16px;color:blue; cursor: pointer;">แก้ไข </i>/ <i href="" class="remove fa fa-minus-circle" style="font-size:14px;color:red; cursor: pointer;">ลบ</i>'
-                                                                                                            }
-                                                                                                        ]
+                                                                                                        columns: [{
+                                                                                                            data: "_user"
+                                                                                                        }, {
+                                                                                                            data: null,
+                                                                                                            className: "center",
+                                                                                                            defaultContent: '<i href="" class="editor fa fa-search" style="font-size:16px;color:blue; cursor: pointer;">แก้ไข </i>/ <i href="" class="remove fa fa-minus-circle" style="font-size:14px;color:red; cursor: pointer;">ลบ</i>'
+                                                                                                        }]
                                                                                                     });
 
-                                                                                                    $(document).ready(function () {
-                                                                                                        $('#table1').on('click', 'i.editor', function (e) {
+                                                                                                    $(document).ready(function() {
+                                                                                                        $('#table1').on('click', 'i.editor', function(e) {
                                                                                                             e.preventDefault();
                                                                                                             var table = $('#table1').DataTable();
                                                                                                             var _ro = table.row($(this).parents('tr'));
@@ -1128,7 +1323,7 @@
 
 
                                                                                                         var data;
-                                                                                                        $('#table1').on('click', 'i.remove', function (e) {
+                                                                                                        $('#table1').on('click', 'i.remove', function(e) {
                                                                                                             e.preventDefault();
                                                                                                             var table = $('#table1').DataTable();
                                                                                                             var _ro = table.row($(this).parents('tr'));
@@ -1147,18 +1342,18 @@
 
                                                                                                         });
 
-                                                                                                        $('#deleteUser').on('click', function (e) {
+                                                                                                        $('#deleteUser').on('click', function(e) {
                                                                                                             //    console.log('adadasda' + decodejwt.userId)
 
-                                                                                                            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                                                                                            $.getScript("ip.js", function(data, textStatus, jqxhr) {
                                                                                                                 var urlipaddress = data.substring(1, data.length - 1);
                                                                                                                 const dataUser = {
-                                                                                                                    userId: decodejwt.userId,
-                                                                                                                    userName: document.getElementById("user_edit").value
-                                                                                                                }
-                                                                                                                //     console.log(document.getElementById("refreshtoken").value)
-                                                                                                                //    console.log(document.getElementById("accesstoken").value)
-                                                                                                                //    console.log(dataUser)
+                                                                                                                        userId: decodejwt.userId,
+                                                                                                                        userName: document.getElementById("user_edit").value
+                                                                                                                    }
+                                                                                                                    //     console.log(document.getElementById("refreshtoken").value)
+                                                                                                                    //    console.log(document.getElementById("accesstoken").value)
+                                                                                                                    //    console.log(dataUser)
 
                                                                                                                 axios({
                                                                                                                     url: urlipaddress + 'delPass',
@@ -1167,8 +1362,10 @@
                                                                                                                         userId: decodejwt.userId,
                                                                                                                         userName: document.getElementById("user_edit").value
                                                                                                                     },
-                                                                                                                    headers: { 'Authorization': document.getElementById("accesstoken").value }
-                                                                                                                }).then(function (response) {
+                                                                                                                    headers: {
+                                                                                                                        'Authorization': document.getElementById("accesstoken").value
+                                                                                                                    }
+                                                                                                                }).then(function(response) {
                                                                                                                     //    console.log(response.data)
                                                                                                                     if (response.data.message == "delete completed") {
                                                                                                                         document.getElementById("c_delete").style.display = "none";
@@ -1178,21 +1375,27 @@
 
                                                                                                                     }
 
-                                                                                                                }).catch(function (res) {
-                                                                                                                    const { response } = res
+                                                                                                                }).catch(function(res) {
+                                                                                                                    const {
+                                                                                                                        response
+                                                                                                                    } = res
                                                                                                                     //   console.log(response.data.message)
                                                                                                                 });
                                                                                                             });
                                                                                                         });
                                                                                                     });
 
-                                                                                                }).catch(function (res) {
-                                                                                                    const { response } = res
+                                                                                                }).catch(function(res) {
+                                                                                                    const {
+                                                                                                        response
+                                                                                                    } = res
                                                                                                     // console.log(response.data.message)
                                                                                                 });
 
-                                                                                            }).catch(function (res) {
-                                                                                                const { response } = res
+                                                                                            }).catch(function(res) {
+                                                                                                const {
+                                                                                                    response
+                                                                                                } = res
                                                                                                 //  console.log(response.data.message)
                                                                                             });
                                                                                         });
@@ -1201,18 +1404,24 @@
 
 
 
-                                                                            }).catch(function (res) {
-                                                                                const { response } = res
+                                                                            }).catch(function(res) {
+                                                                                const {
+                                                                                    response
+                                                                                } = res
                                                                                 //console.log(response.data.message)
                                                                             });
 
 
-                                                                        }).catch(function (res) {
-                                                                            const { response } = res
+                                                                        }).catch(function(res) {
+                                                                            const {
+                                                                                response
+                                                                            } = res
                                                                             //console.log(response.data.message)
                                                                         });
-                                                                    }).catch(function (res) {
-                                                                        const { response } = res
+                                                                    }).catch(function(res) {
+                                                                        const {
+                                                                            response
+                                                                        } = res
                                                                         // console.log(response.data.message)
                                                                     });
                                                                 });
@@ -1221,7 +1430,7 @@
                                                             function parseJwt(token) {
                                                                 var base64Url = token.split('.')[1];
                                                                 var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-                                                                var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+                                                                var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
                                                                     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
                                                                 }).join(''));
                                                                 return JSON.parse(jsonPayload);
@@ -1249,10 +1458,7 @@
                                                         <td> USER :</td>
                                                         <td> <input type="text" id="user" name="user"></td>
                                                         <td></td>
-                                                        <td> <input type="button" value="GENERATE USER ID"
-                                                                id="GENERATE_USER" style="display: none;"
-                                                                onclick="GENERATECLICKUSER()" name="GENERATE_USER"
-                                                                style="cursor: pointer;"></td>
+                                                        <td> <input type="button" value="GENERATE USER ID" id="GENERATE_USER" style="display: none;" onclick="GENERATECLICKUSER()" name="GENERATE_USER" style="cursor: pointer;"></td>
                                                     </tr>
                                                     <tr>
                                                         <td>
@@ -1267,27 +1473,22 @@
                                                         <td></td>
                                                         <td>
                                                             <div>&nbsp;</div>
-                                                            <p style="color: green;">ใช้อักขระ ที่มีทั้งตัวอักษร
-                                                                (A-Z,a-z) ตัวเลข (0-9) และสัญลักษณ์ผสมกัน
+                                                            <p style="color: green;">ใช้อักขระ ที่มีทั้งตัวอักษร (A-Z,a-z) ตัวเลข (0-9) และสัญลักษณ์ผสมกัน
                                                             </p>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td></td>
                                                         <td>
-                                                            <input type="button" value="REGISTER USER"
-                                                                id="REGISTER_USER" onclick="ADDACCOUNT()"
-                                                                name="REGISTER_USER" style="cursor: pointer;">
+                                                            <input type="button" value="REGISTER USER" id="REGISTER_USER" onclick="ADDACCOUNT()" name="REGISTER_USER" style="cursor: pointer;">
                                                             <p id="save" style="color: green; font-size: 18px;"></p>
                                                         </td>
 
                                                         <script>
-
-
                                                             function validateUsernameUSER() {
                                                                 // var reg = /^-?\d*\.?\d*$/;
                                                                 var regexNumber = /\d/; //ตรวจสอบว่าเป็นตัวเลข
-                                                                var regexLetter_A = /[a-z]/;  // ตรวจสอบว่า เป็นตัวอักษรภาษาอังกฤษ ทั้งพิมพ์ใหญ่และพิมพ์เล็ก
+                                                                var regexLetter_A = /[a-z]/; // ตรวจสอบว่า เป็นตัวอักษรภาษาอังกฤษ ทั้งพิมพ์ใหญ่และพิมพ์เล็ก
                                                                 var regexLetter_a = /[A-Z]/;
                                                                 var regExpStrong = /[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/;
                                                                 var checkpassadmin = document.getElementById('passuser').value;
@@ -1319,7 +1520,7 @@
                                                                     alert("กรุณา กดปุ่ม  GENERATE USER ID และ ระบุ PASSWORD");
                                                                     return;
                                                                 }
-                                                                $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                                                $.getScript("ip.js", function(data, textStatus, jqxhr) {
                                                                     var urlipaddress = data.substring(1, data.length - 1);
                                                                     // console.log(document.getElementById("accesstoken").value)
 
@@ -1334,7 +1535,7 @@
                                                                         headers: {
                                                                             'Authorization': document.getElementById("accesstoken").value
                                                                         }
-                                                                    }).then(function (response) {
+                                                                    }).then(function(response) {
                                                                         //  console.log('1')
                                                                         document.getElementById("tbl_1").style.display = "block";
                                                                         //   console.log(response.data)
@@ -1359,7 +1560,7 @@
                                                                             headers: {
                                                                                 'Authorization': document.getElementById("accesstoken").value
                                                                             }
-                                                                        }).then(function (response) {
+                                                                        }).then(function(response) {
                                                                             //  console.log('2')
                                                                             //  console.log(response)
                                                                             var cnt = response.data.message.data.length;
@@ -1376,7 +1577,10 @@
                                                                             //  console.log(_arr)
                                                                             $('#table1').DataTable().destroy();
                                                                             $('#table1').DataTable({
-                                                                                "lengthMenu": [[50, 100, 200, 300, 400, 500, 1000, 1500, 2000, -1], [50, 100, 200, 300, 400, 500, 1000, 1500, 2000, "All"]],
+                                                                                "lengthMenu": [
+                                                                                    [50, 100, 200, 300, 400, 500, 1000, 1500, 2000, -1],
+                                                                                    [50, 100, 200, 300, 400, 500, 1000, 1500, 2000, "All"]
+                                                                                ],
                                                                                 "pageLength": 50,
                                                                                 'data': _arr,
                                                                                 "responsive": true,
@@ -1386,18 +1590,17 @@
                                                                                 "ordering": false,
                                                                                 "searching": false,
                                                                                 "info": false,
-                                                                                columns: [
-                                                                                    { data: "_user" },
-                                                                                    {
-                                                                                        data: null,
-                                                                                        className: "center",
-                                                                                        defaultContent: '<i href="" class="editor fa fa-search" style="font-size:16px;color:blue; cursor: pointer;">แก้ไข </i>/ <i href="" class="remove fa fa-minus-circle" style="font-size:14px;color:red; cursor: pointer;">ลบ</i>'
-                                                                                    }
-                                                                                ]
+                                                                                columns: [{
+                                                                                    data: "_user"
+                                                                                }, {
+                                                                                    data: null,
+                                                                                    className: "center",
+                                                                                    defaultContent: '<i href="" class="editor fa fa-search" style="font-size:16px;color:blue; cursor: pointer;">แก้ไข </i>/ <i href="" class="remove fa fa-minus-circle" style="font-size:14px;color:red; cursor: pointer;">ลบ</i>'
+                                                                                }]
                                                                             });
 
-                                                                            $(document).ready(function () {
-                                                                                $('#table1').on('click', 'i.editor', function (e) {
+                                                                            $(document).ready(function() {
+                                                                                $('#table1').on('click', 'i.editor', function(e) {
                                                                                     e.preventDefault();
                                                                                     var table = $('#table1').DataTable();
                                                                                     var _ro = table.row($(this).parents('tr'));
@@ -1418,7 +1621,7 @@
 
 
                                                                                 var data;
-                                                                                $('#table1').on('click', 'i.remove', function (e) {
+                                                                                $('#table1').on('click', 'i.remove', function(e) {
                                                                                     e.preventDefault();
                                                                                     var table = $('#table1').DataTable();
                                                                                     var _ro = table.row($(this).parents('tr'));
@@ -1437,18 +1640,18 @@
 
                                                                                 });
 
-                                                                                $('#deleteUser').on('click', function (e) {
+                                                                                $('#deleteUser').on('click', function(e) {
                                                                                     // console.log('adadasda' + decodejwt.userId)
 
-                                                                                    $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                                                                    $.getScript("ip.js", function(data, textStatus, jqxhr) {
                                                                                         var urlipaddress = data.substring(1, data.length - 1);
                                                                                         const dataUser = {
-                                                                                            userId: decodejwt.userId,
-                                                                                            userName: document.getElementById("user_edit").value
-                                                                                        }
-                                                                                        //  console.log(document.getElementById("refreshtoken").value)
-                                                                                        //  console.log(document.getElementById("accesstoken").value)
-                                                                                        // console.log(dataUser)
+                                                                                                userId: decodejwt.userId,
+                                                                                                userName: document.getElementById("user_edit").value
+                                                                                            }
+                                                                                            //  console.log(document.getElementById("refreshtoken").value)
+                                                                                            //  console.log(document.getElementById("accesstoken").value)
+                                                                                            // console.log(dataUser)
 
                                                                                         axios({
                                                                                             url: urlipaddress + 'delPass',
@@ -1457,8 +1660,10 @@
                                                                                                 userId: decodejwt.userId,
                                                                                                 userName: document.getElementById("user_edit").value
                                                                                             },
-                                                                                            headers: { 'Authorization': document.getElementById("accesstoken").value }
-                                                                                        }).then(function (response) {
+                                                                                            headers: {
+                                                                                                'Authorization': document.getElementById("accesstoken").value
+                                                                                            }
+                                                                                        }).then(function(response) {
                                                                                             //    console.log(response.data)
                                                                                             if (response.data.message == "delete completed") {
                                                                                                 document.getElementById("c_delete").style.display = "none";
@@ -1466,19 +1671,25 @@
                                                                                                 $("#lbl_completed").text('ลบข้อมูลสำเร็จ');
                                                                                             }
 
-                                                                                        }).catch(function (res) {
-                                                                                            const { response } = res
+                                                                                        }).catch(function(res) {
+                                                                                            const {
+                                                                                                response
+                                                                                            } = res
                                                                                             //  console.log(response.data.message)
                                                                                         });
                                                                                     });
                                                                                 });
                                                                             });
-                                                                        }).catch(function (res) {
-                                                                            const { response } = res
+                                                                        }).catch(function(res) {
+                                                                            const {
+                                                                                response
+                                                                            } = res
                                                                             // console.log(response.data.message)
                                                                         });
-                                                                    }).catch(function (res) {
-                                                                        const { response } = res
+                                                                    }).catch(function(res) {
+                                                                        const {
+                                                                            response
+                                                                        } = res
                                                                         // console.log(response.data.message)
                                                                         if (response.data.message == "update fail.") {
                                                                             alert("บันทึกข้อมูลไม่สำเร็จ");
@@ -1490,9 +1701,7 @@
                                                     </tr>
                                                 </table>
 
-                                                <table align="center"
-                                                    style="text-align:center; width: 800px; height: 200px;" id="table1"
-                                                    border="1px">
+                                                <table align="center" style="text-align:center; width: 800px; height: 200px;" id="table1" border="1px">
                                                     <thead>
                                                         <tr style="text-align:center;">
                                                             <th style="text-align:center; font-size: 18px;">USER ID</th>
@@ -1517,8 +1726,7 @@
                                                                         <table>
                                                                             <tr>
                                                                                 <td> USER :</td>
-                                                                                <td> <input type="text" id="user_edit"
-                                                                                        name="user_edit"></td>
+                                                                                <td> <input type="text" id="user_edit" name="user_edit"></td>
                                                                                 <td></td>
                                                                                 <td> </td>
                                                                             </tr>
@@ -1529,9 +1737,7 @@
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>PASSWORD :</td>
-                                                                                <td><input type="password"
-                                                                                        name="passuser_old"
-                                                                                        id="passuser_old" /></td>
+                                                                                <td><input type="password" name="passuser_old" id="passuser_old" /></td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>
@@ -1540,9 +1746,7 @@
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>NEWPASSWORD :</td>
-                                                                                <td><input type="password"
-                                                                                        name="passuser_new"
-                                                                                        id="passuser_new" /></td>
+                                                                                <td><input type="password" name="passuser_new" id="passuser_new" /></td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>
@@ -1552,14 +1756,8 @@
                                                                             <tr>
                                                                                 <td></td>
                                                                                 <td>
-                                                                                    <input type="button"
-                                                                                        value="UPDATE PASSWORD"
-                                                                                        id="UPDATE"
-                                                                                        onclick="UPDATE_PASSWORD()"
-                                                                                        name="UPDATE"
-                                                                                        style="cursor: pointer;">
-                                                                                    <p id="update"
-                                                                                        style="color: green; font-size: 18px;">
+                                                                                    <input type="button" value="UPDATE PASSWORD" id="UPDATE" onclick="UPDATE_PASSWORD()" name="UPDATE" style="cursor: pointer;">
+                                                                                    <p id="update" style="color: green; font-size: 18px;">
                                                                                     </p>
                                                                                 </td>
 
@@ -1569,7 +1767,7 @@
                                                                                             alert("กรุณา ระบุ ข้อมูลให้ครบ !!!");
                                                                                             return;
                                                                                         }
-                                                                                        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                                                                        $.getScript("ip.js", function(data, textStatus, jqxhr) {
                                                                                             var urlipaddress = data.substring(1, data.length - 1);
                                                                                             const dataUser = {
                                                                                                 user: document.getElementById("user_edit").value,
@@ -1581,14 +1779,16 @@
                                                                                                 headers: {
                                                                                                     'Authorization': document.getElementById("accesstoken").value
                                                                                                 }
-                                                                                            }).then(function (response) {
+                                                                                            }).then(function(response) {
                                                                                                 //  console.log(response.data)
                                                                                                 if (response.data.message == "Complete Registration") {
                                                                                                     document.getElementById("update").innerText = "อัพเดทสำเร็จ";
                                                                                                 }
 
-                                                                                            }).catch(function (res) {
-                                                                                                const { response } = res
+                                                                                            }).catch(function(res) {
+                                                                                                const {
+                                                                                                    response
+                                                                                                } = res
                                                                                                 //   console.log(response.data.message)
                                                                                                 if (response.data.message == "update fail.") {
                                                                                                     alert("บันทึกข้อมูลไม่สำเร็จ");
@@ -1609,8 +1809,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-default"
-                                                                        data-dismiss="modal">ปิด</button>
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1634,17 +1833,12 @@
                                                                     <div class="container">
                                                                         <div class="row">
                                                                             <div class="col-20">
-                                                                                <i class="fa fa-exclamation-triangle"
-                                                                                    id="c_delete"
-                                                                                    style="font-size:48px;color:red"></i>
-                                                                                <i class="fa fa-check-circle"
-                                                                                    id="completed"
-                                                                                    style="font-size:48px;color:green; display: none;"></i>
+                                                                                <i class="fa fa-exclamation-triangle" id="c_delete" style="font-size:48px;color:red"></i>
+                                                                                <i class="fa fa-check-circle" id="completed" style="font-size:48px;color:green; display: none;"></i>
                                                                             </div>
 
                                                                             <div>
-                                                                                <label id="lbl_completed"
-                                                                                    for="fname"></label>
+                                                                                <label id="lbl_completed" for="fname"></label>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1653,11 +1847,9 @@
                                                                     <!-- <input type="button" value="ตกลง" id="deleteUser"
                                                                     onclick="Click_DELETE()" name="deleteUser"
                                                                     style="cursor: pointer;"> -->
-                                                                    <input type="button" value="ตกลง" id="deleteUser"
-                                                                        class="primary btn btn-default" />
+                                                                    <input type="button" value="ตกลง" id="deleteUser" class="primary btn btn-default" />
 
-                                                                    <button type="button" class="btn btn-default"
-                                                                        data-dismiss="modal">ปิด</button>
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
                                                                 </div>
                                                             </div>
 

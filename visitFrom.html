@@ -9,8 +9,7 @@
     <link rel="icon" href="../../uploads/logo.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
-        type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Core Css -->
@@ -34,8 +33,7 @@
     <link href="../../css/themes/all-themes.css" rel="stylesheet" />
 
     <!-- Bootstrap Material Datetime Picker Css -->
-    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
-        rel="stylesheet" />
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
 
     <!-- Bootstrap DatePicker Css -->
     <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
@@ -46,9 +44,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/datatables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
 
     <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
 
@@ -70,25 +66,26 @@
     <script src="./checkCost.js"></script>
     <link href="./css-collor.css" rel="stylesheet">
     <link href="../../plugins/sweetalert/sweetalert.css" rel="stylesheet" />
-    
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="./checkCookies.js"></script>
-<script src="./logout.js"></script>
-<script src="./Profile.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./checkCookies.js"></script>
+    <script src="./logout.js"></script>
+    <script src="./Profile.js"></script>
 </head>
 <link href='https://fonts.googleapis.com/css?family=Kanit:400,300&subset=thai,latin' rel='stylesheet' type='text/css'>
 <style>
     body h1 h2 h3 h4 h5 h6 ul li a p {
-      font-family: 'Kanit', sans-serif;
+        font-family: 'Kanit', sans-serif;
     }
-    div{
+    
+    div {
         font-family: 'Kanit', sans-serif;
     }
 </style>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         var _activeMode = Cookies.get('activeMode');
-        if(_activeMode == 'คิดเงิน'){
+        if (_activeMode == 'คิดเงิน') {
             $("#lll").addClass("intro");
             $("#ll").addClass("intro");
         }
@@ -137,17 +134,15 @@
     <nav class="navbar">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#navbar-collapse" aria-expanded="false"></a>
-                    <a href="javascript:void(0);" class="bars"></a>
-                    <a class="navbar-brand" style="display: none;" id="logoname" href="javascript:void(0);"></a>
-                    <a class="navbar-brand" id="namecompyny" href="../../menu.html" style="color: white;" href="#"></a>
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" style="display: none;" id="logoname" href="javascript:void(0);"></a>
+                <a class="navbar-brand" id="namecompyny" href="../../menu.html" style="color: white;" href="#"></a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Call Search -->
-                    <li><a id='logout' style="cursor: pointer;"
-                        data-close="true">[ออกจากระบบ]</a></li>
+                    <li><a id='logout' style="cursor: pointer;" data-close="true">[ออกจากระบบ]</a></li>
                     <!-- #END# Call Search -->
                     <!-- Notifications -->
                     <li class="dropdown">
@@ -269,8 +264,7 @@
                                                 <small>32%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 32%">
+                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 32%">
                                                 </div>
                                             </div>
                                         </a>
@@ -282,8 +276,7 @@
                                                 <small>45%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
                                                 </div>
                                             </div>
                                         </a>
@@ -295,8 +288,7 @@
                                                 <small>54%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 54%">
+                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 54%">
                                                 </div>
                                             </div>
                                         </a>
@@ -308,9 +300,7 @@
                                                 <small>65%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-orange" role="progressbar"
-                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
-                                                    style="width: 65%">
+                                                <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 65%">
                                                 </div>
                                             </div>
                                         </a>
@@ -322,9 +312,7 @@
                                                 <small>92%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-purple" role="progressbar"
-                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
-                                                    style="width: 92%">
+                                                <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 92%">
                                                 </div>
                                             </div>
                                         </a>
@@ -360,18 +348,18 @@
                 <div><br></div>
                 <div><br></div>
                 <div style="color: white;">
-                    <div class="name" data-toggle="dropdown" id="userlogin"  aria-haspopup="true" aria-expanded="false"></div>
+                    <div class="name" data-toggle="dropdown" id="userlogin" aria-haspopup="true" aria-expanded="false"></div>
                 </div>
             </div>
             <div class="menu">
                 <ul class="list">
-                    <li >
+                    <li>
                         <a href="visitordashboard.html">
                             <i class="material-icons">home</i>
                             <span>แดชบอร์ด VISITOR</span>
                         </a>
                     </li>
-                    <li >
+                    <li>
                         <a href="visitorreport.html">
                             <i class="material-icons">description</i>
                             <span>รายงานการเข้าออก</span>
@@ -383,87 +371,82 @@
                             <span>รายงานการคิดเงิน</span>
                         </a>
                     </li>
-                    <!-- <li >
-                        <a href="memberlist.html">
-                            <i class="material-icons">account_circle</i>
-                            <span>รายชื่อผู้ลงทะเบียน</span>
+                    <li>
+                        <a href="estamp_report.html">
+                            <i class="material-icons">description</i>
+                            <span>รายงาน E-Stamp</span>
                         </a>
-                    </li> -->
-                    <li class="active" >
+                    </li>
+                    <li class="active">
                         <a href="javascript:void(0);" class="menu-toggle">
-                           <i class="material-icons">settings</i>
-                           <span>ตั้งค่า</span>
-                       </a>
-                       <ul class="ml-menu">
-                        <li>
-                            <a href="visitorSetting.html">
-                                <span>ประเภท Visitor</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="visitorlicensePlate.html">
-                                <span>ทะเบียนรถ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="visitPlace.html">
-                                <span>สถานที่ติดต่อ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="contactTopic.html">
-                                <span>ติดต่อเรื่อง</span>
-                            </a>
-                        </li>
-                        <li class="active">
-                            <a href="visitFrom.html">
-                                <span>บริษัท</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="department.html">
-                                <span>แผนกที่ติดต่อ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="visiperson.html">
-                                <span>ผู้รับการติดต่อ</span>
-                            </a>
-                        </li>
-                        <li >
-                            <a href="vehicleType.html">
-                                <span>ชนิดรถ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="visitorregisteruser.html">
-                                <span>เพิ่มผู้ใช้งาน</span>
-                            </a>
-                        </li>
-                        <li id="lll" style="display: none;">
-                            <a href="visitorcost.html">
-                                <span>คิดเงิน</span>
-                            </a>
-                        </li>
-                        <li >
-                            <a  href="deleteLog.html">
-                                <span>ลบข้อมูล</span>
-                            </a>
-                        </li>
-                       </ul>
-                   </li>
+                            <i class="material-icons">settings</i>
+                            <span>ตั้งค่า</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="visitorSetting.html">
+                                    <span>ประเภท Visitor</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="visitorlicensePlate.html">
+                                    <span>ทะเบียนรถ</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="visitPlace.html">
+                                    <span>สถานที่ติดต่อ</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="contactTopic.html">
+                                    <span>ติดต่อเรื่อง</span>
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a href="visitFrom.html">
+                                    <span>บริษัท</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="department.html">
+                                    <span>แผนกที่ติดต่อ</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="visiperson.html">
+                                    <span>ผู้รับการติดต่อ</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="vehicleType.html">
+                                    <span>ชนิดรถ</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="visitorregisteruser.html">
+                                    <span>เพิ่มผู้ใช้งาน</span>
+                                </a>
+                            </li>
+                            <li id="lll" style="display: none;">
+                                <a href="visitorcost.html">
+                                    <span>คิดเงิน</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="deleteLog.html">
+                                    <span>ลบข้อมูล</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="visitorblack_white_list.html">
                             <i class="material-icons">settings</i>
                             <span>BlackList/WhiteList</span>
                         </a>
                     </li>
-                    <!-- <li >
-                        <a href="registermember.html">
-                            <i class="material-icons">group_add</i>
-                            <span>เพิ่มผู้ใช้งาน</span>
-                        </a>
-                    </li> -->
+
                     <li id="l10" style="display: none;">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">event</i>
@@ -644,7 +627,7 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="card">
-                                <div class="header header-new"">
+                                <div class="header header-new">
                                     <h2>
                                         <font style="color: white;">บริษัท
                                         </font>
@@ -666,43 +649,36 @@
                                                         <div class="col-sm-12">
                                                             <div class="form-group">
                                                                 <div class="form-line">
-                                                                    <input type="text" class="form-control"
-                                                                        name="txtvisitorType" id="txtvisitorType" value=""
-                                                                        required autocomplete="off"
-                                                                        placeholder="บริษัท" />
+                                                                    <input type="text" class="form-control" name="txtvisitorType" id="txtvisitorType" value="" required autocomplete="off" placeholder="บริษัท" />
                                                                 </div>
                                                             </div>
                                                         </div>
 
                                                     </div>
-                                                    <button class="btn btn-primary waves-effect"
-                                                        id="submitvisitFrom" class="primary"
-                                                        type="button">บันทึก</button>
+                                                    <button class="btn btn-primary waves-effect" id="submitvisitFrom" class="primary" type="button">บันทึก</button>
                                                     <p id="save" style="font-size: 18px;"></p>
-                                                    </div>
-                                              
+                                                </div>
+
                                             </div>
-                                 
-<div>&nbsp;</div>
+
+                                            <div>&nbsp;</div>
                                             <div class="table-responsive">
-                                                <table
-                                                    class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display"
-                                                    id="tablevisitFrom">
+                                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display" id="tablevisitFrom">
                                                     <thead>
                                                         <tr>
                                                             <th>ลำดับที่</th>
                                                             <th>บริษัท</th>
                                                             <th>แก้ไข/ลบ</th>
-                                                           
+
                                                         </tr>
                                                     </thead>
                                                 </table>
                                                 <ul class="pagination" id="pagination2"></ul>
                                             </div>
-                                            
 
 
-                                            
+
+
 
 
 
@@ -718,11 +694,9 @@
                                                                 <div class="container">
                                                                     <div class="row">
                                                                         <div class="col-20">
-                                                                            <i class="material-icons" id="lbl_delete_official"
-                                                                                style="font-size:58px;color:red">delete</i>
-                                                                            <i class="material-icons" id="lbl_completed_official"
-                                                                                style="font-size:58px;color:green; display: none;">check_circle</i>
-                                
+                                                                            <i class="material-icons" id="lbl_delete_official" style="font-size:58px;color:red">delete</i>
+                                                                            <i class="material-icons" id="lbl_completed_official" style="font-size:58px;color:green; display: none;">check_circle</i>
+
                                                                         </div>
                                                                         <div>
                                                                             <label id="lbl_dalete" for="fname"> </label>
@@ -732,18 +706,16 @@
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <input type="button"  value="ลบ" id="DeletevisitFrom"
-                                                                    class="primary btn btn-default" />
-                                
-                                                                <button type="button" class="btn btn-default" 
-                                                                    data-dismiss="modal">ปิด</button>
+                                                                <input type="button" value="ลบ" id="DeletevisitFrom" class="primary btn btn-default" />
+
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                   
+
                                                 </div>
                                             </div>
-                                            
+
 
 
 
@@ -761,7 +733,7 @@
                                                                         <tr>
                                                                             <td> ชื่อบริษัท (เดิม) :</td>
                                                                             <td> <input type="text" id="oldvisitorType" readonly name="oldvisitorType"></td>
-                                                                          
+
                                                                         </tr>
                                                                         <tr>
                                                                             <td>
@@ -777,13 +749,11 @@
                                                                                 <div>&nbsp;</div>
                                                                             </td>
                                                                         </tr>
-                                                                     
+
                                                                         <tr>
                                                                             <td></td>
                                                                             <td>
-                                                                                <input type="button" value="อัพเดท" id="updatevisitFrom"
-                                                                                   name="updatevisitFrom"
-                                                                                    style="cursor: pointer;">
+                                                                                <input type="button" value="อัพเดท" id="updatevisitFrom" name="updatevisitFrom" style="cursor: pointer;">
                                                                                 <p id="update" style="color: green; font-size: 18px;"></p>
                                                                             </td>
                                                                         </tr>
@@ -795,54 +765,52 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                            
+
                                                 </div>
                                             </div>
 
 
                                     </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
 
-        
 
-        <div class="container">
-            <div class="modal fade" id="myModaldont" role="dialog">
-                <div class="modal-dialog" style="width: 300px; height: 200px;">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 id="title" class="modal-title">บันทึกข้อมูล</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-20">
-                                        <i class="fa fa-exclamation-triangle" id="c_delete"
-                                            style="font-size:48px;color:red"></i>
-                                        <i class="fa fa-check-circle" id="completed"
-                                            style="font-size:48px;color:green; display: none;"></i>
-                                    </div>
-                                    <div>
-                                        <label id="lbl_completed" for="fname"> </label>
+
+            <div class="container">
+                <div class="modal fade" id="myModaldont" role="dialog">
+                    <div class="modal-dialog" style="width: 300px; height: 200px;">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 id="title" class="modal-title">บันทึกข้อมูล</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-20">
+                                            <i class="fa fa-exclamation-triangle" id="c_delete" style="font-size:48px;color:red"></i>
+                                            <i class="fa fa-check-circle" id="completed" style="font-size:48px;color:green; display: none;"></i>
+                                        </div>
+                                        <div>
+                                            <label id="lbl_completed" for="fname"> </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">ตกลง</button>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">ตกลง</button>
-                        </div>
+
                     </div>
 
                 </div>
-
             </div>
-        </div>
 
         </div>
     </section>

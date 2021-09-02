@@ -1,24 +1,35 @@
 var obj = JSON.parse(Cookies.get('datatoken'));
 var userId = Cookies.get('datauserId');
 var IDUSER = JSON.parse(Cookies.get('datajwt'));
-console.log(userId)
+
 var _arr = new Array();
 var _arrInfo = new Array();
 var n = 0;
 var n_info = 0;
 
+
+var datamember = Cookies.get('datamember');
+if (datamember != undefined) {
+    datamember = JSON.parse(datamember)
+} else {
+
+    datamember = Cookies.get('datamemberID');
+    datamember = JSON.parse(datamember)
+}
+console.log(datamember)
+
 function acctoken() {
     return new Promise(resolve => {
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             axios.post(urlipaddress + 'token', data, {
                 headers: {
                     'Authorization': obj.refresh_token
                 }
-            }).then(function (response) {
+            }).then(function(response) {
                 resolve(response.data.message.access_token);
 
-            }).catch(function (res) {
+            }).catch(function(res) {
                 const { response } = res
                 if (response.data.message == "Unauthorized") {
                     location.href = "index.html";
@@ -33,7 +44,7 @@ function showCancelMessageregisteruser(title, text) {
         title: title,
         text: text,
         type: "error",
-    }, function (isConfirm) {
+    }, function(isConfirm) {
         swal("Cancelled", "Your imaginary file is safe :)", "error");
     });
 }
@@ -43,7 +54,7 @@ function showSuccessMessageregisteruser(text) {
         title: "สำเร็จ",
         text: text,
         type: "success",
-    }, function (isConfirm) {
+    }, function(isConfirm) {
         if (isConfirm) {
             location.href = "visitorregisteruser.html";
         }
@@ -51,7 +62,7 @@ function showSuccessMessageregisteruser(text) {
 }
 
 function getUser(refresh_token) {
-    $.getScript("ip.js", function (data, textStatus, jqxhr) {
+    $.getScript("ip.js", function(data, textStatus, jqxhr) {
         var urlipaddress = data.substring(1, data.length - 1);
         const dataUserID = {
             userId: IDUSER.userId
@@ -60,7 +71,7 @@ function getUser(refresh_token) {
             headers: {
                 'Authorization': refresh_token
             }
-        }).then(function (response) {
+        }).then(function(response) {
             var cnt = response.data.message.data.length;
 
             var n = 0;
@@ -68,7 +79,7 @@ function getUser(refresh_token) {
             var _arr = new Array();
             for (i = 0; i < cnt; i++) {
                 var _rule = response.data.message.data[i].rule.toLowerCase()
-                //    console.log(_rule)
+                    //    console.log(_rule)
                 if (_rule != "master admin" && _rule != "member") {
                     _arr[n] = {
                         _num: num,
@@ -85,7 +96,10 @@ function getUser(refresh_token) {
 
             $('#table1').DataTable().destroy();
             $('#table1').DataTable({
-                "lengthMenu": [[50, 100, 200, 300, 400, 500, 1000, 1500, 2000, -1], [50, 100, 200, 300, 400, 500, 1000, 1500, 2000, "All"]],
+                "lengthMenu": [
+                    [50, 100, 200, 300, 400, 500, 1000, 1500, 2000, -1],
+                    [50, 100, 200, 300, 400, 500, 1000, 1500, 2000, "All"]
+                ],
                 "pageLength": 50,
                 'data': _arr,
                 "responsive": true,
@@ -101,7 +115,7 @@ function getUser(refresh_token) {
                     { data: "_type" },
                     {
                         data: "_registerDate",
-                        render: function (data) {
+                        render: function(data) {
                             let date = new Date(data);
                             let options = { hour12: false };
                             var sp = date.toLocaleString('en-US', options).replace(',', '').split('/')
@@ -114,16 +128,16 @@ function getUser(refresh_token) {
                     {
                         data: null,
                         className: "center",
-                        defaultContent: '<i href="" class="editor" style="font-size:16px;color:green; cursor: pointer;">เปลี่ยนรหัสผ่าน </i>  / <i href="" class="edituser" style="font-size:14px;color:blue; cursor: pointer;">แก้ไข</i> / <i href="" class="remove" style="font-size:14px;color:red; cursor: pointer;">ลบ</i>'
-                        /// <i href="" class="edituser" style="font-size:14px;color:green; cursor: pointer;">แก้ไข</i> / 
+                        defaultContent: '<i href="" class="resetPass" style="font-size:16px;color:orange; cursor: pointer;">รีเซ็ตรหัสผ่าน </i>/<i href="" class="editor" style="font-size:16px;color:green; cursor: pointer;">เปลี่ยนรหัสผ่าน </i>  / <i href="" class="edituser" style="font-size:14px;color:blue; cursor: pointer;">แก้ไข</i> / <i href="" class="remove" style="font-size:14px;color:red; cursor: pointer;">ลบ</i>'
+                            /// <i href="" class="edituser" style="font-size:14px;color:green; cursor: pointer;">แก้ไข</i> / 
                     }
                 ]
             });
 
 
 
-            $(document).ready(function () {
-                $('#table1').on('click', 'i.editor', function (e) {
+            $(document).ready(function() {
+                $('#table1').on('click', 'i.editor', function(e) {
                     e.preventDefault();
                     var table = $('#table1').DataTable();
                     var _ro = table.row($(this).parents('tr'));
@@ -143,7 +157,7 @@ function getUser(refresh_token) {
                 });
 
                 var data;
-                $('#table1').on('click', 'i.remove', function (e) {
+                $('#table1').on('click', 'i.remove', function(e) {
                     e.preventDefault();
                     var table = $('#table1').DataTable();
                     var _ro = table.row($(this).parents('tr'));
@@ -161,58 +175,69 @@ function getUser(refresh_token) {
                 });
 
 
-                
+
 
 
                 /////////////////////อัพเดท Password
-                $('#UPDATE').on('click', function (e) {
-                    $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                $('#UPDATE').on('click', function(e) {
+
+                    if ($('#passuser_new').val() == $('#passuser_confirm').val()) {
+                        console.log('Matching')
+
+                    } else {
+                        showCancelMessageregisteruser('รหัสผ่านใหม่ไม่ตรงกัน', 'รหัสผ่านใหม่ไม่ตรงกัน กรุณาระบุ รหัสให้ตรงกัน')
+                        return
+                    }
+
+
+
+                    $.getScript("ip.js", function(data, textStatus, jqxhr) {
                         var urlipaddress = data.substring(1, data.length - 1);
                         const dataUser = {
-                            userId: IDUSER.userId,
-                            username: document.getElementById("user_edit").value,
-                            password: document.getElementById("passuser_old").value,
-                            newPassword: document.getElementById("passuser_new").value,
-                        }
-                        //  console.log(dataUser)
+                                userId: IDUSER.userId,
+                                username: document.getElementById("user_edit").value,
+                                password: document.getElementById("passuser_old").value,
+                                newPassword: document.getElementById("passuser_new").value,
+                            }
+                            //  console.log(dataUser)
                         axios.post(urlipaddress + 'changePass', dataUser, {
                             headers: {
                                 'Authorization': refresh_token
                             }
-                        }).then(function (response) {
+                        }).then(function(response) {
                             //    console.log(response.data)
                             if (response.data.message == "Change password is complete.") {
                                 showSuccessMessageregisteruser('อัพเดทข้อมูลสำเร็จ')
-                                // document.getElementById("update").innerText = "อัพเดทสำเร็จ";
-                                // document.getElementById("update").style.color = "green";
+                                    // document.getElementById("update").innerText = "อัพเดทสำเร็จ";
+                                    // document.getElementById("update").style.color = "green";
 
                                 // location.href = "visitorregisteruser.html";
                             }
 
-                        }).catch(function (res) {
+                        }).catch(function(res) {
                             const { response } = res
                             //   console.log(response.data.message)
                             if (response.data.message == "update fail.") {
-                                showCancelMessageregisteruser('บันทึกข้อมูลไม่สำเร็จ','')
-                                // alert("บันทึกข้อมูลไม่สำเร็จ");
-                                // document.getElementById("update").innerText = "";
-                                // document.getElementById("update").style.color = "red";
+                                showCancelMessageregisteruser('บันทึกข้อมูลไม่สำเร็จ', '')
+                                    // alert("บันทึกข้อมูลไม่สำเร็จ");
+                                    // document.getElementById("update").innerText = "";
+                                    // document.getElementById("update").style.color = "red";
                             }
                             if (response.data.message == "Wrong user or password") {
-                              
-                                showCancelMessageregisteruser('รหัสผ่านเดิมไม่ถูกต้อง','')
-                                // document.getElementById("update").innerText = "รหัสผ่านเดิม ไม่ถูกต้อง !!!";
-                                // document.getElementById("update").style.color = "red";
+
+                                showCancelMessageregisteruser('รหัสผ่านเดิมไม่ถูกต้อง', '')
+                                    // document.getElementById("update").innerText = "รหัสผ่านเดิม ไม่ถูกต้อง !!!";
+                                    // document.getElementById("update").style.color = "red";
                             }
 
                         });
                     });
                 });
                 /////////////////////ลบ
-                $('#deleteUser').on('click', function (e) {
+                $('#deleteUser').on('click', function(e) {
                     //console.log('adadasda' + decodejwt.userId)
 
-                    $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                    $.getScript("ip.js", function(data, textStatus, jqxhr) {
                         var urlipaddress = data.substring(1, data.length - 1);
 
                         //  console.log(document.getElementById("user_edit").value)
@@ -225,18 +250,18 @@ function getUser(refresh_token) {
                                 userName: document.getElementById("user_edit").value
                             },
                             headers: { 'Authorization': refresh_token }
-                        }).then(function (response) {
+                        }).then(function(response) {
                             //   console.log(response.data)
                             if (response.data.message == "delete completed") {
                                 showSuccessMessageregisteruser('ลบข้อมูลสำเร็จ')
-                                // document.getElementById("c_delete").style.display = "none";
-                                // document.getElementById("completed").style.display = "block";
-                                // $("#lbl_completed").text('ลบข้อมูลสำเร็จ');
-                                // location.href = "visitorregisteruser.html";
+                                    // document.getElementById("c_delete").style.display = "none";
+                                    // document.getElementById("completed").style.display = "block";
+                                    // $("#lbl_completed").text('ลบข้อมูลสำเร็จ');
+                                    // location.href = "visitorregisteruser.html";
 
                             }
 
-                        }).catch(function (res) {
+                        }).catch(function(res) {
                             const { response } = res
                             //  console.log(response.data.message)
                         });
@@ -244,19 +269,20 @@ function getUser(refresh_token) {
                 });
             });
 
-        }).catch(function (res) {
+        }).catch(function(res) {
             const { response } = res
-        //    console.log(response.data.message)
-        //     if (response.data.message == "Unauthorized") {
-        //         location.href = "index.html";
-        //     }
+            //    console.log(response.data.message)
+            //     if (response.data.message == "Unauthorized") {
+            //         location.href = "index.html";
+            //     }
         });
     });
 }
+
 function validateUsernameUSER() {
     // var reg = /^-?\d*\.?\d*$/;
     var regexNumber = /\d/; //ตรวจสอบว่าเป็นตัวเลข
-    var regexLetter_A = /[a-z]/;  // ตรวจสอบว่า เป็นตัวอักษรภาษาอังกฤษ ทั้งพิมพ์ใหญ่และพิมพ์เล็ก
+    var regexLetter_A = /[a-z]/; // ตรวจสอบว่า เป็นตัวอักษรภาษาอังกฤษ ทั้งพิมพ์ใหญ่และพิมพ์เล็ก
     var regexLetter_a = /[A-Z]/;
     var regExpStrong = /[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/;
     var checkpassadmin = document.getElementById('passuser').value;
@@ -268,10 +294,11 @@ function validateUsernameUSER() {
         return false;
     }
 }
+
 function validateUsernameUSERMEMBER() {
     // var reg = /^-?\d*\.?\d*$/;
     var regexNumber = /\d/; //ตรวจสอบว่าเป็นตัวเลข
-    var regexLetter_A = /[a-z]/;  // ตรวจสอบว่า เป็นตัวอักษรภาษาอังกฤษ ทั้งพิมพ์ใหญ่และพิมพ์เล็ก
+    var regexLetter_A = /[a-z]/; // ตรวจสอบว่า เป็นตัวอักษรภาษาอังกฤษ ทั้งพิมพ์ใหญ่และพิมพ์เล็ก
     var regexLetter_a = /[A-Z]/;
     var regExpStrong = /[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/;
     var checkpassadmin = document.getElementById('passuser2').value;
@@ -285,7 +312,7 @@ function validateUsernameUSERMEMBER() {
 }
 
 
-$(async function () {
+$(async function() {
     const result = await acctoken();
 
 
@@ -299,18 +326,18 @@ $(async function () {
             const dataUserID = {
                 userId: userId
             }
-            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+            $.getScript("ip.js", function(data, textStatus, jqxhr) {
                 var urlipaddress = data.substring(1, data.length - 1);
                 axios.post(urlipaddress + 'user', dataUserID, {
                     headers: {
                         'Authorization': result
                     }
-                }).then(function (response) {
+                }).then(function(response) {
                     var cnt = response.data.message.data.length;
                     for (i = 0; i < cnt; i++) {
                         if (response.data.message.data[i].username == datamember.username) {
                             if (response.data.message.data[i].rule == "member") {
-                             
+
                                 Cookies.remove('datamember');
                                 Cookies.set('datamember', JSON.stringify(response.data.message.data[i]), { expires: 1 })
                                 return;
@@ -330,14 +357,18 @@ $(async function () {
 
 
     /////////////////////////////////// ผู้ใช้งานเจ้าหน้าที่
-    $('#submitvisitorRegis').on('click', async function (e) {
+    $('#submitvisitorRegis').on('click', async function(e) {
+
+        var masteradmin = JSON.parse(Cookies.get('datamemberID'));
+        masteradmin = masteradmin.username.split('@')
+
         var chk_pass = validateUsernameUSER();
         if (chk_pass == false) {
             return;
         }
-        console.log('aaaaa')
+
         document.getElementById("save").innerText = "";
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             var formData = new FormData();
             var file_data = $('#fileimageadmin').prop('files')[0];
@@ -348,7 +379,13 @@ $(async function () {
             }
             const url = urlipaddress + 'addAccount';
             formData.append('userId', userId);
-            formData.append('username', document.getElementById("user").value);
+
+            if (masteradmin[1] == undefined) {
+                formData.append('username', document.getElementById("user").value);
+            } else {
+                formData.append('username', document.getElementById("user").value + '@' + masteradmin[1]);
+            }
+
             formData.append('password', document.getElementById("passuser").value);
             formData.append('rule', document.getElementById("rule").value);
             formData.append('editMode', false);
@@ -357,13 +394,12 @@ $(async function () {
                 headers: {
                     'Authorization': result,
                     'Content-Type': 'multipart/form-data'
-                   
+
                 }
-            }
-            ).then(function (response) {
+            }).then(function(response) {
                 console.log(response.data.message)
                 if (response.data.message == "This user has already been used.") {
-                    showCancelMessageregisteruser('มีข้อมูลในระบบแล้ว','')
+                    showCancelMessageregisteruser('มีข้อมูลในระบบแล้ว', '')
 
                     // document.getElementById("save").innerText = "มีข้อมูลในระบบแล้ว";
                     // document.getElementById("save").style.color = "red";
@@ -374,28 +410,31 @@ $(async function () {
                     getUser(result);
                 }
 
-            }).catch(function (res) {
+            }).catch(function(res) {
                 const { response } = res
-               // console.log(response.data.message)
-                 if (response.data.message == 'This user has already been used.') {
-                    showCancelMessageregisteruser('มีข้อมูลในระบบแล้ว','')
-                //     document.getElementById("save").innerText = "มีข้อมูลในระบบแล้ว";
-                //     document.getElementById("save").style.color = "red";
-                 }
+                // console.log(response.data.message)
+                if (response.data.message == 'This user has already been used.') {
+                    showCancelMessageregisteruser('มีข้อมูลในระบบแล้ว', '')
+                        //     document.getElementById("save").innerText = "มีข้อมูลในระบบแล้ว";
+                        //     document.getElementById("save").style.color = "red";
+                }
             });
         });
     });
 
 
     /////////////////////////////////// ผู้ใช้งาน   Member
-    $('#submitvisitorRegis2').on('click', async function (e) {
+    $('#submitvisitorRegis2').on('click', async function(e) {
         $("#viewImage").empty();
         var chk_pass = validateUsernameUSERMEMBER();
         if (chk_pass == false) {
             return;
         }
+        var masteradmin = JSON.parse(Cookies.get('datamemberID'));
+        masteradmin = masteradmin.username.split('@')
+        console.log(masteradmin[1])
         document.getElementById("save2").innerText = "";
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             var formData = new FormData();
             var file_data = $('#fileimage').prop('files')[0];
@@ -406,7 +445,13 @@ $(async function () {
             }
             const url = urlipaddress + 'addAccount';
             formData.append('userId', userId);
-            formData.append('username', document.getElementById("user2").value);
+
+            if (masteradmin[1] == undefined) {
+                formData.append('username', document.getElementById("user2").value);
+            } else {
+                formData.append('username', document.getElementById("user2").value + '@' + masteradmin[1]);
+            }
+
             formData.append('password', document.getElementById("passuser2").value);
             formData.append('rule', 'member');
             formData.append('phone', document.getElementById("phone").value);
@@ -423,60 +468,240 @@ $(async function () {
                     'Authorization': result,
                     'Content-Type': 'multipart/form-data'
                 }
-            }
-            ).then(function (response) {
+            }).then(function(response) {
                 // console.log(response.data.message)
                 if (response.data.message == "This user has already been used.") {
-                    showCancelMessageregisteruser('มีข้อมูลในระบบแล้ว','')
-                    // document.getElementById("save2").innerText = "มีข้อมูลในระบบแล้ว";
-                    // document.getElementById("save2").style.color = "red";
+                    showCancelMessageregisteruser('มีข้อมูลในระบบแล้ว', '')
+                        // document.getElementById("save2").innerText = "มีข้อมูลในระบบแล้ว";
+                        // document.getElementById("save2").style.color = "red";
                 } else {
                     //  console.log(response.data.message)
                     showSuccessMessageregisteruser('บันทึกสำเร็จ')
-                    // document.getElementById("save2").innerText = "บันทึกสำเร็จ";
-                    // document.getElementById("save2").style.color = "green";
+                        // document.getElementById("save2").innerText = "บันทึกสำเร็จ";
+                        // document.getElementById("save2").style.color = "green";
                     getUsermember(result);
                 }
 
-            }).catch(function (res) {
+            }).catch(function(res) {
                 const { response } = res
-               // console.log(response.data.message)
+                // console.log(response.data.message)
 
                 if (response.data.message == 'This user has already been used.') {
-                    showCancelMessageregisteruser('มีข้อมูลในระบบแล้ว','')
-                    // document.getElementById("save2").innerText = "มีข้อมูลในระบบแล้ว";
-                    // document.getElementById("save2").style.color = "red";
+                    showCancelMessageregisteruser('มีข้อมูลในระบบแล้ว', '')
+                        // document.getElementById("save2").innerText = "มีข้อมูลในระบบแล้ว";
+                        // document.getElementById("save2").style.color = "red";
                 }
             });
         });
     });
 
 
+    $('#submitcategoryexcelfile').on('click', async function(e) {
 
-    
+        await ExportToTable();
 
-    
+    });
+
+
+    var datausername;
+    $('#table1').on('click', 'i.resetPass', function(e) {
+        e.preventDefault();
+        var table = $('#table1').DataTable();
+        var _ro = table.row($(this).parents('tr'));
+        datausername = _ro.data();
+
+        if (datausername == undefined) {
+            datausername = table.row(this).data();
+        }
+        document.getElementById('lbl_reset_completedmember').innerText = 'คุณต้องการ รีเซ็ต รหัสผ่านใช่หรือไม่'
+        $("#myModalresetpass").modal();
+
+    });
+    var _member;
+    $('#table2').on('click', 'i.resetPass', function(e) {
+        e.preventDefault();
+        var table = $('#table2').DataTable();
+        var _ro = table.row($(this).parents('tr'));
+        _member = _ro.data();
+
+        if (_member == undefined) {
+            _member = table.row(this).data();
+        }
+
+        console.log(_member)
+        document.getElementById('lbl_reset_completedmember').innerText = 'คุณต้องการ รีเซ็ต รหัสผ่านใช่หรือไม่'
+        $("#myModalresetpass").modal();
+
+    });
+
+    ///////////////////////// reset password Admin
+    $('#rsetPass_Admin').on('click', async function(e) {
+
+        console.log(datausername)
+
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
+            var urlipaddress = data.substring(1, data.length - 1);
+            var dataUserID;
+            if (_member != undefined) {
+                dataUserID = {
+                    userId: IDUSER.userId,
+                    username: _member.username
+                }
+            } else {
+                dataUserID = {
+                    userId: IDUSER.userId,
+                    username: datausername._user
+                }
+            }
+
+            axios.post(urlipaddress + 'resetPass', dataUserID, {
+                headers: {
+                    'Authorization': result
+                }
+            }).then(function(response) {
+                console.log(response.data.message)
+                if (response.data.message == 'Reset password is complete.') {
+                    $("#myModalresetpass").empty();
+                    showSuccessMessageregisteruser('รีเซ็ตรหัสผ่าน สำเร็จ รหัสผ่านคือ  Password@2 ')
+                }
+            }).catch(function(res) {
+                const { response } = res
+                console.log(response.data.message)
+            });
+        });
+    });
 });
 
 
+async function ExportToTable() {
+    var fileUpload = $("#excelfile")[0];
+    //Validate whether File is valid Excel file.
+    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$/;
+    if (regex.test(fileUpload.value.toLowerCase())) {
+        if (typeof(FileReader) != "undefined") {
+            var reader = new FileReader();
+            //For Browsers other than IE.
+            if (reader.readAsBinaryString) {
+                reader.onload = function(e) {
+                    ProcessExcel(e.target.result);
+                };
+                reader.readAsBinaryString(fileUpload.files[0]);
+            } else {
+                //For IE Browser.
+                reader.onload = async function(e) {
+                    var data = "";
+                    var bytes = new Uint8Array(e.target.result);
+                    for (var i = 0; i < bytes.byteLength; i++) {
+                        data += String.fromCharCode(bytes[i]);
+                    }
+                    await ProcessExcel(data);
 
+                    console.log(data)
+                };
+                reader.readAsArrayBuffer(fileUpload.files[0]);
+            }
+            console.log('fffffffffffffffffffffffffffff')
+            showSuccessMessageregisteruser('บันทึกสำเร็จ', '')
+        } else {
+            // alert("This browser does not support HTML5.");
+            showCancelMessageregisteruser('This browser does not support HTML5.', '')
+        }
+    } else {
+        // alert("Please upload a valid Excel file.");
+        showCancelMessageregisteruser('โปรดอัปโหลดไฟล์ Excel ที่ถูกต้อง !!', '')
+    }
+}
+
+async function ProcessExcel(data) {
+    const result = await acctoken();
+    //Read the Excel File data.
+    var workbook = XLSX.read(data, {
+        type: 'binary'
+    });
+
+    //Fetch the name of First Sheet.
+    var firstSheet = workbook.SheetNames[0];
+    var masteradmin = JSON.parse(Cookies.get('datamemberID'));
+    masteradmin = masteradmin.username.split('@')
+    console.log(masteradmin[1])
+        //Read all rows from First Sheet into an JSON array.
+    var excelRows = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[firstSheet]);
+    $.getScript("ip.js", function(data, textStatus, jqxhr) {
+        //Add the data rows from Excel file.
+        for (var i = 0; i < excelRows.length; i++) {
+            var _u = excelRows[i].username + '@' + masteradmin[1]
+            var _p = excelRows[i].password
+            var _pho = excelRows[i].phone
+            var _ho_no = excelRows[i].houseNo
+            var _ta = excelRows[i].tag
+            var _add = excelRows[i].address
+
+            //   console.log(_ta)
+
+            var urlipaddress = data.substring(1, data.length - 1);
+            var formData = new FormData();
+            const url = urlipaddress + 'addAccount';
+            formData.append('imageProfile', '');
+            formData.append('userId', userId);
+            formData.append('username', _u);
+            formData.append('password', _p);
+            formData.append('rule', 'member');
+            formData.append('phone', _pho);
+            formData.append('houseNo', _ho_no);
+            var _sp = _ta.split(',')
+
+            for (i2 = 0; i2 < _sp.length; i2++) {
+                console.log(_sp[i2])
+                formData.append('tag[]', _sp[i2]);
+
+
+            }
+            formData.append('address', _add);
+            formData.append('editMode', false);
+            // console.log(excelRows[i])
+            axios.put(url, formData, {
+                headers: {
+                    'Authorization': result,
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(function(response) {
+                console.log(response.data.message)
+                if (response.data.message == "This user has already been used.") {
+                    // showCancelMessageregisteruser('มีข้อมูลในระบบแล้ว', '')
+                } else {
+                    // showSuccessMessageregisteruser('บันทึกสำเร็จ', '')
+                    //  getUsermember(result);
+                }
+
+            }).catch(function(res) {
+                const { response } = res
+
+                if (response.data.message == 'This user has already been used.') {
+                    showCancelMessageregisteruser('มีข้อมูลในระบบแล้ว', '')
+                }
+            });
+
+        }
+    });
+
+};
 
 
 
 ////////////////////////////////////////////////   MEMBER
 function getUsermember(refresh_token) {
     // console.log(refresh_token)
-    $.getScript("ip.js", function (data, textStatus, jqxhr) {
+    $.getScript("ip.js", function(data, textStatus, jqxhr) {
         var urlipaddress = data.substring(1, data.length - 1);
         const dataUserID = {
-            userId: IDUSER.userId
-        }
-        //   console.log(dataUserID)
+                userId: IDUSER.userId
+            }
+            //   console.log(dataUserID)
         axios.post(urlipaddress + 'user', dataUserID, {
             headers: {
                 'Authorization': refresh_token
             }
-        }).then(function (response) {
+        }).then(function(response) {
             var cnt = response.data.message.data.length;
             console.log(response.data.message.data)
             var n = 0;
@@ -484,7 +709,7 @@ function getUsermember(refresh_token) {
             var _arr = new Array();
             for (i = 0; i < cnt; i++) {
                 var _rule = response.data.message.data[i].rule.toLowerCase()
-                //    console.log(_rule)
+                    //    console.log(_rule)
                 if (_rule == "member") {
                     _arr[n] = {
                         _num: num,
@@ -512,7 +737,10 @@ function getUsermember(refresh_token) {
             // console.log(_arr)
             $('#table2').DataTable().destroy();
             $('#table2').DataTable({
-                "lengthMenu": [[50, 100, 200, 300, 400, 500, 1000, 1500, 2000, -1], [50, 100, 200, 300, 400, 500, 1000, 1500, 2000, "All"]],
+                "lengthMenu": [
+                    [50, 100, 200, 300, 400, 500, 1000, 1500, 2000, -1],
+                    [50, 100, 200, 300, 400, 500, 1000, 1500, 2000, "All"]
+                ],
                 "pageLength": 50,
                 'data': reversed,
                 "responsive": true,
@@ -531,7 +759,7 @@ function getUsermember(refresh_token) {
                     { data: "address" },
                     {
                         data: "registerDate",
-                        render: function (data) {
+                        render: function(data) {
                             let date = new Date(data);
                             let options = { hour12: false };
                             var sp = date.toLocaleString('en-US', options).replace(',', '').split('/')
@@ -549,19 +777,21 @@ function getUsermember(refresh_token) {
                     {
                         data: null,
                         className: "center",
-                        defaultContent: '<i href="" class="editor" style="font-size:16px;color:green; cursor: pointer;">เปลี่ยนรหัสผ่าน </i> / <i href="" class="edit_member" style="font-size:16px;color:blue; cursor: pointer;">แก้ไข </i>  / <i href="" class="remove" style="font-size:14px;color:red; cursor: pointer;">ลบ</i> '
+                        defaultContent: '<i href="" class="resetPass" style="font-size:16px;color:orange; cursor: pointer;">รีเซ็ตรหัสผ่าน </i>/<i href="" class="editor" style="font-size:16px;color:green; cursor: pointer;">เปลี่ยนรหัสผ่าน </i> / <i href="" class="edit_member" style="font-size:16px;color:blue; cursor: pointer;">แก้ไข </i>  / <i href="" class="remove" style="font-size:14px;color:red; cursor: pointer;">ลบ</i> '
                     }
                 ],
-                "order": [[0, 'desc']],
+                "order": [
+                    [0, 'desc']
+                ],
                 "displayLength": 25,
-                "drawCallback": function (settings) {
+                "drawCallback": function(settings) {
                     var api = this.api();
                     var rows = api.rows({ page: 'current' }).nodes();
                     var last = null;
-                    api.column(0, { page: 'current' }).data().each(function (group, i) {
+                    api.column(0, { page: 'current' }).data().each(function(group, i) {
                         if (last !== group) {
                             $(rows).eq(i).before(
-                                '<tr class="group"><td colspan="10">' + 'บ้านเลขที่ ' + group + '</td></tr>'
+                                '<tr class="group"><td colspan="6">' + 'บ้านเลขที่ ' + group + '</td></tr>'
                             );
                             last = group;
                         }
@@ -569,9 +799,9 @@ function getUsermember(refresh_token) {
                 }
             });
 
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $("#viewImage").empty();
-                $('#table2').on('click', 'i.view', function (e) {
+                $('#table2').on('click', 'i.view', function(e) {
                     $("#viewImage").empty();
                     var table = $('#table2').DataTable();
                     e.preventDefault();
@@ -591,7 +821,7 @@ function getUsermember(refresh_token) {
                             headers: {
                                 'Authorization': refresh_token
                             }
-                        }).then(function (response) {
+                        }).then(function(response) {
                             var arrayBuffer = response.data; // Note: not oReq.responseText
                             var u8 = new Uint8Array(arrayBuffer);
                             var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -609,7 +839,7 @@ function getUsermember(refresh_token) {
 
 
 
-                $('#table2').on('click', 'i.editor', function (e) {
+                $('#table2').on('click', 'i.editor', function(e) {
                     e.preventDefault();
                     var table = $('#table2').DataTable();
                     var _ro = table.row($(this).parents('tr'));
@@ -633,7 +863,7 @@ function getUsermember(refresh_token) {
 
 
                 var data;
-                $('#table2').on('click', 'i.remove', function (e) {
+                $('#table2').on('click', 'i.remove', function(e) {
                     e.preventDefault();
                     var table = $('#table2').DataTable();
                     var _ro = table.row($(this).parents('tr'));
@@ -654,8 +884,19 @@ function getUsermember(refresh_token) {
 
 
                 /////////////////////อัพเดท
-                $('#UPDATEmember').on('click', function (e) {
-                    $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                $('#UPDATEmember').on('click', function(e) {
+
+                    if ($('#passuser_newmember').val() == $('#passuser_confirmmember').val()) {
+                        console.log('Matching')
+                    } else {
+                        showCancelMessageregisteruser('รหัสผ่านใหม่ไม่ตรงกัน', 'รหัสผ่านใหม่ไม่ตรงกัน กรุณาระบุ รหัสให้ตรงกัน')
+
+                        return
+                    }
+
+
+
+                    $.getScript("ip.js", function(data, textStatus, jqxhr) {
                         var urlipaddress = data.substring(1, data.length - 1);
                         const dataUser = {
                             userId: IDUSER.userId,
@@ -667,35 +908,35 @@ function getUsermember(refresh_token) {
                             headers: {
                                 'Authorization': refresh_token
                             }
-                        }).then(function (response) {
+                        }).then(function(response) {
                             if (response.data.message == "Change password is complete.") {
                                 showSuccessMessageregisteruser('อัพเดทข้อมูลสำเร็จ')
-                                // document.getElementById("updatemember").innerText = "อัพเดทสำเร็จ";
-                                // document.getElementById("updatemember").style.color = "green";
+                                    // document.getElementById("updatemember").innerText = "อัพเดทสำเร็จ";
+                                    // document.getElementById("updatemember").style.color = "green";
 
                                 // location.href = "visitorregisteruser.html";
                             }
 
-                        }).catch(function (res) {
+                        }).catch(function(res) {
                             const { response } = res
                             if (response.data.message == "update fail.") {
-                                showCancelMessageregisteruser('บันทึกข้อมูลไม่สำเร็จ','')
-                                // alert("บันทึกข้อมูลไม่สำเร็จ");
-                                // document.getElementById("updatemember").innerText = "";
-                                // document.getElementById("updatemember").style.color = "red";
+                                showCancelMessageregisteruser('บันทึกข้อมูลไม่สำเร็จ', '')
+                                    // alert("บันทึกข้อมูลไม่สำเร็จ");
+                                    // document.getElementById("updatemember").innerText = "";
+                                    // document.getElementById("updatemember").style.color = "red";
                             }
                             if (response.data.message == "Wrong user or password") {
-                                showCancelMessageregisteruser('รหัสผ่านเดิม ไม่ถูกต้อง !!!','')
-                                // document.getElementById("updatemember").innerText = "รหัสผ่านเดิม ไม่ถูกต้อง !!!";
-                                // document.getElementById("updatemember").style.color = "red";
+                                showCancelMessageregisteruser('รหัสผ่านเดิม ไม่ถูกต้อง !!!', '')
+                                    // document.getElementById("updatemember").innerText = "รหัสผ่านเดิม ไม่ถูกต้อง !!!";
+                                    // document.getElementById("updatemember").style.color = "red";
                             }
 
                         });
                     });
                 });
                 /////////////////////ลบ
-                $('#deleteUsermember').on('click', function (e) {
-                    $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                $('#deleteUsermember').on('click', function(e) {
+                    $.getScript("ip.js", function(data, textStatus, jqxhr) {
                         var urlipaddress = data.substring(1, data.length - 1);
                         axios({
                             url: urlipaddress + 'delPass',
@@ -705,21 +946,21 @@ function getUsermember(refresh_token) {
                                 userName: document.getElementById("user_editmember").value
                             },
                             headers: { 'Authorization': refresh_token }
-                        }).then(function (response) {
+                        }).then(function(response) {
                             if (response.data.message == "delete completed") {
                                 showSuccessMessageregisteruser('ลบข้อมูลสำเร็จ')
-                                // document.getElementById("c_deletemember").style.display = "none";
-                                // document.getElementById("completedmember").style.display = "block";
-                                // $("#lbl_completedmember").text('ลบข้อมูลสำเร็จ');
-                                //location.href = "visitorregisteruser.html";
+                                    // document.getElementById("c_deletemember").style.display = "none";
+                                    // document.getElementById("completedmember").style.display = "block";
+                                    // $("#lbl_completedmember").text('ลบข้อมูลสำเร็จ');
+                                    //location.href = "visitorregisteruser.html";
                             }
-                        }).catch(function (res) {
+                        }).catch(function(res) {
                             const { response } = res
                         });
                     });
                 });
             });
-        }).catch(function (res) {
+        }).catch(function(res) {
             const { response } = res
 
         });

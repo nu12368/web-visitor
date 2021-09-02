@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>WAC</title>
+    <!-- Favicon-->
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- JQuery DataTable Css -->
+    <link href="../../plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+
+    <link href="../../plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+    <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+
+
+    <!-- Custom Css -->
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="../../css/themes/all-themes.css" rel="stylesheet" />
+
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+
+    <!-- Bootstrap DatePicker Css -->
+    <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+    <link href="../../plugins/light-gallery/css/lightgallery.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
+    <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
+    <!-- modal  -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../plugins2/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="../../plugins/light-gallery/css/lightgallery.css" rel="stylesheet">
+
+    <script src="./pageTable.js"></script>
+    <link href="./css-collor.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.1.2/dist/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/dayjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/plugin/utc.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/plugin/isBetween.min.js"></script>
+
+    <link href="../../plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+
+
+
+
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+    <script src="./checkCookies.js"></script>
+    <script src="./pageTable.js"></script>
+    <script src="./checkCost.js"></script>
+    <script type="text/javascript" src="./addimage.js"></script>
+    <script type="text/javascript" src="./viewimage.js"></script>
+    <script type="text/javascript" src="./editimage.js"></script>
+    <script type="text/javascript" src="./edit_supplies.js"></script>
+
+    <script src="./Profile.js"></script>
+
+    <script src="./logout.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="./booking_report.js"></script>
+    <script>
+        window.isMbscDemo = true;
+    </script>
+
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
+</head>
+
+<link href='https://fonts.googleapis.com/css?family=Kanit:400,300&subset=thai,latin' rel='stylesheet' type='text/css'>
+
+
+<script>
+    $(function() {
+        $('input[name="daterange"]').daterangepicker({
+            singleDatePicker: false,
+            linkedCalendars: true,
+            locale: {
+                cancelLabel: 'ปิด',
+                applyLabel: 'ตกลง'
+            }
+        });
+    });
+</script>
+<style>
+    body h1 h2 h3 h4 h5 h6 ul li a p {
+        font-family: 'Kanit', sans-serif;
+    }
+    
+    div {
+        font-family: 'Kanit', sans-serif;
+    }
+</style>
+<style>
+    .intro {
+        display: block !important;
+    }
+    
+    .intronone {
+        display: none !important;
+    }
+</style>
+<style>
+    .green {
+        color: green;
+        /* background-color: green !important; */
+    }
+    
+    .red {
+        color: red;
+        /* background-color: red !important; */
+    }
+    
+    .gray {
+        color: gray;
+        /* background-color: red !important; */
+    }
+    
+    .blue {
+        color: blue;
+        /* background-color: red !important; */
+    }
+    
+    .yellow {
+        color: black;
+        background-color: rgb(248, 248, 66) !important;
+    }
+</style>
+<style>
+    tr.group,
+    tr.group:hover {
+        /* background-color: rgb(235, 233, 233) !important; */
+        background-color: #fde4e4 !important;
+        color: blue;
+    }
+</style>
+<script>
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var ti = today.toLocaleTimeString('en-US', {
+        hour12: false,
+        hour: "numeric",
+        minute: "numeric"
+    });
+    today = dd + '/' + mm + '/' + yyyy;
+
+    $(document).ready(function() {
+        console.log(yyyy + '-' + mm + '-' + dd)
+            // $("#day_agendar").text('รายการจอง วันที่ ' + dd + '/' + mm + '/' + yyyy);
+    });
+</script>
+
+
+
+
+<body class="theme-red">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <div class="search-icon">
+            <i class="material-icons">search</i>
+        </div>
+        <input type="text" placeholder="START TYPING...">
+        <div class="close-search">
+            <i class="material-icons">close</i>
+        </div>
+    </div>
+    <!-- #END# Search Bar -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" style="display: none;" id="logoname" href="javascript:void(0);"></a>
+                <a class="navbar-brand" id="namecompyny" href="../../menu.html" style="color: white;" href="#"></a>
+                <a class="navbar-brand" id="namecompynymember" href="../../servicedashboard.html" style="color: white;" href="#"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Call Search -->
+
+                    <li><a id='logout' style="cursor: pointer;" data-close="true">[ออกจากระบบ]</a></li>
+
+                    <!-- Call Search -->
+                    <!-- <li><a href="javascript:void(0);" class="js-search" data-close="true"><i
+                                class="material-icons">search</i></a></li> -->
+                    <!-- #END# Call Search -->
+                    <!-- Notifications -->
+                    <li class="dropdown">
+                        <!-- <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <i class="material-icons">notifications</i>
+                            <span class="label-count">7</span>
+                        </a> -->
+                        <ul class="dropdown-menu">
+                            <li class="header">NOTIFICATIONS</li>
+                            <li class="body">
+                                <ul class="menu">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-light-green">
+                                                <i class="material-icons">person_add</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>12 new members joined</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 14 mins ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-cyan">
+                                                <i class="material-icons">add_shopping_cart</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>4 sales made</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 22 mins ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-red">
+                                                <i class="material-icons">delete_forever</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>Nancy Doe</b> deleted account</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 3 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-orange">
+                                                <i class="material-icons">mode_edit</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>Nancy</b> changed name</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 2 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-blue-grey">
+                                                <i class="material-icons">comment</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>John</b> commented your post</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 4 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-light-green">
+                                                <i class="material-icons">cached</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>John</b> updated status</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 3 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-purple">
+                                                <i class="material-icons">settings</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>Settings updated</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> Yesterday
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="javascript:void(0);">View All Notifications</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Notifications -->
+                    <!-- Tasks -->
+                    <li class="dropdown">
+                        <!-- <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <i class="material-icons">flag</i>
+                            <span class="label-count"></span>
+                        </a> -->
+                        <ul class="dropdown-menu">
+                            <li class="header">TASKS</li>
+                            <li class="body">
+                                <ul class="menu tasks">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Footer display issue
+                                                <small>32%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 32%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Make new buttons
+                                                <small>45%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Create new dashboard
+                                                <small>54%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 54%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Solve transition issue
+                                                <small>65%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 65%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Answer GitHub questions
+                                                <small>92%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 92%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="javascript:void(0);">View All Tasks</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Tasks -->
+                    <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i
+                                class="material-icons">more_vert</i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar" style="text-align: center;">
+            <!-- User Info -->
+            <div class="user-info" style="text-align:center;">
+                <div class="image">
+                    <!-- <img  id="imageProfile" src="/images/Profile.png" width="80" height="80" alt="User" />
+                    <a class="navbar-brand" id="logoname" href="../../servicedashboard.html">หน้าแรก</a> -->
+                    <!-- <a class="navbar-brand" id="logonamepayment" href="../../servicedashboard.html">SERVICE</a> -->
+                    <a class="navbar-brand" id="logoname" href="../../servicedashboard.html">
+                        <img id="imageProfile" src="/images/Profile.png" width="80" height="80" alt="User" />
+                    </a>
+                </div>
+                <div><br></div>
+                <div><br></div>
+                <div style="color: white;">
+                    <div class="name" data-toggle="dropdown" id="userlogin" aria-haspopup="true" aria-expanded="false">
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu">
+                <ul class="list">
+                    <li>
+                        <a href="servicedashboard.html">
+                            <i class="material-icons">home</i>
+                            <span>แดชบอร์ด SERVICE</span>
+                        </a>
+                    </li>
+                    <li id="l17" style="display: none;">
+                        <a href="allnotice.html">
+                            <i class="material-icons">record_voice_over</i>
+                            <span>ประกาศชุมชน</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="inform.html">
+                            <i class="material-icons">report_problem</i>
+                            <span>รายการแจ้งเหตุ</span>
+                        </a>
+                    </li>
+                    <li id="supplies" style="display: none;">
+                        <a href="supplies.html">
+                            <i class="material-icons">markunread_mailbox</i>
+                            <span>พัสดุ</span>
+                        </a>
+                    </li>
+                    <li id="l10" style="display: none;">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">event</i>
+                            <span>นัดหมาย/ประวัติการเข้าพบ</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="appointment.html">
+                                    <span>นัดหมาย</span>
+                                </a>
+                            </li>
+                            <li id="l11">
+                                <a href="reportappointment.html">
+                                    <span>ประวัติการเข้าพบ</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="appeal.html">
+                            <i class="material-icons">pan_tool</i>
+                            <span>รายการร้องเรียน</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="maintenance.html">
+                            <i class="material-icons">build</i>
+                            <span>รายการแจ้งซ่อมบำรุง</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="allservice.html">
+                            <i class="material-icons">local_laundry_service</i>
+                            <span>ข้อมูลบริการ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="allbusiness.html">
+                            <i class="material-icons">business</i>
+                            <span>ข้อมูลธุรกิจ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="alltravel.html">
+                            <i class="material-icons">card_travel</i>
+                            <span>ข้อมูลท่องเที่ยว</span>
+                        </a>
+                    </li>
+                    <li id="asset" style="display: none;">
+                        <a href="allasset.html">
+                            <i class="material-icons">account_balance</i>
+                            <span>ข้อมูลทรัพย์สิน</span>
+                        </a>
+                    </li>
+                    <li id="approved" style="display: none;">
+                        <a href="approved.html">
+                            <i class="material-icons">list</i>
+                            <span>รายการรออนุมัติ</span>
+                        </a>
+                    </li>
+                    <li id="allpayment" style="display: none;">
+                        <a href="allpayment.html">
+                            <i class="material-icons">beenhere</i>
+                            <span>รายการชำระเงิน</span>
+                        </a>
+                    </li>
+                    <li id="allmarket">
+                        <a href="#">
+                            <i class="material-icons">shopping_cart</i>
+                            <span>ตลาดนัด</span>
+                        </a>
+                    </li>
+                    <li id="agendar">
+                        <a href="agendar.html">
+                            <i class="material-icons">view_agenda</i>
+                            <span>จอง</span>
+                        </a>
+                    </li>
+                    <li id="booking_report" class="active">
+                        <a href="booking_report.html">
+                            <i class="material-icons">view_agenda</i>
+                            <span>รายงานการจองบริการ</span>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+            <!-- #Menu -->
+            <!-- Footer -->
+
+            <!-- #Footer -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+        <!-- Right Sidebar -->
+        <aside id="rightsidebar" class="right-sidebar">
+            <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                <li role="presentation" class="active"><a href="#skins" data-toggle="tab">SKINS</a></li>
+                <!-- <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li> -->
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active in active" id="skins">
+                    <ul class="demo-choose-skin">
+                        <li data-theme="red" class="active">
+                            <div class="red"></div>
+                            <span>Red</span>
+                        </li>
+                        <li data-theme="pink">
+                            <div class="pink"></div>
+                            <span>Pink</span>
+                        </li>
+                        <li data-theme="purple">
+                            <div class="purple"></div>
+                            <span>Purple</span>
+                        </li>
+                        <li data-theme="deep-purple">
+                            <div class="deep-purple"></div>
+                            <span>Deep Purple</span>
+                        </li>
+                        <li data-theme="indigo">
+                            <div class="indigo"></div>
+                            <span>Indigo</span>
+                        </li>
+                        <li data-theme="blue">
+                            <div class="blue"></div>
+                            <span>Blue</span>
+                        </li>
+                        <li data-theme="light-blue">
+                            <div class="light-blue"></div>
+                            <span>Light Blue</span>
+                        </li>
+                        <li data-theme="cyan">
+                            <div class="cyan"></div>
+                            <span>Cyan</span>
+                        </li>
+                        <li data-theme="teal">
+                            <div class="teal"></div>
+                            <span>Teal</span>
+                        </li>
+                        <li data-theme="green">
+                            <div class="green"></div>
+                            <span>Green</span>
+                        </li>
+                        <li data-theme="light-green">
+                            <div class="light-green"></div>
+                            <span>Light Green</span>
+                        </li>
+                        <li data-theme="lime">
+                            <div class="lime"></div>
+                            <span>Lime</span>
+                        </li>
+                        <li data-theme="yellow">
+                            <div class="yellow"></div>
+                            <span>Yellow</span>
+                        </li>
+                        <li data-theme="amber">
+                            <div class="amber"></div>
+                            <span>Amber</span>
+                        </li>
+                        <li data-theme="orange">
+                            <div class="orange"></div>
+                            <span>Orange</span>
+                        </li>
+                        <li data-theme="deep-orange">
+                            <div class="deep-orange"></div>
+                            <span>Deep Orange</span>
+                        </li>
+                        <li data-theme="brown">
+                            <div class="brown"></div>
+                            <span>Brown</span>
+                        </li>
+                        <li data-theme="grey">
+                            <div class="grey"></div>
+                            <span>Grey</span>
+                        </li>
+                        <li data-theme="blue-grey">
+                            <div class="blue-grey"></div>
+                            <span>Blue Grey</span>
+                        </li>
+                        <li data-theme="black">
+                            <div class="black"></div>
+                            <span>Black</span>
+                        </li>
+                    </ul>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="settings">
+                    <div class="demo-settings">
+                        <p>GENERAL SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Report Panel Usage</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Email Redirect</span>
+                                <div class="switch">
+                                    <label><input type="checkbox"><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                        <p>SYSTEM SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Notifications</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Auto Updates</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                        <p>ACCOUNT SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Offline</span>
+                                <div class="switch">
+                                    <label><input type="checkbox"><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Location Permission</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <!-- #END# Right Sidebar -->
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>
+                    <!-- <small>Taken from <a href="https://datatables.net/" target="_blank">datatables.net</a></small> -->
+                </h2>
+            </div>
+            <!-- Basic Examples -->
+
+
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header header-new">
+                            <h2 id="h_der">
+                                <font style=" color: white;">รายงานจองบริการ/รายงารการยกเลิก</font>
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <form id="formElem">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                                    <li role="presentation" class="active"><a href="#tab1" style="font-size: 18px;" data-toggle="tab">รายงานการจอง</a>
+                                    </li>
+                                    <li role="presentation" class=""><a href="#tab2" style="font-size: 18px;" data-toggle="tab">รายงานการยกเลิก</a>
+                                    </li>
+                                </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <h2 id="namelist"></h2>
+                                    <div role="tabpanel" class="tab-pane fade in active" id="tab1">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <p>เลือกวันที่</p>
+                                                <input class="drp-calendar.right form-control" id="daterangebooking" type="text" name="daterange" value="">
+                                            </div>
+                                            <div><br></div>
+                                            <table>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>
+                                                        <button class="btn btn-primary waves-effect" id="submitbookingReport" class="primary" type="button"> ค้นหา</button>
+                                                    </td>
+                                                    <td>&nbsp;</td>
+                                                    <td>
+                                                        <button class="btn btn-primary waves-effect" onclick="ccancelpage()" style="display: none;" id="btn_cancelbooking" class="primary" type="button">ยกเลิก</button>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <script>
+                                                function ccancelpage() {
+                                                    location.href = 'booking_report.html'
+                                                }
+                                            </script>
+                                            <div style="text-align: center; display: none;" id="div_preloader">
+                                                <div class="demo-preloader">
+                                                    <div class="preloader pl-size-xl">
+                                                        <div class="spinner-layer">
+                                                            <div class="circle-clipper left">
+                                                                <div class="circle"></div>
+                                                            </div>
+                                                            <div class="circle-clipper right">
+                                                                <div class="circle"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div><br></div>
+                                            <div id="test1" style="float:right;">
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display" id="tbl_booking_report">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>รายการ</th>
+                                                            <th>วันที่จอง</th>
+                                                            <th>ช่วงเวลาที่จอง</th>
+                                                            <th>รายละเอียด</th>
+                                                            <th>เบอร์โทร</th>
+                                                            <th>บ้านเลขที่</th>
+                                                            <th>ที่อยู่</th>
+                                                            <th>วันที่บันทึก</th>
+                                                            <th>สถานะ</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div role="tabpanel" class="tab-pane fade in" id="tab2">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <p>เลือกวันที่</p>
+                                                <input class="drp-calendar.right form-control" id="daterange" type="text" name="daterange" value="">
+                                            </div>
+                                            <div style="text-align: center; display: none;" id="div_preloader_cancel">
+                                                <div class="demo-preloader">
+                                                    <div class="preloader pl-size-xl">
+                                                        <div class="spinner-layer">
+                                                            <div class="circle-clipper left">
+                                                                <div class="circle"></div>
+                                                            </div>
+                                                            <div class="circle-clipper right">
+                                                                <div class="circle"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div><br></div>
+                                            <table>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>
+                                                        <button class="btn btn-primary waves-effect" id="submitbookingReportDatetimeCancel" class="primary" type="button"> ค้นหา</button>
+                                                    </td>
+                                                    <td>&nbsp;</td>
+                                                    <td>
+                                                        <button class="btn btn-primary waves-effect" style="display: none;" id="btn_cancel" class="primary" type="button">ยกเลิก</button>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div><br></div>
+                                        <div id="test" style="float:right;">
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display" id="tbl_booking_reportcancel">
+                                                <thead>
+                                                    <tr>
+                                                        <th>รายการ</th>
+                                                        <th>วันที่จอง</th>
+                                                        <th>ช่วงเวลาที่จอง</th>
+                                                        <th>รายละเอียด</th>
+                                                        <th>เหตุผลที่ยกเลิก</th>
+                                                        <th>เบอร์โทร</th>
+                                                        <th>บ้านเลขที่</th>
+                                                        <th>ที่อยู่</th>
+                                                        <th>วันที่บันทึก</th>
+                                                        <th>วันที่ยกเลิก</th>
+                                                        <th>สถานะ</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+
+                                        <!-- <div class="col-xs-4 form-group">
+                                           
+                                        </div> -->
+
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <section>
+            <div class="rt-container">
+                <div class="col-rt-12">
+                    <div class="Scriptcontent">
+                        <a href="javascript:" id="return-to-top"><i class="icon-chevron-up"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ICON NEEDS FONT AWESOME FOR CHEVRON UP ICON -->
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/scrollstyle.css">
+        <script src="./scroll.js"></script>
+
+
+
+        <!-- <script src="../../plugins/jquery/jquery.min.js"></script> -->
+
+        <!-- Bootstrap Core Js -->
+        <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
+
+        <!-- Select Plugin Js -->
+        <!-- <script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script> -->
+
+        <!-- Slimscroll Plugin Js -->
+        <script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+        <!-- Waves Effect Plugin Js -->
+        <script src="../../plugins/node-waves/waves.js"></script>
+
+        <!-- Autosize Plugin Js -->
+        <script src="../../plugins/autosize/autosize.js"></script>
+
+        <!-- Moment Plugin Js -->
+        <script src="../../plugins/momentjs/moment.js"></script>
+
+        <!-- Bootstrap Material Datetime Picker Plugin Js -->
+        <script src="../../plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+        <!-- Bootstrap Datepicker Plugin Js -->
+        <script src="../../plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+        <script src="../../plugins/sweetalert/sweetalert.min.js"></script>
+        <script src="../../js/pages/ui/dialogs.js"></script>
+
+        <script src="../../plugins/jquery-datatable/jquery.dataTables.js"></script>
+        <script src="../../plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+        <script src="../../plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+        <script src="../../plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+        <script src="../../plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+        <script src="../../plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+        <script src="../../plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+        <script src="../../plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+        <script src="../../plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+
+
+        <!-- Bootstrap Material Datetime Picker Plugin Js -->
+
+
+        <!-- Bootstrap Datepicker Plugin Js -->
+
+
+
+        <script src="../../plugins/light-gallery/js/lightgallery-all.js"></script>
+        <script src="../../js/pages/medias/image-gallery.js"></script>
+
+        <!-- Custom Js -->
+        <script src="../../js/admin.js"></script>
+        <script src="../../js/pages/forms/basic-form-elements.js"></script>
+
+        <!-- Demo Js -->
+        <script src="../../js/demo.js"></script>
+        <script src="../../plugins2/dataTables.responsive.min.js"></script>
+
+
+
+
+
+</body>
+
+
+</html>

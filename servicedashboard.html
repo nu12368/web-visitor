@@ -9,8 +9,7 @@
     <link rel="icon" href="../../uploads/logo.ico" type="image/x-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
-        type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Core Css -->
@@ -29,8 +28,7 @@
 
 
     <!-- Bootstrap Material Datetime Picker Css -->
-    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
-        rel="stylesheet" />
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
     <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
 
 
@@ -42,8 +40,7 @@
     <link href="../../css/themes/all-themes.css" rel="stylesheet" />
 
     <!-- Bootstrap Material Datetime Picker Css -->
-    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"
-        rel="stylesheet" />
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
 
     <!-- Bootstrap DatePicker Css -->
     <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
@@ -54,9 +51,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/datatables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
 
     <!-- modal  -->
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
@@ -100,13 +95,17 @@
     <script src="./invoice.js"></script>
     <script src="./appointment.js"></script>
 
+    <script src="./approved.js"></script>
+
+
 </head>
 <link href='https://fonts.googleapis.com/css?family=Kanit:400,300&subset=thai,latin' rel='stylesheet' type='text/css'>
 <style>
     body h1 h2 h3 h4 h5 h6 ul li a p {
-      font-family: 'Kanit', sans-serif;
+        font-family: 'Kanit', sans-serif;
     }
-    div{
+    
+    div {
         font-family: 'Kanit', sans-serif;
     }
 </style>
@@ -115,24 +114,40 @@
     .intro {
         display: block !important;
     }
-
+    
     .intronone {
         display: none !important;
     }
-
 </style>
 <script>
+    Cookies.set('maintenance', 'maintenance', {
+        expires: 1
+    })
+    Cookies.set('inform', 'inform', {
+        expires: 1
+    })
+    Cookies.set('appeal', 'appeal', {
+        expires: 1
+    })
+    Cookies.set('appointment', 'appointment', {
+        expires: 1
+    })
+    Cookies.set('announce', 'announce', {
+        expires: 1
+    })
 
-    Cookies.set('maintenance', 'maintenance', { expires: 1 })
-    Cookies.set('inform', 'inform', { expires: 1 })
-    Cookies.set('appeal', 'appeal', { expires: 1 })
-    Cookies.set('appointment', 'appointment', { expires: 1 })
-    Cookies.set('announce', 'announce', { expires: 1 })
-
-    Cookies.set('travel', 'travel', { expires: 1 })
-    Cookies.set('business', 'business', { expires: 1 })
-    Cookies.set('service', 'service', { expires: 1 })
-    Cookies.set('asset', 'asset', { expires: 1 })
+    Cookies.set('travel', 'travel', {
+        expires: 1
+    })
+    Cookies.set('business', 'business', {
+        expires: 1
+    })
+    Cookies.set('service', 'service', {
+        expires: 1
+    })
+    Cookies.set('asset', 'asset', {
+        expires: 1
+    })
 </script>
 
 <body class="theme-red">
@@ -170,9 +185,8 @@
     <!-- Top Bar -->
     <nav class="navbar">
         <div class="container-fluid">
-          <div class="navbar-header">
-                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#navbar-collapse" aria-expanded="false"></a>
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
                 <a class="navbar-brand" style="display: none;" id="logoname" href="javascript:void(0);"></a>
                 <a class="navbar-brand" id="namecompyny" href="../../menu.html" style="color: white;" href="#"></a>
@@ -304,8 +318,7 @@
                                                 <small>32%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 32%">
+                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 32%">
                                                 </div>
                                             </div>
                                         </a>
@@ -317,8 +330,7 @@
                                                 <small>45%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
                                                 </div>
                                             </div>
                                         </a>
@@ -330,8 +342,7 @@
                                                 <small>54%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85"
-                                                    aria-valuemin="0" aria-valuemax="100" style="width: 54%">
+                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 54%">
                                                 </div>
                                             </div>
                                         </a>
@@ -343,9 +354,7 @@
                                                 <small>65%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-orange" role="progressbar"
-                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
-                                                    style="width: 65%">
+                                                <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 65%">
                                                 </div>
                                             </div>
                                         </a>
@@ -357,9 +366,7 @@
                                                 <small>92%</small>
                                             </h4>
                                             <div class="progress">
-                                                <div class="progress-bar bg-purple" role="progressbar"
-                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
-                                                    style="width: 92%">
+                                                <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 92%">
                                                 </div>
                                             </div>
                                         </a>
@@ -406,11 +413,10 @@
                         </ul>
                     </div>
                 </div>
-                <div class="image"  >
+                <div class="image">
                     <!-- <a class="navbar-brand" id="logonamepayment" href="../../servicedashboard.html">SERVICE</a> -->
                     <a class="navbar-brand" id="logoname" href="../../servicedashboard.html">
-                        <img id="imageProfile" src="/images/Profile.png" width="80" height="80"
-                            alt="AdminBSB - Profile Image" />
+                        <img id="imageProfile" src="/images/Profile.png" width="80" height="80" alt="AdminBSB - Profile Image" />
                     </a>
                 </div>
                 <!-- <div><br></div>
@@ -420,7 +426,7 @@
                 <div><br></div>
                 <div><br></div>
                 <div style="color: white;">
-                    <div class="name" data-toggle="dropdown" id="userlogin"  aria-haspopup="true" aria-expanded="false"></div>
+                    <div class="name" data-toggle="dropdown" id="userlogin" aria-haspopup="true" aria-expanded="false"></div>
                 </div>
                 <div class="content-area">
                     <br>
@@ -490,7 +496,7 @@
                             </li>
                         </ul>
                     </li>
-                
+
                     <li>
                         <a href="appeal.html">
                             <i class="material-icons">pan_tool</i>
@@ -529,25 +535,40 @@
                             <span>ข้อมูลทรัพย์สิน</span>
                         </a>
                     </li>
-             
-                   
-                   
+
+                    <li id="approved" style="display: none;">
+                        <a href="approved.html">
+                            <i class="material-icons">list</i>
+                            <span>รายการรออนุมัติ</span>
+                        </a>
+                    </li>
+
                     <li id="allpayment" style="display: none;">
                         <a href="allpayment.html">
                             <i class="material-icons">beenhere</i>
                             <span>รายการชำระเงิน</span>
                         </a>
                     </li>
-                   
 
-                       <li id="allmarket" >
+
+                    <li id="allmarket">
                         <a href="#">
                             <i class="material-icons">shopping_cart</i>
                             <span>ตลาดนัด</span>
                         </a>
                     </li>
-
-                   
+                    <li id="agendar">
+                        <a href="agendar.html">
+                            <i class="material-icons">view_agenda</i>
+                            <span>จอง</span>
+                        </a>
+                    </li>
+                    <li id="booking_report">
+                        <a href="booking_report.html">
+                            <i class="material-icons">view_agenda</i>
+                            <span>รายงานการจองบริการ</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <!-- #Menu -->
@@ -717,15 +738,13 @@
                             }
                         </script>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" id='allnotice'>
-                            <div class="info-box bg-purple hover-expand-effect" style="cursor:pointer;"
-                                onclick="allnotice()">
+                            <div class="info-box bg-purple hover-expand-effect" style="cursor:pointer;" onclick="allnotice()">
                                 <div class="icon">
                                     <a href="allnotice.html"><i class="material-icons">record_voice_over</i></a>
                                 </div>
                                 <div class="content">
                                     <div style="font-size: 22px;" class="text">ประกาศชุมชน</div>
-                                    <div class="number count-to" data-from="0" data-to="1225" data-speed="1000"
-                                        id="div_notice" name="div_notice" data-fresh-interval="20"></div>
+                                    <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" id="div_notice" name="div_notice" data-fresh-interval="20"></div>
                                 </div>
                             </div>
                         </div>
@@ -743,8 +762,7 @@
                                 </div>
                                 <div class="content">
                                     <div style="font-size: 22px;" class="text">แจ้งเหตุ</div>
-                                    <div class="number count-to" data-from="0" data-to="1225" data-speed="1000"
-                                        id="div_inform" name="div_inform" data-fresh-interval="20"></div>
+                                    <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" id="div_inform" name="div_inform" data-fresh-interval="20"></div>
                                 </div>
                             </div>
                         </div>
@@ -754,15 +772,13 @@
                             }
                         </script>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" id="d001supplies">
-                            <div class="info-box bg-orange  hover-expand-effect" style="cursor:pointer;"
-                                onclick="supplies()">
+                            <div class="info-box bg-orange  hover-expand-effect" style="cursor:pointer;" onclick="supplies()">
                                 <div class="icon">
                                     <a href="supplies.html"><i class="material-icons">markunread_mailbox</i></a>
                                 </div>
                                 <div class="content">
                                     <div style="font-size: 22px;" class="text">พัสดุ</div>
-                                    <div class="number count-to" data-from="0" data-to="1225" data-speed="1000"
-                                        id="div_supplies" name="div_supplies" data-fresh-interval="20">
+                                    <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" id="div_supplies" name="div_supplies" data-fresh-interval="20">
                                     </div>
                                 </div>
 
@@ -775,15 +791,13 @@
                             }
                         </script>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" id="dashboardappointment">
-                            <div class="info-box bg-indigo  hover-expand-effect" style="cursor:pointer;"
-                                onclick="appointment()">
+                            <div class="info-box bg-indigo  hover-expand-effect" style="cursor:pointer;" onclick="appointment()">
                                 <div class="icon">
                                     <a href="appointment.html"><i class="material-icons">event</i></a>
                                 </div>
                                 <div class="content">
                                     <div style="font-size: 22px;" class="text">สร้างนัดหมาย</div>
-                                    <div class="number count-to" data-from="0" data-to="1225" data-speed="1000"
-                                        id="div_appointment" name="div_appointment" data-fresh-interval="20"></div>
+                                    <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" id="div_appointment" name="div_appointment" data-fresh-interval="20"></div>
                                 </div>
                             </div>
                         </div>
@@ -794,16 +808,13 @@
                             }
                         </script>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" id="dashboardreportappointment">
-                            <div class="info-box bg-light-green  hover-expand-effect" style="cursor:pointer;"
-                                onclick="reportappointment()">
+                            <div class="info-box bg-light-green  hover-expand-effect" style="cursor:pointer;" onclick="reportappointment()">
                                 <div class="icon">
                                     <a href="reportappointment.html"><i class="material-icons">list</i></a>
                                 </div>
                                 <div class="content">
                                     <div style="font-size: 22px;" class="text">รายการนัดหมาย</div>
-                                    <div class="number count-to" data-from="0" data-to="1225" data-speed="1000"
-                                        id="div_reportappointment" name="div_reportappointment"
-                                        data-fresh-interval="20"></div>
+                                    <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" id="div_reportappointment" name="div_reportappointment" data-fresh-interval="20"></div>
                                 </div>
                             </div>
                         </div>
@@ -813,15 +824,13 @@
                             }
                         </script>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="info-box bg-orange hover-expand-effect" style="cursor:pointer;"
-                                onclick="appeal()">
+                            <div class="info-box bg-orange hover-expand-effect" style="cursor:pointer;" onclick="appeal()">
                                 <div class="icon">
                                     <a href="appeal.html"><i class="material-icons">pan_tool</i></a>
                                 </div>
                                 <div class="content">
                                     <div style="font-size: 22px;" class="text">ร้องเรียน</div>
-                                    <div class="number count-to" data-from="0" data-to="1225" data-speed="1000"
-                                        id="div_appeal" name="div_appeal" data-fresh-interval="20"></div>
+                                    <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" id="div_appeal" name="div_appeal" data-fresh-interval="20"></div>
                                 </div>
                             </div>
                         </div>
@@ -831,15 +840,13 @@
                             }
                         </script>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="info-box bg-teal hover-expand-effect" style="cursor:pointer;"
-                                onclick="maintenance()">
+                            <div class="info-box bg-teal hover-expand-effect" style="cursor:pointer;" onclick="maintenance()">
                                 <div class="icon">
                                     <a href="maintenance.html"><i class="material-icons">build</i></a>
                                 </div>
                                 <div class="content">
                                     <div style="font-size: 22px;" class="text">แจ้งซ่อมบำรุง</div>
-                                    <div class="number count-to" data-from="0" data-to="1225" data-speed="1000"
-                                        id="div_maintenance" name="div_maintenance" data-fresh-interval="20"></div>
+                                    <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" id="div_maintenance" name="div_maintenance" data-fresh-interval="20"></div>
                                 </div>
                             </div>
                         </div>
@@ -851,15 +858,13 @@
                             }
                         </script>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="info-box bg-orange hover-expand-effect" style="cursor:pointer;"
-                                onclick="allservice()">
+                            <div class="info-box bg-orange hover-expand-effect" style="cursor:pointer;" onclick="allservice()">
                                 <div class="icon">
                                     <a href="allservice.html"><i class="material-icons">featured_play_list</i></a>
                                 </div>
                                 <div class="content">
                                     <div style="font-size: 22px;;" class="text">ข้อมูลบริการ</div>
-                                    <div class="number count-to" data-from="0" data-to="1225" data-speed="1000"
-                                        id="div_service" name="div_service" data-fresh-interval="20"></div>
+                                    <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" id="div_service" name="div_service" data-fresh-interval="20"></div>
                                 </div>
                             </div>
                         </div>
@@ -869,15 +874,13 @@
                             }
                         </script>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="info-box bg-red hover-expand-effect" style="cursor:pointer;"
-                                onclick="allbusiness()">
+                            <div class="info-box bg-red hover-expand-effect" style="cursor:pointer;" onclick="allbusiness()">
                                 <div class="icon">
                                     <a href="allbusiness.html"><i class="material-icons">business</i></a>
                                 </div>
                                 <div class="content">
                                     <div style="font-size: 22px;;" class="text">ข้อมูลธุรกิจ</div>
-                                    <div class="number count-to" data-from="0" data-to="257" data-speed="1000"
-                                        id="div_business" name="div_business" data-fresh-interval="20"></div>
+                                    <div class="number count-to" data-from="0" data-to="257" data-speed="1000" id="div_business" name="div_business" data-fresh-interval="20"></div>
                                 </div>
                             </div>
                         </div>
@@ -889,15 +892,13 @@
                             }
                         </script>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="info-box bg-teal hover-expand-effect" style="cursor:pointer;"
-                                onclick="alltravel()">
+                            <div class="info-box bg-teal hover-expand-effect" style="cursor:pointer;" onclick="alltravel()">
                                 <div class="icon">
                                     <a href="alltravel.html"><i class="material-icons">card_travel</i></a>
                                 </div>
                                 <div class="content">
                                     <div style="font-size: 22px;;" class="text">ข้อมูลท่องเที่ยว</div>
-                                    <div class="number count-to" data-from="0" data-to="257" data-speed="1000"
-                                        id="div_travel" name="div_travel" data-fresh-interval="20"></div>
+                                    <div class="number count-to" data-from="0" data-to="257" data-speed="1000" id="div_travel" name="div_travel" data-fresh-interval="20"></div>
                                 </div>
                             </div>
                         </div>
@@ -909,15 +910,13 @@
                             }
                         </script>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" id='memberasset'>
-                            <div class="info-box bg-light-green hover-expand-effect" style="cursor:pointer;"
-                                onclick="allasset()">
+                            <div class="info-box bg-light-green hover-expand-effect" style="cursor:pointer;" onclick="allasset()">
                                 <div class="icon">
                                     <a href="allasset.html"><i class="material-icons">account_balance</i></a>
                                 </div>
                                 <div class="content">
                                     <div style="font-size: 22px;;" class="text">ข้อมูลทรัพย์สิน</div>
-                                    <div class="number count-to" data-from="0" data-to="257" data-speed="1000"
-                                        id="div_asset" name="div_asset" data-fresh-interval="20"></div>
+                                    <div class="number count-to" data-from="0" data-to="257" data-speed="1000" id="div_asset" name="div_asset" data-fresh-interval="20"></div>
                                 </div>
                             </div>
                         </div>
@@ -930,15 +929,13 @@
                             }
                         </script>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" id='allmarket'>
-                            <div class="info-box bg-deep-purple hover-expand-effect" style="cursor:pointer;"
-                                onclick="allmarket()">
+                            <div class="info-box bg-deep-purple hover-expand-effect" style="cursor:pointer;" onclick="allmarket()">
                                 <div class="icon">
                                     <a href="#"><i class="material-icons">shopping_cart</i></a>
                                 </div>
                                 <div class="content">
                                     <div style="font-size: 22px;;" class="text">ตลาดนัด</div>
-                                    <div class="number count-to" data-from="0" data-to="243" data-speed="1000"
-                                        id="div_allmarket" name="div_allmarket" data-fresh-interval="20"></div>
+                                    <div class="number count-to" data-from="0" data-to="243" data-speed="1000" id="div_allmarket" name="div_allmarket" data-fresh-interval="20"></div>
                                 </div>
                             </div>
                         </div>
@@ -949,23 +946,75 @@
                                 location.href = 'allpayment.html';
                             }
                         </script>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" >
-                            <div class="info-box bg-light-green hover-expand-effect" style="cursor:pointer;"
-                                onclick="allpayment()">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box bg-light-green hover-expand-effect" style="cursor:pointer;" onclick="allpayment()">
                                 <div class="icon">
                                     <a href="allpayment.html"><i class="material-icons">playlist_add_check</i></a>
                                 </div>
                                 <div class="content">
                                     <div style="font-size: 22px;;" class="text">รายการชำระเงิน</div>
-                                    <div class="number count-to" data-from="0" data-to="243" data-speed="1000"
-                                        id="div_allpayment" name="div_allpayment" data-fresh-interval="20"></div>
+                                    <div class="number count-to" data-from="0" data-to="243" data-speed="1000" id="div_allpayment" name="div_allpayment" data-fresh-interval="20"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <script>
+                            function agendar() {
+                                location.href = 'agendar.html';
+
+                            }
+                        </script>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box bg-blue hover-expand-effect" style="cursor:pointer;" onclick="agendar()">
+                                <div class="icon">
+                                    <a href="agendar.html"><i class="material-icons">view_agenda</i></a>
+                                </div>
+                                <div class="content">
+                                    <div style="font-size: 22px;;" class="text">จองบริการ</div>
+                                    <div class="number count-to" data-from="0" data-to="243" data-speed="1000" id="div_agendar" name="div_agendar" data-fresh-interval="20"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <script>
+                            function Tracking() {
+                                location.href = 'Tracking.html';
+
+                            }
+                        </script>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" id='admin_Tracking'>
+                            <div class="info-box bg-green  hover-expand-effect" style="cursor:pointer;" onclick="Tracking()">
+                                <div class="icon">
+                                    <a href="Tracking.html"><i class="material-icons">wifi_tethering</i></a>
+                                </div>
+                                <div class="content">
+                                    <div style="font-size: 22px;;" class="text">Tracking</div>
+                                    <div class="number count-to" data-from="0" data-to="243" data-speed="1000" id="div_Tracking" name="div_Tracking" data-fresh-interval="20"></div>
                                 </div>
                             </div>
                         </div>
 
 
 
+                        <script>
+                            function approved() {
+                                location.href = 'approved.html';
 
+                            }
+                        </script>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" id='admin_approved'>
+                            <div class="info-box bg-green  hover-expand-effect" style="cursor:pointer;" onclick="approved()">
+                                <div class="icon">
+                                    <a href="approved.html"><i class="material-icons">check</i></a>
+                                </div>
+                                <div class="content">
+                                    <div style="font-size: 22px;;" class="text">รายการอนุมัติ</div>
+                                    <div class="number count-to" data-from="0" data-to="243" data-speed="1000" id="div_Tapproved" name="div_approved" data-fresh-interval="20"></div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -973,8 +1022,7 @@
         </div>
     </section>
 
-    <div class="modal fade" id="exampleModalCenterImage" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="exampleModalCenterImage" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -997,6 +1045,9 @@
             </div>
         </div>
     </div>
+
+
+
 
 
 
@@ -1042,6 +1093,16 @@
     <script src="../../js/demo.js"></script>
 
 
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="../../plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="../../plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="../../plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
 
 
 
@@ -1060,7 +1121,7 @@
 
             today = dd + '/' + mm + '/' + yyyy + ' ' + ti;
 
-            $(document).ready(function () {
+            $(document).ready(function() {
                 $("#datetimenotice").val(today);
             });
         }

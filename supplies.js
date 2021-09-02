@@ -1,4 +1,3 @@
-
 var obj = JSON.parse(Cookies.get('datatoken'));
 var userId = Cookies.get('datauserId');
 var _arr = new Array();
@@ -15,19 +14,19 @@ if (datamember != undefined) {
 
 function acctoken() {
     return new Promise(resolve => {
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             // console.log('aaaaaaaaaaaaaa')
             axios.post(urlipaddress + 'token', data, {
                 headers: {
                     'Authorization': obj.refresh_token
                 }
-            }).then(function (response) {
+            }).then(function(response) {
                 //   console.log('bbb')
                 // console.log(response.data.message.access_token)
                 resolve(response.data.message.access_token);
 
-            }).catch(function (res) {
+            }).catch(function(res) {
                 const { response } = res
                 //   console.log(response.data.message)
 
@@ -41,18 +40,18 @@ function acctoken() {
     });
 }
 
-const getvisitorsupplies = async (refresh_token, page) => {
- 
+const getvisitorsupplies = async(refresh_token, page) => {
+
     var _arr = new Array();
     var n = 0;
-    $.getScript("ip.js", function (data, textStatus, jqxhr) {
+    $.getScript("ip.js", function(data, textStatus, jqxhr) {
         var urlipaddress = data.substring(1, data.length - 1);
         var param = userId + '?_page=' + page + '&_limit=100&_sort=1'
         axios.get(urlipaddress + 'deliver/' + param, {
             headers: {
                 'Authorization': refresh_token
             }
-        }).then(function (response) {
+        }).then(function(response) {
             if (response.data.message.result.length != 0) {
                 if (datamember.rule == 'member') {
                     var _arr = new Array();
@@ -89,7 +88,10 @@ const getvisitorsupplies = async (refresh_token, page) => {
 
 
                     var table = $('#table_supplies').DataTable({
-                        "lengthMenu": [[25, 50, 100], [25, 50, 100]],
+                        "lengthMenu": [
+                            [25, 50, 100],
+                            [25, 50, 100]
+                        ],
                         "pageLength": 25,
                         'data': [...reversed],
                         "ordering": false,
@@ -104,7 +106,7 @@ const getvisitorsupplies = async (refresh_token, page) => {
                             { data: "status" },
                             {
                                 data: "registerDate",
-                                render: function (data) {
+                                render: function(data) {
                                     let date = new Date(data);
                                     let options = { hour12: false };
                                     var sp = date.toLocaleString('en-US', options).replace(',', '').split('/')
@@ -116,7 +118,7 @@ const getvisitorsupplies = async (refresh_token, page) => {
                             },
                             {
                                 data: "lastEditDate",
-                                render: function (data) {
+                                render: function(data) {
 
                                     let date = new Date(data);
                                     let options = { hour12: false };
@@ -153,13 +155,12 @@ const getvisitorsupplies = async (refresh_token, page) => {
                             { data: "parcelImage", 'visible': false },
                             { data: "receiverImage", 'visible': false },
                         ],
-                        "createdRow": function (row, data, dataIndex) {
+                        "createdRow": function(row, data, dataIndex) {
                             if (data.status == "รับแล้ว") {
                                 $(row).addClass('green');
                             } else if (data.status == "ส่งคืน") {
                                 $(row).addClass('red');
-                            }
-                            else {
+                            } else {
                                 $(row).addClass('yellow');
                             }
                         }
@@ -179,7 +180,10 @@ const getvisitorsupplies = async (refresh_token, page) => {
 
                 console.log(reversed)
                 var table = $('#table_supplies').DataTable({
-                    "lengthMenu": [[25, 50, 100], [25, 50, 100]],
+                    "lengthMenu": [
+                        [25, 50, 100],
+                        [25, 50, 100]
+                    ],
                     "pageLength": 25,
                     'data': [...reversed],
                     "ordering": false,
@@ -194,7 +198,7 @@ const getvisitorsupplies = async (refresh_token, page) => {
                         { data: "status" },
                         {
                             data: "registerDate",
-                            render: function (data) {
+                            render: function(data) {
 
                                 let date = new Date(data);
                                 let options = { hour12: false };
@@ -207,7 +211,7 @@ const getvisitorsupplies = async (refresh_token, page) => {
                         },
                         {
                             data: "lastEditDate",
-                            render: function (data) {
+                            render: function(data) {
 
                                 let date = new Date(data);
                                 let options = { hour12: false };
@@ -247,24 +251,21 @@ const getvisitorsupplies = async (refresh_token, page) => {
                     ],
 
                     dom: 'lBfrtip',
-                    buttons: [
-                        {
-                            title: 'export',
-                            text: 'Export <i class="fa fa-file-excel-o" style="font-size:30px"></i>',
-                            extend: 'excel',
-                            footer: false,
-                            exportOptions: {
-                                columns: [0, 1, 2, 3]
-                            }
+                    buttons: [{
+                        title: 'export',
+                        text: 'Export <i class="fa fa-file-excel-o" style="font-size:30px"></i>',
+                        extend: 'excel',
+                        footer: false,
+                        exportOptions: {
+                            columns: [0, 1, 2, 3]
                         }
-                    ],
-                    "createdRow": function (row, data, dataIndex) {
+                    }],
+                    "createdRow": function(row, data, dataIndex) {
                         if (data.status == "รับแล้ว") {
                             $(row).addClass('green');
                         } else if (data.status == "ส่งคืน") {
                             $(row).addClass('red');
-                        }
-                        else {
+                        } else {
                             $(row).addClass('yellow');
                         }
                     }
@@ -272,7 +273,7 @@ const getvisitorsupplies = async (refresh_token, page) => {
                 table.buttons().container().appendTo($('#test'));
             }
 
-        }).catch(function (res) {
+        }).catch(function(res) {
             const { response } = res
         });
     });
@@ -280,19 +281,19 @@ const getvisitorsupplies = async (refresh_token, page) => {
 }
 
 
-$(async function () {
+$(async function() {
     console.log('dsdssds')
     const result = await acctoken();
     for (let i = 1; i < 10; i++) {
         responseappointment = await getvisitorsupplies(result, i)
 
     }
-    $(document).ready(function () {
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+    $(document).ready(function() {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
 
             /////// ดูรูปภาพ
-            $('#table_supplies').on('click', 'i.view_img', function (e) {
+            $('#table_supplies').on('click', 'i.view_img', function(e) {
                 var table = $('#table_supplies').DataTable();
                 e.preventDefault();
                 var _ro = table.row($(this).parents('tr'));
@@ -313,7 +314,7 @@ $(async function () {
                         headers: {
                             'Authorization': result
                         }
-                    }).then(function (response) {
+                    }).then(function(response) {
                         var arrayBuffer = response.data; // Note: not oReq.responseText
                         var u8 = new Uint8Array(arrayBuffer);
                         var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -331,7 +332,7 @@ $(async function () {
 
 
             /////// ดูรูปภาพผู้รับ
-            $('#table_supplies').on('click', 'i.view_receiver', function (e) {
+            $('#table_supplies').on('click', 'i.view_receiver', function(e) {
                 console.log('dsdsd')
                 var table = $('#table_supplies').DataTable();
                 e.preventDefault();
@@ -353,7 +354,7 @@ $(async function () {
                         headers: {
                             'Authorization': result
                         }
-                    }).then(function (response) {
+                    }).then(function(response) {
                         var arrayBuffer = response.data; // Note: not oReq.responseText
                         var u8 = new Uint8Array(arrayBuffer);
                         var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -371,7 +372,7 @@ $(async function () {
 
 
 
-            $('#table_supplies').on('click', 'i.delete_supplies', function (e) {
+            $('#table_supplies').on('click', 'i.delete_supplies', function(e) {
                 e.preventDefault();
                 var table = $('#table_supplies').DataTable();
                 var _ro = table.row($(this).parents('tr'));
@@ -388,33 +389,33 @@ $(async function () {
             });
 
 
-            $('#Deletenoticedata').on('click', function (e) {
+            $('#Deletenoticedata').on('click', function(e) {
 
                 const datanew = {
                     userId: userId,
                     parcelId: data.parcelId
                 }
 
-                $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                $.getScript("ip.js", function(data, textStatus, jqxhr) {
                     var urlipaddress = data.substring(1, data.length - 1);
                     axios({
                         url: urlipaddress + 'deliver',
                         method: 'delete',
                         data: datanew,
                         headers: { 'Authorization': result }
-                    }).then(function (response) {
+                    }).then(function(response) {
                         if (response.data.message == "delete completed") {
                             $("#myModaldelete").empty()
-                            showSuccessMessage('สำเร็จ','ลบข้อมูลสำเร็จ','supplies.html')
-                            // console.log(response.data.message)
-                            // document.getElementById("lbl_delete").style.display = "none";
-                            // document.getElementById("lbl_dalate_completed").style.display = "block";
-                            // $("#lbl_dalete").text('ลบข้อมูลสำเร็จ');
-                            // location.href = "supplies.html";
+                            showSuccessMessage('สำเร็จ', 'ลบข้อมูลสำเร็จ', 'supplies.html')
+                                // console.log(response.data.message)
+                                // document.getElementById("lbl_delete").style.display = "none";
+                                // document.getElementById("lbl_dalate_completed").style.display = "block";
+                                // $("#lbl_dalete").text('ลบข้อมูลสำเร็จ');
+                                // location.href = "supplies.html";
                         }
-                    }).catch(function (res) {
+                    }).catch(function(res) {
                         const { response } = res
-                        showCancelMessage(response.data.message,'')
+                        showCancelMessage(response.data.message, '')
                     });
                 });
             });
@@ -431,7 +432,7 @@ $(async function () {
             title: title,
             text: text,
             type: "error",
-        }, function (isConfirm) {
+        }, function(isConfirm) {
             swal("Cancelled", "Your imaginary file is safe :)", "error");
         });
     }
@@ -441,7 +442,7 @@ $(async function () {
             title: title,
             text: text,
             type: "success",
-        }, function (isConfirm) {
+        }, function(isConfirm) {
             if (isConfirm) {
                 location.href = page;
             }

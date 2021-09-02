@@ -11,10 +11,10 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJ6SnvPM-O0dyoUChDYJxv34TXDX2cpEw&libraries=drawing,places"
         async defer></script>
     <script src="./map.js"></script>
-
-      <!-- cookie -->
-      <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
-      <script type="module" src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.mjs"></script>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
+    
+   
 </head>
 <style>
          html, body {
@@ -34,6 +34,7 @@
         height: 32px;
         outline: none;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      
       }
 
       #pac-input {
@@ -75,7 +76,7 @@
    
    
     <div>&nbsp;</div>
-    <input id="pac-input" class="controls" type="text" placeholder="ค้นหาใน Google Maps" />
+    <input id="pac-input" class="controls"  type="text" placeholder="ค้นหาใน Google Maps" />
     <div>&nbsp;</div>
     <div id="map" ></div>
    

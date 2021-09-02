@@ -1,26 +1,23 @@
-
-
-
-$(function () {
+$(function() {
     if (Cookies.get('activeMode') == 'คิดเงิน') {
         $("#lll").addClass('intro'); //// คิดเงิน
         $("#ll").addClass('intro'); ///// รายงานการคิดเงิน
-        $("#l1").addClass('intro');  /// ประเภท visittor
+        $("#l1").addClass('intro'); /// ประเภท visittor
         $("#l8").addClass('intro'); /// ชนิดรถ
-        $("#l9").addClass('intro');  /// เพิ่มผู้ใช้งาน
+        $("#l9").addClass('intro'); /// เพิ่มผู้ใช้งาน
 
-        $("#l3").addClass('intro');  ///สถานที่ติดต่อ
-        $("#l2").addClass('intro');  /// ทะเบียนรถ
+        $("#l3").addClass('intro'); ///สถานที่ติดต่อ
+        $("#l2").addClass('intro'); /// ทะเบียนรถ
     } else {
-        $("#l1").addClass('intro');  /// ประเภท visittor
-        $("#l2").addClass('intro');  /// ทะเบียนรถ
-        $("#l3").addClass('intro');  ///สถานที่ติดต่อ
-        $("#l4").addClass('intro');  /// ติดต่อเรื่อง
-        $("#l5").addClass('intro');  /// บริษัท
-        $("#l6").addClass('intro');  /// แผนกที่ติดต่อ
-        $("#l7").addClass('intro');  /// ผู้รับการติดต่อ
-        $("#l8").addClass('intro');  /// ชนิดรถ
-        $("#l9").addClass('intro');  /// เพิ่มผู้ใช้งาน
+        $("#l1").addClass('intro'); /// ประเภท visittor
+        $("#l2").addClass('intro'); /// ทะเบียนรถ
+        $("#l3").addClass('intro'); ///สถานที่ติดต่อ
+        $("#l4").addClass('intro'); /// ติดต่อเรื่อง
+        $("#l5").addClass('intro'); /// บริษัท
+        $("#l6").addClass('intro'); /// แผนกที่ติดต่อ
+        $("#l7").addClass('intro'); /// ผู้รับการติดต่อ
+        $("#l8").addClass('intro'); /// ชนิดรถ
+        $("#l9").addClass('intro'); /// เพิ่มผู้ใช้งาน
 
     }
 
@@ -38,7 +35,7 @@ $(function () {
         $("#l12").addClass('intro'); //  แดชบอร์ด SERVICE
         $("#l13").addClass('intro');
         $("#l14").addClass('intro'); //บริการ
-        $("#l15").addClass('intro');  // ข้อมูลธุรกิจ
+        $("#l15").addClass('intro'); // ข้อมูลธุรกิจ
         $("#l16").addClass('intro'); //รายการร้องเรียน
         $("#l17").addClass('intro'); //ประกาศ
         $("#logonameservice").addClass('intro');
@@ -50,7 +47,21 @@ $(function () {
         $("#menusupplies").addClass('intronone');
         $("#add").addClass('intronone');
         $("#nameservice").addClass('intro');
-        $("#id_notice").addClass('intronone');
+
+
+        /////////////////ธุรกิจ ท่องเที่ยว
+
+        if (Cookies.get('business') == 'business' || Cookies.get('travel') == 'travel') {
+            $("#id_notice").addClass('intro');
+
+            $("#divmemberaddannounce").addClass('intronone');
+
+        } else {
+            $("#id_notice").addClass('intronone');
+        }
+        $("#admin_approved").addClass('intronone');
+
+
         $("#edit_image").addClass('intro');
         $("#navbaradmin").addClass('intro');
         $("#status_edit").addClass('intronone');
@@ -64,16 +75,22 @@ $(function () {
         $("#namecompyny").addClass('intronone');
         $("#d001supplies").addClass('intro');
 
+        $("#addlist").addClass('intronone');
+        $("#admin_Tracking").addClass('intronone');
 
+        $("#member_description").addClass('intro');
+        $("#p_p1").addClass('intro');
+        $("#h2_description").addClass('intro');
+        $("#booking_report").addClass('intronone');
     } else {
 
         //$("#imageProfile").addClass('intronone');
         $("#l12").addClass('intronone'); //  แดชบอร์ด SERVICE
         $("#l13").addClass('intronone');
         $("#l14").addClass('intronone'); //บริการ
-        $("#l15").addClass('intronone');  // ข้อมูลธุรกิจ
-        $("#l15-1").addClass('intronone');  // 
-        $("#l15-2").addClass('intronone');  // 
+        $("#l15").addClass('intronone'); // ข้อมูลธุรกิจ
+        $("#l15-1").addClass('intronone'); // 
+        $("#l15-2").addClass('intronone'); // 
 
         $("#l16").addClass('intronone'); //รายการร้องเรียน
         $("#logonamevisitor").addClass('intro');
@@ -106,6 +123,18 @@ $(function () {
         $("#dashboardreportappointment").addClass('intronone');
         $("#namecompynymember").addClass('intronone');
 
+
+        $("#record").addClass('intronone');
+        $("#bookinglist").addClass('intronone');
+        $("#p_p").addClass('intronone');
+
+        $("#bookingcancel").addClass('intronone');
+        $("#p_p1").addClass('intronone');
+        $("#h2_description").addClass('intronone');
+        $("#announce_view").addClass('intronone');
+
+        $("#approved").addClass('intro');
+
     }
 
     if (Cookies.get('visitor') == 'visitor') {
@@ -118,6 +147,7 @@ $(function () {
         $("#allpayment").addClass('intronone');
         $("#alltravel").addClass('intronone');
         $("#allmarket").addClass('intronone');
+        $("#agendar").addClass('intronone');
     }
 
     ///news 
@@ -125,15 +155,16 @@ $(function () {
         $("#l12").addClass('intronone'); //  แดชบอร์ด SERVICE
         $("#l13").addClass('intronone');
         $("#l14").addClass('intronone'); //บริการ
-        $("#l15").addClass('intronone');  // ข้อมูลธุรกิจ
+        $("#l15").addClass('intronone'); // ข้อมูลธุรกิจ
         $("#l16").addClass('intronone'); //รายการร้องเรียน
-        $("#l15-1").addClass('intronone');  // 
-        $("#l15-2").addClass('intronone');  // 
+        $("#l15-1").addClass('intronone'); // 
+        $("#l15-2").addClass('intronone'); // 
         $("#allInvoice").addClass('intronone');
         $("#supplies").addClass('intronone');
         $("#alltravel").addClass('intronone');
         $("#allpayment").addClass('intronone');
         $("#allmarket").addClass('intronone');
+        $("#agendar").addClass('intronone');
     }
     //servicedashboard
     if (Cookies.get('service') == 'service') {
@@ -145,6 +176,7 @@ $(function () {
             $("#d001supplies").addClass('intro');
         } else {
             $("#d001supplies").addClass('intronone');
+            // $("#agendar").addClass('intronone');
         }
 
 
@@ -177,7 +209,7 @@ $(function () {
         $("#allpayment").addClass('intronone');
         $("#alltravel").addClass('intronone');
         $("#allmarket").addClass('intronone');
-
+        $("#agendar").addClass('intronone');
 
     }
 
@@ -187,6 +219,7 @@ $(function () {
         $("#alltravel").addClass('intronone');
         $("#supplies").addClass('intronone');
         $("#allmarket").addClass('intronone');
+        $("#agendar").addClass('intronone');
 
     }
 

@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>WAC</title>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
+
+
+    <!------ Include the above in your HEAD tag ---------->
+
+
+
+    <!-- Favicon-->
+    <link rel="icon" href="../../uploads/logo.ico" id="imagelogoview" type="image/x-icon">
+    <!-- <link rel="icon" href=""  id="imagelogoview"  type="image/x-icon"> -->
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="../../plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- JQuery DataTable Css -->
+    <link href="../../plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+
+    <link href="../../plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <!-- <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+    <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" /> -->
+
+
+    <!-- Custom Css -->
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="../../css/themes/all-themes.css" rel="stylesheet" />
+
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="../../plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+
+    <!-- Bootstrap DatePicker Css -->
+    <link href="../../plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+
+    <link href="../../plugins/light-gallery/css/lightgallery.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+
+    <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
+
+    <!-- modal  -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <link href="../../plugins/light-gallery/css/lightgallery.css" rel="stylesheet">
+
+
+    <script src="https://cdn.jsdelivr.net/bootstrap.timepicker/0.2.6/js/bootstrap-timepicker.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/socket.io-client@4.1.2/dist/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/dayjs.min.js"></script>
+
+    <script src="https://unpkg.com/dayjs@1.8.21/plugin/isBetween.js"></script>
+
+    <link href="./css-collor.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../plugins2/responsive.bootstrap4.min.css">
+
+
+    <link href="../../plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+
+    <script src="./checkCookies.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <script src="./pageTable.js"></script>
+    <script src="./checkCost.js"></script>
+    <script type="text/javascript" src="./addimage.js"></script>
+    <script type="text/javascript" src="./viewimage.js"></script>
+    <script type="text/javascript" src="./editimage.js"></script>
+    <script type="text/javascript" src="./edit_supplies.js"></script>
+
+    <script src="./Profile.js"></script>
+
+    <script src="./logout.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="./agendar.js"></script>
+    <link href="../cssagendar.css" rel="stylesheet" />
+
+
+</head>
+
+<link href='https://fonts.googleapis.com/css?family=Kanit:400,300&subset=thai,latin' rel='stylesheet' type='text/css'>
+
+
+
+<style>
+    body h1 h2 h3 h4 h5 h6 ul li a p {
+        font-family: 'Kanit', sans-serif;
+    }
+    
+    div {
+        font-family: 'Kanit', sans-serif;
+    }
+</style>
+<style>
+    .intro {
+        display: block !important;
+    }
+    
+    .intronone {
+        display: none !important;
+    }
+</style>
+<style>
+    .green {
+        color: green;
+        /* background-color: green !important; */
+    }
+    
+    .red {
+        color: red;
+        /* background-color: red !important; */
+    }
+    
+    .gray {
+        color: gray;
+        /* background-color: red !important; */
+    }
+    
+    .blue {
+        color: blue;
+        /* background-color: red !important; */
+    }
+    
+    .yellow {
+        color: black;
+        background-color: rgb(248, 248, 66) !important;
+    }
+</style>
+<style>
+    tr.group,
+    tr.group:hover {
+        /* background-color: rgb(235, 233, 233) !important; */
+        background-color: #fde4e4 !important;
+        color: blue;
+    }
+</style>
+<script>
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    var ti = today.toLocaleTimeString('en-US', {
+        hour12: false,
+        hour: "numeric",
+        minute: "numeric"
+    });
+    today = dd + '/' + mm + '/' + yyyy;
+
+    $(document).ready(function() {
+        console.log(yyyy + '-' + mm + '-' + dd)
+            // $("#day_agendar").text('รายการจอง วันที่ ' + dd + '/' + mm + '/' + yyyy);
+    });
+</script>
+
+
+
+
+<body class="theme-red">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <div class="search-icon">
+            <i class="material-icons">search</i>
+        </div>
+        <input type="text" placeholder="START TYPING...">
+        <div class="close-search">
+            <i class="material-icons">close</i>
+        </div>
+    </div>
+    <!-- #END# Search Bar -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" style="display: none;" id="logoname" href="javascript:void(0);"></a>
+                <a class="navbar-brand" id="namecompyny" href="../../menu.html" style="color: white;" href="#"></a>
+                <a class="navbar-brand" id="namecompynymember" href="../../servicedashboard.html" style="color: white;" href="#"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Call Search -->
+
+                    <li><a id='logout' style="cursor: pointer;" data-close="true">[ออกจากระบบ]</a></li>
+
+                    <!-- Call Search -->
+                    <!-- <li><a href="javascript:void(0);" class="js-search" data-close="true"><i
+                                class="material-icons">search</i></a></li> -->
+                    <!-- #END# Call Search -->
+                    <!-- Notifications -->
+                    <li class="dropdown">
+                        <!-- <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <i class="material-icons">notifications</i>
+                            <span class="label-count">7</span>
+                        </a> -->
+                        <ul class="dropdown-menu">
+                            <li class="header">NOTIFICATIONS</li>
+                            <li class="body">
+                                <ul class="menu">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-light-green">
+                                                <i class="material-icons">person_add</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>12 new members joined</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 14 mins ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-cyan">
+                                                <i class="material-icons">add_shopping_cart</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>4 sales made</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 22 mins ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-red">
+                                                <i class="material-icons">delete_forever</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>Nancy Doe</b> deleted account</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 3 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-orange">
+                                                <i class="material-icons">mode_edit</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>Nancy</b> changed name</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 2 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-blue-grey">
+                                                <i class="material-icons">comment</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>John</b> commented your post</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 4 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-light-green">
+                                                <i class="material-icons">cached</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4><b>John</b> updated status</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> 3 hours ago
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="icon-circle bg-purple">
+                                                <i class="material-icons">settings</i>
+                                            </div>
+                                            <div class="menu-info">
+                                                <h4>Settings updated</h4>
+                                                <p>
+                                                    <i class="material-icons">access_time</i> Yesterday
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="javascript:void(0);">View All Notifications</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Notifications -->
+                    <!-- Tasks -->
+                    <li class="dropdown">
+                        <!-- <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <i class="material-icons">flag</i>
+                            <span class="label-count"></span>
+                        </a> -->
+                        <ul class="dropdown-menu">
+                            <li class="header">TASKS</li>
+                            <li class="body">
+                                <ul class="menu tasks">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Footer display issue
+                                                <small>32%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 32%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Make new buttons
+                                                <small>45%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-cyan" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Create new dashboard
+                                                <small>54%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-teal" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 54%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Solve transition issue
+                                                <small>65%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-orange" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 65%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <h4>
+                                                Answer GitHub questions
+                                                <small>92%</small>
+                                            </h4>
+                                            <div class="progress">
+                                                <div class="progress-bar bg-purple" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 92%">
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="javascript:void(0);">View All Tasks</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- #END# Tasks -->
+                    <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i
+                                class="material-icons">more_vert</i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar" style="text-align: center;">
+            <!-- User Info -->
+            <div class="user-info" style="text-align:center;">
+                <div class="image">
+                    <!-- <img  id="imageProfile" src="/images/Profile.png" width="80" height="80" alt="User" />
+                    <a class="navbar-brand" id="logoname" href="../../servicedashboard.html">หน้าแรก</a> -->
+                    <!-- <a class="navbar-brand" id="logonamepayment" href="../../servicedashboard.html">SERVICE</a> -->
+                    <a class="navbar-brand" id="logoname" href="../../servicedashboard.html">
+                        <img id="imageProfile" src="/images/Profile.png" width="80" height="80" alt="User" />
+                    </a>
+                </div>
+                <div><br></div>
+                <div><br></div>
+                <div style="color: white;">
+                    <div class="name" data-toggle="dropdown" id="userlogin" aria-haspopup="true" aria-expanded="false">
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu">
+                <ul class="list">
+                    <li>
+                        <a href="servicedashboard.html">
+                            <i class="material-icons">home</i>
+                            <span>แดชบอร์ด SERVICE</span>
+                        </a>
+                    </li>
+                    <li id="l17" style="display: none;">
+                        <a href="allnotice.html">
+                            <i class="material-icons">record_voice_over</i>
+                            <span>ประกาศชุมชน</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="inform.html">
+                            <i class="material-icons">report_problem</i>
+                            <span>รายการแจ้งเหตุ</span>
+                        </a>
+                    </li>
+                    <li id="supplies" style="display: none;">
+                        <a href="supplies.html">
+                            <i class="material-icons">markunread_mailbox</i>
+                            <span>พัสดุ</span>
+                        </a>
+                    </li>
+                    <li id="l10" style="display: none;">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">event</i>
+                            <span>นัดหมาย/ประวัติการเข้าพบ</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="appointment.html">
+                                    <span>นัดหมาย</span>
+                                </a>
+                            </li>
+                            <li id="l11">
+                                <a href="reportappointment.html">
+                                    <span>ประวัติการเข้าพบ</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="appeal.html">
+                            <i class="material-icons">pan_tool</i>
+                            <span>รายการร้องเรียน</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="maintenance.html">
+                            <i class="material-icons">build</i>
+                            <span>รายการแจ้งซ่อมบำรุง</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="allservice.html">
+                            <i class="material-icons">local_laundry_service</i>
+                            <span>ข้อมูลบริการ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="allbusiness.html">
+                            <i class="material-icons">business</i>
+                            <span>ข้อมูลธุรกิจ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="alltravel.html">
+                            <i class="material-icons">card_travel</i>
+                            <span>ข้อมูลท่องเที่ยว</span>
+                        </a>
+                    </li>
+                    <li id="asset" style="display: none;">
+                        <a href="allasset.html">
+                            <i class="material-icons">account_balance</i>
+                            <span>ข้อมูลทรัพย์สิน</span>
+                        </a>
+                    </li>
+                    <li id="approved" style="display: none;">
+                        <a href="approved.html">
+                            <i class="material-icons">list</i>
+                            <span>รายการรออนุมัติ</span>
+                        </a>
+                    </li>
+                    <li id="allpayment" style="display: none;">
+                        <a href="allpayment.html">
+                            <i class="material-icons">beenhere</i>
+                            <span>รายการชำระเงิน</span>
+                        </a>
+                    </li>
+                    <li id="allmarket">
+                        <a href="#">
+                            <i class="material-icons">shopping_cart</i>
+                            <span>ตลาดนัด</span>
+                        </a>
+                    </li>
+                    <li id="agendar" class="active">
+                        <a href="agendar.html">
+                            <i class="material-icons">view_agenda</i>
+                            <span>จอง</span>
+                        </a>
+                    </li>
+                    <li id="booking_report">
+                        <a href="booking_report.html">
+                            <i class="material-icons">view_agenda</i>
+                            <span>รายงานการจองบริการ</span>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+            <!-- #Menu -->
+            <!-- Footer -->
+
+            <!-- #Footer -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+        <!-- Right Sidebar -->
+        <aside id="rightsidebar" class="right-sidebar">
+            <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                <li role="presentation" class="active"><a href="#skins" data-toggle="tab">SKINS</a></li>
+                <!-- <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li> -->
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active in active" id="skins">
+                    <ul class="demo-choose-skin">
+                        <li data-theme="red" class="active">
+                            <div class="red"></div>
+                            <span>Red</span>
+                        </li>
+                        <li data-theme="pink">
+                            <div class="pink"></div>
+                            <span>Pink</span>
+                        </li>
+                        <li data-theme="purple">
+                            <div class="purple"></div>
+                            <span>Purple</span>
+                        </li>
+                        <li data-theme="deep-purple">
+                            <div class="deep-purple"></div>
+                            <span>Deep Purple</span>
+                        </li>
+                        <li data-theme="indigo">
+                            <div class="indigo"></div>
+                            <span>Indigo</span>
+                        </li>
+                        <li data-theme="blue">
+                            <div class="blue"></div>
+                            <span>Blue</span>
+                        </li>
+                        <li data-theme="light-blue">
+                            <div class="light-blue"></div>
+                            <span>Light Blue</span>
+                        </li>
+                        <li data-theme="cyan">
+                            <div class="cyan"></div>
+                            <span>Cyan</span>
+                        </li>
+                        <li data-theme="teal">
+                            <div class="teal"></div>
+                            <span>Teal</span>
+                        </li>
+                        <li data-theme="green">
+                            <div class="green"></div>
+                            <span>Green</span>
+                        </li>
+                        <li data-theme="light-green">
+                            <div class="light-green"></div>
+                            <span>Light Green</span>
+                        </li>
+                        <li data-theme="lime">
+                            <div class="lime"></div>
+                            <span>Lime</span>
+                        </li>
+                        <li data-theme="yellow">
+                            <div class="yellow"></div>
+                            <span>Yellow</span>
+                        </li>
+                        <li data-theme="amber">
+                            <div class="amber"></div>
+                            <span>Amber</span>
+                        </li>
+                        <li data-theme="orange">
+                            <div class="orange"></div>
+                            <span>Orange</span>
+                        </li>
+                        <li data-theme="deep-orange">
+                            <div class="deep-orange"></div>
+                            <span>Deep Orange</span>
+                        </li>
+                        <li data-theme="brown">
+                            <div class="brown"></div>
+                            <span>Brown</span>
+                        </li>
+                        <li data-theme="grey">
+                            <div class="grey"></div>
+                            <span>Grey</span>
+                        </li>
+                        <li data-theme="blue-grey">
+                            <div class="blue-grey"></div>
+                            <span>Blue Grey</span>
+                        </li>
+                        <li data-theme="black">
+                            <div class="black"></div>
+                            <span>Black</span>
+                        </li>
+                    </ul>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="settings">
+                    <div class="demo-settings">
+                        <p>GENERAL SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Report Panel Usage</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Email Redirect</span>
+                                <div class="switch">
+                                    <label><input type="checkbox"><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                        <p>SYSTEM SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Notifications</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Auto Updates</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                        <p>ACCOUNT SETTINGS</p>
+                        <ul class="setting-list">
+                            <li>
+                                <span>Offline</span>
+                                <div class="switch">
+                                    <label><input type="checkbox"><span class="lever"></span></label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Location Permission</span>
+                                <div class="switch">
+                                    <label><input type="checkbox" checked><span class="lever"></span></label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <!-- #END# Right Sidebar -->
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>
+                    <!-- <small>Taken from <a href="https://datatables.net/" target="_blank">datatables.net</a></small> -->
+                </h2>
+            </div>
+            <!-- Basic Examples -->
+
+
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header header-new">
+                            <a id='a_back' onclick="a_back()" style="color: white; cursor: pointer; display: none;">
+                                < ย้อนกลับ</a>
+                                    <script>
+                                        function a_back() {
+                                            document.getElementById("div_list").style.display = 'block'
+                                            document.getElementById("div_calendar").style.display = 'none'
+                                            document.getElementById('h_der').style.display = 'block'
+                                            document.getElementById("a_back").style.display = 'none'
+                                        }
+                                    </script>
+                                    <h2 id="h_der">
+                                        <font style=" color: white;">จองบริการ</font>
+                                    </h2>
+
+                                    <ul class="header-dropdown m-r--5">
+                                        <li class="dropdown">
+                                            <a href="" style="color: white; font-size: 14px;" id="addlist" data-toggle="modal"> +เพิ่มรายการจอง
+                                            </a>
+
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="" style="color: white; font-size: 14px;" id="bookingcancel" data-toggle="modal">การยกเลิก
+                                            </a>
+                                        </li>
+                                        <li class="dropdown">
+                                            <p id='p_p1' style="color: white; font-size: 14px;">|</p>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="" style="color: white; font-size: 14px;" id="record" data-toggle="modal"> ประวัติ  
+                                            </a>
+                                        </li>
+                                        <li class="dropdown">
+                                            <p id='p_p' style="color: white; font-size: 14px;">|</p>
+                                        </li>
+
+                                        <li class="dropdown">
+                                            <a href="" style="color: white; font-size: 14px;" id="bookinglist" data-toggle="modal"> รายการจองของฉัน
+                                            </a>
+
+                                        </li>
+                                    </ul>
+                        </div>
+
+                        <div class="body" id='div_list'>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display" style="border: none;" id="table_service_reservation">
+                                </table>
+                            </div>
+                        </div>
+
+
+                        <div class="body" id='div_calendar' style="display: none;">
+                            <h4 id="name_list"></h4>
+                            <div id='wrap'>
+                                <div style="cursor: pointer;" id='calendar'></div>
+                                <div style='clear:both'></div>
+                            </div>
+
+                            <u>
+                                <input type="hidden" id="tem_name">
+                                        <h2 id="day_agendar"> </h2>
+                                    </u>
+                            <div id='_view' class="body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display" id="tbl_booking_category">
+                                        <thead>
+                                            <tr>
+                                                <th>ลำดับที่</th>
+                                                <th>ช่วงเวลาที่จอง</th>
+                                                <th>รายละเอียด</th>
+                                                <th>วันที่</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="modal fade" id="modalbookingcancel" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div style="text-align: right;">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                        </div>
+                        <div class="modal-header">
+                            <h3 class="modal-title">ประวัติการยกเลิก</h3>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row clearfix">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="card">
+                                        <div class="body">
+                                            <form id="formElem">
+                                                <div class="table-responsive" style="border: none;">
+                                                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display" style="border: none;" id="tbl_bookingcancel">
+                                                    </table>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="modal fade" id="bookingrecord" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div style="text-align: right;">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                        </div>
+                        <div class="modal-header">
+                            <h3 class="modal-title">ประวัติ</h3>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row clearfix">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="card">
+                                        <div class="body">
+                                            <form id="formElem">
+                                                <div class="table-responsive" style="border: none;">
+                                                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display" style="border: none;" id="tbl_record">
+                                                    </table>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="modal fade" id="bookinguserlist" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div style="text-align: right;">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                        </div>
+                        <div class="modal-header">
+                            <h3 class="modal-title">รายการจองของฉัน</h3>
+                            <div style="text-align: right;">
+                                <button class="btn btn-primary waves-effect" id="cancelbooking" class="primary" type="button">ยกเลิก</button>
+
+                            </div>
+                            <div class="form-group form-float">
+                                <textarea class="form-control" id="reasonForCancellation" name="reasonForCancellation" rows="3" required placeholder="เหตุผลที่ยกเลิก"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="row clearfix">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="card">
+                                        <div class="body">
+                                            <form id="formElem">
+                                                <div class="table-responsive" style="border: none;">
+                                                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display" style="border: none;" id="tbl_recordlistcancel">
+                                                    </table>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="modal fade" id="editdatalist" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                        </div>
+                        <div class="modal-header">
+                            <h4 class="modal-title">แก้ไขรายการจอง</h4>
+
+                        </div>
+                        <div class="modal-body">
+                            <div class="row clearfix">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="card">
+                                        <div class="body">
+                                            <form id="formElem">
+                                                <div class="form-group form-float">
+
+                                                    <div class="form-line">
+                                                        <input type="text" class="form-control" name="postlist_edit" id="postlist_edit" value="" readonly placeholder="รายการจอง" required autocomplete=off />
+                                                    </div>
+                                                    <div><br></div>
+                                                    <div class="form-line">
+                                                        <textarea class="form-control" id="categorydescription_edit" name="categorydescription_edit" rows="3" required placeholder="รายละเอียด"></textarea>
+                                                    </div>
+                                                    <div><br></div>
+                                                    <div class="form-group form-float">
+                                                        <input type="file" name="edit_fileimage" type="file" multiple style="display: block;" accept=".png, .jpg, .jpeg" id="edit_fileimage">
+                                                        <label class="form-label">เลือกรูปภาพอัพโหลด</label>
+                                                    </div>
+
+                                                    <div class="form-group form-float">
+                                                        <div class="form-line">
+                                                            <div class="list-unstyled row clearfix">
+                                                                <p id="imgsixeedit" style="font-size: 16px; color: red;">
+                                                                </p>
+                                                                <h4>รูปภาพ</h4>
+                                                                <div id="EditaddImage" class="img-responsive thumbnail">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group form-float">
+                                                        <h5>กำหนดระยะเวลาการใช้งาน</h5>
+                                                        <p>เลือก ชั่วโมง</p>
+                                                        <div class="form-line">
+                                                            <select name="hours_edit" disabled="true" class="form-control" id="starthours_edit">
+                                                    <option  value="00">00</option>
+                                                    <option  value="1">01</option>
+                                                    <option value="2">02</option>
+                                                    <option value="3">03</option>
+                                                    <option value="4">04</option>
+                                                    <option value="5">05</option>
+                                                    <option value="6">06</option>
+                                                    <option value="7">07</option>
+                                                    <option value="8">08</option>
+                                                    <option value="9">09</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                    <option value="23">23</option>
+                                                </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group form-float">
+                                                        <p>เลือก นาที</p>
+                                                        <div class="form-line">
+                                                            <select name="minutes_edit" disabled="true" class="form-control" id="startminutes_edit">
+                                                    <option value="00">00</option>
+                                                    <option value="01">01</option>
+                                                    <option value="02">02</option>
+                                                    <option value="03">03</option>
+                                                    <option value="04">04</option>
+                                                    <option value="05">05</option>
+                                                    <option value="06">06</option>
+                                                    <option value="07">07</option>
+                                                    <option value="08">08</option>
+                                                    <option value="09">09</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                    <option value="24">24</option>
+                                                    <option value="25">25</option>
+                                                    <option value="26">26</option>
+                                                    <option value="27">27</option>
+                                                    <option value="28">28</option>
+                                                    <option value="29">29</option>
+                                                    <option value="30">30</option>
+                                                    <option value="31">31</option>
+                                                    <option value="32">32</option>
+                                                    <option value="33">33</option>
+                                                    <option value="34">34</option>
+                                                    <option value="35">35</option>
+                                                    <option value="36">36</option>
+                                                    <option value="37">37</option>
+                                                    <option value="38">38</option>
+                                                    <option value="39">39</option>
+                                                    <option value="40">40</option>
+                                                    <option value="41">41</option>
+                                                    <option value="42">42</option>
+                                                    <option value="43">43</option>
+                                                    <option value="44">44</option>
+                                                    <option value="45">45</option>
+                                                    <option value="46">46</option>
+                                                    <option value="47">47</option>
+                                                    <option value="48">48</option>
+                                                    <option value="49">49</option>
+                                                    <option value="50">50</option>
+                                                    <option value="51">51</option>
+                                                    <option value="52">52</option>
+                                                    <option value="53">53</option>
+                                                    <option value="54">54</option>
+                                                    <option value="55">55</option>
+                                                    <option value="56">56</option>
+                                                    <option value="57">57</option>
+                                                    <option value="58">58</option>
+                                                    <option value="59">59</option>
+                                                </select>
+                                                        </div>
+                                                    </div>
+                                                    <button class="btn btn-primary waves-effect" id="submitlist_edit" class="primary" type="button">อัพเดท</button>
+
+                                            </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="modal fade" id="myModalview" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div style="text-align: right;">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="body">
+
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <h4 id="h2_description" style="display: none;">รายละเอียด</h4>
+                                        <p style="display: none;" id='member_description'></p>
+                                    </div>
+                                    <p>รูปภาพ</p>
+                                    <div class="form-line">
+                                        <div class="list-unstyled row clearfix">
+                                            <div id="aniimated-thumbnials">
+                                                <div id="viewImage_prop" style="cursor: pointer;" class="img-responsive thumbnail lightgallery">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="container">
+            <div class="modal fade" id="adddatalist" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                        </div>
+                        <div class="modal-header">
+                            <h4 class="modal-title">เพิ่มรายการจอง</h4>
+
+                        </div>
+                        <div class="modal-body">
+                            <div class="row clearfix">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="card">
+                                        <div class="body">
+                                            <form id="formElem">
+                                                <div class="form-group form-float">
+
+                                                    <div class="form-line">
+                                                        <input type="text" class="form-control" name="postlist" id="postlist" value="" placeholder="รายการจอง" required autocomplete=off />
+                                                    </div>
+                                                    <div><br></div>
+                                                    <div class="form-line">
+                                                        <textarea class="form-control" id="categorydescription" name="categorydescription" rows="3" required placeholder="รายละเอียด"></textarea>
+                                                    </div>
+
+                                                    <div class="form-group form-float">
+                                                        <input type="file" name="fileimage" type="file" multiple accept=".png, .jpg, .jpeg " id="fileimage">
+                                                        <label class="form-label">เลือกรูปภาพอัพโหลด</label>
+                                                        <p id="lbl_add" style="font-size: 16px; color: red;"></p>
+
+                                                    </div>
+
+                                                    <div class="form-group form-float">
+                                                        <div class="form-line">
+                                                            <div class="list-unstyled row clearfix">
+                                                                <p id="imgsixe" style="font-size: 16px; color: red;">
+                                                                </p>
+                                                                <h4>รูปภาพ</h4>
+                                                                <div id="addImagenew" class="img-responsive thumbnail">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group form-float">
+                                                        <h5>กำหนดระยะเวลาการใช้งาน</h5>
+                                                        <p>เลือก ชั่วโมง</p>
+                                                        <div class="form-line">
+                                                            <select name="hours" class="form-control" id="starthours">
+                                                        <option value="00">00</option>
+                                                        <option value="1">01</option>
+                                                        <option value="2">02</option>
+                                                        <option value="3">03</option>
+                                                        <option value="4">04</option>
+                                                        <option value="5">05</option>
+                                                        <option value="6">06</option>
+                                                        <option value="7">07</option>
+                                                        <option value="8">08</option>
+                                                        <option value="9">09</option>
+                                                        <option value="10">10</option>
+                                                        <option value="11">11</option>
+                                                        <option value="12">12</option>
+                                                        <option value="13">13</option>
+                                                        <option value="14">14</option>
+                                                        <option value="15">15</option>
+                                                        <option value="16">16</option>
+                                                        <option value="17">17</option>
+                                                        <option value="18">18</option>
+                                                        <option value="19">19</option>
+                                                        <option value="20">20</option>
+                                                        <option value="21">21</option>
+                                                        <option value="22">22</option>
+                                                        <option value="23">23</option>
+                                                        <option value="24">24</option>
+                                                    </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group form-float">
+                                                        <p>เลือก นาที</p>
+                                                        <div class="form-line">
+                                                            <select name="minutes" class="form-control" id="startminutes">
+                                                        <option value="00">00</option>
+                                                        <option value="01">01</option>
+                                                        <option value="02">02</option>
+                                                        <option value="03">03</option>
+                                                        <option value="04">04</option>
+                                                        <option value="05">05</option>
+                                                        <option value="06">06</option>
+                                                        <option value="07">07</option>
+                                                        <option value="08">08</option>
+                                                        <option value="09">09</option>
+                                                        <option value="10">10</option>
+                                                        <option value="11">11</option>
+                                                        <option value="12">12</option>
+                                                        <option value="13">13</option>
+                                                        <option value="14">14</option>
+                                                        <option value="15">15</option>
+                                                        <option value="16">16</option>
+                                                        <option value="17">17</option>
+                                                        <option value="18">18</option>
+                                                        <option value="19">19</option>
+                                                        <option value="20">20</option>
+                                                        <option value="21">21</option>
+                                                        <option value="22">22</option>
+                                                        <option value="24">24</option>
+                                                        <option value="25">25</option>
+                                                        <option value="26">26</option>
+                                                        <option value="27">27</option>
+                                                        <option value="28">28</option>
+                                                        <option value="29">29</option>
+                                                        <option value="30">30</option>
+                                                        <option value="31">31</option>
+                                                        <option value="32">32</option>
+                                                        <option value="33">33</option>
+                                                        <option value="34">34</option>
+                                                        <option value="35">35</option>
+                                                        <option value="36">36</option>
+                                                        <option value="37">37</option>
+                                                        <option value="38">38</option>
+                                                        <option value="39">39</option>
+                                                        <option value="40">40</option>
+                                                        <option value="41">41</option>
+                                                        <option value="42">42</option>
+                                                        <option value="43">43</option>
+                                                        <option value="44">44</option>
+                                                        <option value="45">45</option>
+                                                        <option value="46">46</option>
+                                                        <option value="47">47</option>
+                                                        <option value="48">48</option>
+                                                        <option value="49">49</option>
+                                                        <option value="50">50</option>
+                                                        <option value="51">51</option>
+                                                        <option value="52">52</option>
+                                                        <option value="53">53</option>
+                                                        <option value="54">54</option>
+                                                        <option value="55">55</option>
+                                                        <option value="56">56</option>
+                                                        <option value="57">57</option>
+                                                        <option value="58">58</option>
+                                                        <option value="59">59</option>
+                                                    </select>
+                                                        </div>
+                                                    </div>
+                                                    <button class="btn btn-primary waves-effect" id="submitlist" class="primary" type="button">บันทึก</button>
+
+                                            </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="container">
+                <div class="modal fade" id="addagendar" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div style="text-align: right;">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                            </div>
+                            <!-- <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                        </div> -->
+                            <div class="modal-header">
+                                <h3 class="modal-title">รายการจอง</h3>
+                                <div style="text-align: right;">
+                                    <button class="btn btn-primary waves-effect" id="submitagendar" class="primary" type="button">บันทึกการจอง</button>
+                                    <input type="text" style="display: none;" id="startdate">
+                                    <input type="hidden" id="enddate">
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row clearfix">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="card">
+                                            <div class="body">
+                                                <form id="formElem">
+                                                    <div class="form-group form-float">
+                                                        <h5 id='heard_agendar'></h5>
+                                                        <h5 id='selectcategoryagendar'></h5>
+                                                    </div>
+
+                                                    <div class="form-group form-float">
+                                                        <textarea class="form-control" id="postdetail" name="postdetail" rows="3" required placeholder="รายละเอียด"></textarea>
+                                                    </div>
+                                                    <h4>เลือกช่วงเวลา</h4>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered table-striped table-hover js-basic-example dataTable sortable tr hover table display" id="table1">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="width: 5px;">
+                                                                        <!-- <div style="width: 5px;">
+                                                                        <input type="checkbox" class="material-icons" id="All" class="select-checkbox filled-in chk-col-red" /><label for="All"> ทั้งหมด</label>
+                                                    </div> -->
+                                                                    </th>
+                                                                    <th>ช่วงเวลา</th>
+                                                                    <th>สถานะ</th>
+                                                                </tr>
+                                                            </thead>
+                                                        </table>
+                                                    </div>
+                                                    <!-- <div class="form-group form-float">
+                                                    <h5>ชื่อ-สกุล</h5>
+                                                    <div class="form-line">
+                                                        <input type="text" class="form-control" name="_namemember"
+                                                            id="_namemember" value="" placeholder="ชื่อ-สกุล"
+                                                            autocomplete=off />
+                                                    </div>
+                                                </div> -->
+
+                                                    <div>&nbsp;</div>
+
+
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <section>
+                <div class="rt-container">
+                    <div class="col-rt-12">
+                        <div class="Scriptcontent">
+                            <a href="javascript:" id="return-to-top"><i class="icon-chevron-up"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- ICON NEEDS FONT AWESOME FOR CHEVRON UP ICON -->
+            <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+            <link rel="stylesheet" href="css/scrollstyle.css">
+            <script src="./scroll.js"></script>
+
+
+
+            <script src="../../plugins/jquery/jquery.min.js"></script>
+
+            <!-- Bootstrap Core Js -->
+            <script src="../../plugins/bootstrap/js/bootstrap.js"></script>
+
+            <!-- Select Plugin Js -->
+            <!-- <script src="../../plugins/bootstrap-select/js/bootstrap-select.js"></script> -->
+
+            <!-- Slimscroll Plugin Js -->
+            <script src="../../plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+            <!-- Waves Effect Plugin Js -->
+            <script src="../../plugins/node-waves/waves.js"></script>
+
+            <!-- Autosize Plugin Js -->
+            <script src="../../plugins/autosize/autosize.js"></script>
+
+            <!-- Moment Plugin Js -->
+            <script src="../../plugins/momentjs/moment.js"></script>
+
+            <!-- Bootstrap Material Datetime Picker Plugin Js -->
+            <script src="../../plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+            <!-- Bootstrap Datepicker Plugin Js -->
+            <script src="../../plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+            <script src="../../plugins/sweetalert/sweetalert.min.js"></script>
+            <script src="../../js/pages/ui/dialogs.js"></script>
+
+            <script src="../../plugins/jquery-datatable/jquery.dataTables.js"></script>
+            <script src="../../plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+            <script src="../../plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+            <script src="../../plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+            <script src="../../plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+            <script src="../../plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+            <script src="../../plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+            <script src="../../plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+            <script src="../../plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+
+
+            <!-- Bootstrap Material Datetime Picker Plugin Js -->
+
+
+            <!-- Bootstrap Datepicker Plugin Js -->
+
+
+
+            <script src="../../plugins/light-gallery/js/lightgallery-all.js"></script>
+            <script src="../../js/pages/medias/image-gallery.js"></script>
+
+            <!-- Custom Js -->
+            <script src="../../js/admin.js"></script>
+            <script src="../../js/pages/forms/basic-form-elements.js"></script>
+
+            <!-- Demo Js -->
+            <script src="../../js/demo.js"></script>
+            <script src="../../plugins2/dataTables.responsive.min.js"></script>
+
+
+
+
+
+</body>
+
+
+</html>

@@ -1,4 +1,3 @@
-
 var obj = JSON.parse(Cookies.get('datatoken'));
 var userId = Cookies.get('datauserId');
 
@@ -10,19 +9,20 @@ if (datamember != undefined) {
     datamember = Cookies.get('datamemberID');
     datamember = JSON.parse(datamember)
 }
-//console.log(datamember)
+console.log(datamember)
+
 function acctoken() {
     return new Promise(resolve => {
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             axios.post(urlipaddress + 'token', data, {
                 headers: {
                     'Authorization': obj.refresh_token
                 }
-            }).then(function (response) {
+            }).then(function(response) {
                 resolve(response.data.message.access_token);
 
-            }).catch(function (res) {
+            }).catch(function(res) {
                 const { response } = res
                 if (response.data.message == "Unauthorized") {
                     location.href = "index.html";
@@ -34,10 +34,10 @@ function acctoken() {
 }
 
 var strlogo
-const getlogocompany = async (refresh_token) => {
+const getlogocompany = async(refresh_token) => {
 
     var n = 0;
-    $.getScript("ip.js", function (data, textStatus, jqxhr) {
+    $.getScript("ip.js", function(data, textStatus, jqxhr) {
         var urlipaddress = data.substring(1, data.length - 1);
 
         var param = userId
@@ -45,7 +45,7 @@ const getlogocompany = async (refresh_token) => {
             headers: {
                 'Authorization': refresh_token
             }
-        }).then(function (response) {
+        }).then(function(response) {
             console.log(response.data.message.data[0].name)
 
             if (datamember.rule == 'member') {
@@ -57,8 +57,9 @@ const getlogocompany = async (refresh_token) => {
 
             document.getElementById('logoId').value = response.data.message.data[0].logoId
             document.getElementById('logoname').value = response.data.message.data[0].name
+                // console.log( response.data.message.data[0].imageLogo[0])
             viewlogo(refresh_token, response.data.message.data[0].imageLogo[0])
-        }).catch(function (res) {
+        }).catch(function(res) {
             const { response } = res
         });
     });
@@ -67,7 +68,7 @@ const getlogocompany = async (refresh_token) => {
 
 function viewlogo(refresh_token, idlogo) {
     var n = 0;
-    $.getScript("ip.js", function (data, textStatus, jqxhr) {
+    $.getScript("ip.js", function(data, textStatus, jqxhr) {
         var urlipaddress = data.substring(1, data.length - 1);
         var param = userId
         axios.get(urlipaddress + "view/logo/" + idlogo, {
@@ -75,7 +76,7 @@ function viewlogo(refresh_token, idlogo) {
             headers: {
                 'Authorization': refresh_token
             }
-        }).then(function (responseview) {
+        }).then(function(responseview) {
             console.log(responseview.data)
             var arrayBuffer = responseview.data; // Note: not oReq.responseText
             var u8 = new Uint8Array(arrayBuffer);
@@ -89,10 +90,10 @@ function viewlogo(refresh_token, idlogo) {
 
 }
 
-$(async function () {
+$(async function() {
     const result = await acctoken();
     getlogocompany(result)
-    $.getScript("ip.js", function (data, textStatus, jqxhr) {
+    $.getScript("ip.js", function(data, textStatus, jqxhr) {
         var urlipaddress = data.substring(1, data.length - 1);
         document.getElementById('userlogin').innerText = datamember.username
         if (datamember.imageProfile.length != 0) {
@@ -102,7 +103,7 @@ $(async function () {
                     headers: {
                         'Authorization': result
                     }
-                }).then(function (response) {
+                }).then(function(response) {
                     var arrayBuffer = response.data; // Note: not oReq.responseText
                     var u8 = new Uint8Array(arrayBuffer);
                     var b64encoded = btoa(String.fromCharCode.apply(null, u8));

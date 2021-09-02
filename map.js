@@ -2,6 +2,7 @@ let markers = [];
 var marker = [];
 var data_map;
 var maps;
+var info;
 function getCurrent() {
     // return new Promise(resolve => {
     if (navigator.geolocation) {
@@ -17,17 +18,23 @@ function getCurrent() {
     // });
 }
 function Currentmap(_lat, _lng) {
-    console.log(_lat, _lng)
     var mapOptions = {
-        center: { lat: _lat, lng: _lng },
+        center: { lat: Number(_lat), lng: Number(_lng) },
         zoom: 15,
+        options: {
+            gestureHandling: 'greedy'
+        }
     }
     maps = new google.maps.Map(document.getElementById("map"), mapOptions);
     //var marker;
     marker = new google.maps.Marker({
         // position: new google.maps.LatLng(_lat, _lng),
         map: maps,
+        options: {
+            gestureHandling: 'greedy'
+        }
     });
+
     markers.push(marker);
     search(maps);
     maps.addListener('click', function (mapsMouseEvent) {
@@ -50,16 +57,14 @@ function Currentmap(_lat, _lng) {
         var marker;
         marker = new google.maps.Marker({
             position: new google.maps.LatLng(lat, lng),
-            map: maps
+            map: maps,
         });
-        // console.log(infoWindow)
         markers.push(marker);
-        // document.getElementById("latitude").value = lat;
-        // document.getElementById("longitude").value = lng.replace(")", "");
-
         Cookies.set('latitude', lat)
         Cookies.set('longitude', lng.replace(")", ""))
     });
+
+
 
 
 
@@ -100,16 +105,17 @@ function search(map) {
             }(place));
 
         }
-         map.fitBounds(bounds);
+        map.fitBounds(bounds);
         searchBox.set('map', map);
         map.setZoom(Math.min(map.getZoom(), 18));
     });
 }
 function _m() {
     var mapOptions = {
-        // center: { lat: Number(mapCurrents.lat), lng: Number(mapCurrents.lng) },
-        center: { lat: 13.8018, lng: 100.5841 },
+        center: { lat: Number(mapCurrents.lat), lng: Number(mapCurrents.lng) },
+        // center: { lat: 13.8018, lng: 100.5841 },
         zoom: 15,
+        zoomControl: false,
     }
     var maps = new google.maps.Map(document.getElementById("map"), mapOptions);
     var marker, info, poly;
@@ -145,9 +151,86 @@ function _m() {
 }
 $(function () {
     $(document).ready(function () {
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = window.location.search.substring(1),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+                }
+            }
+        };
+        var latitude = getUrlParameter('latitude');
+        var longitude = getUrlParameter('longitude');
+
+        if (latitude != undefined) {
+            var jsonObj = [{ "location": "", "latitude": latitude, "longitude": longitude }]
+            var mapOptions = {
+                center: { lat: Number(jsonObj[0].latitude), lng: Number(jsonObj[0].longitude) },
+                zoom: 15,
+                options: {
+                    gestureHandling: 'greedy'
+                  }
+            }
+            markers.push(marker);
+            var maps = new google.maps.Map(document.getElementById("map"), mapOptions);
+            search(maps);
+            var marker, info;
+            $.each(jsonObj, function (i, item) {
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(item.latitude, item.longitude),
+                    map: maps,
+                    options: {
+                        gestureHandling: 'greedy'
+                    }
+                });
+                info = new google.maps.InfoWindow();
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                        info.setContent(item.location);
+                        info.open(maps, marker);
+                    }
+                })(marker, i));
+            });
+            markers.push(marker);
+            maps.addListener('click', function (mapsMouseEvent) {
+                console.log(markers.length)
+                if (markers.length > 0) {
+                    markers.pop().setMap(null);
+                }
+                // Create a new InfoWindow.
+                infoWindow = new google.maps.InfoWindow({
+                    position: mapsMouseEvent.latLng
+                });
+                infoWindow.setContent(mapsMouseEvent.latLng.toString());
+                var checkmarker = infoWindow.content.split(",")
+                // // console.log(checkmarker)
+                console.log(checkmarker[0].substring(1, checkmarker[0].length))
+                console.log(checkmarker[1].replace(" ", "").substring(0, checkmarker[0].length - 1))
+                var lat = checkmarker[0].substring(1, checkmarker[0].length);
+                var lng = checkmarker[1].replace(" ", "").substring(0, checkmarker[0].length - 1);
+                var marker;
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(lat, lng),
+                    map: maps
+                });
+                // console.log(infoWindow)
+                markers.push(marker);
+                // document.getElementById("latitude").value = lat;
+                // document.getElementById("longitude").value = lng.replace(")", "");
+                Cookies.set('latitude', lat)
+                Cookies.set('longitude', lng.replace(")", ""))
+            });
+        }
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
-                Currentmap(position.coords.latitude, position.coords.longitude)
+                if (longitude == undefined) {
+                    Currentmap(position.coords.latitude, position.coords.longitude)
+                }
             });
         }
     });

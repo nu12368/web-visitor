@@ -1,4 +1,3 @@
-
 var length_img;
 var arr = new Array();
 var arrimagedelete = new Array();
@@ -12,22 +11,30 @@ var _arr = new Array();
 var n = 0;
 console.log(userId)
 
+var datamember;
+datamember = Cookies.get('datamember');
+if (datamember != undefined) {
+    datamember = JSON.parse(datamember)
+} else {
+    datamember = Cookies.get('datamemberID');
+    datamember = JSON.parse(datamember)
+}
 
 function acctoken() {
     return new Promise(resolve => {
-        $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $.getScript("ip.js", function(data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             // console.log('aaaaaaaaaaaaaa')
             axios.post(urlipaddress + 'token', data, {
                 headers: {
                     'Authorization': obj.refresh_token
                 }
-            }).then(function (response) {
+            }).then(function(response) {
                 //   console.log('bbb')
                 // console.log(response.data.message.access_token)
                 resolve(response.data.message.access_token);
 
-            }).catch(function (res) {
+            }).catch(function(res) {
                 const { response } = res
                 //   console.log(response.data.message)
 
@@ -41,10 +48,10 @@ function acctoken() {
     });
 }
 
-$(async function () {
+$(async function() {
     console.log('dsdssds')
     const result = await acctoken();
-    var imagesPreview = function (input) {
+    var imagesPreview = function(input) {
         if (input.files) {
             var filesAmount = input.files.length;
             document.getElementById("imgsixeedit").innerText = '';
@@ -62,7 +69,7 @@ $(async function () {
                 //     document.getElementById("imgsixeedit").style.color = "red";
                 //     return;
                 // }
-                reader.onload = function (event) {
+                reader.onload = function(event) {
                     length_img = $("#EditaddImage img");
                     if (length_img.length > 4) {
 
@@ -80,7 +87,7 @@ $(async function () {
 
     function resize(item) {
         //define the width to resize e.g 600px
-        var resize_width = 600;//without px
+        var resize_width = 600; //without px
         // console.log(item.files)
         for (i = 0; i < item.files.length; i++) {
             //get the image selected
@@ -91,15 +98,15 @@ $(async function () {
 
             //image turned to base64-encoded Data URI.
             reader.readAsDataURL(item.files[i]);
-            reader.name = item.files[i].name;//get the image's name
+            reader.name = item.files[i].name; //get the image's name
             reader.size = item.files[i].size; //get the image's size
-            reader.onload = function (event) {
-                var img = new Image();//create a image
-                img.src = event.target.result;//result is base64-encoded Data URI
-                img.name = event.target.name;//set name (optional)
-                img.size = event.target.size;//set size (optional)
-                img.onload = function (el) {
-                    var elem = document.createElement('canvas');//create a canvas
+            reader.onload = function(event) {
+                var img = new Image(); //create a image
+                img.src = event.target.result; //result is base64-encoded Data URI
+                img.name = event.target.name; //set name (optional)
+                img.size = event.target.size; //set size (optional)
+                img.onload = function(el) {
+                    var elem = document.createElement('canvas'); //create a canvas
 
                     //scale the image to 600 (width) and keep aspect ratio
                     var scaleFactor = resize_width / el.target.width;
@@ -136,7 +143,7 @@ $(async function () {
     }
     var namefile;
     var typename;
-    $('#edit_fileimage').on('change', function () {
+    $('#edit_fileimage').on('change', function() {
         length_img = $("#EditaddImage img");
         resize(this);
         //  imagesPreview(this);
@@ -156,7 +163,7 @@ $(async function () {
 
 
     function _checkimage(_file) {
-        getDataUrl(_file, function (imgBase64) {
+        getDataUrl(_file, function(imgBase64) {
             $("#EditaddImage").append(`<a id="close" style="font-size:18px;color:red; class="pull-right" href="#">
             <i name="${n}" class="delete_cc fa fa-times fa fa-times col-lg-3 col-md-4 col-sm-6 col-xs-12"><img name="${n}" src="${imgBase64}"class="img-responsive thumbnail"></i></a>`);
 
@@ -183,13 +190,13 @@ $(async function () {
     }
 
     function getDataUrl(file, callback2) {
-        var callback = function (srcOrientation) {
+        var callback = function(srcOrientation) {
             var reader2 = new FileReader();
-            reader2.onload = function (e) {
+            reader2.onload = function(e) {
                 var srcBase64 = e.target.result;
                 var img = new Image();
 
-                img.onload = function () {
+                img.onload = function() {
                     var width = img.width,
                         height = img.height,
                         canvas = document.createElement('canvas'),
@@ -206,14 +213,29 @@ $(async function () {
 
                     // transform context before drawing image
                     switch (srcOrientation) {
-                        case 2: ctx.transform(-1, 0, 0, 1, width, 0); break;
-                        case 3: ctx.transform(-1, 0, 0, -1, width, height); break;
-                        case 4: ctx.transform(1, 0, 0, -1, 0, height); break;
-                        case 5: ctx.transform(0, 1, 1, 0, 0, 0); break;
-                        case 6: ctx.transform(0, 1, -1, 0, height, 0); break;
-                        case 7: ctx.transform(0, -1, -1, 0, height, width); break;
-                        case 8: ctx.transform(0, -1, 1, 0, 0, width); break;
-                        default: break;
+                        case 2:
+                            ctx.transform(-1, 0, 0, 1, width, 0);
+                            break;
+                        case 3:
+                            ctx.transform(-1, 0, 0, -1, width, height);
+                            break;
+                        case 4:
+                            ctx.transform(1, 0, 0, -1, 0, height);
+                            break;
+                        case 5:
+                            ctx.transform(0, 1, 1, 0, 0, 0);
+                            break;
+                        case 6:
+                            ctx.transform(0, 1, -1, 0, height, 0);
+                            break;
+                        case 7:
+                            ctx.transform(0, -1, -1, 0, height, width);
+                            break;
+                        case 8:
+                            ctx.transform(0, -1, 1, 0, 0, width);
+                            break;
+                        default:
+                            break;
                     }
 
                     // draw image
@@ -228,10 +250,11 @@ $(async function () {
         }
 
         var reader = new FileReader();
-        reader.onload = function (e) {
+        reader.onload = function(e) {
             var view = new DataView(e.target.result);
             if (view.getUint16(0, false) != 0xFFD8) return callback(-2);
-            var length = view.byteLength, offset = 2;
+            var length = view.byteLength,
+                offset = 2;
             while (offset < length) {
                 var marker = view.getUint16(offset, false);
                 offset += 2;
@@ -244,8 +267,7 @@ $(async function () {
                     for (var i = 0; i < tags; i++)
                         if (view.getUint16(offset + (i * 12), little) == 0x0112)
                             return callback(view.getUint16(offset + (i * 12) + 8, little));
-                }
-                else if ((marker & 0xFF00) != 0xFF00) break;
+                } else if ((marker & 0xFF00) != 0xFF00) break;
                 else offset += view.getUint16(offset, false);
             }
             return callback(-1);
@@ -254,7 +276,7 @@ $(async function () {
     }
 
     ///////// ลบรูปภาพ
-    $('#EditaddImage').on('click', 'i.delete_cc', function (e) {
+    $('#EditaddImage').on('click', 'i.delete_cc', function(e) {
         var remove_index = $(this).attr("name");
         arrimagedelete[remove_index] = arr[remove_index];
         arr[parseInt(remove_index)] = " ";
@@ -266,9 +288,9 @@ $(async function () {
 
 
     var data;
-    $.getScript("ip.js", function (dataipaddress, textStatus, jqxhr) {
+    $.getScript("ip.js", function(dataipaddress, textStatus, jqxhr) {
         var urlipad = dataipaddress.substring(1, dataipaddress.length - 1);
-        $('#table_supplies').on('click', 'i.view_edit', function (e) {
+        $('#table_supplies').on('click', 'i.view_edit', function(e) {
             e.preventDefault();
             $("#EditaddImage").empty();
             var table = $('#table_supplies').DataTable();
@@ -292,7 +314,7 @@ $(async function () {
                     headers: {
                         'Authorization': result
                     }
-                }).then(function (response) {
+                }).then(function(response) {
                     var arrayBuffer = response.data; // Note: not oReq.responseText
                     var u8 = new Uint8Array(arrayBuffer);
                     var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -330,7 +352,7 @@ $(async function () {
 
 
         /////////////////////////// ส่งมอบพัสดุ
-        $('#edit_submitsupplies').on('click', function (e) {
+        $('#edit_submitsupplies').on('click', function(e) {
             const url = urlipad + 'deliver';
             let formData = new FormData();
             formData.append('userId', userId);
@@ -351,18 +373,17 @@ $(async function () {
                 headers: {
                     'Authorization': result
                 }
-            }
-            ).then(function (response) {
+            }).then(function(response) {
                 console.log(response.data.message)
                 location.href = "supplies.html";
-            }).catch(function (res) {
+            }).catch(function(res) {
                 const { response } = res
                 console.log(response.data.message)
             });
         });
 
         ////////////////  แก้ไขประกาศ
-        $('#table_id8').on('click', 'i.edit_supplies', function (e) {
+        $('#table_id8').on('click', 'i.edit_supplies', function(e) {
             e.preventDefault();
             $("#EditaddImage").empty();
             var table = $('#table_id8').DataTable();
@@ -380,13 +401,17 @@ $(async function () {
                     headers: {
                         'Authorization': result
                     }
-                }).then(function (response) {
+                }).then(function(response) {
                     var arrayBuffer = response.data; // Note: not oReq.responseText
                     var u8 = new Uint8Array(arrayBuffer);
-                    var b64encoded = btoa(String.fromCharCode.apply(null, u8));
+                    var b64encoded = bufferToBase64(u8)
                     var mimetype = "image/png"; // or whatever your image mime type is
+
+                    //// รุปไปแสดง
                     $("#EditaddImage").append(`<a id="close" style="font-size:18px;color:red; class="pull-right" href="#">
                     <i name="${n}" class="delete_cc  fa fa-times col-lg-3 col-md-4 col-sm-6 col-xs-12" ><img name="${n}" style="width: 600px;" src="${"data:" + mimetype + ";base64," + b64encoded}"class="view_img img-responsive thumbnail col-lg-3 col-md-4 col-sm-6 col-xs-12" >`);
+
+                    //// แปลง 64 เป็น ไฟล์ เก็บ Array
                     arr[n] = dataURLtoFileEdit("data:" + mimetype + ";base64," + b64encoded, nn.toString() + '.jpg');
                     n = n + 1;
                 });
@@ -408,22 +433,77 @@ $(async function () {
             $("#edit_posttopic").val(data.topic);
             $("#edit_postdetail").val(data.detail);
             $("#edit_weblink").val(data.weblink);
+            $("#latitude_edit").val(data.latitude);
+            $("#longitude_edit").val(data.longitude);
+            $("#gps_edit").attr("href", `map.html?latitude= ${data.latitude}&longitude= ${data.longitude}`);
+        });
 
+        /////////////////////////////////////// แก้ไข รายการ รออนุมัติ
+        $('#table_pendingapproval').on('click', 'a.a_edit', function(e) {
+            e.preventDefault();
+            $("#EditaddImage").empty();
+            $("#myModalpendingapproval").empty();
+
+            data = $(this).attr("id");
+            data = JSON.parse(data)
+            console.log(data)
+            $("#Editnotice").modal();
+            var nn = 0;
+            for (let i in data.announceImage) {
+                axios.get(urlipad + "view/images/" + data.announceImage[i], {
+                    responseType: 'arraybuffer',
+                    headers: {
+                        'Authorization': result
+                    }
+                }).then(function(response) {
+                    var arrayBuffer = response.data; // Note: not oReq.responseText
+                    var u8 = new Uint8Array(arrayBuffer);
+                    var b64encoded = bufferToBase64(u8)
+                    var mimetype = "image/png"; // or whatever your image mime type is
+
+                    //// รุปไปแสดง
+                    $("#EditaddImage").append(`<a id="close" style="font-size:18px;color:red; class="pull-right" href="#">
+                    <i name="${n}" class="delete_cc  fa fa-times col-lg-3 col-md-4 col-sm-6 col-xs-12" ><img name="${n}" style="width: 600px;" src="${"data:" + mimetype + ";base64," + b64encoded}"class="view_img img-responsive thumbnail col-lg-3 col-md-4 col-sm-6 col-xs-12" >`);
+
+                    //// แปลง 64 เป็น ไฟล์ เก็บ Array
+                    arr[n] = dataURLtoFileEdit("data:" + mimetype + ";base64," + b64encoded, nn.toString() + '.jpg');
+                    n = n + 1;
+                });
+
+                nn = nn + 1;
+            }
+            document.getElementById("Editdivmemberaddannounce").style.display = 'none'
+
+            let date = new Date(data.showDate);
+            let options = { hour12: false };
+            var sp = date.toLocaleString('en-US', options).replace(',', '').split('/')
+            var _d = sp[1].padStart(2, '0') + "/" + sp[0].padStart(2, '0') + "/" + sp[2]
+            $("#selectdeleteedit").val(data.isRemoved);
+            $("#editshowDate").val(_d.substring(0, 10));
+            $("#edittxttimenotice").val(_d.substring(10, _d.length));
+            // $("#edittxttimenotice").val('14:00');
+            $("#edit_posttopic").val(data.topic);
+            $("#edit_postdetail").val(data.detail);
+            $("#edit_weblink").val(data.weblink);
+            $("#latitude_edit").val(data.latitude);
+            $("#longitude_edit").val(data.longitude);
+            $("#gps_edit").attr("href", `map.html?latitude= ${data.latitude}&longitude= ${data.longitude}`);
         });
 
 
-        $('#Edit_logo').on('click', async function (e) {
+
+        $('#Edit_logo').on('click', async function(e) {
             document.getElementById("profileEdit").value = 'profileEdit';
             $("#exampleModalCenterImage").modal();
             $("#EditaddImage").empty()
-            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+            $.getScript("ip.js", function(data, textStatus, jqxhr) {
                 var urlipaddress = data.substring(1, data.length - 1);
                 var param = userId
                 axios.get(urlipaddress + 'logo/' + param, {
                     headers: {
                         'Authorization': result
                     }
-                }).then(function (response) {
+                }).then(function(response) {
                     console.log(response.data.message.data[0].imageLogo[0])
                     document.getElementById('editnamecompany').value = response.data.message.data[0].name
                     var nn = 0;
@@ -432,7 +512,7 @@ $(async function () {
                         headers: {
                             'Authorization': result
                         }
-                    }).then(function (response) {
+                    }).then(function(response) {
                         var arrayBuffer = response.data; // Note: not oReq.responseText
                         var u8 = new Uint8Array(arrayBuffer);
                         var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -446,13 +526,13 @@ $(async function () {
                     });
 
 
-                }).catch(function (res) {
+                }).catch(function(res) {
                     const { response } = res
                 });
             });
         });
         /////////////////////////////// LOGO
-        $('#updatelogo').on('click', async function (e) {
+        $('#updatelogo').on('click', async function(e) {
             console.log('dddddddddddddddddddddddddddddd')
             const result = await acctoken();
             if (document.getElementById('logoId').value != '') {
@@ -461,26 +541,26 @@ $(async function () {
                     logoId: document.getElementById('logoId').value
                 }
                 console.log(datanew)
-                $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                $.getScript("ip.js", function(data, textStatus, jqxhr) {
                     var urlipaddress = data.substring(1, data.length - 1);
                     axios({
                         url: urlipaddress + 'logo',
                         method: 'delete',
                         data: datanew,
                         headers: { 'Authorization': result }
-                    }).then(function (response) {
+                    }).then(function(response) {
                         var formData = new FormData();
                         const url = urlipaddress + 'logo';
                         formData.append('userId', userId);
                         formData.append('name', document.getElementById('editnamecompany').value);
                         formData.append('description', '');
                         if (arr.length != 0) {
-                            if( arr[0] == ' '){
+                            if (arr[0] == ' ') {
                                 formData.append('imageLogo', arr[1]);
-                            }else{
+                            } else {
                                 formData.append('imageLogo', arr[0]);
                             }
-                           // formData.append('imageLogo', arr[0]);
+                            // formData.append('imageLogo', arr[0]);
                         } else {
                             formData.append('imageLogo', '');
                         }
@@ -490,23 +570,22 @@ $(async function () {
                                 'Authorization': result,
                                 'Content-Type': 'multipart/form-data'
                             }
-                        }
-                        ).then(function (response) {
+                        }).then(function(response) {
                             console.log(response.data.message)
-                            // if (response.data.message = 'update completed') {
+                                // if (response.data.message = 'update completed') {
                             location.href = "menu.html";
                             // }
-                        }).catch(function (res) {
+                        }).catch(function(res) {
                             const { response } = res
                             console.log(response.data.message)
                         });
-                    }).catch(function (res) {
+                    }).catch(function(res) {
                         const { response } = res
                     });
                 });
 
             } else {
-                $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                $.getScript("ip.js", function(data, textStatus, jqxhr) {
                     var urlipaddress = data.substring(1, data.length - 1);
                     var formData = new FormData();
 
@@ -516,12 +595,12 @@ $(async function () {
                     formData.append('description', '');
 
                     if (arr.length != 0) {
-                        if( arr[0] == ' '){
+                        if (arr[0] == ' ') {
                             formData.append('imageLogo', arr[1]);
-                        }else{
+                        } else {
                             formData.append('imageLogo', arr[0]);
                         }
-                       
+
                     } else {
                         formData.append('imageLogo', '');
                     }
@@ -531,13 +610,12 @@ $(async function () {
                             'Authorization': result,
                             'Content-Type': 'multipart/form-data'
                         }
-                    }
-                    ).then(function (response) {
+                    }).then(function(response) {
                         console.log(response.data.message)
-                        // if (response.data.message = 'update completed') {
+                            // if (response.data.message = 'update completed') {
                         location.href = "menu.html";
                         // }
-                    }).catch(function (res) {
+                    }).catch(function(res) {
                         const { response } = res
                         console.log(response.data.message)
                     });
@@ -547,12 +625,8 @@ $(async function () {
 
         });
 
-
-
         /////////////////////////// อัพเดท ประกาศ
-        $('#edit_submitpostinvoice').on('click', function (e) {
-
-
+        $('#edit_submitpostinvoice').on('click', function(e) {
             var category;
             if (Cookies.get('announce') != undefined) {
                 category = 'announce'
@@ -572,7 +646,6 @@ $(async function () {
 
             document.getElementById("edit_lbl_notice").innerText = ''
             const url = urlipad + 'announce';
-
             let formData = new FormData();
             var ddd = document.getElementById('editshowDate').value
             var s_time = document.getElementById('edittxttimenotice').value.replace(' ', '');
@@ -594,95 +667,157 @@ $(async function () {
                 //  strdaysshowDate = new Date(timedaysshowDate[2] + '-' + timedaysshowDate[1] + '-' + timedaysshowDate[0] + ' ' + s_time + ':' + '00').toISOString();
             }
 
+            console.log(datamember.rule)
 
-            if (arr.length == 0) {
-                formData.append('userId', userId);
-                formData.append('announceId', data.announceId);
-                formData.append('announceImage', '');
-                formData.append('topic', document.getElementById("edit_posttopic").value);
-                formData.append('detail', document.getElementById("edit_postdetail").value);
-                formData.append('weblink', document.getElementById("edit_weblink").value);
-                var _sp = document.getElementById("editinput-tags").value.split(',')
-                for (i = 0; i < _sp.length; i++) {
-                    formData.append('tag[]', _sp[i]);
-                }
-                formData.append('category', category);
-                formData.append('showDate', strdaysshowDate);
-                var isRemoved = false;
-                if (document.getElementById("selectdeleteedit").value == 'true') {
-                    isRemoved = true;
-                }
-                formData.append('isRemoved', isRemoved);
-            } else {
-                formData.append('userId', userId);
-                formData.append('announceId', data.announceId);
-                for (var i = 0; i < arr.length; i++) {
-                    if (arr[i] != " ") {
-                        formData.append('announceImage', arr[i]);
-                    }
-                }
-                formData.append('topic', document.getElementById("edit_posttopic").value);
-                formData.append('detail', document.getElementById("edit_postdetail").value);
-                formData.append('weblink', document.getElementById("edit_weblink").value);
-                var _sp = document.getElementById("editinput-tags").value.split(',')
-
-                for (i = 0; i < _sp.length; i++) {
-                    formData.append('tag[]', _sp[i]);
-                }
-                formData.append('category', category);
-                formData.append('showDate', strdaysshowDate);
-                var isRemoved = false;
-                if (document.getElementById("selectdeleteedit").value == 'true') {
-                    isRemoved = true;
-                }
-                formData.append('isRemoved', isRemoved);
+            if (document.getElementById("edit_postdetail").value == '') {
+                document.getElementById("edit_postdetail").value = '-'
+            }
+            if (document.getElementById("edit_weblink").value == '') {
+                document.getElementById("edit_weblink").value = '-'
             }
 
-            axios.put(url, formData,
-                {
-                    headers: {
-                        'Authorization': result
+
+
+            if (datamember.rule == 'member') { //////////////////////////////// member
+                if (arr.length == 0) {
+                    formData.append('userId', userId);
+                    formData.append('uId', datamember.uId);
+                    formData.append('announceId', data.announceId);
+                    formData.append('announceImage', '');
+                    formData.append('topic', document.getElementById("edit_posttopic").value);
+                    formData.append('detail', document.getElementById("edit_postdetail").value);
+                    formData.append('weblink', document.getElementById("edit_weblink").value);
+                    var _sp = document.getElementById("editinput-tags").value.split(',')
+                    for (i = 0; i < _sp.length; i++) {
+                        formData.append('tag[]', _sp[i]);
                     }
+                    formData.append('category', category);
+                    formData.append('showDate', strdaysshowDate);
+                    var isRemoved = false;
+                    if (document.getElementById("selectdeleteedit").value == 'true') {
+                        isRemoved = true;
+                    }
+                    formData.append('isRemoved', isRemoved);
+                    formData.append('approve', 'รออนุมัติ');
+                } else {
+                    formData.append('userId', userId);
+                    formData.append('announceId', data.announceId);
+                    for (var i = 0; i < arr.length; i++) {
+                        if (arr[i] != " ") {
+                            formData.append('announceImage', arr[i]);
+                        }
+                    }
+                    formData.append('topic', document.getElementById("edit_posttopic").value);
+                    formData.append('detail', document.getElementById("edit_postdetail").value);
+                    formData.append('weblink', document.getElementById("edit_weblink").value);
+                    var _sp = document.getElementById("editinput-tags").value.split(',')
+
+                    for (i = 0; i < _sp.length; i++) {
+                        formData.append('tag[]', _sp[i]);
+                    }
+                    formData.append('gps[latitude]', document.getElementById("latitude_edit").value);
+                    formData.append('gps[longitude]', document.getElementById("longitude_edit").value);
+                    formData.append('category', category);
+                    formData.append('showDate', strdaysshowDate);
+                    var isRemoved = false;
+                    if (document.getElementById("selectdeleteedit").value == 'true') {
+                        isRemoved = true;
+                    }
+                    formData.append('isRemoved', isRemoved);
+                    formData.append('approve', 'รออนุมัติ');
                 }
-            ).then(function (response) {
+            } else { /////////////////////////////////admin
+
+                if (arr.length == 0) {
+                    formData.append('userId', userId);
+                    formData.append('announceId', data.announceId);
+                    formData.append('announceImage', '');
+                    formData.append('topic', document.getElementById("edit_posttopic").value);
+                    formData.append('detail', document.getElementById("edit_postdetail").value);
+                    formData.append('weblink', document.getElementById("edit_weblink").value);
+                    var _sp = document.getElementById("editinput-tags").value.split(',')
+                    for (i = 0; i < _sp.length; i++) {
+                        formData.append('tag[]', _sp[i]);
+                    }
+                    formData.append('category', category);
+                    formData.append('showDate', strdaysshowDate);
+                    var isRemoved = false;
+                    if (document.getElementById("selectdeleteedit").value == 'true') {
+                        isRemoved = true;
+                    }
+                    formData.append('isRemoved', isRemoved);
+                } else {
+                    formData.append('userId', userId);
+                    formData.append('announceId', data.announceId);
+                    var chk = '';
+                    for (var i = 0; i < arr.length; i++) {
+                        if (arr[i] != " ") {
+                            console.log('มีรูป')
+                            formData.append('announceImage', arr[i]);
+                            chk = 'true'
+                        } else {
+                            if (chk == 'true') {} else {
+                                chk = 'false'
+                            }
+                        }
+                    }
+                    if (chk == 'false') {
+                        console.log('รูป ใส่ค่าว่าง')
+                        formData.append('announceImage', '');
+                    }
+                    formData.append('topic', document.getElementById("edit_posttopic").value);
+                    formData.append('detail', document.getElementById("edit_postdetail").value);
+                    formData.append('weblink', document.getElementById("edit_weblink").value);
+                    var _sp = document.getElementById("editinput-tags").value.split(',')
+
+                    for (i = 0; i < _sp.length; i++) {
+                        formData.append('tag[]', _sp[i]);
+                    }
+                    formData.append('gps[latitude]', document.getElementById("latitude_edit").value);
+                    formData.append('gps[longitude]', document.getElementById("longitude_edit").value);
+                    formData.append('category', category);
+                    formData.append('showDate', strdaysshowDate);
+                    var isRemoved = false;
+                    if (document.getElementById("selectdeleteedit").value == 'true') {
+                        isRemoved = true;
+                    }
+                    formData.append('isRemoved', isRemoved);
+                }
+            }
+
+            axios.put(url, formData, {
+                headers: {
+                    'Authorization': result
+                }
+            }).then(function(response) {
                 console.log(response.data.message);
                 if (response.data.message.data == 'update completed') {
-                    // document.getElementById("edit_lbl_notice").innerText = 'อัพเดทข้อมูลสำเร็จ'
-                    // document.getElementById("edit_lbl_notice").style.color = 'green'
                     if (category == 'announce') {
-                        //   location.href = "allnotice.html";
                         showSuccessMessage('สำเร็จ', 'อัพเดทข้อมูลสำเร็จ', 'allnotice.html');
                     }
                     if (category == 'service') {
-                        //  location.href = "allservice.html";
                         showSuccessMessage('สำเร็จ', 'อัพเดทข้อมูลสำเร็จ', 'allservice.html');
                     }
                     if (category == 'business') {
-                        //  location.href = "allbusiness.html";
                         showSuccessMessage('สำเร็จ', 'อัพเดทข้อมูลสำเร็จ', 'allbusiness.html');
                     }
                     if (category == 'asset') {
-                        // location.href = "allasset.html";
                         showSuccessMessage('สำเร็จ', 'อัพเดทข้อมูลสำเร็จ', 'allasset.html');
                     }
                     if (category == 'travel') {
-                        //  location.href = "alltravel.html";
                         showSuccessMessage('สำเร็จ', 'อัพเดทข้อมูลสำเร็จ', 'alltravel.html');
                     }
                 }
 
-            }).catch(function (res) {
-                const { response } = res
-                //  console.log(response.data.message)
+            }).catch(function(res) {
+                const { response } = response
                 showCancelMessage(response.data.message, '')
-                //document.getElementById("edit_lbl_notice").innerText = response.data.message
-                //document.getElementById("edit_lbl_notice").style.color = 'red'
             });
 
         });
 
         ////////////////// แก้ไข member
-        $('#table2').on('click', 'i.edit_member', function (e) {
+        $('#table2').on('click', 'i.edit_member', function(e) {
             e.preventDefault();
             var table = $('#table2').DataTable();
             var _ro = table.row($(this).parents('tr'));
@@ -703,7 +838,7 @@ $(async function () {
                     headers: {
                         'Authorization': result
                     }
-                }).then(function (response) {
+                }).then(function(response) {
                     var arrayBuffer = response.data; // Note: not oReq.responseText
                     var u8 = new Uint8Array(arrayBuffer);
                     var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -731,7 +866,7 @@ $(async function () {
         });
 
         /////////////////////////// อัพเดท USER MEMBER
-        $('#UPDATEEDITMEMBER').on('click', function (e) {
+        $('#UPDATEEDITMEMBER').on('click', function(e) {
             document.getElementById("update_member").innerText = ''
             const url = urlipad + 'addAccount';
             let formData = new FormData();
@@ -774,8 +909,7 @@ $(async function () {
                 headers: {
                     'Authorization': result
                 }
-            }
-            ).then(function (response) {
+            }).then(function(response) {
                 //  console.log(response.data.message);
                 if (response.data.message == 'update completed') {
                     showSuccessMessage('สำเร็จ', 'อัพเดทข้อมูลสำเร็จ', 'visitorregisteruser.html');
@@ -784,23 +918,18 @@ $(async function () {
                     // location.href = "visitorregisteruser.html";
                 }
 
-            }).catch(function (res) {
+            }).catch(function(res) {
                 const { response } = res
                 //   console.log(response.data.message)
                 showCancelMessage(response.data.message, '')
-                // document.getElementById("update_member").innerText = response.data.message
-                // document.getElementById("update_member").style.color = 'red'
+                    // document.getElementById("update_member").innerText = response.data.message
+                    // document.getElementById("update_member").style.color = 'red'
             });
 
         });
 
-
-
-
-
-
         ////////////////////////////// แก้ไข เจ้าหน้าที่
-        $('#table1').on('click', 'i.edituser', function (e) {
+        $('#table1').on('click', 'i.edituser', function(e) {
             e.preventDefault();
             var table = $('#table1').DataTable();
             var _ro = table.row($(this).parents('tr'));
@@ -824,7 +953,7 @@ $(async function () {
                     headers: {
                         'Authorization': result
                     }
-                }).then(function (response) {
+                }).then(function(response) {
                     var arrayBuffer = response.data; // Note: not oReq.responseText
                     var u8 = new Uint8Array(arrayBuffer);
                     var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -839,8 +968,8 @@ $(async function () {
         });
 
         /////////////////////อัพเดทข้อมูล เจ้าหน้าที่
-        $('#UPDATEEDIT').on('click', async function (e) {
-            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+        $('#UPDATEEDIT').on('click', async function(e) {
+            $.getScript("ip.js", function(data, textStatus, jqxhr) {
                 var urlipaddress = data.substring(1, data.length - 1);
 
                 var formData = new FormData();
@@ -863,8 +992,7 @@ $(async function () {
                         'Authorization': result,
                         'Content-Type': 'multipart/form-data'
                     }
-                }
-                ).then(function (response) {
+                }).then(function(response) {
                     console.log(response.data.message)
                     if (response.data.message == "This user has already been used.") {
                         // document.getElementById("update_").innerText = "มีข้อมูลในระบบแล้ว";
@@ -872,13 +1000,13 @@ $(async function () {
                         showCancelMessageregisteruser('มีข้อมูลในระบบแล้ว', '')
                     } else {
                         showSuccessMessageregisteruser('อัพเดทข้อมูลสำเร็จ')
-                        // document.getElementById("update_").innerText = "บันทึกสำเร็จ";
-                        // document.getElementById("update_").style.color = "green";
+                            // document.getElementById("update_").innerText = "บันทึกสำเร็จ";
+                            // document.getElementById("update_").style.color = "green";
                         getUser(result);
                         //  location.href = "visitorregisteruser.html";
                     }
 
-                }).catch(function (res) {
+                }).catch(function(res) {
                     const { response } = res
                     // console.log(response.data.message)
                     if (response.data.message == 'This user has already been used.') {
@@ -892,12 +1020,8 @@ $(async function () {
             });
         });
 
-
-
-
-
         //////////////////// แก้ไข service resolved
-        $('#table1_resolved').on('click', 'i.edit_service', function (e) {
+        $('#table1_resolved').on('click', 'i.edit_service', function(e) {
             e.preventDefault();
             $("#EditaddImage").empty();
             var table = $('#table1_resolved').DataTable();
@@ -918,7 +1042,7 @@ $(async function () {
                     headers: {
                         'Authorization': result
                     }
-                }).then(function (response) {
+                }).then(function(response) {
                     var arrayBuffer = response.data; // Note: not oReq.responseText
                     var u8 = new Uint8Array(arrayBuffer);
                     var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -959,6 +1083,145 @@ $(async function () {
         });
 
 
+        var data_prop;
+        /////////////////////////////////////////////แก้ไขรายการจอง
+        $('#table_service_reservation').on('click', 'a.propedit', async function(e) {
+            $("#EditaddImage").empty();
+            data_prop = $(this).attr("id");
+            console.log(data_prop)
+            data_prop = JSON.parse(data_prop)
+            console.log(data_prop)
+
+            $("#editdatalist").modal();
+            var nn = 0;
+            for (let i in data_prop.imageProp) {
+                axios.get(urlipad + "view/images/" + data_prop.imageProp[i], {
+                    responseType: 'arraybuffer',
+                    headers: {
+                        'Authorization': result
+                    }
+                }).then(function(response) {
+                    var arrayBuffer = response.data; // Note: not oReq.responseText
+                    var u8 = new Uint8Array(arrayBuffer);
+                    var b64encoded = btoa(String.fromCharCode.apply(null, u8));
+                    var mimetype = "image/png"; // or whatever your image mime type is
+
+                    $("#EditaddImage").append(`<a id="close" style="font-size:18px;color:red; class="pull-right" href="#">
+                    <i name="${n}" class="delete_cc  fa fa-times col-lg-3 col-md-4 col-sm-6 col-xs-12" ><img name="${n}" style="width: 600px;" src="${"data:" + mimetype + ";base64," + b64encoded}"class="view_img img-responsive thumbnail col-lg-3 col-md-4 col-sm-6 col-xs-12" >`);
+                    arr[n] = dataURLtoFileEdit("data:" + mimetype + ";base64," + b64encoded, nn.toString() + '.jpg');
+
+                    n = n + 1;
+                });
+                nn = nn + 1;
+            }
+
+            $("#postlist_edit").val(data_prop.category);
+            $("#categorydescription_edit").val(data_prop.description);
+            var _sp = data_prop.intervalDifference[0].split('-')
+            var m_sp = _sp[1].split(':')
+            console.log(m_sp[0])
+            if (m_sp[0] == '00') {
+                $("#starthours_edit").val('00');
+            } else {
+                $("#starthours_edit").val(parseInt(m_sp[0]));
+            }
+
+            $("#startminutes_edit").val(m_sp[1]);
+        });
+
+
+        ///////ดูรูปภาพ
+
+        $('#table_service_reservation').on('click', 'a.propimage', async function(e) {
+            $("#viewImage_prop").empty();
+            $("#member_description").text('')
+            data_prop = $(this).attr("id");
+            console.log(data_prop)
+            data_prop = JSON.parse(data_prop)
+            console.log(data_prop)
+
+            $("#myModalview").modal();
+            for (let i in data_prop.imageProp) {
+                axios.get(urlipad + "view/images/" + data_prop.imageProp[i], {
+                    responseType: 'arraybuffer',
+                    headers: {
+                        'Authorization': result
+                    }
+                }).then(function(response) {
+                    var arrayBuffer = response.data; // Note: not oReq.responseText
+                    var u8 = new Uint8Array(arrayBuffer);
+                    var base64 = bufferToBase64(u8); // "SSDCvSDimaUg8J+SqQ=="
+                    console.log(base64)
+                    var b64encoded = base64
+                        ///   var b64encoded = btoa(String.fromCharCode.apply(null, u8));
+                    var mimetype = "image/png"; // or whatever your image mime type is
+                    $("#viewImage_prop").append(`
+           <img name="${n}" style="width: 600px;" src="${"data:" + mimetype + ";base64," + b64encoded}"class="view_img img-responsive thumbnail col-lg-3 col-md-4 col-sm-6 col-xs-12" >`);
+
+                });
+            }
+            $("#member_description").text(data_prop.description)
+                // document.getElementById('member_description').style.display = 'block'
+                // h2_description
+        });
+
+
+        function bufferToBase64(buf) {
+            var binstr = Array.prototype.map.call(buf, function(ch) {
+                return String.fromCharCode(ch);
+            }).join('');
+            return btoa(binstr);
+        }
+
+
+
+        /////////////////////////////////////// อัเดท รายการจอง
+        $('#submitlist_edit').on('click', function(e) {
+            console.log(data_prop)
+            console.log(arr)
+            console.log(document.getElementById('categorydescription_edit').value)
+
+            $.getScript("ip.js", function(data, textStatus, jqxhr) {
+                var urlipaddress = data.substring(1, data.length - 1);
+                var formData = new FormData();
+                const url = urlipaddress + 'updateProp';
+                formData.append('userId', userId);
+                formData.append('bookingPropId', data_prop.bookingPropId);
+                formData.append('usability', data_prop.usability);
+                formData.append('description', document.getElementById('categorydescription_edit').value);
+                console.log(arr)
+                if (arr.length != 0) {
+                    for (var i = 0; i < arr.length; i++) {
+                        if (arr[i] != " ") {
+                            console.log('sssssssss')
+                            formData.append('imageProp', arr[i]);
+                        }
+                    }
+                } else {
+                    formData.append('imageProp', '');
+                }
+                axios.put(url, formData, {
+                    headers: {
+                        'Authorization': result,
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then(function(response) {
+                    console.log(response.data.message)
+                    if (response.data.message == 'updateProp completed') {
+                        showSuccessMessage('สำเร็จ', 'ทำรายการสำเร็จ', 'agendar.html');
+                    }
+                }).catch(function(res) {
+                    const { response } = res
+                    console.log(response.data.message)
+
+                });
+
+
+            });
+
+        });
+
+
 
 
 
@@ -966,20 +1229,17 @@ $(async function () {
 
 
         ////////////////  แก้ไขรายการค้างชำระ
-        $('#table_id2').on('click', 'i.edit_invoice', function (e) {
+        $('#table_id2').on('click', 'i.edit_invoice', function(e) {
             e.preventDefault();
             $("#EditaddImage").empty();
             var table = $('#table_id2').DataTable();
             e.preventDefault();
             var _ro = table.row($(this).parents('tr'));
             data = _ro.data();
-
             if (data == undefined) {
                 data = table.row(this).data();
             }
-
             $("#Editnotice").modal();
-
             var nn = 0;
             for (let i in data.invoiceImage) {
                 console.log(data.invoiceImage[i])
@@ -989,7 +1249,7 @@ $(async function () {
                     headers: {
                         'Authorization': result
                     }
-                }).then(function (response) {
+                }).then(function(response) {
                     var arrayBuffer = response.data; // Note: not oReq.responseText
                     var u8 = new Uint8Array(arrayBuffer);
                     var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -1027,7 +1287,7 @@ $(async function () {
         });
 
         /////////////////////////// อัพเดท รายการค้างชำระ
-        $('#edit_invoice').on('click', function (e) {
+        $('#edit_invoice').on('click', function(e) {
             console.log('aaaaaaaaaaaaaaaaaaa')
             const url = urlipad + 'invoice';
             let formData = new FormData();
@@ -1102,13 +1362,11 @@ $(async function () {
 
             }
             console.log(url)
-            axios.put(url, formData,
-                {
-                    headers: {
-                        'Authorization': result
-                    }
+            axios.put(url, formData, {
+                headers: {
+                    'Authorization': result
                 }
-            ).then(function (response) {
+            }).then(function(response) {
                 console.log(response.data.message.data)
                 if (response.data.message.data == 'update completed') {
                     showSuccessMessage('สำเร็จ', 'ทำรายการสำเร็จ', 'allInvoice.html');
@@ -1116,12 +1374,12 @@ $(async function () {
                     // document.getElementById("_id_updatedata").style.color = 'green'
                     // location.href = "allInvoice.html";
                 }
-            }).catch(function (res) {
+            }).catch(function(res) {
                 const { response } = res
                 if (response.data.message == 'Please specify a announceImage.') {
                     showCancelMessage('กรุณาระบุเลือกไฟล์รูปภาพ', '')
-                    // document.getElementById("_id_updatedata").innerText = 'กรุณาระบุเลือกไฟล์รูปภาพ'
-                    // document.getElementById("_id_updatedata").style.color = 'red'
+                        // document.getElementById("_id_updatedata").innerText = 'กรุณาระบุเลือกไฟล์รูปภาพ'
+                        // document.getElementById("_id_updatedata").style.color = 'red'
                     return
                 } else {
                     showCancelMessage(response.data.message, '')
@@ -1131,7 +1389,7 @@ $(async function () {
 
 
         var invoiceId;
-        $('#myButtonSearch').on('click', async function (e) {
+        $('#myButtonSearch').on('click', async function(e) {
             $("#EditaddImage").empty();
             console.log(document.getElementById("ref1").value)
 
@@ -1167,7 +1425,7 @@ $(async function () {
                                     headers: {
                                         'Authorization': result
                                     }
-                                }).then(function (response) {
+                                }).then(function(response) {
                                     var arrayBuffer = response.data; // Note: not oReq.responseText
                                     var u8 = new Uint8Array(arrayBuffer);
                                     var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -1212,7 +1470,7 @@ $(async function () {
 
 
         /////////////////////////   Payment
-        $('#submitpayment').on('click', function (e) {
+        $('#submitpayment').on('click', function(e) {
 
             //  var id = document.getElementById("paymentinvoiceid").value
             console.log(invoiceId)
@@ -1244,6 +1502,7 @@ $(async function () {
             // function convertTZ(date, tzString) {
             //     return new Date((typeof date === "string" ? new Date(date) : date).toLocaleString("en-US", { timeZone: tzString }));
             // }
+
 
             if (arr.length == 0) {
                 document.getElementById("_id_updatedata").innerText = 'กรุณาเลือกรูปภาพสลิป'
@@ -1283,13 +1542,11 @@ $(async function () {
                 formData.append('payDate', str_creditDate);
                 formData.append('receiveName', datamember.username);
             }
-            axios.put(url, formData,
-                {
-                    headers: {
-                        'Authorization': result
-                    }
+            axios.put(url, formData, {
+                headers: {
+                    'Authorization': result
                 }
-            ).then(function (response) {
+            }).then(function(response) {
 
                 if (response.data.message.data == 'update completed') {
                     // document.getElementById("_id_updatedata").innerText = 'ชำระสำเร็จ'
@@ -1298,14 +1555,14 @@ $(async function () {
 
                     showSuccessMessage('สำเร็จ', 'ทำรายการสำเร็จ', 'payment.html');
                 }
-            }).catch(function (res) {
+            }).catch(function(res) {
                 const { response } = res
                 showCancelMessage(response.data.message, '')
-                // if (response.data.message == 'Please specify a announceImage.') {
-                //     document.getElementById("_id_updatedata").innerText = 'กรุณาระบุเลือกไฟล์รูปภาพ'
-                //     document.getElementById("_id_updatedata").style.color = 'red'
-                //     return
-                // }
+                    // if (response.data.message == 'Please specify a announceImage.') {
+                    //     document.getElementById("_id_updatedata").innerText = 'กรุณาระบุเลือกไฟล์รูปภาพ'
+                    //     document.getElementById("_id_updatedata").style.color = 'red'
+                    //     return
+                    // }
             });
         });
 
@@ -1314,7 +1571,7 @@ $(async function () {
                 title: title,
                 text: text,
                 type: "error",
-            }, function (isConfirm) {
+            }, function(isConfirm) {
                 swal("Cancelled", "Your imaginary file is safe :)", "error");
             });
         }
@@ -1324,7 +1581,7 @@ $(async function () {
                 title: title,
                 text: text,
                 type: "success",
-            }, function (isConfirm) {
+            }, function(isConfirm) {
                 if (isConfirm) {
                     location.href = page;
                 }
@@ -1347,10 +1604,3 @@ function dataURLtoFileEdit(dataurl, filename) {
 
     return new File([u8arr], filename, { type: mime });
 }
-
-
-
-
-
-
-
