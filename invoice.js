@@ -15,16 +15,16 @@ console.log(datamember)
 
 function acctoken() {
     return new Promise(resolve => {
-        $.getScript("ip.js", function(data, textStatus, jqxhr) {
+        $.getScript("ip.js", function (data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             axios.post(urlipaddress + 'token', data, {
                 headers: {
                     'Authorization': obj.refresh_token
                 }
-            }).then(function(response) {
+            }).then(function (response) {
                 resolve(response.data.message.access_token);
 
-            }).catch(function(res) {
+            }).catch(function (res) {
                 const { response } = res
                 if (response.data.message == "Unauthorized") {
 
@@ -36,10 +36,10 @@ function acctoken() {
     });
 }
 
-const getinvoice = async(refresh_token, page) => {
+const getinvoice = async (refresh_token, page) => {
 
     var n = 0;
-    $.getScript("ip.js", function(data, textStatus, jqxhr) {
+    $.getScript("ip.js", function (data, textStatus, jqxhr) {
         var urlipaddress = data.substring(1, data.length - 1);
 
         var param = userId + '?uId=' + datamember.userId + '&_page=' + page + '&_limit=100&_sort=1'
@@ -47,14 +47,13 @@ const getinvoice = async(refresh_token, page) => {
             headers: {
                 'Authorization': refresh_token
             }
-        }).then(function(response) {
+        }).then(function (response) {
             console.log(response.data.message.result)
             if (response.data.message.result.length != 0) {
                 console.log(datamember.rule)
-                    //////////////// member 
+                //////////////// member 
                 if (datamember.rule == 'member') {
 
-                    ///// admin
                     var n = 0;
                     var n_payment = 0;
                     for (i = 0; i < response.data.message.result.length; i++) {
@@ -139,7 +138,7 @@ const getinvoice = async(refresh_token, page) => {
                             { data: "remain" },
                             {
                                 data: "creditDate",
-                                render: function(data) {
+                                render: function (data) {
 
                                     let date = new Date(data);
                                     let options = { hour12: false };
@@ -152,20 +151,21 @@ const getinvoice = async(refresh_token, page) => {
                             },
                             {
                                 data: "startDate",
-                                render: function(data) {
+                                render: function (data) {
 
                                     let date = new Date(data);
                                     let options = { hour12: false };
                                     var sp = date.toLocaleString('en-US', options).replace(',', '').split('/')
                                     if (date.toLocaleString('en-US', options).replace(',', '') == 'Invalid Date') {
                                         return '-';
+
                                     }
-                                    return sp[1].padStart(2, '0') + "/" + sp[0].padStart(2, '0') + "/" + sp[2].replace('07:00:00', '00:00:00');
+                                    return sp[1].padStart(2, '0') + "/" + sp[0].padStart(2, '0') + "/" + sp[2].substr('0', '4');
                                 }
                             },
                             {
                                 data: "dueDate",
-                                render: function(data) {
+                                render: function (data) {
 
                                     let date = new Date(data);
                                     let options = { hour12: false };
@@ -173,7 +173,7 @@ const getinvoice = async(refresh_token, page) => {
                                     if (date.toLocaleString('en-US', options).replace(',', '') == 'Invalid Date') {
                                         return '-';
                                     }
-                                    return sp[1].padStart(2, '0') + "/" + sp[0].padStart(2, '0') + "/" + sp[2].replace('07:00:00', '00:00:00');
+                                    return sp[1].padStart(2, '0') + "/" + sp[0].padStart(2, '0') + "/" + sp[2].substr('0', '4');
                                 }
                             },
                             { data: "description" },
@@ -196,7 +196,7 @@ const getinvoice = async(refresh_token, page) => {
 
                         ],
 
-                        "createdRow": function(row, data, dataIndex) {
+                        "createdRow": function (row, data, dataIndex) {
                             if (data.status == "ค้างชำระ") {
                                 $('td:eq(10)', row).addClass('red');
                                 $('td:eq(3)', row).addClass('blue');
@@ -243,27 +243,50 @@ const getinvoice = async(refresh_token, page) => {
                                 n = n + 1;
                             } else {
                                 // รายการจ่าย payment
-                                _arrpayment[n_payment] = {
-                                    invoiceId: response.data.message.result[i].invoiceId,
-                                    uId: response.data.message.result[i].uId,
-                                    invoiceImage: response.data.message.result[i].invoiceImage,
-                                    paymentImage: response.data.message.result[i].paymentImage,
-                                    ref1: response.data.message.result[i].ref1,
-                                    ref2: response.data.message.result[i].ref2,
-                                    category: response.data.message.result[i].category,
-                                    description: response.data.message.result[i].description,
-                                    amount: response.data.message.result[i].payment.amount,
-                                    credit: response.data.message.result[i].payment.credit,
-                                    remain: response.data.message.result[i].payment.remain,
-                                    creditDate: response.data.message.result[i].payment.payDate,
-                                    status: response.data.message.result[i].payment.status,
-                                    startDate: response.data.message.result[i].startDate,
-                                    dueDate: response.data.message.result[i].dueDate,
-                                    payDate: response.data.message.result[i].payDate,
-                                    registerDate: response.data.message.result[i].registerDate,
+                                if (response.data.message.result[i].receiptImage != undefined) {
+                                    _arrpayment[n_payment] = {
+                                        invoiceId: response.data.message.result[i].invoiceId,
+                                        uId: response.data.message.result[i].uId,
+                                        invoiceImage: response.data.message.result[i].invoiceImage,
+                                        paymentImage: response.data.message.result[i].paymentImage,
+                                        ref1: response.data.message.result[i].ref1,
+                                        ref2: response.data.message.result[i].ref2,
+                                        category: response.data.message.result[i].category,
+                                        description: response.data.message.result[i].description,
+                                        amount: response.data.message.result[i].payment.amount,
+                                        credit: response.data.message.result[i].payment.credit,
+                                        remain: response.data.message.result[i].payment.remain,
+                                        creditDate: response.data.message.result[i].payment.payDate,
+                                        status: response.data.message.result[i].payment.status,
+                                        startDate: response.data.message.result[i].startDate,
+                                        dueDate: response.data.message.result[i].dueDate,
+                                        payDate: response.data.message.result[i].payDate,
+                                        registerDate: response.data.message.result[i].registerDate,
+                                        receiptImage: response.data.message.result[i].receiptImage
+                                    }
+                                    n_payment = n_payment + 1;
+                                } else {
+                                    _arrpayment[n_payment] = {
+                                        invoiceId: response.data.message.result[i].invoiceId,
+                                        uId: response.data.message.result[i].uId,
+                                        invoiceImage: response.data.message.result[i].invoiceImage,
+                                        paymentImage: response.data.message.result[i].paymentImage,
+                                        ref1: response.data.message.result[i].ref1,
+                                        ref2: response.data.message.result[i].ref2,
+                                        category: response.data.message.result[i].category,
+                                        description: response.data.message.result[i].description,
+                                        amount: response.data.message.result[i].payment.amount,
+                                        credit: response.data.message.result[i].payment.credit,
+                                        remain: response.data.message.result[i].payment.remain,
+                                        creditDate: response.data.message.result[i].payment.payDate,
+                                        status: response.data.message.result[i].payment.status,
+                                        startDate: response.data.message.result[i].startDate,
+                                        dueDate: response.data.message.result[i].dueDate,
+                                        payDate: response.data.message.result[i].payDate,
+                                        registerDate: response.data.message.result[i].registerDate,
+                                    }
+                                    n_payment = n_payment + 1;
                                 }
-                                n_payment = n_payment + 1;
-
                                 //////////////จ่ายเพิ่ม
                                 _arr[n] = {
                                     invoiceId: response.data.message.result[i].invoiceId,
@@ -286,26 +309,52 @@ const getinvoice = async(refresh_token, page) => {
                                 n = n + 1;
                             }
                         } else {
-                            _arrpayment[n_payment] = {
-                                invoiceId: response.data.message.result[i].invoiceId,
-                                uId: response.data.message.result[i].uId,
-                                invoiceImage: response.data.message.result[i].invoiceImage,
-                                paymentImage: response.data.message.result[i].paymentImage,
-                                ref1: response.data.message.result[i].ref1,
-                                ref2: response.data.message.result[i].ref2,
-                                category: response.data.message.result[i].category,
-                                description: response.data.message.result[i].description,
-                                amount: response.data.message.result[i].payment.amount,
-                                credit: response.data.message.result[i].payment.credit,
-                                remain: response.data.message.result[i].payment.remain,
-                                creditDate: response.data.message.result[i].payment.payDate,
-                                status: response.data.message.result[i].payment.status,
-                                startDate: response.data.message.result[i].startDate,
-                                dueDate: response.data.message.result[i].dueDate,
-                                payDate: response.data.message.result[i].payDate,
-                                registerDate: response.data.message.result[i].registerDate,
+
+                            if (response.data.message.result[i].receiptImage != undefined) {
+                                _arrpayment[n_payment] = {
+                                    invoiceId: response.data.message.result[i].invoiceId,
+                                    uId: response.data.message.result[i].uId,
+                                    invoiceImage: response.data.message.result[i].invoiceImage,
+                                    paymentImage: response.data.message.result[i].paymentImage,
+                                    ref1: response.data.message.result[i].ref1,
+                                    ref2: response.data.message.result[i].ref2,
+                                    category: response.data.message.result[i].category,
+                                    description: response.data.message.result[i].description,
+                                    amount: response.data.message.result[i].payment.amount,
+                                    credit: response.data.message.result[i].payment.credit,
+                                    remain: response.data.message.result[i].payment.remain,
+                                    creditDate: response.data.message.result[i].payment.payDate,
+                                    status: response.data.message.result[i].payment.status,
+                                    startDate: response.data.message.result[i].startDate,
+                                    dueDate: response.data.message.result[i].dueDate,
+                                    payDate: response.data.message.result[i].payDate,
+                                    registerDate: response.data.message.result[i].registerDate,
+                                    receiptImage: response.data.message.result[i].receiptImage
+                                }
+                                n_payment = n_payment + 1;
+                            } else {
+                                _arrpayment[n_payment] = {
+                                    invoiceId: response.data.message.result[i].invoiceId,
+                                    uId: response.data.message.result[i].uId,
+                                    invoiceImage: response.data.message.result[i].invoiceImage,
+                                    paymentImage: response.data.message.result[i].paymentImage,
+                                    ref1: response.data.message.result[i].ref1,
+                                    ref2: response.data.message.result[i].ref2,
+                                    category: response.data.message.result[i].category,
+                                    description: response.data.message.result[i].description,
+                                    amount: response.data.message.result[i].payment.amount,
+                                    credit: response.data.message.result[i].payment.credit,
+                                    remain: response.data.message.result[i].payment.remain,
+                                    creditDate: response.data.message.result[i].payment.payDate,
+                                    status: response.data.message.result[i].payment.status,
+                                    startDate: response.data.message.result[i].startDate,
+                                    dueDate: response.data.message.result[i].dueDate,
+                                    payDate: response.data.message.result[i].payDate,
+                                    registerDate: response.data.message.result[i].registerDate,
+                                }
+                                n_payment = n_payment + 1;
                             }
-                            n_payment = n_payment + 1;
+
                         }
                     }
                 }
@@ -345,7 +394,7 @@ const getinvoice = async(refresh_token, page) => {
 
                         {
                             data: "startDate",
-                            render: function(data) {
+                            render: function (data) {
 
                                 let date = new Date(data);
                                 let options = { hour12: false };
@@ -353,12 +402,12 @@ const getinvoice = async(refresh_token, page) => {
                                 if (date.toLocaleString('en-US', options).replace(',', '') == 'Invalid Date') {
                                     return '-';
                                 }
-                                return sp[1].padStart(2, '0') + "/" + sp[0].padStart(2, '0') + "/" + sp[2].replace('07:00:00', '00:00:00');
+                                return sp[1].padStart(2, '0') + "/" + sp[0].padStart(2, '0') + "/" + sp[2].substr('0', '4');
                             }
                         },
                         {
                             data: "dueDate",
-                            render: function(data) {
+                            render: function (data) {
 
                                 let date = new Date(data);
                                 let options = { hour12: false };
@@ -367,7 +416,7 @@ const getinvoice = async(refresh_token, page) => {
                                     return '-';
                                 }
 
-                                return sp[1].padStart(2, '0') + "/" + sp[0].padStart(2, '0') + "/" + sp[2].replace('07:00:00', '00:00:00');
+                                return sp[1].padStart(2, '0') + "/" + sp[0].padStart(2, '0') + "/" + sp[2].substr('0', '4');
                             }
                         },
                         { data: "description" },
@@ -399,11 +448,11 @@ const getinvoice = async(refresh_token, page) => {
                         [0, 'desc']
                     ],
                     "displayLength": 25,
-                    "drawCallback": function(settings) {
+                    "drawCallback": function (settings) {
                         var api = this.api();
                         var rows = api.rows({ page: 'current' }).nodes();
                         var last = null;
-                        api.column(0, { page: 'current' }).data().each(function(group, i) {
+                        api.column(0, { page: 'current' }).data().each(function (group, i) {
                             if (last !== group) {
                                 $(rows).eq(i).before(
                                     '<tr class="group"><td colspan="12">' + 'บ้านเลขที่ ' + group + '</td></tr>'
@@ -412,7 +461,7 @@ const getinvoice = async(refresh_token, page) => {
                             }
                         });
                     },
-                    "createdRow": function(row, data, dataIndex) {
+                    "createdRow": function (row, data, dataIndex) {
                         if (data.status == "ค้างชำระ") {
                             $('td:eq(8)', row).addClass('red');
                         }
@@ -453,7 +502,7 @@ const getinvoice = async(refresh_token, page) => {
                         { data: "remain" },
                         {
                             data: "creditDate",
-                            render: function(data) {
+                            render: function (data) {
 
                                 let date = new Date(data);
                                 let options = { hour12: false };
@@ -466,7 +515,7 @@ const getinvoice = async(refresh_token, page) => {
                         },
                         {
                             data: "startDate",
-                            render: function(data) {
+                            render: function (data) {
 
                                 let date = new Date(data);
                                 let options = { hour12: false };
@@ -474,12 +523,12 @@ const getinvoice = async(refresh_token, page) => {
                                 if (date.toLocaleString('en-US', options).replace(',', '') == 'Invalid Date') {
                                     return '-';
                                 }
-                                return sp[1].padStart(2, '0') + "/" + sp[0].padStart(2, '0') + "/" + sp[2].replace('07:00:00', '00:00:00');
+                                return sp[1].padStart(2, '0') + "/" + sp[0].padStart(2, '0') + "/" + sp[2].substr('0', '4');
                             }
                         },
                         {
                             data: "dueDate",
-                            render: function(data) {
+                            render: function (data) {
 
                                 let date = new Date(data);
                                 let options = { hour12: false };
@@ -487,7 +536,7 @@ const getinvoice = async(refresh_token, page) => {
                                 if (date.toLocaleString('en-US', options).replace(',', '') == 'Invalid Date') {
                                     return '-';
                                 }
-                                return sp[1].padStart(2, '0') + "/" + sp[0].padStart(2, '0') + "/" + sp[2].replace('07:00:00', '00:00:00');
+                                return sp[1].padStart(2, '0') + "/" + sp[0].padStart(2, '0') + "/" + sp[2].substr('0', '4');
                             }
                         },
                         { data: "description" },
@@ -502,6 +551,16 @@ const getinvoice = async(refresh_token, page) => {
                             className: "center",
                             defaultContent: '<i href="" class="view_imgpayment" style="color:blue; cursor: pointer;">สลิป </i> '
                         },
+                        {
+                            data: null,
+                            className: "center",
+                            defaultContent: '<i href="" class="view_receiptImage_viewimage" style="color:blue; cursor: pointer;">ใบเสร็จ </i> '
+                        },
+                        {
+                            data: null,
+                            className: "center",
+                            defaultContent: '<i href="" class="view_receiptImage" style="color:blue; cursor: pointer;">แจ้งใบเสร็จ </i> '
+                        },
                         // {
                         //     data: null,
                         //     className: "center",
@@ -513,14 +572,14 @@ const getinvoice = async(refresh_token, page) => {
                         [0, 'desc']
                     ],
                     "displayLength": 25,
-                    "drawCallback": function(settings) {
+                    "drawCallback": function (settings) {
                         var api = this.api();
                         var rows = api.rows({ page: 'current' }).nodes();
                         var last = null;
-                        api.column(0, { page: 'current' }).data().each(function(group, i) {
+                        api.column(0, { page: 'current' }).data().each(function (group, i) {
                             if (last !== group) {
                                 $(rows).eq(i).before(
-                                    '<tr class="group"><td colspan="12">' + 'บ้านเลขที่ ' + group + '</td></tr>'
+                                    '<tr class="group"><td colspan="13">' + 'บ้านเลขที่ ' + group + '</td></tr>'
                                 );
                                 last = group;
                             }
@@ -536,7 +595,7 @@ const getinvoice = async(refresh_token, page) => {
                             columns: [0, 1, 2, 3, 4, 5, 6, 8]
                         }
                     }],
-                    "createdRow": function(row, data, dataIndex) {
+                    "createdRow": function (row, data, dataIndex) {
                         if (data.status == "ค้างชำระ") {
                             $('td:eq(10)', row).addClass('red');
                             $('td:eq(3)', row).addClass('blue');
@@ -552,7 +611,7 @@ const getinvoice = async(refresh_token, page) => {
                 });
                 table.buttons().container().appendTo($('#test'));
             }
-        }).catch(function(res) {
+        }).catch(function (res) {
             const { response } = res
         });
     });
@@ -562,7 +621,7 @@ const getinvoice = async(refresh_token, page) => {
 function getuserinvoice(refresh_token) {
     // console.log(refresh_token)
     // return new Promise(resolve => {
-    $.getScript("ip.js", function(data, textStatus, jqxhr) {
+    $.getScript("ip.js", function (data, textStatus, jqxhr) {
         var urlipaddress = data.substring(1, data.length - 1);
 
         const dataUserID = {
@@ -572,7 +631,7 @@ function getuserinvoice(refresh_token) {
             headers: {
                 'Authorization': refresh_token
             }
-        }).then(function(response) {
+        }).then(function (response) {
             var cnt = response.data.message.data.length;
             var n = 0;
             var _arr = new Array();
@@ -596,13 +655,13 @@ function getuserinvoice(refresh_token) {
                 $select.append('<option value=' + _arr[i].memberId + '>' + _arr[i].houseNo + '</option>');
             }
 
-            $(document).ready(function() {
+            $(document).ready(function () {
                 $('#ref2').selectize({
                     sortField: 'text'
                 });
             });
             //  resolve(response.data.message.category);
-        }).catch(function(res) {
+        }).catch(function (res) {
             const { response } = res
             //     console.log(response.data)
         });
@@ -610,9 +669,9 @@ function getuserinvoice(refresh_token) {
     // });
 }
 
-const getuser = async(refresh_token) => {
+const getuser = async (refresh_token) => {
 
-    $.getScript("ip.js", function(data, textStatus, jqxhr) {
+    $.getScript("ip.js", function (data, textStatus, jqxhr) {
         var urlipaddress = data.substring(1, data.length - 1);
 
         const dataUserID = {
@@ -622,7 +681,7 @@ const getuser = async(refresh_token) => {
             headers: {
                 'Authorization': refresh_token
             }
-        }).then(function(response) {
+        }).then(function (response) {
             console.log(response.data.message.data)
             var cnt = response.data.message.data.length;
             var n = 0;
@@ -650,7 +709,7 @@ const getuser = async(refresh_token) => {
     });
 }
 
-$(async function() {
+$(async function () {
     var data
     const result = await acctoken();
     console.log('dsdsds')
@@ -659,10 +718,10 @@ $(async function() {
     for (let i = 1; i < 10; i++) {
         await getinvoice(result, i)
     }
-    $(document).ready(function() {
-        $.getScript("ip.js", function(data, textStatus, jqxhr) {
+    $(document).ready(function () {
+        $.getScript("ip.js", function (data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
-            $('#table_id2').on('click', 'i.view_img', function(e) {
+            $('#table_id2').on('click', 'i.view_img', function (e) {
                 var table = $('#table_id2').DataTable();
                 e.preventDefault();
                 var _ro = table.row($(this).parents('tr'));
@@ -682,7 +741,7 @@ $(async function() {
                         headers: {
                             'Authorization': result
                         }
-                    }).then(function(response) {
+                    }).then(function (response) {
                         var arrayBuffer = response.data; // Note: not oReq.responseText
                         var u8 = new Uint8Array(arrayBuffer);
                         var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -694,7 +753,7 @@ $(async function() {
             });
 
 
-            $('#table_id2').on('click', 'i.delete_invoice', function(e) {
+            $('#table_id2').on('click', 'i.delete_invoice', function (e) {
                 e.preventDefault();
                 var table = $('#table_id2').DataTable();
                 var _ro = table.row($(this).parents('tr'));
@@ -709,30 +768,30 @@ $(async function() {
 
             });
 
-            $('#Deletenotice').on('click', function(e) {
+            $('#Deletenotice').on('click', function (e) {
                 const datanew = {
                     userId: userId,
                     invoiceId: data.invoiceId
                 }
-                $.getScript("ip.js", function(data, textStatus, jqxhr) {
+                $.getScript("ip.js", function (data, textStatus, jqxhr) {
                     var urlipaddress = data.substring(1, data.length - 1);
                     axios({
                         url: urlipaddress + 'invoice',
                         method: 'delete',
                         data: datanew,
                         headers: { 'Authorization': result }
-                    }).then(function(response) {
+                    }).then(function (response) {
                         if (response.data.message == "delete completed") {
                             $("#myModaldelete").empty();
                             showSuccessMessage('สำเร็จ', 'ลบข้อมูลสำเร็จ', 'allInvoice.html')
-                                // console.log(response.data.message)
-                                // document.getElementById("lbl_delete_official").style.display = "none";
-                                // document.getElementById("lbl_completed_official").style.display = "block";
-                                // $("#_id_deletedata").text('ลบข้อมูลสำเร็จ');
-                                // location.href = "allInvoice.html";
+                            // console.log(response.data.message)
+                            // document.getElementById("lbl_delete_official").style.display = "none";
+                            // document.getElementById("lbl_completed_official").style.display = "block";
+                            // $("#_id_deletedata").text('ลบข้อมูลสำเร็จ');
+                            // location.href = "allInvoice.html";
 
                         }
-                    }).catch(function(res) {
+                    }).catch(function (res) {
                         const { response } = res
                     });
                 });
@@ -744,7 +803,7 @@ $(async function() {
                     title: title,
                     text: text,
                     type: "error",
-                }, function(isConfirm) {
+                }, function (isConfirm) {
                     swal("Cancelled", "Your imaginary file is safe :)", "error");
                 });
             }
@@ -754,16 +813,48 @@ $(async function() {
                     title: title,
                     text: text,
                     type: "success",
-                }, function(isConfirm) {
+                }, function (isConfirm) {
                     if (isConfirm) {
                         location.href = page;
                     }
                 });
             }
 
+//////////// ดูใบเสร็จ
+            
+            $('#table_id6').on('click', 'i.view_receiptImage_viewimage', function (e) {
+                var table = $('#table_id6').DataTable();
+                e.preventDefault();
+                var _ro = table.row($(this).parents('tr'));
+                data = _ro.data();
+                if (data == undefined) {
+                    data = table.row(this).data();
+                }
+                console.log(data)
+                $("#viewImage").empty();
+                $("#myModalview").modal();
+                var nn = 0;
+                for (let i in data.receiptImage) {
+                    console.log(data.receiptImage[i])
+                    axios.get(urlipaddress + "view/images/" + data.receiptImage[i], {
+                        responseType: 'arraybuffer',
+                        headers: {
+                            'Authorization': result
+                        }
+                    }).then(function (response) {
+                        var arrayBuffer = response.data; // Note: not oReq.responseText
+                        var u8 = new Uint8Array(arrayBuffer);
+                        var b64encoded = btoa(String.fromCharCode.apply(null, u8));
+                        var mimetype = "image/png"; // or whatever your image mime type is
+                        $("#viewImage").append(`<img name="${b64encoded}" style="width: 600px;" src="${"data:" + mimetype + ";base64," + b64encoded}"class="view_img img-responsive thumbnail col-lg-3 col-md-4 col-sm-6 col-xs-12" >`);
+                    });
+                    nn = nn + 1;
+                }
+
+            });
 
             ////////// payment
-            $('#table_id6').on('click', 'i.view_imginvoice', function(e) {
+            $('#table_id6').on('click', 'i.view_imginvoice', function (e) {
                 var table = $('#table_id6').DataTable();
                 e.preventDefault();
                 var _ro = table.row($(this).parents('tr'));
@@ -783,7 +874,7 @@ $(async function() {
                         headers: {
                             'Authorization': result
                         }
-                    }).then(function(response) {
+                    }).then(function (response) {
                         var arrayBuffer = response.data; // Note: not oReq.responseText
                         var u8 = new Uint8Array(arrayBuffer);
                         var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -795,9 +886,9 @@ $(async function() {
 
             });
 
-            $('#ref2').on('change', function(e) {
+            $('#ref2').on('change', function (e) {
                 var Strref2 = document.getElementById("ref2").value.split('@')
-                    //  console.log(Strref2)
+                //  console.log(Strref2)
                 var _phone = ''
                 if (Strref2[2] == undefined) {
                     _phone = ''
@@ -813,7 +904,7 @@ $(async function() {
             });
 
             /////////////////สลิป
-            $('#table_id6').on('click', 'i.view_imgpayment', function(e) {
+            $('#table_id6').on('click', 'i.view_imgpayment', function (e) {
                 var table = $('#table_id6').DataTable();
                 e.preventDefault();
                 var _ro = table.row($(this).parents('tr'));
@@ -833,7 +924,7 @@ $(async function() {
                         headers: {
                             'Authorization': result
                         }
-                    }).then(function(response) {
+                    }).then(function (response) {
                         var arrayBuffer = response.data; // Note: not oReq.responseText
                         var u8 = new Uint8Array(arrayBuffer);
                         var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -846,8 +937,8 @@ $(async function() {
             });
 
 
-            $(document).ready(function() {
-                $('#table_id6').on('click', 'i.view_print', function(e) {
+            $(document).ready(function () {
+                $('#table_id6').on('click', 'i.view_print', function (e) {
                     $('#ref1').val('');
                     e.preventDefault();
                     var table = $('#table_id6').DataTable();

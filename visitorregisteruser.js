@@ -608,7 +608,7 @@ async function ExportToTable() {
         }
     } else {
         // alert("Please upload a valid Excel file.");
-        showCancelMessageregisteruser('โปรดอัปโหลดไฟล์ Excel ที่ถูกต้อง !!', '')
+        showCancelMessageregisteruser('โปรดอัปโหลดไฟล์ Excel ที่ถูกต้อง !!', 'กรุณาใช้ชื่อไฟล์เป็นภาษาอังกฤษ เท่านั้น !!!')
     }
 }
 

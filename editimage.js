@@ -22,19 +22,19 @@ if (datamember != undefined) {
 
 function acctoken() {
     return new Promise(resolve => {
-        $.getScript("ip.js", function(data, textStatus, jqxhr) {
+        $.getScript("ip.js", function (data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             // console.log('aaaaaaaaaaaaaa')
             axios.post(urlipaddress + 'token', data, {
                 headers: {
                     'Authorization': obj.refresh_token
                 }
-            }).then(function(response) {
+            }).then(function (response) {
                 //   console.log('bbb')
                 // console.log(response.data.message.access_token)
                 resolve(response.data.message.access_token);
 
-            }).catch(function(res) {
+            }).catch(function (res) {
                 const { response } = res
                 //   console.log(response.data.message)
 
@@ -48,10 +48,10 @@ function acctoken() {
     });
 }
 
-$(async function() {
+$(async function () {
     console.log('dsdssds')
     const result = await acctoken();
-    var imagesPreview = function(input) {
+    var imagesPreview = function (input) {
         if (input.files) {
             var filesAmount = input.files.length;
             document.getElementById("imgsixeedit").innerText = '';
@@ -69,7 +69,7 @@ $(async function() {
                 //     document.getElementById("imgsixeedit").style.color = "red";
                 //     return;
                 // }
-                reader.onload = function(event) {
+                reader.onload = function (event) {
                     length_img = $("#EditaddImage img");
                     if (length_img.length > 4) {
 
@@ -100,12 +100,12 @@ $(async function() {
             reader.readAsDataURL(item.files[i]);
             reader.name = item.files[i].name; //get the image's name
             reader.size = item.files[i].size; //get the image's size
-            reader.onload = function(event) {
+            reader.onload = function (event) {
                 var img = new Image(); //create a image
                 img.src = event.target.result; //result is base64-encoded Data URI
                 img.name = event.target.name; //set name (optional)
                 img.size = event.target.size; //set size (optional)
-                img.onload = function(el) {
+                img.onload = function (el) {
                     var elem = document.createElement('canvas'); //create a canvas
 
                     //scale the image to 600 (width) and keep aspect ratio
@@ -143,7 +143,7 @@ $(async function() {
     }
     var namefile;
     var typename;
-    $('#edit_fileimage').on('change', function() {
+    $('#edit_fileimage').on('change', function () {
         length_img = $("#EditaddImage img");
         resize(this);
         //  imagesPreview(this);
@@ -163,7 +163,7 @@ $(async function() {
 
 
     function _checkimage(_file) {
-        getDataUrl(_file, function(imgBase64) {
+        getDataUrl(_file, function (imgBase64) {
             $("#EditaddImage").append(`<a id="close" style="font-size:18px;color:red; class="pull-right" href="#">
             <i name="${n}" class="delete_cc fa fa-times fa fa-times col-lg-3 col-md-4 col-sm-6 col-xs-12"><img name="${n}" src="${imgBase64}"class="img-responsive thumbnail"></i></a>`);
 
@@ -190,13 +190,13 @@ $(async function() {
     }
 
     function getDataUrl(file, callback2) {
-        var callback = function(srcOrientation) {
+        var callback = function (srcOrientation) {
             var reader2 = new FileReader();
-            reader2.onload = function(e) {
+            reader2.onload = function (e) {
                 var srcBase64 = e.target.result;
                 var img = new Image();
 
-                img.onload = function() {
+                img.onload = function () {
                     var width = img.width,
                         height = img.height,
                         canvas = document.createElement('canvas'),
@@ -250,7 +250,7 @@ $(async function() {
         }
 
         var reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             var view = new DataView(e.target.result);
             if (view.getUint16(0, false) != 0xFFD8) return callback(-2);
             var length = view.byteLength,
@@ -276,7 +276,7 @@ $(async function() {
     }
 
     ///////// ลบรูปภาพ
-    $('#EditaddImage').on('click', 'i.delete_cc', function(e) {
+    $('#EditaddImage').on('click', 'i.delete_cc', function (e) {
         var remove_index = $(this).attr("name");
         arrimagedelete[remove_index] = arr[remove_index];
         arr[parseInt(remove_index)] = " ";
@@ -288,9 +288,9 @@ $(async function() {
 
 
     var data;
-    $.getScript("ip.js", function(dataipaddress, textStatus, jqxhr) {
+    $.getScript("ip.js", function (dataipaddress, textStatus, jqxhr) {
         var urlipad = dataipaddress.substring(1, dataipaddress.length - 1);
-        $('#table_supplies').on('click', 'i.view_edit', function(e) {
+        $('#table_supplies').on('click', 'i.view_edit', function (e) {
             e.preventDefault();
             $("#EditaddImage").empty();
             var table = $('#table_supplies').DataTable();
@@ -314,7 +314,7 @@ $(async function() {
                     headers: {
                         'Authorization': result
                     }
-                }).then(function(response) {
+                }).then(function (response) {
                     var arrayBuffer = response.data; // Note: not oReq.responseText
                     var u8 = new Uint8Array(arrayBuffer);
                     var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -352,7 +352,7 @@ $(async function() {
 
 
         /////////////////////////// ส่งมอบพัสดุ
-        $('#edit_submitsupplies').on('click', function(e) {
+        $('#edit_submitsupplies').on('click', function (e) {
             const url = urlipad + 'deliver';
             let formData = new FormData();
             formData.append('userId', userId);
@@ -373,17 +373,17 @@ $(async function() {
                 headers: {
                     'Authorization': result
                 }
-            }).then(function(response) {
+            }).then(function (response) {
                 console.log(response.data.message)
                 location.href = "supplies.html";
-            }).catch(function(res) {
+            }).catch(function (res) {
                 const { response } = res
                 console.log(response.data.message)
             });
         });
 
         ////////////////  แก้ไขประกาศ
-        $('#table_id8').on('click', 'i.edit_supplies', function(e) {
+        $('#table_id8').on('click', 'i.edit_supplies', function (e) {
             e.preventDefault();
             $("#EditaddImage").empty();
             var table = $('#table_id8').DataTable();
@@ -401,7 +401,7 @@ $(async function() {
                     headers: {
                         'Authorization': result
                     }
-                }).then(function(response) {
+                }).then(function (response) {
                     var arrayBuffer = response.data; // Note: not oReq.responseText
                     var u8 = new Uint8Array(arrayBuffer);
                     var b64encoded = bufferToBase64(u8)
@@ -439,7 +439,7 @@ $(async function() {
         });
 
         /////////////////////////////////////// แก้ไข รายการ รออนุมัติ
-        $('#table_pendingapproval').on('click', 'a.a_edit', function(e) {
+        $('#table_pendingapproval').on('click', 'a.a_edit', function (e) {
             e.preventDefault();
             $("#EditaddImage").empty();
             $("#myModalpendingapproval").empty();
@@ -455,7 +455,7 @@ $(async function() {
                     headers: {
                         'Authorization': result
                     }
-                }).then(function(response) {
+                }).then(function (response) {
                     var arrayBuffer = response.data; // Note: not oReq.responseText
                     var u8 = new Uint8Array(arrayBuffer);
                     var b64encoded = bufferToBase64(u8)
@@ -492,18 +492,18 @@ $(async function() {
 
 
 
-        $('#Edit_logo').on('click', async function(e) {
+        $('#Edit_logo').on('click', async function (e) {
             document.getElementById("profileEdit").value = 'profileEdit';
             $("#exampleModalCenterImage").modal();
             $("#EditaddImage").empty()
-            $.getScript("ip.js", function(data, textStatus, jqxhr) {
+            $.getScript("ip.js", function (data, textStatus, jqxhr) {
                 var urlipaddress = data.substring(1, data.length - 1);
                 var param = userId
                 axios.get(urlipaddress + 'logo/' + param, {
                     headers: {
                         'Authorization': result
                     }
-                }).then(function(response) {
+                }).then(function (response) {
                     console.log(response.data.message.data[0].imageLogo[0])
                     document.getElementById('editnamecompany').value = response.data.message.data[0].name
                     var nn = 0;
@@ -512,7 +512,7 @@ $(async function() {
                         headers: {
                             'Authorization': result
                         }
-                    }).then(function(response) {
+                    }).then(function (response) {
                         var arrayBuffer = response.data; // Note: not oReq.responseText
                         var u8 = new Uint8Array(arrayBuffer);
                         var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -526,13 +526,13 @@ $(async function() {
                     });
 
 
-                }).catch(function(res) {
+                }).catch(function (res) {
                     const { response } = res
                 });
             });
         });
         /////////////////////////////// LOGO
-        $('#updatelogo').on('click', async function(e) {
+        $('#updatelogo').on('click', async function (e) {
             console.log('dddddddddddddddddddddddddddddd')
             const result = await acctoken();
             if (document.getElementById('logoId').value != '') {
@@ -541,14 +541,14 @@ $(async function() {
                     logoId: document.getElementById('logoId').value
                 }
                 console.log(datanew)
-                $.getScript("ip.js", function(data, textStatus, jqxhr) {
+                $.getScript("ip.js", function (data, textStatus, jqxhr) {
                     var urlipaddress = data.substring(1, data.length - 1);
                     axios({
                         url: urlipaddress + 'logo',
                         method: 'delete',
                         data: datanew,
                         headers: { 'Authorization': result }
-                    }).then(function(response) {
+                    }).then(function (response) {
                         var formData = new FormData();
                         const url = urlipaddress + 'logo';
                         formData.append('userId', userId);
@@ -570,22 +570,22 @@ $(async function() {
                                 'Authorization': result,
                                 'Content-Type': 'multipart/form-data'
                             }
-                        }).then(function(response) {
+                        }).then(function (response) {
                             console.log(response.data.message)
-                                // if (response.data.message = 'update completed') {
+                            // if (response.data.message = 'update completed') {
                             location.href = "menu.html";
                             // }
-                        }).catch(function(res) {
+                        }).catch(function (res) {
                             const { response } = res
                             console.log(response.data.message)
                         });
-                    }).catch(function(res) {
+                    }).catch(function (res) {
                         const { response } = res
                     });
                 });
 
             } else {
-                $.getScript("ip.js", function(data, textStatus, jqxhr) {
+                $.getScript("ip.js", function (data, textStatus, jqxhr) {
                     var urlipaddress = data.substring(1, data.length - 1);
                     var formData = new FormData();
 
@@ -610,12 +610,12 @@ $(async function() {
                             'Authorization': result,
                             'Content-Type': 'multipart/form-data'
                         }
-                    }).then(function(response) {
+                    }).then(function (response) {
                         console.log(response.data.message)
-                            // if (response.data.message = 'update completed') {
+                        // if (response.data.message = 'update completed') {
                         location.href = "menu.html";
                         // }
-                    }).catch(function(res) {
+                    }).catch(function (res) {
                         const { response } = res
                         console.log(response.data.message)
                     });
@@ -626,7 +626,7 @@ $(async function() {
         });
 
         /////////////////////////// อัพเดท ประกาศ
-        $('#edit_submitpostinvoice').on('click', function(e) {
+        $('#edit_submitpostinvoice').on('click', function (e) {
             var category;
             if (Cookies.get('announce') != undefined) {
                 category = 'announce'
@@ -756,7 +756,7 @@ $(async function() {
                             formData.append('announceImage', arr[i]);
                             chk = 'true'
                         } else {
-                            if (chk == 'true') {} else {
+                            if (chk == 'true') { } else {
                                 chk = 'false'
                             }
                         }
@@ -789,7 +789,7 @@ $(async function() {
                 headers: {
                     'Authorization': result
                 }
-            }).then(function(response) {
+            }).then(function (response) {
                 console.log(response.data.message);
                 if (response.data.message.data == 'update completed') {
                     if (category == 'announce') {
@@ -809,7 +809,7 @@ $(async function() {
                     }
                 }
 
-            }).catch(function(res) {
+            }).catch(function (res) {
                 const { response } = response
                 showCancelMessage(response.data.message, '')
             });
@@ -817,7 +817,7 @@ $(async function() {
         });
 
         ////////////////// แก้ไข member
-        $('#table2').on('click', 'i.edit_member', function(e) {
+        $('#table2').on('click', 'i.edit_member', function (e) {
             e.preventDefault();
             var table = $('#table2').DataTable();
             var _ro = table.row($(this).parents('tr'));
@@ -838,7 +838,7 @@ $(async function() {
                     headers: {
                         'Authorization': result
                     }
-                }).then(function(response) {
+                }).then(function (response) {
                     var arrayBuffer = response.data; // Note: not oReq.responseText
                     var u8 = new Uint8Array(arrayBuffer);
                     var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -866,7 +866,7 @@ $(async function() {
         });
 
         /////////////////////////// อัพเดท USER MEMBER
-        $('#UPDATEEDITMEMBER').on('click', function(e) {
+        $('#UPDATEEDITMEMBER').on('click', function (e) {
             document.getElementById("update_member").innerText = ''
             const url = urlipad + 'addAccount';
             let formData = new FormData();
@@ -909,7 +909,7 @@ $(async function() {
                 headers: {
                     'Authorization': result
                 }
-            }).then(function(response) {
+            }).then(function (response) {
                 //  console.log(response.data.message);
                 if (response.data.message == 'update completed') {
                     showSuccessMessage('สำเร็จ', 'อัพเดทข้อมูลสำเร็จ', 'visitorregisteruser.html');
@@ -918,18 +918,18 @@ $(async function() {
                     // location.href = "visitorregisteruser.html";
                 }
 
-            }).catch(function(res) {
+            }).catch(function (res) {
                 const { response } = res
                 //   console.log(response.data.message)
                 showCancelMessage(response.data.message, '')
-                    // document.getElementById("update_member").innerText = response.data.message
-                    // document.getElementById("update_member").style.color = 'red'
+                // document.getElementById("update_member").innerText = response.data.message
+                // document.getElementById("update_member").style.color = 'red'
             });
 
         });
 
         ////////////////////////////// แก้ไข เจ้าหน้าที่
-        $('#table1').on('click', 'i.edituser', function(e) {
+        $('#table1').on('click', 'i.edituser', function (e) {
             e.preventDefault();
             var table = $('#table1').DataTable();
             var _ro = table.row($(this).parents('tr'));
@@ -953,7 +953,7 @@ $(async function() {
                     headers: {
                         'Authorization': result
                     }
-                }).then(function(response) {
+                }).then(function (response) {
                     var arrayBuffer = response.data; // Note: not oReq.responseText
                     var u8 = new Uint8Array(arrayBuffer);
                     var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -968,8 +968,8 @@ $(async function() {
         });
 
         /////////////////////อัพเดทข้อมูล เจ้าหน้าที่
-        $('#UPDATEEDIT').on('click', async function(e) {
-            $.getScript("ip.js", function(data, textStatus, jqxhr) {
+        $('#UPDATEEDIT').on('click', async function (e) {
+            $.getScript("ip.js", function (data, textStatus, jqxhr) {
                 var urlipaddress = data.substring(1, data.length - 1);
 
                 var formData = new FormData();
@@ -992,7 +992,7 @@ $(async function() {
                         'Authorization': result,
                         'Content-Type': 'multipart/form-data'
                     }
-                }).then(function(response) {
+                }).then(function (response) {
                     console.log(response.data.message)
                     if (response.data.message == "This user has already been used.") {
                         // document.getElementById("update_").innerText = "มีข้อมูลในระบบแล้ว";
@@ -1000,13 +1000,13 @@ $(async function() {
                         showCancelMessageregisteruser('มีข้อมูลในระบบแล้ว', '')
                     } else {
                         showSuccessMessageregisteruser('อัพเดทข้อมูลสำเร็จ')
-                            // document.getElementById("update_").innerText = "บันทึกสำเร็จ";
-                            // document.getElementById("update_").style.color = "green";
+                        // document.getElementById("update_").innerText = "บันทึกสำเร็จ";
+                        // document.getElementById("update_").style.color = "green";
                         getUser(result);
                         //  location.href = "visitorregisteruser.html";
                     }
 
-                }).catch(function(res) {
+                }).catch(function (res) {
                     const { response } = res
                     // console.log(response.data.message)
                     if (response.data.message == 'This user has already been used.') {
@@ -1021,7 +1021,7 @@ $(async function() {
         });
 
         //////////////////// แก้ไข service resolved
-        $('#table1_resolved').on('click', 'i.edit_service', function(e) {
+        $('#table1_resolved').on('click', 'i.edit_service', function (e) {
             e.preventDefault();
             $("#EditaddImage").empty();
             var table = $('#table1_resolved').DataTable();
@@ -1042,7 +1042,7 @@ $(async function() {
                     headers: {
                         'Authorization': result
                     }
-                }).then(function(response) {
+                }).then(function (response) {
                     var arrayBuffer = response.data; // Note: not oReq.responseText
                     var u8 = new Uint8Array(arrayBuffer);
                     var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -1085,7 +1085,7 @@ $(async function() {
 
         var data_prop;
         /////////////////////////////////////////////แก้ไขรายการจอง
-        $('#table_service_reservation').on('click', 'a.propedit', async function(e) {
+        $('#table_service_reservation').on('click', 'a.propedit', async function (e) {
             $("#EditaddImage").empty();
             data_prop = $(this).attr("id");
             console.log(data_prop)
@@ -1100,7 +1100,7 @@ $(async function() {
                     headers: {
                         'Authorization': result
                     }
-                }).then(function(response) {
+                }).then(function (response) {
                     var arrayBuffer = response.data; // Note: not oReq.responseText
                     var u8 = new Uint8Array(arrayBuffer);
                     var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -1132,7 +1132,7 @@ $(async function() {
 
         ///////ดูรูปภาพ
 
-        $('#table_service_reservation').on('click', 'a.propimage', async function(e) {
+        $('#table_service_reservation').on('click', 'a.propimage', async function (e) {
             $("#viewImage_prop").empty();
             $("#member_description").text('')
             data_prop = $(this).attr("id");
@@ -1147,13 +1147,13 @@ $(async function() {
                     headers: {
                         'Authorization': result
                     }
-                }).then(function(response) {
+                }).then(function (response) {
                     var arrayBuffer = response.data; // Note: not oReq.responseText
                     var u8 = new Uint8Array(arrayBuffer);
                     var base64 = bufferToBase64(u8); // "SSDCvSDimaUg8J+SqQ=="
                     console.log(base64)
                     var b64encoded = base64
-                        ///   var b64encoded = btoa(String.fromCharCode.apply(null, u8));
+                    ///   var b64encoded = btoa(String.fromCharCode.apply(null, u8));
                     var mimetype = "image/png"; // or whatever your image mime type is
                     $("#viewImage_prop").append(`
            <img name="${n}" style="width: 600px;" src="${"data:" + mimetype + ";base64," + b64encoded}"class="view_img img-responsive thumbnail col-lg-3 col-md-4 col-sm-6 col-xs-12" >`);
@@ -1161,27 +1161,24 @@ $(async function() {
                 });
             }
             $("#member_description").text(data_prop.description)
-                // document.getElementById('member_description').style.display = 'block'
-                // h2_description
+            // document.getElementById('member_description').style.display = 'block'
+            // h2_description
         });
 
-
         function bufferToBase64(buf) {
-            var binstr = Array.prototype.map.call(buf, function(ch) {
+            var binstr = Array.prototype.map.call(buf, function (ch) {
                 return String.fromCharCode(ch);
             }).join('');
             return btoa(binstr);
         }
 
-
-
         /////////////////////////////////////// อัเดท รายการจอง
-        $('#submitlist_edit').on('click', function(e) {
+        $('#submitlist_edit').on('click', function (e) {
             console.log(data_prop)
             console.log(arr)
             console.log(document.getElementById('categorydescription_edit').value)
 
-            $.getScript("ip.js", function(data, textStatus, jqxhr) {
+            $.getScript("ip.js", function (data, textStatus, jqxhr) {
                 var urlipaddress = data.substring(1, data.length - 1);
                 var formData = new FormData();
                 const url = urlipaddress + 'updateProp';
@@ -1205,12 +1202,12 @@ $(async function() {
                         'Authorization': result,
                         'Content-Type': 'multipart/form-data'
                     }
-                }).then(function(response) {
+                }).then(function (response) {
                     console.log(response.data.message)
                     if (response.data.message == 'updateProp completed') {
                         showSuccessMessage('สำเร็จ', 'ทำรายการสำเร็จ', 'agendar.html');
                     }
-                }).catch(function(res) {
+                }).catch(function (res) {
                     const { response } = res
                     console.log(response.data.message)
 
@@ -1221,15 +1218,8 @@ $(async function() {
 
         });
 
-
-
-
-
-
-
-
         ////////////////  แก้ไขรายการค้างชำระ
-        $('#table_id2').on('click', 'i.edit_invoice', function(e) {
+        $('#table_id2').on('click', 'i.edit_invoice', function (e) {
             e.preventDefault();
             $("#EditaddImage").empty();
             var table = $('#table_id2').DataTable();
@@ -1249,7 +1239,7 @@ $(async function() {
                     headers: {
                         'Authorization': result
                     }
-                }).then(function(response) {
+                }).then(function (response) {
                     var arrayBuffer = response.data; // Note: not oReq.responseText
                     var u8 = new Uint8Array(arrayBuffer);
                     var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -1287,7 +1277,7 @@ $(async function() {
         });
 
         /////////////////////////// อัพเดท รายการค้างชำระ
-        $('#edit_invoice').on('click', function(e) {
+        $('#edit_invoice').on('click', function (e) {
             console.log('aaaaaaaaaaaaaaaaaaa')
             const url = urlipad + 'invoice';
             let formData = new FormData();
@@ -1366,7 +1356,7 @@ $(async function() {
                 headers: {
                     'Authorization': result
                 }
-            }).then(function(response) {
+            }).then(function (response) {
                 console.log(response.data.message.data)
                 if (response.data.message.data == 'update completed') {
                     showSuccessMessage('สำเร็จ', 'ทำรายการสำเร็จ', 'allInvoice.html');
@@ -1374,12 +1364,12 @@ $(async function() {
                     // document.getElementById("_id_updatedata").style.color = 'green'
                     // location.href = "allInvoice.html";
                 }
-            }).catch(function(res) {
+            }).catch(function (res) {
                 const { response } = res
                 if (response.data.message == 'Please specify a announceImage.') {
                     showCancelMessage('กรุณาระบุเลือกไฟล์รูปภาพ', '')
-                        // document.getElementById("_id_updatedata").innerText = 'กรุณาระบุเลือกไฟล์รูปภาพ'
-                        // document.getElementById("_id_updatedata").style.color = 'red'
+                    // document.getElementById("_id_updatedata").innerText = 'กรุณาระบุเลือกไฟล์รูปภาพ'
+                    // document.getElementById("_id_updatedata").style.color = 'red'
                     return
                 } else {
                     showCancelMessage(response.data.message, '')
@@ -1389,7 +1379,7 @@ $(async function() {
 
 
         var invoiceId;
-        $('#myButtonSearch').on('click', async function(e) {
+        $('#myButtonSearch').on('click', async function (e) {
             $("#EditaddImage").empty();
             console.log(document.getElementById("ref1").value)
 
@@ -1425,7 +1415,7 @@ $(async function() {
                                     headers: {
                                         'Authorization': result
                                     }
-                                }).then(function(response) {
+                                }).then(function (response) {
                                     var arrayBuffer = response.data; // Note: not oReq.responseText
                                     var u8 = new Uint8Array(arrayBuffer);
                                     var b64encoded = btoa(String.fromCharCode.apply(null, u8));
@@ -1470,7 +1460,7 @@ $(async function() {
 
 
         /////////////////////////   Payment
-        $('#submitpayment').on('click', function(e) {
+        $('#submitpayment').on('click', function (e) {
 
             //  var id = document.getElementById("paymentinvoiceid").value
             console.log(invoiceId)
@@ -1503,6 +1493,8 @@ $(async function() {
             //     return new Date((typeof date === "string" ? new Date(date) : date).toLocaleString("en-US", { timeZone: tzString }));
             // }
 
+
+            console.log(str_creditDate)
 
             if (arr.length == 0) {
                 document.getElementById("_id_updatedata").innerText = 'กรุณาเลือกรูปภาพสลิป'
@@ -1546,8 +1538,7 @@ $(async function() {
                 headers: {
                     'Authorization': result
                 }
-            }).then(function(response) {
-
+            }).then(function (response) {
                 if (response.data.message.data == 'update completed') {
                     // document.getElementById("_id_updatedata").innerText = 'ชำระสำเร็จ'
                     // document.getElementById("_id_updatedata").style.color = 'green'
@@ -1555,15 +1546,79 @@ $(async function() {
 
                     showSuccessMessage('สำเร็จ', 'ทำรายการสำเร็จ', 'payment.html');
                 }
-            }).catch(function(res) {
+            }).catch(function (res) {
                 const { response } = res
                 showCancelMessage(response.data.message, '')
-                    // if (response.data.message == 'Please specify a announceImage.') {
-                    //     document.getElementById("_id_updatedata").innerText = 'กรุณาระบุเลือกไฟล์รูปภาพ'
-                    //     document.getElementById("_id_updatedata").style.color = 'red'
-                    //     return
-                    // }
+                // if (response.data.message == 'Please specify a announceImage.') {
+                //     document.getElementById("_id_updatedata").innerText = 'กรุณาระบุเลือกไฟล์รูปภาพ'
+                //     document.getElementById("_id_updatedata").style.color = 'red'
+                //     return
+                // }
             });
+        });
+
+        var datainvoice
+        ///////////////////// อัพเดท ใบเสร็จ
+        $('#table_id6').on('click', 'i.view_receiptImage', function (e) {
+            var table = $('#table_id6').DataTable();
+            e.preventDefault();
+            var _ro = table.row($(this).parents('tr'));
+            datainvoice = _ro.data();
+            if (datainvoice == undefined) {
+                datainvoice = table.row(this).data();
+            }
+            var nn = 0;
+            for (let i in datainvoice.receiptImage) {
+                axios.get(urlipad + "view/images/" + datainvoice.receiptImage[i], {
+                    responseType: 'arraybuffer',
+                    headers: {
+                        'Authorization': result
+                    }
+                }).then(function (response) {
+                    var arrayBuffer = response.data; // Note: not oReq.responseText
+                    var u8 = new Uint8Array(arrayBuffer);
+                    var b64encoded = btoa(String.fromCharCode.apply(null, u8));
+                    var mimetype = "image/png"; // or whatever your image mime type is
+                    arr[n] = dataURLtoFileEdit("data:" + mimetype + ";base64," + b64encoded, nn.toString() + '.jpg');
+                    n = n + 1;
+                });
+                nn = nn + 1;
+            }
+            console.log(arr)
+            $('#myModalview_addreceiptImage').modal()
+            $('#number_ref').text( '  เลขอ้างอิง (ref1) : ' + datainvoice.ref1)
+
+        });
+
+        $('#submitreceiptImage').on('click', function (e) {
+            console.log(datainvoice)
+            const url = urlipad + 'receipt';
+            let formData = new FormData();
+            if (arr.length == 0) {
+                showCancelMessage('กรุณาเลือกไฟล์ ใบเสร็จ', '')
+                return
+            } else {
+                formData.append('userId', userId);
+                formData.append('invoiceId', datainvoice.invoiceId);
+                for (var i = 0; i < arr.length; i++) {
+                    if (arr[i] != " ") {
+                        formData.append('receiptImage', arr[i]);
+                    }
+                }
+                axios.put(url, formData, {
+                    headers: {
+                        'Authorization': result
+                    }
+                }).then(function (response) {
+                    console.log(response.data.message.data)
+                    if (response.data.message.data == 'update completed') {
+                        showSuccessMessage('สำเร็จ', 'ทำรายการสำเร็จ', 'allpayment.html');
+                    }
+                }).catch(function (res) {
+                    const { response } = res
+                    showCancelMessage(response.data.message, '')
+                });
+            }
         });
 
         function showCancelMessage(title, text) {
@@ -1571,7 +1626,7 @@ $(async function() {
                 title: title,
                 text: text,
                 type: "error",
-            }, function(isConfirm) {
+            }, function (isConfirm) {
                 swal("Cancelled", "Your imaginary file is safe :)", "error");
             });
         }
@@ -1581,7 +1636,7 @@ $(async function() {
                 title: title,
                 text: text,
                 type: "success",
-            }, function(isConfirm) {
+            }, function (isConfirm) {
                 if (isConfirm) {
                     location.href = page;
                 }

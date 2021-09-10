@@ -5,7 +5,7 @@ var obj = JSON.parse(Cookies.get('datatoken'));
 
 var userId = Cookies.get('datauserId');
  var userId_checkCost = Cookies.get('datajwt');
-console.log(userId)
+console.log(userId_checkCost)
 var _arr = new Array();
 var n = 0;
 function acctoken() {

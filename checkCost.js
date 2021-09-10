@@ -134,7 +134,8 @@ $(function() {
         $("#announce_view").addClass('intronone');
 
         $("#approved").addClass('intro');
-
+        $("#list_supplies_member").addClass('intronone');
+        
     }
 
     if (Cookies.get('visitor') == 'visitor') {

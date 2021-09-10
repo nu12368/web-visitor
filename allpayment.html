@@ -745,6 +745,8 @@
                                             <th>สถานะ</th>
                                             <th>รุปภาพ</th>
                                             <th>สลิป</th>
+                                            <th>ใบเสร็จ</th>
+                                            <th>แจ้งใบเสร็จ</th>
                                             <!-- <th>พิมพ์ใบเสร็จ</th> -->
                                         </tr>
                                     </thead>
@@ -791,6 +793,62 @@
 
                         </div>
 
+                    </div>
+                </div>
+
+
+
+                <div class="modal fade" id="myModalview_addreceiptImage" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-footer">
+                                <button type="button" onclick="cnew()" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                                <script>
+                                    function cnew() {
+                                        location.href = "allpayment.html";
+                                    }
+                                </script>
+                            </div>
+                            <div class="header" style="text-align: center;">
+                                <h4 id="number_ref">
+                                </h4>
+    
+                            </div>
+                            <div class="modal-body">
+                                <div class="body">
+                                    <p>เลือกไฟล์ใบเสร็จ</p>
+                                    <div class="form-group form-float">
+                                        <div class="list-unstyled row clearfix">
+                                            <div class="form-group form-float">
+                                                <input type="file" name="edit_fileimage" type="file" multiple
+                                                    accept=".png, .jpg, .jpeg" id="edit_fileimage">
+                                                <label class="form-label">เลือกรูปภาพอัพโหลด</label>
+                                                <p id="lbl_add" style="font-size: 16px; color: red;">
+                                                </p>
+                                            </div>
+                                            <div class="form-group form-float">
+                                                <div>
+                                                    <h4>รูปภาพ ใบเสร็จ</h4>
+                                                </div>
+                                                    <div class="list-unstyled row clearfix">
+                                                        <p id="imgsixeedit"
+                                                            style="font-size: 16px; color: red;">
+                                                        </p>
+                                                       
+                                                 
+                                                        <div id="EditaddImage"
+                                                            class="img-responsive">
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <button class="btn btn-primary waves-effect" id="submitreceiptImage" class="primary" type="button">บันทึก</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- #END# Basic Examples -->
