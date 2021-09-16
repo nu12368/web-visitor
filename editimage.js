@@ -339,6 +339,9 @@ $(async function () {
             document.getElementById("edit_submitsupplies").disabled = false;
             if (data.status == 'รับแล้ว') {
                 console.log(data.status)
+                
+                document.getElementById("edit_fileimage2").disabled = true;
+                document.getElementById("statusdeit").disabled = true;
                 document.getElementById("edit_submitsupplies").disabled = true;
             }
 
