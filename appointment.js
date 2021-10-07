@@ -18,19 +18,19 @@ if (datamember != undefined) {
 
 function acctoken() {
     return new Promise(resolve => {
-        $.getScript("ip.js", function(data, textStatus, jqxhr) {
+        $.getScript("ip.js", function (data, textStatus, jqxhr) {
             var urlipaddress = data.substring(1, data.length - 1);
             // console.log('aaaaaaaaaaaaaa')
             axios.post(urlipaddress + 'token', data, {
                 headers: {
                     'Authorization': obj.refresh_token
                 }
-            }).then(function(response) {
+            }).then(function (response) {
                 //   console.log('bbb')
                 // console.log(response.data.message.access_token)
                 resolve(response.data.message.access_token);
 
-            }).catch(function(res) {
+            }).catch(function (res) {
                 const { response } = res
                 //   console.log(response.data.message)
 
@@ -44,7 +44,7 @@ function acctoken() {
     });
 }
 
-const getvisitorappointment = async(refresh_token, page) => {
+const getvisitorappointment = async (refresh_token, page) => {
     var header = [];
     header.push("สถานที่นัดพบ");
     header.push("ชื่อ-สกุล ผู้ขอเข้าพบ");
@@ -53,14 +53,14 @@ const getvisitorappointment = async(refresh_token, page) => {
     header.push("สถานะ");
     header.push("เวลาพบ");
     // console.log(refresh_token)
-    $.getScript("ip.js", function(data, textStatus, jqxhr) {
+    $.getScript("ip.js", function (data, textStatus, jqxhr) {
         var urlipaddress = data.substring(1, data.length - 1);
         var param = userId + '?uId=' + datamember.userId + '&_page=' + page + '&_limit=100&_sort=1'
         axios.get(urlipaddress + 'meeting/' + param, {
             headers: {
                 'Authorization': refresh_token
             }
-        }).then(function(response) {
+        }).then(function (response) {
             if (response.data.message.result.length != 0) {
                 $("#div_reportappointment").text(response.data.message.result.length + " รายการ");
                 const toDate = str => {
@@ -73,12 +73,12 @@ const getvisitorappointment = async(refresh_token, page) => {
 
                 // console.log(reversed)
                 var xx = document.getElementById('startdate').value
-                    //  console.log(xx)
-                    /////////////////////////////////// ค้นหา นัดหมาย
+                //  console.log(xx)
+                /////////////////////////////////// ค้นหา นัดหมาย
                 if (document.getElementById('startdate').value != '') {
                     var startdate = document.getElementById('startdate').value.split('/')
                     var _date = startdate[2] + '/' + startdate[1] + '/' + startdate[0]
-                        // console.log(_date)
+                    // console.log(_date)
                     var _arrsearch = new Array();
                     var num_search = 0;
                     for (i = 0; i < reversed.length; i++) {
@@ -91,12 +91,17 @@ const getvisitorappointment = async(refresh_token, page) => {
                         s_date = s_date[0].split('/')
 
                         var datenew = s_date[2] + '/' + s_date[0] + '/' + s_date[1]
-                            // console.log(_date)
-                            // console.log(datenew)
-                            //  console.log(dayjs('2011/01/30').isSame(dayjs('2011/01/30')))
-                            //  console.log(dayjs('2011-01-30').isSame(dayjs('2011-01-30')))
+                        // console.log(_date)
+                        // console.log(datenew)
+                        //  console.log(dayjs('2011/01/30').isSame(dayjs('2011/01/30')))
+                        //  console.log(dayjs('2011-01-30').isSame(dayjs('2011-01-30')))
                         var checkdate = dayjs(_date).isSame(dayjs(datenew))
                         if (checkdate == true) {
+                            var nameMeet = '';
+                            if (reversed[i].nameMeet != undefined) {
+                                nameMeet = reversed[i].nameMeet
+                            }
+
                             _arrsearch[num_search] = {
                                 daysToCome: reversed[i].daysToCome,
                                 licensePlate: reversed[i].licensePlate,
@@ -106,7 +111,7 @@ const getvisitorappointment = async(refresh_token, page) => {
                                 registerDate: reversed[i].registerDate,
                                 status: reversed[i].status,
                                 uId: reversed[i].uId,
-                                _nameMeet: reversed[i].nameMeet
+                                _nameMeet: nameMeet
                             }
                             num_search = num_search + 1;
                         }
@@ -143,7 +148,7 @@ const getvisitorappointment = async(refresh_token, page) => {
                             { data: "status" },
                             {
                                 data: "daysToCome",
-                                render: function(data) {
+                                render: function (data) {
 
                                     let date = new Date(data);
                                     let options = { hour12: false };
@@ -156,11 +161,11 @@ const getvisitorappointment = async(refresh_token, page) => {
                             },
                             {
                                 data: "status",
-                                render: function(data) {
+                                render: function (data) {
                                     if (data == 'มา') {
                                         if (datamember.rule == 'member') {
                                             return '<i href="" class="Stamp" style="font-size:16px;color:white; cursor: pointer;">STAMP</i>';
-                                        } else {}
+                                        } else { }
                                     }
                                     return ''
                                 }
@@ -171,15 +176,15 @@ const getvisitorappointment = async(refresh_token, page) => {
                                 defaultContent: '<i href="" class="edit_visitor" style="font-size:16px;color:blue; cursor: pointer;">แก้ไข </i> / <i href="" class="delete_appointment" style="font-size:14px;color:red; cursor: pointer;">ลบ </i>'
                             }
                         ],
-                        initComplete: function() {
+                        initComplete: function () {
                             //////////////////// รายการ
-                            this.api().columns(4).every(function() {
+                            this.api().columns(4).every(function () {
                                 var column = this;
                                 $(column.header()).empty()
                                 $(column.header()).append("<br/><p></p>")
                                 var select = $('<select style=" width: 150px ;"><option>แสดงทั้งหมด</option></select>')
                                     .appendTo($(column.header()))
-                                    .on('change', function() {
+                                    .on('change', function () {
                                         var val = $.fn.dataTable.util.escapeRegex(
                                             $(this).val()
                                         );
@@ -211,14 +216,14 @@ const getvisitorappointment = async(refresh_token, page) => {
                             footer: false,
                             exportOptions: {
                                 format: {
-                                    header: function(data, column, row) {
+                                    header: function (data, column, row) {
                                         return header[column]; //header is the array I used to store header texts
                                     }
                                 },
                                 columns: [0, 1, 2, 3, 4, 5]
                             }
                         }],
-                        "createdRow": function(row, data, dataIndex) {
+                        "createdRow": function (row, data, dataIndex) {
                             if (data.status == "นัด") {
                                 $(row).addClass('yellow');
                             } else if (data.status == "ไม่พบ" || data.status == "ยกเลิก") {
@@ -233,14 +238,52 @@ const getvisitorappointment = async(refresh_token, page) => {
                         table.column(6).visible(false);
                     }
                 } else {
-                    console.log(reversed)
+
+var _arrappointment = new Array()
+                    for (i = 0; i < reversed.length; i++) {
+                        let date = new Date(reversed[i].daysToCome);
+                        let options = { hour12: false };
+                        var sp = date.toLocaleString('en-US', options).replace(',', '').split('/')
+                        var s_date = sp[0].padStart(2, '0') + "/" + sp[1].padStart(2, '0') + "/" + sp[2]
+
+                        s_date = s_date.split(' ')
+                        s_date = s_date[0].split('/')
+
+                        var datenew = s_date[2] + '/' + s_date[0] + '/' + s_date[1]
+                        // console.log(_date)
+                        // console.log(datenew)
+                        //  console.log(dayjs('2011/01/30').isSame(dayjs('2011/01/30')))
+                        //  console.log(dayjs('2011-01-30').isSame(dayjs('2011-01-30')))
+                        var checkdate = dayjs(_date).isSame(dayjs(datenew))
+                        //if (checkdate == true) {
+                            var nameMeet = '';
+                            if (reversed[i].nameMeet != undefined) {
+                                nameMeet = reversed[i].nameMeet
+                            }
+                            _arrappointment[n] = {
+                                daysToCome: reversed[i].daysToCome,
+                                licensePlate: reversed[i].licensePlate,
+                                meetUpLocal: reversed[i].meetUpLocal,
+                                meetingId: reversed[i].meetingId,
+                                name: reversed[i].name,
+                                registerDate: reversed[i].registerDate,
+                                status: reversed[i].status,
+                                uId: reversed[i].uId,
+                                _nameMeet: nameMeet
+                            }
+                            n = n + 1;
+                        //}
+                    }
+
+
+                    console.log(_arrappointment)
                     var table = $('#tableappointment').DataTable({
                         "lengthMenu": [
                             [25, 50, 100],
                             [25, 50, 100]
                         ],
                         "pageLength": 25,
-                        'data': [...reversed],
+                        'data': [..._arrappointment],
                         "ordering": false,
                         "responsive": true,
                         "autoWidth": false,
@@ -250,12 +293,12 @@ const getvisitorappointment = async(refresh_token, page) => {
                         columns: [
                             { data: "meetUpLocal" },
                             { data: "name" },
-                            { data: "nameMeet" },
+                            { data: "_nameMeet" },
                             { data: "licensePlate" },
                             { data: "status" },
                             {
                                 data: "daysToCome",
-                                render: function(data) {
+                                render: function (data) {
 
                                     let date = new Date(data);
                                     let options = { hour12: false };
@@ -269,11 +312,11 @@ const getvisitorappointment = async(refresh_token, page) => {
                             {
 
                                 data: "status",
-                                render: function(data) {
+                                render: function (data) {
                                     if (data == 'มา') {
                                         if (datamember.rule == 'member') {
                                             return '<i href="" class="Stamp" style="font-size:16px;color:white; cursor: pointer;">STAMP</i>';
-                                        } else {}
+                                        } else { }
                                     }
                                     return ''
                                 }
@@ -284,15 +327,15 @@ const getvisitorappointment = async(refresh_token, page) => {
                                 defaultContent: '<i href="" class="edit_visitor" style="font-size:16px;color:blue; cursor: pointer;">แก้ไข </i> / <i href="" class="delete_appointment" style="font-size:14px;color:red; cursor: pointer;">ลบ </i>'
                             }
                         ],
-                        initComplete: function() {
+                        initComplete: function () {
                             //////////////////// รายการ
-                            this.api().columns(4).every(function() {
+                            this.api().columns(4).every(function () {
                                 var column = this;
                                 $(column.header()).empty()
                                 $(column.header()).append("<br/><p></p>")
                                 var select = $('<select style=" width: 150px ;"><option>แสดงทั้งหมด</option></select>')
                                     .appendTo($(column.header()))
-                                    .on('change', function() {
+                                    .on('change', function () {
                                         var val = $.fn.dataTable.util.escapeRegex(
                                             $(this).val()
                                         );
@@ -324,14 +367,14 @@ const getvisitorappointment = async(refresh_token, page) => {
                             footer: false,
                             exportOptions: {
                                 format: {
-                                    header: function(data, column, row) {
+                                    header: function (data, column, row) {
                                         return header[column]; //header is the array I used to store header texts
                                     }
                                 },
                                 columns: [0, 1, 2, 3, 4, 5]
                             }
                         }],
-                        "createdRow": function(row, data, dataIndex) {
+                        "createdRow": function (row, data, dataIndex) {
                             if (data.status == "นัด") {
                                 $(row).addClass('yellow');
                             } else if (data.status == "ไม่พบ" || data.status == "ยกเลิก") {
@@ -356,15 +399,15 @@ const getvisitorappointment = async(refresh_token, page) => {
 
 
 
-        }).catch(function(res) {
+        }).catch(function (res) {
             const { response } = res
         });
     });
 
 }
 
-const getuserappointment = async(refresh_token) => {
-    $.getScript("ip.js", function(data, textStatus, jqxhr) {
+const getuserappointment = async (refresh_token) => {
+    $.getScript("ip.js", function (data, textStatus, jqxhr) {
         var urlipaddress = data.substring(1, data.length - 1);
         const dataUserID = {
             userId: userId
@@ -373,7 +416,7 @@ const getuserappointment = async(refresh_token) => {
             headers: {
                 'Authorization': refresh_token
             }
-        }).then(function(response) {
+        }).then(function (response) {
             //   console.log(response.data.message.data)
             var cnt = response.data.message.data.length;
             var n = 0;
@@ -398,7 +441,7 @@ const getuserappointment = async(refresh_token) => {
     });
 }
 
-$(async function() {
+$(async function () {
 
     const result = await acctoken();
     for (let i = 1; i < 10; i++) {
@@ -410,7 +453,7 @@ $(async function() {
 
 
 
-    $('#searchappointment').on('click', async function(e) {
+    $('#searchappointment').on('click', async function (e) {
         if (document.getElementById('startdate').value == '') {
             showCancelMessagesearchappointment('กรุณาเลือกวันที่', '')
 
@@ -428,15 +471,15 @@ $(async function() {
             title: title,
             text: text,
             type: "error",
-        }, function(isConfirm) {
+        }, function (isConfirm) {
             swal("Cancelled", "Your imaginary file is safe :)", "error");
         });
     }
 
-    $.getScript("ip.js", function(data, textStatus, jqxhr) {
+    $.getScript("ip.js", function (data, textStatus, jqxhr) {
         var urlipaddress = data.substring(1, data.length - 1);
 
-        $('#submitappointment').on('click', function(e) {
+        $('#submitappointment').on('click', function (e) {
             var timedaysToCome = document.getElementById('daysToCome').value.split('/');
             var s_time = document.getElementById('txtdaysToCome').value;
             //var strdaysToCome = new Date(timedaysToCome[2] + '-' + timedaysToCome[1] + '-' + timedaysToCome[0] + ' ' + s_time + ':' + '00').toISOString();
@@ -471,15 +514,15 @@ $(async function() {
                 headers: {
                     'Authorization': result
                 }
-            }).then(function(response) {
+            }).then(function (response) {
                 console.log(response.data.message)
 
                 if (response.data.message == 'add meeting completed') {
                     showSuccessMessage('สำเร็จ', 'บันทึกข้อมูลสำเร็จ', 'appointment.html')
-                        // document.getElementById("save").innerText = 'บันทึกสำเร็จ'
-                        // document.getElementById("save").style.color = 'green'
+                    // document.getElementById("save").innerText = 'บันทึกสำเร็จ'
+                    // document.getElementById("save").style.color = 'green'
                 }
-            }).catch(function(res) {
+            }).catch(function (res) {
                 const { response } = res
                 showCancelMessage(response.data.message, '')
 
@@ -493,7 +536,7 @@ $(async function() {
                 title: title,
                 text: text,
                 type: "error",
-            }, function(isConfirm) {
+            }, function (isConfirm) {
                 swal("Cancelled", "Your imaginary file is safe :)", "error");
             });
         }
@@ -503,7 +546,7 @@ $(async function() {
                 title: title,
                 text: text,
                 type: "success",
-            }, function(isConfirm) {
+            }, function (isConfirm) {
                 if (isConfirm) {
                     location.href = page;
                 }
@@ -513,7 +556,7 @@ $(async function() {
 
 
         var _data;
-        $('#tableappointment').on('click', 'i.edit_visitor', function(e) {
+        $('#tableappointment').on('click', 'i.edit_visitor', function (e) {
             e.preventDefault();
             $("#myModaledit").modal();
             var table = $('#tableappointment').DataTable();
@@ -553,7 +596,7 @@ $(async function() {
 
 
 
-        $('#tableappointment').on('click', 'i.Stamp', function(e) {
+        $('#tableappointment').on('click', 'i.Stamp', function (e) {
             var table = $('#tableappointment').DataTable();
             e.preventDefault();
             var _ro = table.row($(this).parents('tr'));
@@ -577,27 +620,27 @@ $(async function() {
                 headers: {
                     'Authorization': result
                 }
-            }).then(function(response) {
+            }).then(function (response) {
                 console.log(response.data.message.data)
                 if (response.data.message.data == 'update completed') {
                     showSuccessMessage('สำเร็จ', 'อัพเดทข้อมูลสำเร็จ', 'reportappointment.html')
 
                 }
 
-            }).catch(function(res) {
+            }).catch(function (res) {
                 const { response } = res
                 showCancelMessage(response.data.message, '')
             });
         });
 
 
-        $('#updateappointment').on('click', function(e) {
+        $('#updateappointment').on('click', function (e) {
             var timedaysToCome = document.getElementById('daysToCome').value.split('/');
             //  var s_time = document.getElementById('txtdaysToCome').value;
             var s_time = document.getElementById('txtdaysToCome').value.replace(' ', '');
             s_time = s_time.substring(0, 5);
             var strdaysToCome = new Date(`${timedaysToCome[2] + '-' + timedaysToCome[1] + '-' + timedaysToCome[0]}T${s_time}:00`).toISOString()
-                //var strdaysToCome = new Date(timedaysToCome[2] + '-' + timedaysToCome[1] + '-' + timedaysToCome[0] + ' ' + s_time + ':' + '00').toISOString();
+            //var strdaysToCome = new Date(timedaysToCome[2] + '-' + timedaysToCome[1] + '-' + timedaysToCome[0] + ' ' + s_time + ':' + '00').toISOString();
             const datameeting = {
                 userId: userId,
                 meetingId: _data.meetingId,
@@ -612,24 +655,24 @@ $(async function() {
                 headers: {
                     'Authorization': result
                 }
-            }).then(function(response) {
+            }).then(function (response) {
                 console.log(response.data.message.data)
                 if (response.data.message.data == 'update completed') {
                     showSuccessMessage('สำเร็จ', 'อัพเดทข้อมูลสำเร็จ', 'reportappointment.html')
-                        // document.getElementById("update").innerText = 'อัพเดทสำเร็จ'
-                        // location.href = "reportappointment.html";
+                    // document.getElementById("update").innerText = 'อัพเดทสำเร็จ'
+                    // location.href = "reportappointment.html";
 
                 }
 
-            }).catch(function(res) {
+            }).catch(function (res) {
                 const { response } = res
                 //    console.log(response.data.message)
                 showCancelMessage(response.data.message, '')
-                    // document.getElementById("update").innerText = response.data.message.data;
+                // document.getElementById("update").innerText = response.data.message.data;
             });
         });
 
-        $('#tableappointment').on('click', 'i.delete_appointment', function(e) {
+        $('#tableappointment').on('click', 'i.delete_appointment', function (e) {
             e.preventDefault();
             var table = $('#tableappointment').DataTable();
             var _ro = table.row($(this).parents('tr'));
@@ -641,25 +684,25 @@ $(async function() {
             $("#lbl_dalete").text('คุณต้องการจะลบข้อมูล ใช่หรือไม่');
 
         });
-        $('#Deleteappointment').on('click', function(e) {
+        $('#Deleteappointment').on('click', function (e) {
             const datanew = {
                 userId: userId,
                 meetingId: _data.meetingId
             }
-            $.getScript("ip.js", function(data, textStatus, jqxhr) {
+            $.getScript("ip.js", function (data, textStatus, jqxhr) {
                 var urlipaddress = data.substring(1, data.length - 1);
                 axios({
                     url: urlipaddress + 'meeting',
                     method: 'delete',
                     data: datanew,
                     headers: { 'Authorization': result }
-                }).then(function(response) {
+                }).then(function (response) {
                     if (response.data.message == "delete completed") {
                         //  console.log(response.data.message)
                         $("#myModaldelete").empty()
                         showSuccessMessage('สำเร็จ', 'ลบข้อมูลสำเร็จ', 'reportappointment.html')
                     }
-                }).catch(function(res) {
+                }).catch(function (res) {
                     const { response } = res
                 });
             });

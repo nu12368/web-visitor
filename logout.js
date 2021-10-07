@@ -29,6 +29,7 @@ $(async function () {
     const result = await acctoken();
   //  console.log(result)
     $(document).ready(function () {
+        console.log('dsd')
         $('#logout').on('click', function (e) {
             console.log('dsd')
             $.getScript("ip.js", function (data, textStatus, jqxhr) {

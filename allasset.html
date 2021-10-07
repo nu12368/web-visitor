@@ -203,7 +203,53 @@
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Call Search -->
-                    <li><a id='logout' style="cursor: pointer;" data-close="true">[ออกจากระบบ]</a></li>
+                    <li><a id='logout' onclick="xxx()" style="cursor: pointer;" data-close="true">[ออกจากระบบ]</a></li>
+
+                    <script>
+                        var obj = JSON.parse(Cookies.get('datatoken'));
+                        var userId = Cookies.get('datauserId');
+                        function acctoken() {
+                            return new Promise(resolve => {
+                                $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                    var urlipaddress = data.substring(1, data.length - 1);
+                                    axios.post(urlipaddress + 'token', data, {
+                                        headers: {
+                                            'Authorization': obj.refresh_token
+                                        }
+                                    }).then(function (response) {
+                                        resolve(response.data.message.access_token);
+                                    }).catch(function (res) {
+                                        const { response } = res
+                                        if (response.data.message == "Unauthorized") {
+                                            location.href = "index.html";
+                                        }
+                                    });
+                                });
+                            });
+                        }
+                       async function xxx() {
+                            const result = await acctoken();
+                            console.log('asxasas')
+                            $.getScript("ip.js", function (data, textStatus, jqxhr) {
+                                var urlipaddress = data.substring(1, data.length - 1);
+                                const databody = {
+                                    refresh_token: obj.refresh_token
+                                }
+                                axios.post(urlipaddress + 'logout', databody, {
+                                    headers: {
+                                        'Authorization': result
+                                    }
+                                }).then(function (response) {
+                                    if (response.data.message == "success") {
+                                        location.href = "index.html";
+                                    }
+                                }).catch(function (res) {
+                                    const { response } = res
+                                });
+                            });
+                        }
+                    </script>
+
 
                     <!-- Call Search -->
                     <!-- <li><a href="javascript:void(0);" class="js-search" data-close="true"><i
