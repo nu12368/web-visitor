@@ -1,11 +1,21 @@
-$(function() {
+$(function () {
+    // oem
+    ////////////////// iconMenu
+   // $("#IconMenu").addClass('intro');   ///Neoentech    
+   // $("#IconMenuWac").addClass('intronone');    // Neoentech    
+
+ $("#IconMenu").addClass('intronone');   ///WAC   
+    $("#IconMenuWac").addClass('intro');    // WAC   
+
+
+
+    //////////////////Menu
     if (Cookies.get('activeMode') == 'คิดเงิน') {
         $("#lll").addClass('intro'); //// คิดเงิน
         $("#ll").addClass('intro'); ///// รายงานการคิดเงิน
         $("#l1").addClass('intro'); /// ประเภท visittor
         $("#l8").addClass('intro'); /// ชนิดรถ
         $("#l9").addClass('intro'); /// เพิ่มผู้ใช้งาน
-
         $("#l3").addClass('intro'); ///สถานที่ติดต่อ
         $("#l2").addClass('intro'); /// ทะเบียนรถ
     } else {
@@ -23,6 +33,11 @@ $(function() {
 
     //////////////// ลูกบ้านนัดหมาย
     if (Cookies.get('userappontment') == 'userappontment') {
+
+
+        $("#modalassset").addClass('intronone');
+        $("#report-eatamp").addClass('intronone');
+
         $("#l10").addClass('intro'); // นัดหมาย.
         $("#l11").addClass('intro'); // ประวัตินัดหมาย เห็นเฉพราะลูกบ้านคนนั้น
         $("#l01").addClass('intronone');
@@ -135,7 +150,7 @@ $(function() {
 
         $("#approved").addClass('intro');
         $("#list_supplies_member").addClass('intronone');
-        
+
     }
 
     if (Cookies.get('visitor') == 'visitor') {
@@ -187,18 +202,25 @@ $(function() {
     //////////////////// serviceAdmin
     if (Cookies.get('serviceadmin') == 'serviceadmin') {
         // 
-        $("#allmarket").addClass('intronone');
+
+        $("#icon01").addClass('intronone');
+        $("#icon08").addClass('intronone');
+        $("#icon09").addClass('intronone');
+        $("#allmarket_div").addClass('intronone');
         $("#allnotice").addClass('intronone');
         if (Cookies.get('suppliesview') == 'suppliesview') {
+            $("#icon05").addClass('intro');
             $("#supplies").addClass('intro');
-            $("#allpayment").addClass('intronone');
+            $("#allpayment_div").addClass('intronone');
             $("#alltravel").addClass('intronone');
-            $("#allmarket").addClass('intronone');
+            $("#allmarket_div").addClass('intronone');
         } else {
+            $("#icon05").addClass('intronone');
             $("#supplies").addClass('intronone');
             console.log(Cookies.get('serviceadmin'))
             console.log(Cookies.get('payment'))
-            $("#allpayment").addClass('intronone');
+            $("#icon04").addClass('intronone');
+            $("#allpayment_div").addClass('intronone');
 
 
         }
@@ -223,6 +245,9 @@ $(function() {
         $("#agendar").addClass('intronone');
 
     }
+
+
+
 
 
 

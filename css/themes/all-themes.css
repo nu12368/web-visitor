@@ -1,5 +1,23 @@
-﻿.theme-red .navbar {
-  background-color: #F44336; }
+﻿
+/* oem */
+.theme-red .navbar {
+   /* background-color: #1ebcba; */
+  background-color: #F44336;       
+ }
+ .header-new{
+   /* background-color: #1ebcba; */
+  background-color: #F44336 !important;
+}
+.theme-red .sidebar .menu .list li.active > :first-child i, .theme-red .sidebar .menu .list li.active > :first-child span {
+   /* color: #1ebcba;     */
+  color: #F44336; 
+}
+
+
+
+
+
+
 
 .theme-red .navbar-brand {
   color: #fff; }
@@ -29,8 +47,7 @@
 
 .theme-red .sidebar .menu .list li.active {
   background-color: transparent; }
-  .theme-red .sidebar .menu .list li.active > :first-child i, .theme-red .sidebar .menu .list li.active > :first-child span {
-    color: #F44336; }
+
 
 .theme-red .sidebar .menu .list .toggled {
   background-color: transparent; }

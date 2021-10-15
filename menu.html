@@ -36,7 +36,7 @@
     <script src="./checkCookies.js"></script>
     <script src="./logout.js"></script>
     <script src="./Profile.js"></script>
-
+<script src="./checkCost.js"></script>
 <script src="./editimage.js"></script>
 
     
@@ -48,6 +48,18 @@
     }
     div{
         font-family: 'Kanit', sans-serif;
+    }
+</style>
+<style>
+    .intro {
+        display: block !important;
+    }
+
+    .intronone {
+        display: none !important;
+    }
+    .text{
+        font-size: 16px;
     }
 </style>
 <script>
@@ -121,7 +133,74 @@
                             <input type="hidden" id="profileEdit" name="profileEdit">
                         </div>
                         <br>
-                        <div class="row clearfix">
+
+                        <div style="text-align: center;">
+                            <div class="row clearfix" id="IconMenu" style="text-align: center;">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div style="cursor:pointer;">
+                                        <div class="icon">
+                                            <img src="images/1.png" onclick="allnotice()" class="img-responsiveadmin">
+                                        </div>
+                                        <div class="content">
+                                            <div  class="text">ประกาศ</div> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div style="cursor:pointer;">
+                                        <div class="icon">
+                                            <img src="images/8.png" class="img-responsiveadmin">
+                                        </div>
+                                        <div class="content">
+                                            <div  class="text">ตลาดซื้อ-ขาย</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div style="cursor:pointer;">
+                                        <div class="icon">
+                                            <img src="images/5.png" class="img-responsiveadmin"   onclick="supplies()">
+                                        </div>
+                                        <div class="content">
+                                            <div class="text">รับ-ส่ง พัสดุ</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div style="cursor:pointer;">
+                                        <div class="icon">
+                                            <img src="images/9.png"  class="img-responsiveadmin" onclick="visitor()">
+                                        </div>
+                                        <div class="content">
+                                            <div  class="text">ผู้มาติดต่อ/นัดหมาย</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div style="cursor:pointer;">
+                                        <div class="icon">
+                                            <img src="images/6.png" class="img-responsiveadmin" onclick="service()">
+                                        </div>
+                                        <div class="content">
+                                            <div  class="text">บริการทั่วไป</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div style="cursor:pointer;">
+                                        <div class="icon">
+                                            <img src="images/4.png" class="img-responsiveadmin"   onclick="payment()">
+                                        </div>
+                                        <div class="content">
+                                            <div  class="text">การเงิน-บัญชี</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix" id="IconMenuWac">
                             <br>
                           
                             <div><br></div>
